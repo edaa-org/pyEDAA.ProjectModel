@@ -32,7 +32,8 @@
 # ============================================================================
 #
 from enum import Enum
-from typing import Dict, Union
+from pathlib import Path
+from typing import Dict, Union, Optional as Nullable, List
 
 from pydecor import export
 
@@ -131,16 +132,162 @@ class VerilogVersion(FileVersion):
 		return "Verilog'" + str(self.value)[-2:]
 
 
-@export
-class Project:
-	pass
+class SystemVerilogVersion(FileVersion):
+	VHDL2005=           2005
+	VHDL2009 =         2009
+	VHDL2017 =         2017
 
+	__VERSION_MAPPINGS__ = {
+		5:      VHDL2005,
+		9:      VHDL2009,
+		17:     VHDL2017,
+		2005:   VHDL2005,
+		2009:   VHDL2009,
+		2017:   VHDL2017,
+		"05":   VHDL2005,
+		"09":   VHDL2009,
+		"17":   VHDL2017,
+		"2005": VHDL2005,
+		"2009": VHDL2009,
+		"2017": VHDL2017,
+	}
 
-@export
-class FileSet:
-	pass
+	def __str__(self):
+		return "SV'" + str(self.value)[-2:]
 
 
 @export
 class File:
-	pass
+	_fileType: FileType = FileTypes.Unknown
+	_path:     Path
+	_project:  Nullable[Project]
+	_fileSet:  Nullable[FileSet]
+
+
+	def __init__(self, path: Path, project: Project = None, fileSet: FileSet = None):
+		self._path =    path
+		self._project = project
+		self._fileSet = fileSet
+
+	@property
+	def FileType(self) -> FileType:
+		return self._FileType
+
+	@property
+	def Path(self) -> Path:
+		return self._path
+
+	@property
+	def Project(self) -> Nullable[Project]:
+		return self._project
+
+	@property
+	def FileSet(self) -> Nullable[FileSet]:
+		return self._fileSet
+
+
+@export
+class FileSet:
+	_name:    str
+	_project: Nullable[Project]
+	_files:   List[File]
+
+	def __init__(self, name: str, project: Project = None):
+		self._name =    name
+		self._project = project
+		self._files =   []
+
+	@property
+	def Name(self) -> str:
+		return self._name
+
+	@property
+	def Project(self) -> Nullable[Project]:
+		return self._project
+
+	@Project.setter
+	def Project(self, value: Project):
+#		if not isinstance(value, Project):
+#			raise ValueError("Parameter 'value' is not of type 'Project'.")
+
+		self._project = value
+
+	@property
+	def Files(self) -> List[File]:
+		return self._files
+
+
+@export
+class VHDLLibrary:
+	_name:    str
+	_project: Nullable[Project]
+	_files:   List[File]
+
+	def __init__(self, name: str, project: Project = None):
+		self._name =    name
+		self._project = project
+		self._files =   []
+
+	@property
+	def Name(self) -> str:
+		return self._name
+
+	@property
+	def Project(self) -> Nullable[Project]:
+		return self._project
+
+	@Project.setter
+	def Project(self, value: Project):
+		if not isinstance(value, Project):              raise ValueError("Parameter 'value' is not of type Base.Project.Project.")
+		self._project = value
+
+	@property
+	def Files(self) -> List[File]:
+		return self._files
+
+
+@export
+class Project:
+	_name:                  str
+	_rootDirectory:         Nullable[Path]
+	_fileSets:              Dict[str, FileSet]
+	_defaultFileSet:        Nullable[FileSet]
+	_vhdlLibraries:         Dict[str, VHDLLibrary]
+	_externalVHDLLibraries: List
+
+	def __init__(self, name: str):
+		self._name =                  name
+		self._rootDirectory =         None
+		self._fileSets =              {}
+		self._defaultFileSet =        None
+		self._vhdlLibraries =         {}
+		self._externalVHDLLibraries = []
+
+	@property
+	def Name(self) -> str:
+		return self._name
+
+	@property
+	def RootDirectory(self) -> Path:
+		return self._rootDirectory
+
+	@RootDirectory.setter
+	def RootDirectory(self, value: Path) -> None:
+		self._rootDirectory = value
+
+	# TODO: return generator
+	@property
+	def FileSets(self) -> List[FileSet]:
+		return [i for i in self._fileSets.values()]
+
+	@property
+	def DefaultFileSet(self) -> FileSet:
+		return self._defaultFileSet
+
+	@property
+	def VHDLLibraries(self) -> List[VHDLLibrary]:
+		return self._vhdlLibraries.values()
+
+	@property
+	def ExternalVHDLLibraries(self) -> List:
+		return self._externalVHDLLibraries
