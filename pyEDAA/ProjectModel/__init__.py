@@ -35,53 +35,21 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, Union, Optional as Nullable, List
 
+from flags import Flags
 from pydecor import export
 
 
 __version__ = "0.1.0"
 
 
-class FileVersion(Enum):
-	Any =                 0
-
-	__VERSION_MAPPINGS__: Dict[Union[int, str], Enum]
-
-	def __init__(self, *_):
-		"""Patch the embedded MAP dictionary"""
-		for k, v in self.__class__.__VERSION_MAPPINGS__.items():
-			if ((not isinstance(v, self.__class__)) and (v == self.value)):
-				self.__class__.__VERSION_MAPPINGS__[k] = self
-
-	@classmethod
-	def Parse(cls, value):
-		try:
-			return cls.__VERSION_MAPPINGS__[value]
-		except KeyError:
-			ValueError("Value '{0!s}' cannot be parsed to member of {1}.".format(value, cls.__name__))
-
-	def __lt__(self, other):    return self.value <  other.value
-	def __le__(self, other):    return self.value <= other.value
-	def __gt__(self, other):    return self.value >  other.value
-	def __ge__(self, other):    return self.value >= other.value
-	def __ne__(self, other):    return self.value != other.value
-	def __eq__(self, other):
-		if ((self is self.__class__.Any) or (other is self.__class__.Any)):
-			return True
-		else:
-			return (self.value == other.value)
-
-	def __repr__(self):
-		return str(self.value)
-
-
-class VHDLVersion(FileVersion):
+class VHDLVersion(Enum):
 	VHDL87 =             87
 	VHDL93 =             93
 	VHDL2002 =         2002
 	VHDL2008 =         2008
 	VHDL2019 =         2019
 
-	__VERSION_MAPPINGS__ = {
+	__VERSION_MAPPINGS__: Dict[Union[int, str], Enum] = {
 		87:     VHDL87,
 		93:     VHDL93,
 		2:      VHDL2002,
@@ -104,16 +72,54 @@ class VHDLVersion(FileVersion):
 		"2019": VHDL2019
 	}
 
+	def __init__(self, *_):
+		"""Patch the embedded MAP dictionary"""
+		for k, v in self.__class__.__VERSION_MAPPINGS__.items():
+			if ((not isinstance(v, self.__class__)) and (v == self.value)):
+				self.__class__.__VERSION_MAPPINGS__[k] = self
+
+	@classmethod
+	def Parse(cls, value):
+		try:
+			return cls.__VERSION_MAPPINGS__[value]
+		except KeyError:
+			ValueError("Value '{0!s}' cannot be parsed to member of {1}.".format(value, cls.__name__))
+
+	def __lt__(self, other):
+		return self.value < other.value
+
+	def __le__(self, other):
+		return self.value <= other.value
+
+	def __gt__(self, other):
+		return self.value > other.value
+
+	def __ge__(self, other):
+		return self.value >= other.value
+
+	def __ne__(self, other):
+		return self.value != other.value
+
+	def __eq__(self, other):
+		if ((self is self.__class__.Any) or (other is self.__class__.Any)):
+			return True
+		else:
+			return (self.value == other.value)
+
+
 	def __str__(self):
 		return "VHDL'" + str(self.value)[-2:]
 
+	def __repr__(self):
+		return str(self.value)
 
-class VerilogVersion(FileVersion):
+
+class VerilogVersion(Enum):
 	VHDL95 =             95
 	VHDL2001 =         2001
 	VHDL2005 =         2005
 
-	__VERSION_MAPPINGS__ = {
+	__VERSION_MAPPINGS__: Dict[Union[int, str], Enum] = {
 		95:     VHDL95,
 		1:      VHDL2001,
 		5:      VHDL2005,
@@ -128,16 +134,53 @@ class VerilogVersion(FileVersion):
 		"2005": VHDL2005,
 	}
 
+	def __init__(self, *_):
+		"""Patch the embedded MAP dictionary"""
+		for k, v in self.__class__.__VERSION_MAPPINGS__.items():
+			if ((not isinstance(v, self.__class__)) and (v == self.value)):
+				self.__class__.__VERSION_MAPPINGS__[k] = self
+
+	@classmethod
+	def Parse(cls, value):
+		try:
+			return cls.__VERSION_MAPPINGS__[value]
+		except KeyError:
+			ValueError("Value '{0!s}' cannot be parsed to member of {1}.".format(value, cls.__name__))
+
+	def __lt__(self, other):
+		return self.value < other.value
+
+	def __le__(self, other):
+		return self.value <= other.value
+
+	def __gt__(self, other):
+		return self.value > other.value
+
+	def __ge__(self, other):
+		return self.value >= other.value
+
+	def __ne__(self, other):
+		return self.value != other.value
+
+	def __eq__(self, other):
+		if ((self is self.__class__.Any) or (other is self.__class__.Any)):
+			return True
+		else:
+			return (self.value == other.value)
+
 	def __str__(self):
 		return "Verilog'" + str(self.value)[-2:]
 
+	def __repr__(self):
+		return str(self.value)
 
-class SystemVerilogVersion(FileVersion):
+
+class SystemVerilogVersion(Enum):
 	VHDL2005=           2005
 	VHDL2009 =         2009
 	VHDL2017 =         2017
 
-	__VERSION_MAPPINGS__ = {
+	__VERSION_MAPPINGS__: Dict[Union[int, str], Enum] = {
 		5:      VHDL2005,
 		9:      VHDL2009,
 		17:     VHDL2017,
@@ -152,19 +195,61 @@ class SystemVerilogVersion(FileVersion):
 		"2017": VHDL2017,
 	}
 
+	def __init__(self, *_):
+		"""Patch the embedded MAP dictionary"""
+		for k, v in self.__class__.__VERSION_MAPPINGS__.items():
+			if ((not isinstance(v, self.__class__)) and (v == self.value)):
+				self.__class__.__VERSION_MAPPINGS__[k] = self
+
+	@classmethod
+	def Parse(cls, value):
+		try:
+			return cls.__VERSION_MAPPINGS__[value]
+		except KeyError:
+			ValueError("Value '{0!s}' cannot be parsed to member of {1}.".format(value, cls.__name__))
+
+	def __lt__(self, other):
+		return self.value < other.value
+
+	def __le__(self, other):
+		return self.value <= other.value
+
+	def __gt__(self, other):
+		return self.value > other.value
+
+	def __ge__(self, other):
+		return self.value >= other.value
+
+	def __ne__(self, other):
+		return self.value != other.value
+
+	def __eq__(self, other):
+		if ((self is self.__class__.Any) or (other is self.__class__.Any)):
+			return True
+		else:
+			return (self.value == other.value)
+
 	def __str__(self):
 		return "SV'" + str(self.value)[-2:]
+
+	def __repr__(self):
+		return str(self.value)
+
+
+@export
+class FileType:
+	pass
 
 
 @export
 class File:
-	_fileType: FileType = FileTypes.Unknown
+	_fileType: FileType = None #FileTypes.Unknown
 	_path:     Path
-	_project:  Nullable[Project]
-	_fileSet:  Nullable[FileSet]
+	_project:  Nullable['Project']
+	_fileSet:  Nullable['FileSet']
 
 
-	def __init__(self, path: Path, project: Project = None, fileSet: FileSet = None):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
 		self._path =    path
 		self._project = project
 		self._fileSet = fileSet
@@ -178,21 +263,21 @@ class File:
 		return self._path
 
 	@property
-	def Project(self) -> Nullable[Project]:
+	def Project(self) -> Nullable['Project']:
 		return self._project
 
 	@property
-	def FileSet(self) -> Nullable[FileSet]:
+	def FileSet(self) -> Nullable['FileSet']:
 		return self._fileSet
 
 
 @export
 class FileSet:
 	_name:    str
-	_project: Nullable[Project]
+	_project: Nullable['Project']
 	_files:   List[File]
 
-	def __init__(self, name: str, project: Project = None):
+	def __init__(self, name: str, project: 'Project' = None):
 		self._name =    name
 		self._project = project
 		self._files =   []
@@ -202,11 +287,11 @@ class FileSet:
 		return self._name
 
 	@property
-	def Project(self) -> Nullable[Project]:
+	def Project(self) -> Nullable['Project']:
 		return self._project
 
 	@Project.setter
-	def Project(self, value: Project):
+	def Project(self, value: 'Project'):
 #		if not isinstance(value, Project):
 #			raise ValueError("Parameter 'value' is not of type 'Project'.")
 
@@ -220,10 +305,10 @@ class FileSet:
 @export
 class VHDLLibrary:
 	_name:    str
-	_project: Nullable[Project]
+	_project: Nullable['Project']
 	_files:   List[File]
 
-	def __init__(self, name: str, project: Project = None):
+	def __init__(self, name: str, project: 'Project' = None):
 		self._name =    name
 		self._project = project
 		self._files =   []
@@ -233,11 +318,11 @@ class VHDLLibrary:
 		return self._name
 
 	@property
-	def Project(self) -> Nullable[Project]:
+	def Project(self) -> Nullable['Project']:
 		return self._project
 
 	@Project.setter
-	def Project(self, value: Project):
+	def Project(self, value: 'Project'):
 		if not isinstance(value, Project):              raise ValueError("Parameter 'value' is not of type Base.Project.Project.")
 		self._project = value
 
