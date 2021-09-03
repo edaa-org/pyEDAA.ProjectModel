@@ -33,7 +33,7 @@
 #
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project
+from pyEDAA.ProjectModel import Project, FileSet, VHDLLibrary
 
 
 if __name__ == "__main__":
@@ -44,11 +44,45 @@ if __name__ == "__main__":
 
 class Instantiate(TestCase):
 	def test_Project(self):
-		project = Project("test")
+		project = Project("project")
 
 		self.assertIsNotNone(project)
-		self.assertEqual(project.Name, "test")
+		self.assertEqual(project.Name, "project")
 		self.assertIsNone(project.RootDirectory)
 		self.assertIsNone(project.DefaultFileSet)
 		self.assertEqual(0, len(project.FileSets))
 		self.assertEqual(0, len(project.VHDLLibraries))
+
+	def test_FileSet(self):
+		fileset = FileSet("fileset")
+
+		self.assertIsNotNone(fileset)
+		self.assertEqual(fileset.Name, "fileset")
+		self.assertIsNone(fileset.Project)
+		self.assertEqual(0, len(fileset.Files))
+
+	def test_FileSetFromProject(self):
+		project = Project("project")
+		fileset = FileSet("fileset", project)
+
+		self.assertIsNotNone(fileset)
+		self.assertEqual(fileset.Name, "fileset")
+		self.assertIs(fileset.Project, project)
+		self.assertEqual(0, len(fileset.Files))
+
+	def test_VHDLLibrary(self):
+		library = VHDLLibrary("library")
+
+		self.assertIsNotNone(library)
+		self.assertEqual(library.Name, "library")
+		self.assertIsNone(library.Project)
+		self.assertEqual(0, len(library.Files))
+
+	def test_VHDLLibraryFromProject(self):
+		project = Project("project")
+		library = FileSet("library", project)
+
+		self.assertIsNotNone(library)
+		self.assertEqual(library.Name, "library")
+		self.assertIs(library.Project, project)
+		self.assertEqual(0, len(library.Files))
