@@ -239,6 +239,8 @@ class SystemVerilogVersion(Enum):
 class FileType:
 	pass
 
+# should it be a singleton with dynamic members?
+
 
 @export
 class File:
@@ -247,6 +249,8 @@ class File:
 	_project:  Nullable['Project']
 	_fileSet:  Nullable['FileSet']
 
+# related file
+# attributes
 
 	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
 		self._path =    path
@@ -272,9 +276,12 @@ class File:
 
 @export
 class FileSet:
-	_name:    str
-	_project: Nullable['Project']
-	_files:   List[File]
+	_name:      str
+	_project:   Nullable['Project']
+	_fileSets:  List['FileSet']
+	_files:     List[File]
+
+# attributes
 
 	def __init__(self, name: str, project: 'Project' = None):
 		self._name =    name
@@ -295,6 +302,10 @@ class FileSet:
 #			raise ValueError("Parameter 'value' is not of type 'Project'.")
 
 		self._project = value
+
+	@property
+	def FileSets(self) -> List['FileSet']:
+		return self._fileSets
 
 	@property
 	def Files(self) -> List[File]:
@@ -338,6 +349,8 @@ class Project:
 	_defaultFileSet:        Nullable[FileSet]
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_externalVHDLLibraries: List
+
+# attributes
 
 	def __init__(self, name: str):
 		self._name =                  name
