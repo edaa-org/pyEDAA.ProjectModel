@@ -7,47 +7,50 @@ Generic description of an EDA project.
 
 .. rubric:: Table of Content
 
-* :ref:`projectmodel-project`
+* :ref:`projectmodel-project2`
 
 
 .. rubric:: Class Hierarchy
 
-.. inheritance-diagram:: pyVHDLModel.VHDLModel.GenericConstantInterfaceItem pyVHDLModel.VHDLModel.GenericTypeInterfaceItem pyVHDLModel.VHDLModel.GenericProcedureInterfaceItem pyVHDLModel.VHDLModel.GenericFunctionInterfaceItem pyVHDLModel.VHDLModel.PortSignalInterfaceItem pyVHDLModel.VHDLModel.ParameterConstantInterfaceItem pyVHDLModel.VHDLModel.ParameterVariableInterfaceItem pyVHDLModel.VHDLModel.ParameterSignalInterfaceItem pyVHDLModel.VHDLModel.ParameterFileInterfaceItem
+.. inheritance-diagram:: pyEDAA.ProjectModel.Project
    :parts: 1
 
 
-.. _vhdlmodel-generics:
+.. _projectmodel-project2:
 
-Generic Interface Items
-=======================
+Project
+=======
 
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyVHDLModel.VHDLModel.GenericConstantInterfaceItem`:
+**Condensed definition of class** :class:`~pyEDAA.ProjectModel.Project`:
 
 .. code-block:: Python
 
    @export
-   class GenericConstantInterfaceItem(Constant, GenericInterfaceItem):
-     # inherited from ModelEntity
-     @property
-     def Parent(self) -> ModelEntity:
-
-     # inherited from NamedEntity
+   class Project:
      @property
      def Name(self) -> str:
 
-     # inherited from Object
      @property
-     def SubType(self) -> SubType:
+     def RootDirectory(self) -> Path:
+     @RootDirectory.setter
+     def RootDirectory(self, value: Path) -> None:
 
-     # inherited from WithDefaultExpressionMixin
      @property
-     def DefaultExpression(self) -> BaseExpression:
+     def DefaultFileSet(self) -> FileSet:
 
-     # inherited from InterfaceItem
      @property
-     def Mode(self) -> Mode:
+     def FileSets(self) -> Dict[str, FileSet]:
 
+     @property
+     def VHDLLibraries(self) -> List[VHDLLibrary]:
+
+     @property
+     def ExternalVHDLLibraries(self) -> List:
+
+     def AddFile(self, file: File) -> None:
+
+     def AddFiles(self, files: Iterable[File]) -> None:

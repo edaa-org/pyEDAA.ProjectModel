@@ -116,7 +116,7 @@ License
    :caption: Main Documentation
    :hidden:
 
-   LanguageModel/index
+   ProjectModel/index
 
 
 .. raw:: latex
@@ -127,7 +127,7 @@ License
    :caption: References
    :hidden:
 
-   pyVHDLModel/index
+   pyEDAA.ProjectModel/index
 
 
 .. raw:: latex

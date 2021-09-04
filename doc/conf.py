@@ -9,7 +9,7 @@ from json    import dump, loads
 
 sys.path.insert(0, abspath('.'))
 sys.path.insert(0, abspath('..'))
-sys.path.insert(0, abspath('../pyEDAA.ProjectModel'))
+sys.path.insert(0, abspath('../pyEDAA/ProjectModel'))
 #sys.path.insert(0, abspath('_extensions'))
 
 
