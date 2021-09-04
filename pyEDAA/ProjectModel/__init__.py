@@ -254,8 +254,15 @@ class File:
 
 	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
 		self._path =    path
-		self._project = project
-		self._fileSet = fileSet
+		if project is not None:
+			self._project = project
+			self.FileSet = project.DefaultFileSet if fileSet is None else fileSet
+		elif fileSet is not None:
+			self._project = fileSet._project
+			self.FileSet = fileSet
+		else:
+			self._project = None
+			self._fileSet = None
 
 	@property
 	def FileType(self) -> FileType:
@@ -268,10 +275,17 @@ class File:
 	@property
 	def Project(self) -> Nullable['Project']:
 		return self._project
+	@Project.setter
+	def Project(self, value: 'Project'):
+		self._project = value
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
 		return self._fileSet
+	@FileSet.setter
+	def FileSet(self, value: 'FileSet'):
+		self._fileSet = value
+		value._files.append(self)
 
 
 @export
