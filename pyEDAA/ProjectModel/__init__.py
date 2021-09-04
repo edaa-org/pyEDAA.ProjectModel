@@ -353,10 +353,12 @@ class Project:
 # attributes
 
 	def __init__(self, name: str):
+		defaultFileSet = FileSet("default", self)
+
 		self._name =                  name
 		self._rootDirectory =         None
-		self._fileSets =              {}
-		self._defaultFileSet =        None
+		self._fileSets =              {defaultFileSet._name: defaultFileSet}
+		self._defaultFileSet =        defaultFileSet
 		self._vhdlLibraries =         {}
 		self._externalVHDLLibraries = []
 
@@ -372,10 +374,10 @@ class Project:
 	def RootDirectory(self, value: Path) -> None:
 		self._rootDirectory = value
 
-	# TODO: return generator
+	# TODO: return generator with another method
 	@property
-	def FileSets(self) -> List[FileSet]:
-		return [i for i in self._fileSets.values()]
+	def FileSets(self) -> Dict[str, FileSet]:
+		return self._fileSets
 
 	@property
 	def DefaultFileSet(self) -> FileSet:
