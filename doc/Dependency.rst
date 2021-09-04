@@ -15,7 +15,7 @@ Dependency
 +------------------------------------------+------------------------------------------+
 | `Libraries.io <https://libraries.io/>`_  | `Requires.io <https://requires.io/>`_    |
 +==========================================+==========================================+
-| |img-ProjectModel-lib-status|             | |img-ProjectModel-req-status|             |
+| |img-ProjectModel-lib-status|            | |img-ProjectModel-req-status|            |
 +------------------------------------------+------------------------------------------+
 
 
