@@ -3,19 +3,19 @@
 Dependency
 ##########
 
-.. |img-pyVHDLModel-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyVHDLModel
+.. |img-ProjectModel-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel
    :alt: Libraries.io status for latest release
    :height: 22
-   :target: https://libraries.io/github/Paebbels/pyVHDLModel
-.. |img-pyVHDLModel-req-status| image:: https://img.shields.io/requires/github/Paebbels/pyVHDLModel
+   :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel
+.. |img-ProjectModel-req-status| image:: https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel
    :alt: Requires.io
    :height: 22
-   :target: https://requires.io/github/Paebbels/pyVHDLModel/requirements/?branch=master
+   :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=master
 
 +------------------------------------------+------------------------------------------+
 | `Libraries.io <https://libraries.io/>`_  | `Requires.io <https://requires.io/>`_    |
 +==========================================+==========================================+
-| |img-pyVHDLModel-lib-status|             | |img-pyVHDLModel-req-status|             |
+| |img-ProjectModel-lib-status|             | |img-ProjectModel-req-status|             |
 +------------------------------------------+------------------------------------------+
 
 

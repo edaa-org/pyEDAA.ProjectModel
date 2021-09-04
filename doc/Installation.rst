@@ -10,28 +10,48 @@ Installation/Updates
 Using PIP
 *********
 
-Installation using PIP
-======================
+Installation from PyPI using PIP
+================================
 
 .. code-block:: bash
 
    pip3 install pyEDAA.ProjectModel
 
 
-Updating using PIP
-==================
+Updating from PyPI using PIP
+============================
 
 .. code-block:: bash
 
    pip3 install -U pyEDAA.ProjectModel
 
 
+Uninstallation using PIP
+========================
+
+.. code-block:: bash
+
+   pip3 uninstall pyEDAA.ProjectModel
+
+
+Installation from local directory using PIP
+===========================================
+
+.. code-block:: bash
+
+   pip3 install .
+
 
 .. _installation-setup:
 
-Using setup.py
-**************
+Using ``setup.py`` (legacy)
+***************************
 
-.. todo::
+See sections above on how to use PIP.
 
-   Describe setup procedure using ``setup.py``
+Installation using ``setup.py``
+===============================
+
+.. code-block:: bash
+
+   setup.py install
