@@ -33,7 +33,7 @@
 #
 from enum import Enum
 from pathlib import Path
-from typing import Dict, Union, Optional as Nullable, List
+from typing import Dict, Union, Optional as Nullable, List, Iterable
 
 from pydecor import export
 
@@ -325,6 +325,15 @@ class FileSet:
 	def Files(self) -> List[File]:
 		return self._files
 
+	def AddFile(self, file: File):
+		self._files.append(file)
+		file._fileSet = self
+
+	def AddFiles(self, files: Iterable[File]):
+		for file in files:
+			self._files.append(file)
+			file._fileSet = self
+
 
 @export
 class VHDLLibrary:
@@ -388,14 +397,14 @@ class Project:
 	def RootDirectory(self, value: Path) -> None:
 		self._rootDirectory = value
 
+	@property
+	def DefaultFileSet(self) -> FileSet:
+		return self._defaultFileSet
+
 	# TODO: return generator with another method
 	@property
 	def FileSets(self) -> Dict[str, FileSet]:
 		return self._fileSets
-
-	@property
-	def DefaultFileSet(self) -> FileSet:
-		return self._defaultFileSet
 
 	@property
 	def VHDLLibraries(self) -> List[VHDLLibrary]:
@@ -404,3 +413,13 @@ class Project:
 	@property
 	def ExternalVHDLLibraries(self) -> List:
 		return self._externalVHDLLibraries
+
+	def AddFile(self, file: File) -> None:
+		if file.FileSet is None:
+			self._defaultFileSet.AddFile(file)
+		else:
+			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Project to a default fileset.".format(file=file))
+
+	def AddFiles(self, files: Iterable[File]) -> None:
+		for file in files:
+			self.AddFile(file)
