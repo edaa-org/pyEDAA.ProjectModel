@@ -33,7 +33,7 @@
 #
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project
+from pyEDAA.ProjectModel import Project, FileSet
 
 
 if __name__ == "__main__":
@@ -43,12 +43,19 @@ if __name__ == "__main__":
 
 
 class Instantiate(TestCase):
-	def test_Project(self):
-		project = Project("project")
+	def test_FileSet(self):
+		fileset = FileSet("fileset")
 
-		self.assertIsNotNone(project)
-		self.assertEqual(project.Name, "project")
-		self.assertIsNone(project.RootDirectory)
-		self.assertIsNone(project.DefaultFileSet)
-		self.assertEqual(0, len(project.FileSets))
-		self.assertEqual(0, len(project.VHDLLibraries))
+		self.assertIsNotNone(fileset)
+		self.assertEqual(fileset.Name, "fileset")
+		self.assertIsNone(fileset.Project)
+		self.assertEqual(0, len(fileset.Files))
+
+	def test_FileSetFromProject(self):
+		project = Project("project")
+		fileset = FileSet("fileset", project)
+
+		self.assertIsNotNone(fileset)
+		self.assertEqual(fileset.Name, "fileset")
+		self.assertIs(fileset.Project, project)
+		self.assertEqual(0, len(fileset.Files))
