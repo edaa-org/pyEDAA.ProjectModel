@@ -49,7 +49,7 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")
 		self.assertIsNone(library.Project)
-		self.assertEqual(0, len(library.Files))
+		self.assertEqual(0, len(library._files))
 
 	def test_VHDLLibraryFromProject(self):
 		project = Project("project")
@@ -58,4 +58,4 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")
 		self.assertIs(library.Project, project)
-		self.assertEqual(0, len(library.Files))
+		self.assertEqual(0, len(library._files))

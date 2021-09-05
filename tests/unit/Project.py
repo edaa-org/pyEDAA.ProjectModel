@@ -31,9 +31,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # ==============================================================================
 #
+from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project
+from pyEDAA.ProjectModel import Project, File
 
 
 if __name__ == "__main__":
@@ -54,3 +55,11 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(project.FileSets["default"])
 		self.assertIs(project.FileSets[project.DefaultFileSet.Name], project.DefaultFileSet)
 		self.assertEqual(0, len(project.VHDLLibraries))
+
+	def test_Files(self):
+		project = Project("project")
+
+		file = File(Path("example.vhdl"))
+		project.AddFile(file)
+
+		self.assertListEqual([file], [f for f in project.Files()])

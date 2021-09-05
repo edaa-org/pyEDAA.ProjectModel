@@ -49,7 +49,7 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(fileset)
 		self.assertEqual(fileset.Name, "fileset")
 		self.assertIsNone(fileset.Project)
-		self.assertEqual(0, len(fileset.Files))
+		self.assertEqual(0, len(fileset._files))
 
 	def test_FileSetFromProject(self):
 		project = Project("project")
@@ -58,4 +58,4 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(fileset)
 		self.assertEqual(fileset.Name, "fileset")
 		self.assertIs(fileset.Project, project)
-		self.assertEqual(0, len(fileset.Files))
+		self.assertEqual(0, len(fileset._files))

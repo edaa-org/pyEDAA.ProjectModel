@@ -33,8 +33,9 @@
 #
 from enum import Enum
 from pathlib import Path
-from typing import Dict, Union, Optional as Nullable, List, Iterable
+from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator
 
+from flags import Flags
 from pydecor import export
 
 
@@ -236,15 +237,21 @@ class SystemVerilogVersion(Enum):
 
 
 @export
-class FileType:
-	pass
+class FileTypes(Flags):
+	__no_flags_name__ =   "Unknown"
+	__all_flags_name__ =  "Any"
+	Text =                ()
+	ProjectFile =         ()
+	SourceFile =          ()
+	ConstraintFile =      ()
+	SettingsFile =        ()
 
 # should it be a singleton with dynamic members?
 
 
 @export
 class File:
-	_fileType: FileType = None #FileTypes.Unknown
+	_fileType: FileTypes = None #FileTypes.Unknown
 	_path:     Path
 	_project:  Nullable['Project']
 	_fileSet:  Nullable['FileSet']
@@ -253,20 +260,21 @@ class File:
 # attributes
 
 	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		self._path =    path
+		self._fileType =  FileTypes.SourceFile
+		self._path =      path
 		if project is not None:
 			self._project = project
-			self.FileSet = project.DefaultFileSet if fileSet is None else fileSet
+			self.FileSet =  project.DefaultFileSet if fileSet is None else fileSet
 		elif fileSet is not None:
 			self._project = fileSet._project
-			self.FileSet = fileSet
+			self.FileSet =  fileSet
 		else:
 			self._project = None
 			self._fileSet = None
 
 	@property
-	def FileType(self) -> FileType:
-		return self._FileType
+	def FileType(self) -> FileTypes:
+		return self._fileType
 
 	@property
 	def Path(self) -> Path:
@@ -276,14 +284,14 @@ class File:
 	def Project(self) -> Nullable['Project']:
 		return self._project
 	@Project.setter
-	def Project(self, value: 'Project'):
+	def Project(self, value: 'Project') -> None:
 		self._project = value
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
 		return self._fileSet
 	@FileSet.setter
-	def FileSet(self, value: 'FileSet'):
+	def FileSet(self, value: 'FileSet') -> None:
 		self._fileSet = value
 		value._files.append(self)
 
@@ -292,15 +300,16 @@ class File:
 class FileSet:
 	_name:      str
 	_project:   Nullable['Project']
-	_fileSets:  List['FileSet']
+	_fileSets:  Dict[str, 'FileSet']
 	_files:     List[File]
 
 # attributes
 
 	def __init__(self, name: str, project: 'Project' = None):
-		self._name =    name
-		self._project = project
-		self._files =   []
+		self._name =      name
+		self._project =   project
+		self._fileSets =  {}
+		self._files =     []
 
 	@property
 	def Name(self) -> str:
@@ -311,25 +320,42 @@ class FileSet:
 		return self._project
 
 	@Project.setter
-	def Project(self, value: 'Project'):
+	def Project(self, value: 'Project') -> None:
 #		if not isinstance(value, Project):
-#			raise ValueError("Parameter 'value' is not of type 'Project'.")
+#			raise TypeError("Parameter 'value' is not of type 'ProjectModel.Project'.")
 
 		self._project = value
 
 	@property
-	def FileSets(self) -> List['FileSet']:
+	def FileSets(self) -> Dict[str, 'FileSet']:
 		return self._fileSets
 
-	@property
-	def Files(self) -> List[File]:
-		return self._files
+	def Files(self, fileType: FileTypes = FileTypes.Any, fileSet: Union[str, 'FileSet'] = None) -> Generator[File, None, None]:
+		if fileSet is None:
+			for fileSet in self._fileSets.values():
+				for file in fileSet.Files(fileType):
+					yield file
+			for file in self._files:
+				if (file.FileType in fileType):
+					yield file
 
-	def AddFile(self, file: File):
+		else:
+			if isinstance(fileSet, str):
+				try:
+					fileSet = self._fileSets[fileSet]
+				except KeyError as ex:
+					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSet.Name, fileset=self.Name)) from ex
+			elif not isinstance(fileSet, FileSet):
+				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
+
+			for file in fileSet.Files(fileType):
+				yield file
+
+	def AddFile(self, file: File) -> None:
 		self._files.append(file)
 		file._fileSet = self
 
-	def AddFiles(self, files: Iterable[File]):
+	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
@@ -356,12 +382,15 @@ class VHDLLibrary:
 
 	@Project.setter
 	def Project(self, value: 'Project'):
-		if not isinstance(value, Project):              raise ValueError("Parameter 'value' is not of type Base.Project.Project.")
+		if not isinstance(value, Project):
+			raise TypeError("Parameter 'value' is not of type 'ProjectModel.Project'.")
+
 		self._project = value
 
 	@property
-	def Files(self) -> List[File]:
-		return self._files
+	def Files(self) -> Generator[File, None, None]:
+		for file in self._files:
+			yield file
 
 
 @export
@@ -401,10 +430,43 @@ class Project:
 	def DefaultFileSet(self) -> FileSet:
 		return self._defaultFileSet
 
+	@DefaultFileSet.setter
+	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
+		if isinstance(value, str):
+			if (value not in self._fileSets.keys()):
+				raise Exception("Fileset '{0}' is not in this project.".format(value))
+
+			self._defaultFileSet = self._fileSets[value]
+		elif isinstance(value, FileSet):
+			if (value not in self.FileSets):
+				raise Exception("Fileset '{0}' is not associated to this project.".format(value))
+
+			self._defaultFileSet = value
+		else:
+			raise ValueError("Unsupported parameter type for 'value'.")
+
+
 	# TODO: return generator with another method
 	@property
 	def FileSets(self) -> Dict[str, FileSet]:
 		return self._fileSets
+
+	def Files(self, fileType: FileTypes=FileTypes.Any, fileSet: Union[str, FileSet]=None) -> Generator[File, None, None]:
+		if fileSet is None:
+			for fileSet in self._fileSets.values():
+				for file in fileSet.Files(fileType):
+					yield file
+		else:
+			if isinstance(fileSet, str):
+				try:
+					fileSet = self._fileSets[fileSet]
+				except KeyError as ex:
+					raise Exception("Fileset {name} not bound to project {project}.".format(name=fileSet.Name, project=self.Name)) from ex
+			elif not isinstance(fileSet, FileSet):
+				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
+
+			for file in fileSet.Files(fileType):
+				yield file
 
 	@property
 	def VHDLLibraries(self) -> List[VHDLLibrary]:
@@ -413,6 +475,21 @@ class Project:
 	@property
 	def ExternalVHDLLibraries(self) -> List:
 		return self._externalVHDLLibraries
+
+	def AddFileSet(self, fileSet: FileSet) -> None:
+		if (not isinstance(fileSet, FileSet)):
+			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
+		elif (fileSet in self.FileSets):
+			raise Exception("Project already contains this fileSet.")
+		elif (fileSet.Name in self._fileSets.keys()):
+			raise Exception("Project already contains a fileset named '{0}'.".format(fileSet.Name))
+
+		fileSet.Project = self
+		self._fileSets[fileSet.Name] = fileSet
+
+	def AddFileSets(self, fileSets: Iterable[FileSet]) -> None:
+		for fileSet in fileSets:
+			self.AddFileSet(fileSet)
 
 	def AddFile(self, file: File) -> None:
 		if file.FileSet is None:
@@ -423,3 +500,4 @@ class Project:
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
 			self.AddFile(file)
+
