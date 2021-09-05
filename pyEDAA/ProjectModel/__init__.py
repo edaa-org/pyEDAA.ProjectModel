@@ -238,13 +238,17 @@ class SystemVerilogVersion(Enum):
 
 @export
 class FileTypes(Flags):
-	__no_flags_name__ =   "Unknown"
-	__all_flags_name__ =  "Any"
-	Text =                ()
-	ProjectFile =         ()
-	SourceFile =          ()
-	ConstraintFile =      ()
-	SettingsFile =        ()
+	__no_flags_name__ =       "Unknown"
+	__all_flags_name__ =      "Any"
+	TextFile =                ()
+	SourceFile =              ()
+	VHDLSourceFile =          ()
+	VerilogSourceFile =       ()
+	SystemVerilogSourceFile = ()
+	PythonSourceFile =        ()
+	ConstraintFile =          ()
+	ProjectFile =             ()
+	SettingsFile =            ()
 
 # should it be a singleton with dynamic members?
 
@@ -294,6 +298,54 @@ class File:
 	def FileSet(self, value: 'FileSet') -> None:
 		self._fileSet = value
 		value._files.append(self)
+
+
+@export
+class TextFile(File):
+	_fileType = FileTypes.TextFile
+
+
+@export
+class SourceFile(File):
+	_fileType = FileTypes.SourceFile
+
+
+@export
+class VHDLSourceFile(SourceFile):
+	_fileType = FileTypes.VHDLSourceFile
+
+	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+
+
+@export
+class VerilogSourceFile(SourceFile):
+	_fileType = FileTypes.VerilogSourceFile
+
+
+@export
+class SystemVerilogSourceFile(SourceFile):
+	_fileType = FileTypes.SystemVerilogSourceFile
+
+
+@export
+class PythonSourceFile(SourceFile):
+	_fileType = FileTypes.PythonSourceFile
+
+
+@export
+class ConstraintFile(File):
+	_fileType = FileTypes.ConstraintFile
+
+
+@export
+class ProjectFile(File):
+	_fileType = FileTypes.ProjectFile
+
+
+@export
+class SettingFile(File):
+	_fileType = FileTypes.SettingsFile
 
 
 @export
@@ -500,4 +552,3 @@ class Project:
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
 			self.AddFile(file)
-
