@@ -35,8 +35,6 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
-from flags import Flags
-from pyMetaClasses import Singleton
 from pydecor import export
 
 
@@ -262,11 +260,8 @@ class FileType(type):
 		return cls.FileTypes[item]
 
 	def __contains__(cls, item) -> bool:
-		if cls is item:
-			return True
-		else:
-			return issubclass(item, cls)
-			# print("need help here")
+		return issubclass(item, cls)
+
 
 @export
 class File(metaclass=FileType):
@@ -278,7 +273,7 @@ class File(metaclass=FileType):
 # attributes
 
 	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		self._fileType =  FileTypes.File
+		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
 		if project is not None:
 			self._project = project
@@ -318,87 +313,69 @@ FileTypes = File
 
 
 @export
-class HumanReadableFile(File):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.HumanReadableFile
+class HumanReadable:
+	pass
 
 
 @export
-class TextFile(HumanReadableFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.TextFile
+class TextFile(File, HumanReadable):
+	pass
 
 
 @export
-class LogFile(HumanReadableFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.TextFile
+class LogFile(File, HumanReadable):
+	pass
 
 
 @export
-class XMLFile(HumanReadableFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.TextFile
+class XMLFile(File):
+	pass
 
 
 @export
-class SourceFile(HumanReadableFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.SourceFile
+class SourceFile(File):
+	pass
 
 
 @export
-class VHDLSourceFile(SourceFile):
+class HDLSourceFile(SourceFile):
+	pass
+
+
+@export
+class VHDLSourceFile(HDLSourceFile):
 	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], project: 'Project' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.VHDLSourceFile
 
 
 @export
-class VerilogSourceFile(SourceFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.VerilogSourceFile
+class VerilogSourceFile(HDLSourceFile):
+	pass
 
 
 @export
-class SystemVerilogSourceFile(SourceFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.SystemVerilogSourceFile
+class SystemVerilogSourceFile(HDLSourceFile):
+	pass
 
 
 @export
 class PythonSourceFile(SourceFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.PythonSourceFile
+	pass
 
 
 @export
-class ConstraintFile(HumanReadableFile):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.ConstraintFile
+class ConstraintFile(HumanReadable):
+	pass
 
 
 @export
 class ProjectFile(File):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.ProjectFile
+	pass
 
 
 @export
 class SettingFile(File):
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
-		self._fileType = FileTypes.SettingsFile
+	pass
 
 
 @export
