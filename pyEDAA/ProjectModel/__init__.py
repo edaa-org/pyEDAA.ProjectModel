@@ -257,7 +257,8 @@ class FileType(type):
 		return fileType
 
 	def __getattr__(cls, item) -> 'FileTypes':
-		return cls.FileTypes[item]
+		if item[:2] != "__" and item[-2:] != "__":
+			return cls.FileTypes[item]
 
 	def __contains__(cls, item) -> bool:
 		return issubclass(item, cls)

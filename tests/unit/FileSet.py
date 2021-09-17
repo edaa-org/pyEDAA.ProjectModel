@@ -73,13 +73,14 @@ class FileFilter(TestCase):
 		self._file2 =   File(Path("file2.file"))
 		self._file3 =   File(Path("file3.file"))
 
-		self._fileset2 =  FileSet("fileset2", self._project)
-		self._textfile1 = TextFile(Path("text1.txt"), fileSet=self._fileset2)
-		self._textfile2 = TextFile(Path("text2.txt"), fileSet=self._fileset2)
-		self._textfile3 = TextFile(Path("text3.txt"), fileSet=self._fileset2)
-
 		self._fileset1.AddFile(self._file1)
 		self._fileset1.AddFiles((self._file2, self._file3))
+
+		self._textfile1 = TextFile(Path("text1.txt"), fileSet=self._fileset1)
+
+		self._fileset2 =  FileSet("fileset2", self._project)
+		self._textfile2 = TextFile(Path("text2.txt"), fileSet=self._fileset2)
+		self._textfile3 = TextFile(Path("text3.txt"), fileSet=self._fileset2)
 
 	def test_AnyFile(self):
 		result = [f for f in self._project.Files(fileType=FileTypes.Any)]
@@ -88,10 +89,15 @@ class FileFilter(TestCase):
 		self.assertListEqual(result, [self._file1, self._file2, self._file3, self._textfile1, self._textfile2, self._textfile3])
 
 	def test_TextFile(self):
-		result = [f for f in self._project.Files(fileType=FileTypes.TextFile)]
+		result1 = [f for f in self._project.Files(fileType=FileTypes.TextFile)]
 
-		self.assertEqual(3, len(result))
-		self.assertListEqual(result, [self._textfile1, self._textfile2, self._textfile3])
+		self.assertEqual(3, len(result1))
+		self.assertListEqual(result1, [self._textfile1, self._textfile2, self._textfile3])
+
+		result2 = [f for f in self._project.Files(fileType=FileTypes.TextFile, fileSet="fileset2")]
+
+		self.assertEqual(2, len(result2))
+		self.assertListEqual(result2, [self._textfile2, self._textfile3])
 
 	def test_SourceFile(self):
 		pass
