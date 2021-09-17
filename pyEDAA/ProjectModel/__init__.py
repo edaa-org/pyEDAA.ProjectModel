@@ -33,9 +33,10 @@
 #
 from enum import Enum
 from pathlib import Path
-from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator
+from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
 from flags import Flags
+from pyMetaClasses import Singleton
 from pydecor import export
 
 
@@ -176,7 +177,7 @@ class VerilogVersion(Enum):
 
 
 class SystemVerilogVersion(Enum):
-	VHDL2005=           2005
+	VHDL2005=          2005
 	VHDL2009 =         2009
 	VHDL2017 =         2017
 
@@ -236,26 +237,39 @@ class SystemVerilogVersion(Enum):
 		return str(self.value)
 
 
+
+class FileType(type):
+	"""
+	A :term:`meta-class` to construct *FileType* classes.
+
+	Modifications done by this meta-class:
+	* Register all classes of type :class:`FileType` or derived variants in a class field :attr:`FileType.FileTypes` in this meta-class.
+	"""
+
+	FileTypes: Dict[str, 'FileTypes'] = {}     #: Dictionary of all classes of type :class:`FileType` or derived variants
+	Any: 'FileType'
+
+	def __init__(self, name: str, bases: Tuple[type, ...], dict: Dict[str, typing_Any], **kwargs):
+		super().__init__(name, bases, dict, **kwargs)
+		self.Any = self
+
+	def __new__(cls, className, baseClasses, classMembers: dict):
+		fileType = super().__new__(cls, className, baseClasses, classMembers)
+		cls.FileTypes[className] = fileType
+		return fileType
+
+	def __getattr__(cls, item) -> 'FileTypes':
+		return cls.FileTypes[item]
+
+	def __contains__(cls, item) -> bool:
+		if cls is item:
+			return True
+		else:
+			return issubclass(item, cls)
+			# print("need help here")
+
 @export
-class FileTypes(Flags):
-	__no_flags_name__ =       "Unknown"
-	__all_flags_name__ =      "Any"
-	TextFile =                ()
-	SourceFile =              ()
-	VHDLSourceFile =          ()
-	VerilogSourceFile =       ()
-	SystemVerilogSourceFile = ()
-	PythonSourceFile =        ()
-	ConstraintFile =          ()
-	ProjectFile =             ()
-	SettingsFile =            ()
-
-# should it be a singleton with dynamic members?
-
-
-@export
-class File:
-	_fileType: FileTypes = None #FileTypes.Unknown
+class File(metaclass=FileType):
 	_path:     Path
 	_project:  Nullable['Project']
 	_fileSet:  Nullable['FileSet']
@@ -264,7 +278,7 @@ class File:
 # attributes
 
 	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
-		self._fileType =  FileTypes.SourceFile
+		self._fileType =  FileTypes.File
 		self._path =      path
 		if project is not None:
 			self._project = project
@@ -277,7 +291,7 @@ class File:
 			self._fileSet = None
 
 	@property
-	def FileType(self) -> FileTypes:
+	def FileType(self) -> 'FileType':
 		return self._fileType
 
 	@property
@@ -300,52 +314,91 @@ class File:
 		value._files.append(self)
 
 
-@export
-class TextFile(File):
-	_fileType = FileTypes.TextFile
+FileTypes = File
 
 
 @export
-class SourceFile(File):
-	_fileType = FileTypes.SourceFile
+class HumanReadableFile(File):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.HumanReadableFile
+
+
+@export
+class TextFile(HumanReadableFile):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.TextFile
+
+
+@export
+class LogFile(HumanReadableFile):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.TextFile
+
+
+@export
+class XMLFile(HumanReadableFile):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.TextFile
+
+
+@export
+class SourceFile(HumanReadableFile):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.SourceFile
 
 
 @export
 class VHDLSourceFile(SourceFile):
-	_fileType = FileTypes.VHDLSourceFile
-
 	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], project: 'Project' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.VHDLSourceFile
 
 
 @export
 class VerilogSourceFile(SourceFile):
-	_fileType = FileTypes.VerilogSourceFile
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.VerilogSourceFile
 
 
 @export
 class SystemVerilogSourceFile(SourceFile):
-	_fileType = FileTypes.SystemVerilogSourceFile
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.SystemVerilogSourceFile
 
 
 @export
 class PythonSourceFile(SourceFile):
-	_fileType = FileTypes.PythonSourceFile
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.PythonSourceFile
 
 
 @export
-class ConstraintFile(File):
-	_fileType = FileTypes.ConstraintFile
+class ConstraintFile(HumanReadableFile):
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.ConstraintFile
 
 
 @export
 class ProjectFile(File):
-	_fileType = FileTypes.ProjectFile
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.ProjectFile
 
 
 @export
 class SettingFile(File):
-	_fileType = FileTypes.SettingsFile
+	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, fileSet)
+		self._fileType = FileTypes.SettingsFile
 
 
 @export
@@ -362,6 +415,9 @@ class FileSet:
 		self._project =   project
 		self._fileSets =  {}
 		self._files =     []
+
+		if project is not None:
+			project._fileSets[name] = self
 
 	@property
 	def Name(self) -> str:
@@ -382,7 +438,7 @@ class FileSet:
 	def FileSets(self) -> Dict[str, 'FileSet']:
 		return self._fileSets
 
-	def Files(self, fileType: FileTypes = FileTypes.Any, fileSet: Union[str, 'FileSet'] = None) -> Generator[File, None, None]:
+	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, 'FileSet'] = None) -> Generator[File, None, None]:
 		if fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
@@ -457,12 +513,10 @@ class Project:
 # attributes
 
 	def __init__(self, name: str):
-		defaultFileSet = FileSet("default", self)
-
 		self._name =                  name
 		self._rootDirectory =         None
-		self._fileSets =              {defaultFileSet._name: defaultFileSet}
-		self._defaultFileSet =        defaultFileSet
+		self._fileSets =              {}
+		self._defaultFileSet =        FileSet("default", self)
 		self._vhdlLibraries =         {}
 		self._externalVHDLLibraries = []
 
@@ -503,7 +557,7 @@ class Project:
 	def FileSets(self) -> Dict[str, FileSet]:
 		return self._fileSets
 
-	def Files(self, fileType: FileTypes=FileTypes.Any, fileSet: Union[str, FileSet]=None) -> Generator[File, None, None]:
+	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, FileSet] = None) -> Generator[File, None, None]:
 		if fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
