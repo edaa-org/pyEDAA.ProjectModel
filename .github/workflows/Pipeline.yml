@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {python: 3.6, icon: 🔴}
+#          - {python: 3.6, icon: 🔴}
           - {python: 3.7, icon: 🟠}
           - {python: 3.8, icon: 🟡}
           - {python: 3.9, icon: 🟢}
