@@ -344,6 +344,31 @@ class SettingFile(File):
 
 
 @export
+class SimulationAnalysisFile(File):
+	"""Base-class of all tool-specific setting files."""
+
+
+@export
+class SimulationElaborationFile(File):
+	"""Base-class of all tool-specific setting files."""
+
+
+@export
+class SimulationStartFile(File):
+	"""Base-class of all tool-specific setting files."""
+
+
+@export
+class SimulationRunFile(File):
+	"""Base-class of all tool-specific setting files."""
+
+
+@export
+class WaveformFile(File):
+	"""Base-class of all tool-specific setting files."""
+
+
+@export
 class FileSet:
 	_name:      str
 	_project:   Nullable['Project']

@@ -31,24 +31,14 @@
 #
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent
+from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, SDCContent, TCLContent
 
 
 @export
-class VivadoProjectFile(ProjectFile, XMLContent):
-	"""A Vivado project file (``*.xpr``)."""
+class QuartusProjectFile(ProjectFile, TCLContent):
+	"""A Quartus project file (``*.qpf``)."""
 
 
 @export
-class XDCConstraintFile(ConstraintFile, SDCContent):
-	"""A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``)."""
-
-
-@export
-class IPCoreDescriptionFile(XMLFile):
-	pass
-
-
-@export
-class IPCoreInstantiationFile(XMLFile):
-	"""A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``)."""
+class SDCConstraintFile(ConstraintFile, SDCContent):
+	"""A Quartus constraint file (Synopsys Design Constraints; ``*.sdc``)."""

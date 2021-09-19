@@ -31,24 +31,19 @@
 #
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent
+from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformFile, TCLContent
 
 
 @export
-class VivadoProjectFile(ProjectFile, XMLContent):
-	"""A Vivado project file (``*.xpr``)."""
-
-
-@export
-class XDCConstraintFile(ConstraintFile, SDCContent):
-	"""A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``)."""
-
-
-@export
-class IPCoreDescriptionFile(XMLFile):
+class ModelSimProjectFile(ProjectFile):
 	pass
 
 
 @export
-class IPCoreInstantiationFile(XMLFile):
-	"""A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``)."""
+class ModelSimINIFile(SettingFile, INIContent):
+	pass
+
+
+@export
+class WaveDoFile(WaveformFile, TCLContent):
+	pass
