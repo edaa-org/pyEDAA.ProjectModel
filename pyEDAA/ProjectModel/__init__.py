@@ -194,10 +194,15 @@ class FileType(type):
 @export
 class File(metaclass=FileType):
 	"""
-	Base-class for all file classes.
+	A :term:`File` represents a file in a project. This :term:`base-class` is used
+	for all derived file classes.
 
-	File can be created standalone and later associated to a fileset and project,
-	or a fileset and/or project can be associated while creating a file.
+	A file can be created standalone and later associated to a fileset and project.
+	Or a fileset and/or project can be associated immediately while creating a file.
+
+	:arg path:    Relative or absolute path to the file.
+	:arg project: Project the file is associated with.
+	:arg fileset: Fileset the file is associated with.
 	"""
 
 	_path:     Path
@@ -370,11 +375,26 @@ class WaveformFile(File):
 
 @export
 class FileSet:
+	"""
+	A :term:`Fileset` represents a group of files. Filesets can have sub-filesets.
+
+	The order of insertion is preserved. A fileset can be created standalone and
+	later associated to another fileset and/or project. Or a fileset and/or project
+	can be associated immediately while creating the fileset.
+
+	:arg project: Project the file is associated with.
+	:arg fileset: Fileset the file is associated with.
+	"""
+
+#	:arg path:    Relative or absolute path to the file.
+
 	_name:      str
 	_project:   Nullable['Project']
 	_fileSets:  Dict[str, 'FileSet']
 	_files:     List[File]
 
+	# TODO: link parent fileset for relative path calculations
+	# TODO: add a path to reach fileset (relative or absolute)
 # attributes
 
 	def __init__(self, name: str, project: 'Project' = None):
@@ -470,6 +490,17 @@ class VHDLLibrary:
 
 @export
 class Project:
+	"""
+	A :term:`Project` represents a group of filesets and the source files therein.
+
+	Each project contains at least one fileset - the :term:`default fileset`. For
+	projects with VHDL source files, a independent `VHDLLibraries` overlay structure
+	exists.
+
+	:arg name:    The project's name.
+	"""
+
+#	:arg path:    Relative or absolute path to the file.
 	_name:                  str
 	_rootDirectory:         Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
@@ -477,6 +508,7 @@ class Project:
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_externalVHDLLibraries: List
 
+	# TODO: add a path to reach fileset (relative or absolute)
 # attributes
 
 	def __init__(self, name: str):
