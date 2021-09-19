@@ -41,78 +41,6 @@ from pydecor import export
 __version__ = "0.1.0"
 
 
-class VHDLVersion(Enum):
-	VHDL87 =             87
-	VHDL93 =             93
-	VHDL2002 =         2002
-	VHDL2008 =         2008
-	VHDL2019 =         2019
-
-	__VERSION_MAPPINGS__: Dict[Union[int, str], Enum] = {
-		87:     VHDL87,
-		93:     VHDL93,
-		2:      VHDL2002,
-		8:      VHDL2008,
-		19:     VHDL2019,
-		1987:   VHDL87,
-		1993:   VHDL93,
-		2002:   VHDL2002,
-		2008:   VHDL2008,
-		2019:   VHDL2019,
-		"87":   VHDL87,
-		"93":   VHDL93,
-		"02":   VHDL2002,
-		"08":   VHDL2008,
-		"19":   VHDL2019,
-		"1987": VHDL87,
-		"1993": VHDL93,
-		"2002": VHDL2002,
-		"2008": VHDL2008,
-		"2019": VHDL2019
-	}
-
-	def __init__(self, *_):
-		"""Patch the embedded MAP dictionary"""
-		for k, v in self.__class__.__VERSION_MAPPINGS__.items():
-			if ((not isinstance(v, self.__class__)) and (v == self.value)):
-				self.__class__.__VERSION_MAPPINGS__[k] = self
-
-	@classmethod
-	def Parse(cls, value):
-		try:
-			return cls.__VERSION_MAPPINGS__[value]
-		except KeyError:
-			ValueError("Value '{0!s}' cannot be parsed to member of {1}.".format(value, cls.__name__))
-
-	def __lt__(self, other):
-		return self.value < other.value
-
-	def __le__(self, other):
-		return self.value <= other.value
-
-	def __gt__(self, other):
-		return self.value > other.value
-
-	def __ge__(self, other):
-		return self.value >= other.value
-
-	def __ne__(self, other):
-		return self.value != other.value
-
-	def __eq__(self, other):
-		if ((self is self.__class__.Any) or (other is self.__class__.Any)):
-			return True
-		else:
-			return (self.value == other.value)
-
-
-	def __str__(self):
-		return "VHDL'" + str(self.value)[-2:]
-
-	def __repr__(self):
-		return str(self.value)
-
-
 class VerilogVersion(Enum):
 	VHDL95 =             95
 	VHDL2001 =         2001
@@ -233,7 +161,6 @@ class SystemVerilogVersion(Enum):
 
 	def __repr__(self):
 		return str(self.value)
-
 
 
 class FileType(type):
