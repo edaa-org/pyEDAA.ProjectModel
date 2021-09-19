@@ -193,6 +193,13 @@ class FileType(type):
 
 @export
 class File(metaclass=FileType):
+	"""
+	Base-class for all file classes.
+
+	File can be created standalone and later associated to a fileset and project,
+	or a fileset and/or project can be associated while creating a file.
+	"""
+
 	_path:     Path
 	_project:  Nullable['Project']
 	_fileSet:  Nullable['FileSet']
@@ -241,69 +248,99 @@ FileTypes = File
 
 
 @export
-class HumanReadable:
-	pass
+class HumanReadableContent:
+	"""A file type representing human-readable contents."""
+
+@export
+class XMLContent(HumanReadableContent):
+	"""A file type representing XML contents."""
+
+@export
+class YAMLContent(HumanReadableContent):
+	"""A file type representing YAML contents."""
+
+@export
+class JSONContent(HumanReadableContent):
+	"""A file type representing JSON contents."""
+
+@export
+class INIContent(HumanReadableContent):
+	"""A file type representing INI contents."""
+
+@export
+class TOMLContent(HumanReadableContent):
+	"""A file type representing TOML contents."""
+
+@export
+class TCLContent(HumanReadableContent):
+	"""A file type representing content in TCL code."""
+
+@export
+class SDCContent(TCLContent):
+	"""A file type representing contents as Synopsys Design Constraints (SDC)."""
 
 
 @export
-class TextFile(File, HumanReadable):
-	pass
+class TextFile(File, HumanReadableContent):
+	"""A text file (``*.txt``)."""
 
 
 @export
-class LogFile(File, HumanReadable):
-	pass
+class LogFile(File, HumanReadableContent):
+	"""A log file (``*.log``)."""
 
 
 @export
-class XMLFile(File):
-	pass
+class XMLFile(File, XMLContent):
+	"""An XML file (``*.xml``)."""
 
 
 @export
 class SourceFile(File):
-	pass
+	"""Base-class of all source files."""
 
 
 @export
 class HDLSourceFile(SourceFile):
-	pass
+	"""Base-class of all HDL source files."""
 
 
 @export
-class VHDLSourceFile(HDLSourceFile):
+class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
+	"""A VHDL source file (of any language version)."""
+
 	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], project: 'Project' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, fileSet)
 
 
 @export
-class VerilogSourceFile(HDLSourceFile):
-	pass
+class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
+	"""A Verilog source file (of any language version)."""
 
 
 @export
-class SystemVerilogSourceFile(HDLSourceFile):
-	pass
+class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
+	"""A SystemVerilog source file (of any language version)."""
 
 
 @export
-class PythonSourceFile(SourceFile):
-	pass
+class PythonSourceFile(SourceFile, HumanReadableContent):
+	"""A Python source file."""
 
 
 @export
-class ConstraintFile(HumanReadable):
-	pass
+class ConstraintFile(File, HumanReadableContent):
+	"""Base-class of all constraint files."""
 
 
 @export
 class ProjectFile(File):
-	pass
+	"""Base-class of all tool-specific project files."""
 
 
 @export
 class SettingFile(File):
-	pass
+	"""Base-class of all tool-specific setting files."""
 
 
 @export
