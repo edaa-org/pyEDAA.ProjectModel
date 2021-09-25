@@ -34,7 +34,7 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project, FileSet, File
+from pyEDAA.ProjectModel import Design, FileSet, File
 
 
 if __name__ == "__main__":
@@ -50,18 +50,18 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(file)
 		self.assertEqual(file.Path, path)
-		self.assertIsNone(file.Project)
+		self.assertIsNone(file.Design)
 		self.assertIsNone(file.FileSet)
 
 	def test_FileWithProject(self):
 		path = Path("example.vhdl")
-		project = Project("project")
-		file = File(path, project=project)
+		design = Design("design")
+		file = File(path, design=design)
 
 		self.assertIsNotNone(file)
 		self.assertEqual(file.Path, path)
-		self.assertIs(file.Project, project)
-		self.assertIs(file.FileSet, project.DefaultFileSet)
+		self.assertIs(file.Design, design)
+		self.assertIs(file.FileSet, design.DefaultFileSet)
 
 	def test_FileWithFileSet(self):
 		path = Path("example.vhdl")
@@ -70,17 +70,17 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(file)
 		self.assertEqual(file.Path, path)
-		self.assertIsNone(file.Project)
+		self.assertIsNone(file.Design)
 		self.assertIs(file.FileSet, fileset)
 
 
 	def test_FileWithFileSetAndProject(self):
 		path = Path("example.vhdl")
-		project = Project("project")
-		fileset = FileSet("fileset", project=project)
+		design = Design("design")
+		fileset = FileSet("fileset", design=design)
 		file = File(path, fileSet=fileset)
 
 		self.assertIsNotNone(file)
 		self.assertEqual(file.Path, path)
-		self.assertIs(file.Project, project)
+		self.assertIs(file.Design, design)
 		self.assertIs(file.FileSet, fileset)

@@ -15,5 +15,6 @@ Project Model
    :maxdepth: 1
 
    Project
+   Design
    FileSet
    File

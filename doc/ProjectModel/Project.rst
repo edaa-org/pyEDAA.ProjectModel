@@ -1,7 +1,7 @@
 .. _projectmodel-project:
 
-Project
-#######
+Design
+######
 
 Generic description of an EDA project.
 
@@ -12,25 +12,25 @@ Generic description of an EDA project.
 
 .. rubric:: Class Hierarchy
 
-.. inheritance-diagram:: pyEDAA.ProjectModel.Project
+.. inheritance-diagram:: pyEDAA.ProjectModel.Design
    :parts: 1
 
 
 .. _projectmodel-project2:
 
-Project
-=======
+Design
+======
 
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyEDAA.ProjectModel.Project`:
+**Condensed definition of class** :class:`~pyEDAA.ProjectModel.Design`:
 
 .. code-block:: Python
 
    @export
-   class Project:
+   class Design:
      @property
      def Name(self) -> str:
 

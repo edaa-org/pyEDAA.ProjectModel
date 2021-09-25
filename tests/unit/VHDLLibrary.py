@@ -33,7 +33,7 @@
 #
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project, VHDLLibrary
+from pyEDAA.ProjectModel import Design, VHDLLibrary
 
 
 if __name__ == "__main__":
@@ -48,14 +48,14 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")
-		self.assertIsNone(library.Project)
+		self.assertIsNone(library.Design)
 		self.assertEqual(0, len(library._files))
 
 	def test_VHDLLibraryFromProject(self):
-		project = Project("project")
-		library = VHDLLibrary("library", project)
+		design =  Design("design")
+		library = VHDLLibrary("library", design)
 
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")
-		self.assertIs(library.Project, project)
+		self.assertIs(library.Design, design)
 		self.assertEqual(0, len(library._files))

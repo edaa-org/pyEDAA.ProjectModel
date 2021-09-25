@@ -31,7 +31,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from enum import Enum
 from pathlib import Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
@@ -39,9 +38,6 @@ from pydecor import export
 
 
 __version__ = "0.1.0"
-
-
-
 
 
 class FileType(type):
@@ -75,35 +71,35 @@ class FileType(type):
 @export
 class File(metaclass=FileType):
 	"""
-	A :term:`File` represents a file in a project. This :term:`base-class` is used
+	A :term:`File` represents a file in a design. This :term:`base-class` is used
 	for all derived file classes.
 
-	A file can be created standalone and later associated to a fileset and project.
-	Or a fileset and/or project can be associated immediately while creating a file.
+	A file can be created standalone and later associated to a fileset and design.
+	Or a fileset and/or design can be associated immediately while creating a file.
 
 	:arg path:    Relative or absolute path to the file.
-	:arg project: Project the file is associated with.
+	:arg design: Design the file is associated with.
 	:arg fileset: Fileset the file is associated with.
 	"""
 
 	_path:     Path
-	_project:  Nullable['Project']
+	_design:  Nullable['Design']
 	_fileSet:  Nullable['FileSet']
 
 # related file
 # attributes
 
-	def __init__(self, path: Path, project: 'Project' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: Path, design: 'Design' = None, fileSet: 'FileSet' = None):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
-		if project is not None:
-			self._project = project
-			self.FileSet =  project.DefaultFileSet if fileSet is None else fileSet
+		if design is not None:
+			self._design = design
+			self.FileSet =  design.DefaultFileSet if fileSet is None else fileSet
 		elif fileSet is not None:
-			self._project = fileSet._project
+			self._design = fileSet._design
 			self.FileSet =  fileSet
 		else:
-			self._project = None
+			self._design = None
 			self._fileSet = None
 
 	@property
@@ -115,11 +111,11 @@ class File(metaclass=FileType):
 		return self._path
 
 	@property
-	def Project(self) -> Nullable['Project']:
-		return self._project
-	@Project.setter
-	def Project(self, value: 'Project') -> None:
-		self._project = value
+	def Design(self) -> Nullable['Design']:
+		return self._design
+	@Design.setter
+	def Design(self, value: 'Design') -> None:
+		self._design = value
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
@@ -195,8 +191,8 @@ class HDLSourceFile(SourceFile):
 class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A VHDL source file (of any language version)."""
 
-	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], project: 'Project' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, fileSet)
+	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, design, fileSet)
 
 
 @export
@@ -260,17 +256,17 @@ class FileSet:
 	A :term:`Fileset` represents a group of files. Filesets can have sub-filesets.
 
 	The order of insertion is preserved. A fileset can be created standalone and
-	later associated to another fileset and/or project. Or a fileset and/or project
+	later associated to another fileset and/or design. Or a fileset and/or design
 	can be associated immediately while creating the fileset.
 
-	:arg project: Project the file is associated with.
+	:arg design: Design the file is associated with.
 	:arg fileset: Fileset the file is associated with.
 	"""
 
 #	:arg path:    Relative or absolute path to the file.
 
 	_name:      str
-	_project:   Nullable['Project']
+	_design:   Nullable['Design']
 	_fileSets:  Dict[str, 'FileSet']
 	_files:     List[File]
 
@@ -278,29 +274,29 @@ class FileSet:
 	# TODO: add a path to reach fileset (relative or absolute)
 # attributes
 
-	def __init__(self, name: str, project: 'Project' = None):
+	def __init__(self, name: str, design: 'Design' = None):
 		self._name =      name
-		self._project =   project
+		self._design =   design
 		self._fileSets =  {}
 		self._files =     []
 
-		if project is not None:
-			project._fileSets[name] = self
+		if design is not None:
+			design._fileSets[name] = self
 
 	@property
 	def Name(self) -> str:
 		return self._name
 
 	@property
-	def Project(self) -> Nullable['Project']:
-		return self._project
+	def Design(self) -> Nullable['Design']:
+		return self._design
 
-	@Project.setter
-	def Project(self, value: 'Project') -> None:
-#		if not isinstance(value, Project):
-#			raise TypeError("Parameter 'value' is not of type 'ProjectModel.Project'.")
+	@Design.setter
+	def Design(self, value: 'Design') -> None:
+#		if not isinstance(value, Design):
+#			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
 
-		self._project = value
+		self._design = value
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -340,12 +336,12 @@ class FileSet:
 @export
 class VHDLLibrary:
 	_name:    str
-	_project: Nullable['Project']
+	_design: Nullable['Design']
 	_files:   List[File]
 
-	def __init__(self, name: str, project: 'Project' = None):
+	def __init__(self, name: str, design: 'Design' = None):
 		self._name =    name
-		self._project = project
+		self._design = design
 		self._files =   []
 
 	@property
@@ -353,15 +349,15 @@ class VHDLLibrary:
 		return self._name
 
 	@property
-	def Project(self) -> Nullable['Project']:
-		return self._project
+	def Design(self) -> Nullable['Design']:
+		return self._design
 
-	@Project.setter
-	def Project(self, value: 'Project'):
-		if not isinstance(value, Project):
-			raise TypeError("Parameter 'value' is not of type 'ProjectModel.Project'.")
+	@Design.setter
+	def Design(self, value: 'Design'):
+		if not isinstance(value, Design):
+			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
 
-		self._project = value
+		self._design = value
 
 	@property
 	def Files(self) -> Generator[File, None, None]:
@@ -370,15 +366,15 @@ class VHDLLibrary:
 
 
 @export
-class Project:
+class Design:
 	"""
-	A :term:`Project` represents a group of filesets and the source files therein.
+	A :term:`Design` represents a group of filesets and the source files therein.
 
-	Each project contains at least one fileset - the :term:`default fileset`. For
-	projects with VHDL source files, a independent `VHDLLibraries` overlay structure
+	Each design contains at least one fileset - the :term:`default fileset`. For
+	designs with VHDL source files, a independent `VHDLLibraries` overlay structure
 	exists.
 
-	:arg name:    The project's name.
+	:arg name:    The design's name.
 	"""
 
 #	:arg path:    Relative or absolute path to the file.
@@ -420,12 +416,12 @@ class Project:
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
 			if (value not in self._fileSets.keys()):
-				raise Exception("Fileset '{0}' is not in this project.".format(value))
+				raise Exception("Fileset '{0}' is not in this design.".format(value))
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
 			if (value not in self.FileSets):
-				raise Exception("Fileset '{0}' is not associated to this project.".format(value))
+				raise Exception("Fileset '{0}' is not associated to this design.".format(value))
 
 			self._defaultFileSet = value
 		else:
@@ -447,7 +443,7 @@ class Project:
 				try:
 					fileSet = self._fileSets[fileSet]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to project {project}.".format(name=fileSet.Name, project=self.Name)) from ex
+					raise Exception("Fileset {name} not bound to design {design}.".format(name=fileSet.Name, design=self.Name)) from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -466,11 +462,11 @@ class Project:
 		if (not isinstance(fileSet, FileSet)):
 			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
 		elif (fileSet in self.FileSets):
-			raise Exception("Project already contains this fileSet.")
+			raise Exception("Design already contains this fileSet.")
 		elif (fileSet.Name in self._fileSets.keys()):
-			raise Exception("Project already contains a fileset named '{0}'.".format(fileSet.Name))
+			raise Exception("Design already contains a fileset named '{0}'.".format(fileSet.Name))
 
-		fileSet.Project = self
+		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
 
 	def AddFileSets(self, fileSets: Iterable[FileSet]) -> None:
@@ -481,7 +477,7 @@ class Project:
 		if file.FileSet is None:
 			self._defaultFileSet.AddFile(file)
 		else:
-			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Project to a default fileset.".format(file=file))
+			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.".format(file=file))
 
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
