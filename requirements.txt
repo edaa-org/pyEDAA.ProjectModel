@@ -1,3 +1,4 @@
 pydecor>=2.0.1
 
 pyVHDLModel>=0.13.0
+pySystemVerilogModel>=0.1.2
