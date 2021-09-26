@@ -248,27 +248,27 @@ class SettingFile(File):
 
 @export
 class SimulationAnalysisFile(File):
-	"""Base-class of all tool-specific setting files."""
+	"""Base-class of all tool-specific analysis files."""
 
 
 @export
 class SimulationElaborationFile(File):
-	"""Base-class of all tool-specific setting files."""
+	"""Base-class of all tool-specific elaboration files."""
 
 
 @export
 class SimulationStartFile(File):
-	"""Base-class of all tool-specific setting files."""
+	"""Base-class of all tool-specific simulation start-up files."""
 
 
 @export
 class SimulationRunFile(File):
-	"""Base-class of all tool-specific setting files."""
+	"""Base-class of all tool-specific simulation run (execution) files."""
 
 
 @export
 class WaveformConfigFile(File):
-	"""Base-class of all tool-specific setting files."""
+	"""Base-class of all tool-specific waveform configuration files."""
 
 
 @export
