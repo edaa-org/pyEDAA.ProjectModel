@@ -74,32 +74,42 @@ class File(metaclass=FileType):
 	A :term:`File` represents a file in a design. This :term:`base-class` is used
 	for all derived file classes.
 
-	A file can be created standalone and later associated to a fileset and design.
-	Or a fileset and/or design can be associated immediately while creating a file.
+	A file can be created standalone and later associated to a fileset, design and
+	project. Or a fileset, design and/or project can be associated immediately
+	while creating a file.
 
 	:arg path:    Relative or absolute path to the file.
-	:arg design: Design the file is associated with.
+	:arg project: Project the file is associated with.
+	:arg design:  Design the file is associated with.
 	:arg fileset: Fileset the file is associated with.
 	"""
 
 	_path:     Path
-	_design:  Nullable['Design']
+	_project:  Nullable['Project']
+	_design:   Nullable['Design']
 	_fileSet:  Nullable['FileSet']
 
 # related file
 # attributes
 
-	def __init__(self, path: Path, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: Path, project: 'Project' = None,  design: 'Design' = None, fileSet: 'FileSet' = None):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
-		if design is not None:
-			self._design = design
+		if project is not None:
+			self._project = project
+			self._design =  design
+			self.FileSet =  fileSet
+		elif design is not None:
+			self._project = design._project
+			self._design =  design
 			self.FileSet =  design.DefaultFileSet if fileSet is None else fileSet
 		elif fileSet is not None:
-			self._design = fileSet._design
+			self._project = fileSet._design._project
+			self._design =  fileSet._design
 			self.FileSet =  fileSet
 		else:
-			self._design = None
+			self._project = None
+			self._design =  None
 			self._fileSet = None
 
 	@property
@@ -109,6 +119,13 @@ class File(metaclass=FileType):
 	@property
 	def Path(self) -> Path:
 		return self._path
+
+	@property
+	def Project(self) -> Nullable['Project']:
+		return self._project
+	@Project.setter
+	def Project(self, value: 'Project') -> None:
+		self._project = value
 
 	@property
 	def Design(self) -> Nullable['Design']:
@@ -256,17 +273,21 @@ class FileSet:
 	A :term:`Fileset` represents a group of files. Filesets can have sub-filesets.
 
 	The order of insertion is preserved. A fileset can be created standalone and
-	later associated to another fileset and/or design. Or a fileset and/or design
-	can be associated immediately while creating the fileset.
+	later associated to another fileset, design and/or project. Or a fileset,
+	design and/or project can be associated immediately while creating the
+	fileset.
 
-	:arg design: Design the file is associated with.
+	:arg project: Project the file is associated with.
+	:arg design:  Design the file is associated with.
 	:arg fileset: Fileset the file is associated with.
 	"""
 
 #	:arg path:    Relative or absolute path to the file.
 
 	_name:      str
-	_design:   Nullable['Design']
+	_project:   Nullable['Project']
+	_design:    Nullable['Design']
+	_directory: Nullable[Path]
 	_fileSets:  Dict[str, 'FileSet']
 	_files:     List[File]
 
@@ -274,9 +295,12 @@ class FileSet:
 	# TODO: add a path to reach fileset (relative or absolute)
 # attributes
 
-	def __init__(self, name: str, design: 'Design' = None):
+	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, design: 'Design' = None):
 		self._name =      name
-		self._design =   design
+		self._project =   project if project is not None else design._project
+		self._design =    design
+		self._directory = directory
+
 		self._fileSets =  {}
 		self._files =     []
 
@@ -288,6 +312,14 @@ class FileSet:
 		return self._name
 
 	@property
+	def Project(self) -> Nullable['Project']:
+		return self._project
+
+	@Project.setter
+	def Project(self, value: 'Project') -> None:
+		self._project = value
+
+	@property
 	def Design(self) -> Nullable['Design']:
 		return self._design
 
@@ -297,6 +329,14 @@ class FileSet:
 #			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
 
 		self._design = value
+
+	@property
+	def Directory(self) -> Path:
+		return self._directory
+
+	@Directory.setter
+	def Directory(self, value: Path) -> None:
+		self._directory = value
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -339,14 +379,23 @@ class VHDLLibrary:
 	_design: Nullable['Design']
 	_files:   List[File]
 
-	def __init__(self, name: str, design: 'Design' = None):
+	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None):
 		self._name =    name
-		self._design = design
+		self._project = project if project is not None else design._project
+		self._design =  design
 		self._files =   []
 
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@property
+	def Project(self) -> Nullable['Project']:
+		return self._project
+
+	@Project.setter
+	def Project(self, value: 'Project'):
+		self._project = value
 
 	@property
 	def Design(self) -> Nullable['Design']:
@@ -379,6 +428,7 @@ class Design:
 
 #	:arg path:    Relative or absolute path to the file.
 	_name:                  str
+	_project:               Nullable['Project']
 	_rootDirectory:         Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
@@ -388,17 +438,22 @@ class Design:
 	# TODO: add a path to reach fileset (relative or absolute)
 # attributes
 
-	def __init__(self, name: str):
+	def __init__(self, name: str, project: 'Project' = None):
 		self._name =                  name
+		self._project =               project
 		self._rootDirectory =         None
 		self._fileSets =              {}
-		self._defaultFileSet =        FileSet("default", self)
+		self._defaultFileSet =        FileSet("default", project=project, design=self)
 		self._vhdlLibraries =         {}
 		self._externalVHDLLibraries = []
 
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@property
+	def Project(self) -> Nullable['Project']:
+		return self._project
 
 	@property
 	def RootDirectory(self) -> Path:
@@ -482,3 +537,41 @@ class Design:
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
 			self.AddFile(file)
+
+
+@export
+class Project:
+	"""
+	A :term:`Project` represents a group of designs and the source files therein.
+
+	:arg name:          The project's name.
+	:arg rootDirectory: Base-path to the project.
+	"""
+
+#	:arg path:    Relative or absolute path to the file.
+	_name:                  str
+	_rootDirectory:         Nullable[Path]
+	_designs:               Dict[str, Design]
+
+
+	def __init__(self, name: str, rootDirectory: Path = None):
+		self._name =                  name
+		self._rootDirectory =         rootDirectory
+		self._designs =               {}
+
+	@property
+	def Name(self) -> str:
+		return self._name
+
+	@property
+	def RootDirectory(self) -> Path:
+		return self._rootDirectory
+
+	@RootDirectory.setter
+	def RootDirectory(self, value: Path) -> None:
+		self._rootDirectory = value
+
+	# TODO: return generator with another method
+	@property
+	def Designs(self) -> Dict[str, Design]:
+		return self._designs

@@ -34,7 +34,7 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project, File
+from pyEDAA.ProjectModel import Design, File
 
 
 if __name__ == "__main__":
@@ -44,9 +44,26 @@ if __name__ == "__main__":
 
 
 class Instantiate(TestCase):
-	def test_Project(self):
-		project = Project("project")
+	def test_Design(self):
+		design = Design("design")
 
-		self.assertIsNotNone(project)
-		self.assertEqual(project.Name, "project")
-		self.assertIsNone(project.RootDirectory)
+		self.assertIsNotNone(design)
+		self.assertEqual(design.Name, "design")
+		self.assertIsNone(design.RootDirectory)
+		self.assertIsNotNone(design.DefaultFileSet)
+		self.assertEqual(1, len(design.FileSets))
+		self.assertIsNotNone(design.FileSets["default"])
+		self.assertIs(design.FileSets[design.DefaultFileSet.Name], design.DefaultFileSet)
+		self.assertEqual(0, len(design.VHDLLibraries))
+
+# todo: test design with project
+
+# todo: test composing path
+
+	def test_Files(self):
+		project = Design("project")
+
+		file = File(Path("example.vhdl"))
+		project.AddFile(file)
+
+		self.assertListEqual([file], [f for f in project.Files()])
