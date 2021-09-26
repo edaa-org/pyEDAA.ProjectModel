@@ -3,7 +3,10 @@
 Installation/Updates
 ####################
 
+.. note::
 
+   Python ≥3.7 is required for this package due to problems with meta classes and
+   ``__getattr__`` in Python 3.6.
 
 .. _installation-pip:
 
