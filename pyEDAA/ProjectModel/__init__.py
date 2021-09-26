@@ -104,9 +104,13 @@ class File(metaclass=FileType):
 			self._design =  design
 			self.FileSet =  design.DefaultFileSet if fileSet is None else fileSet
 		elif fileSet is not None:
-			self._project = fileSet._design._project
-			self._design =  fileSet._design
-			self.FileSet =  fileSet
+			design = fileSet._design
+			if design is not None:
+				self._project = design._project
+			else:
+				self._project = None
+			self._design =    design
+			self.FileSet =    fileSet
 		else:
 			self._project = None
 			self._design =  None
@@ -297,10 +301,16 @@ class FileSet:
 
 	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, design: 'Design' = None):
 		self._name =      name
-		self._project =   project if project is not None else design._project
-		self._design =    design
+		if project is not None:
+			self._project = project
+			self._design =  design
+		elif design is not None:
+			self._project = design._project
+			self._design =  design
+		else:
+			self._project = None
+			self._design =  None
 		self._directory = directory
-
 		self._fileSets =  {}
 		self._files =     []
 
@@ -381,8 +391,15 @@ class VHDLLibrary:
 
 	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None):
 		self._name =    name
-		self._project = project if project is not None else design._project
-		self._design =  design
+		if project is not None:
+			self._project = project
+			self._design =  design
+		elif design is not None:
+			self._project = design._project
+			self._design =  design
+		else:
+			self._project = None
+			self._design =  None
 		self._files =   []
 
 	@property

@@ -53,7 +53,7 @@ class Instantiate(TestCase):
 
 	def test_VHDLLibraryFromProject(self):
 		design =  Design("design")
-		library = VHDLLibrary("library", design)
+		library = VHDLLibrary("library", design=design)
 
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")

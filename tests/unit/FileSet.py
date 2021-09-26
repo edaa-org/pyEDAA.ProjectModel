@@ -54,7 +54,7 @@ class Instantiate(TestCase):
 
 	def test_FileSetFromProject(self):
 		design =  Design("design")
-		fileset = FileSet("fileset", design)
+		fileset = FileSet("fileset", design=design)
 
 		self.assertIsNotNone(fileset)
 		self.assertEqual(fileset.Name, "fileset")
@@ -67,7 +67,7 @@ class FileFilter(TestCase):
 
 	def setUp(self) -> None:
 		self._design =   Design("design")
-		self._fileset1 = FileSet("fileset1", self._design)
+		self._fileset1 = FileSet("fileset1", design=self._design)
 
 		self._file1 =   File(Path("file1.file"))
 		self._file2 =   File(Path("file2.file"))
@@ -78,7 +78,7 @@ class FileFilter(TestCase):
 
 		self._textfile1 = TextFile(Path("text1.txt"), fileSet=self._fileset1)
 
-		self._fileset2 =  FileSet("fileset2", self._design)
+		self._fileset2 =  FileSet("fileset2", design=self._design)
 		self._textfile2 = TextFile(Path("text2.txt"), fileSet=self._fileset2)
 		self._textfile3 = TextFile(Path("text3.txt"), fileSet=self._fileset2)
 
