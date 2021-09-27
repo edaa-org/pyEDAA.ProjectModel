@@ -29,33 +29,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from pydecor import export
-
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent
+from pyEDAA.ProjectModel import WaveformExchangeFile
 
 
-@export
-class VivadoProjectFile(ProjectFile, XMLContent):
-	"""A Vivado project file (``*.xpr``)."""
+# TODO: GHDL signal selection file (*.ghdl?)
 
 
-@export
-class XDCConstraintFile(ConstraintFile, SDCContent):
-	"""A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``)."""
-
-
-@export
-class IPCoreDescriptionFile(XMLFile):
-	pass
-
-
-@export
-class IPCoreInstantiationFile(XMLFile):
-	"""A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``)."""
-
-# TODO: MIG file
-# TODO: BD file   XML / JSON
-# TODO: exported contents (A project TCL, a block design TCL)
-
-# TODO: DesignCheckpoint
-
+class GHDLWaveformFile(WaveformExchangeFile):
+	"""GHDL's waveform file (``*.ghw``) supporting VHDL and Verilog simulation results."""

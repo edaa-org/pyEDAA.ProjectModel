@@ -224,6 +224,16 @@ class HDLSourceFile(SourceFile):
 
 
 @export
+class NetlistFile(SourceFile):
+	"""Base-class of all netlist source files."""
+
+
+@export
+class EDIFNetlistFile(SourceFile):
+	"""Netlist file in EDIF (Electronic Design Interchange Format)."""
+
+
+@export
 class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A VHDL source file (of any language version)."""
 
@@ -251,6 +261,11 @@ class PythonSourceFile(SourceFile, PythonContent):
 
 
 @export
+class CocotbPythonFile(PythonSourceFile):
+	"""A Python source file used by Cocotb."""
+
+
+@export
 class ConstraintFile(File, HumanReadableContent):
 	"""Base-class of all constraint files."""
 
@@ -258,6 +273,16 @@ class ConstraintFile(File, HumanReadableContent):
 @export
 class ProjectFile(File):
 	"""Base-class of all tool-specific project files."""
+
+
+@export
+class CSourceFile(File):
+	"""Base-class of all ANSI-C source files."""
+
+
+@export
+class CppSourceFile(File):
+	"""Base-class of all ANSI-C++ source files."""
 
 
 @export
@@ -288,6 +313,19 @@ class SimulationRunFile(File):
 @export
 class WaveformConfigFile(File):
 	"""Base-class of all tool-specific waveform configuration files."""
+
+
+@export
+class WaveformDatabaseFile(File):
+	"""Base-class of all tool-specific waveform database files."""
+
+
+@export
+class WaveformExchangeFile(File):
+	"""Base-class of all tool-independent waveform exchange files."""
+
+
+# TODO: SVCB - Streamed Value Change Blocks (SVCB)
 
 
 @export
