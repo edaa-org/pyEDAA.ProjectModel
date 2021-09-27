@@ -49,7 +49,7 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(design)
 		self.assertEqual(design.Name, "design")
-		self.assertIsNone(design.RootDirectory)
+		self.assertIsNone(design.Directory)
 		self.assertIsNotNone(design.DefaultFileSet)
 		self.assertEqual(1, len(design.FileSets))
 		self.assertIsNotNone(design.FileSets["default"])

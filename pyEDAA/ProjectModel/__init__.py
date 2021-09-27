@@ -48,19 +48,19 @@ class FileType(type):
 	* Register all classes of type :class:`FileType` or derived variants in a class field :attr:`FileType.FileTypes` in this meta-class.
 	"""
 
-	FileTypes: Dict[str, 'FileTypes'] = {}     #: Dictionary of all classes of type :class:`FileType` or derived variants
+	FileTypes: Dict[str, 'FileType'] = {}     #: Dictionary of all classes of type :class:`FileType` or derived variants
 	Any: 'FileType'
 
-	def __init__(self, name: str, bases: Tuple[type, ...], dict: Dict[str, typing_Any], **kwargs):
+	def __init__(cls, name: str, bases: Tuple[type, ...], dict: Dict[str, typing_Any], **kwargs):
 		super().__init__(name, bases, dict, **kwargs)
-		self.Any = self
+		cls.Any = cls
 
 	def __new__(cls, className, baseClasses, classMembers: dict):
 		fileType = super().__new__(cls, className, baseClasses, classMembers)
 		cls.FileTypes[className] = fileType
 		return fileType
 
-	def __getattr__(cls, item) -> 'FileTypes':
+	def __getattr__(cls, item) -> 'FileType':
 		if item[:2] != "__" and item[-2:] != "__":
 			return cls.FileTypes[item]
 
@@ -81,7 +81,7 @@ class File(metaclass=FileType):
 	:arg path:    Relative or absolute path to the file.
 	:arg project: Project the file is associated with.
 	:arg design:  Design the file is associated with.
-	:arg fileset: Fileset the file is associated with.
+	:arg fileSet: Fileset the file is associated with.
 	"""
 
 	_path:     Path
@@ -89,8 +89,8 @@ class File(metaclass=FileType):
 	_design:   Nullable['Design']
 	_fileSet:  Nullable['FileSet']
 
-# related file
-# attributes
+	# TODO: Feature - related file
+	# TODO: Feature - file attributes
 
 	def __init__(self, path: Path, project: 'Project' = None,  design: 'Design' = None, fileSet: 'FileSet' = None):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
@@ -127,6 +127,7 @@ class File(metaclass=FileType):
 	@property
 	def Project(self) -> Nullable['Project']:
 		return self._project
+
 	@Project.setter
 	def Project(self, value: 'Project') -> None:
 		self._project = value
@@ -134,6 +135,7 @@ class File(metaclass=FileType):
 	@property
 	def Design(self) -> Nullable['Design']:
 		return self._design
+
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
 		self._design = value
@@ -141,6 +143,7 @@ class File(metaclass=FileType):
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
 		return self._fileSet
+
 	@FileSet.setter
 	def FileSet(self, value: 'FileSet') -> None:
 		self._fileSet = value
@@ -154,33 +157,45 @@ FileTypes = File
 class HumanReadableContent:
 	"""A file type representing human-readable contents."""
 
+
 @export
 class XMLContent(HumanReadableContent):
 	"""A file type representing XML contents."""
+
 
 @export
 class YAMLContent(HumanReadableContent):
 	"""A file type representing YAML contents."""
 
+
 @export
 class JSONContent(HumanReadableContent):
 	"""A file type representing JSON contents."""
+
 
 @export
 class INIContent(HumanReadableContent):
 	"""A file type representing INI contents."""
 
+
 @export
 class TOMLContent(HumanReadableContent):
 	"""A file type representing TOML contents."""
+
 
 @export
 class TCLContent(HumanReadableContent):
 	"""A file type representing content in TCL code."""
 
+
 @export
 class SDCContent(TCLContent):
 	"""A file type representing contents as Synopsys Design Constraints (SDC)."""
+
+
+@export
+class PythonContent(HumanReadableContent):
+	"""A file type representing contents as Python source code."""
 
 
 @export
@@ -215,6 +230,10 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, design, fileSet)
 
+# TODO: make vhdlLibrary = None
+#         go one level up in resolution if None
+# TODO: add vhdlVersion the same way
+
 
 @export
 class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
@@ -227,7 +246,7 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 
 @export
-class PythonSourceFile(SourceFile, HumanReadableContent):
+class PythonSourceFile(SourceFile, PythonContent):
 	"""A Python source file."""
 
 
@@ -281,12 +300,11 @@ class FileSet:
 	design and/or project can be associated immediately while creating the
 	fileset.
 
-	:arg project: Project the file is associated with.
-	:arg design:  Design the file is associated with.
-	:arg fileset: Fileset the file is associated with.
+	:arg name:      Name of this fileset.
+	:arg directory: Path of this fileset (absolute or relative to a parent fileset or design).
+	:arg project:   Project the file is associated with.
+	:arg design:    Design the file is associated with.
 	"""
-
-#	:arg path:    Relative or absolute path to the file.
 
 	_name:      str
 	_project:   Nullable['Project']
@@ -296,8 +314,7 @@ class FileSet:
 	_files:     List[File]
 
 	# TODO: link parent fileset for relative path calculations
-	# TODO: add a path to reach fileset (relative or absolute)
-# attributes
+	# TODO: Feature - attributes
 
 	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, design: 'Design' = None):
 		self._name =      name
@@ -385,9 +402,19 @@ class FileSet:
 
 @export
 class VHDLLibrary:
+	"""
+	A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
+
+	:arg name:      The VHDL libraries' name.
+	:arg project:   Project the VHDL library is associated with.
+	:arg design:    Design the VHDL library is associated with.
+	"""
+
 	_name:    str
 	_design: Nullable['Design']
 	_files:   List[File]
+
+# TODO: default VHDL version number
 
 	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None):
 		self._name =    name
@@ -440,25 +467,25 @@ class Design:
 	designs with VHDL source files, a independent `VHDLLibraries` overlay structure
 	exists.
 
-	:arg name:    The design's name.
+	:arg name:      The design's name.
+	:arg directory: Path of this design (absolute or relative to the project).
+	:arg project:   Project the design is associated with.
 	"""
 
-#	:arg path:    Relative or absolute path to the file.
 	_name:                  str
 	_project:               Nullable['Project']
-	_rootDirectory:         Nullable[Path]
+	_directory:             Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_externalVHDLLibraries: List
 
-	# TODO: add a path to reach fileset (relative or absolute)
-# attributes
+	# TODO: Feature - attributes
 
-	def __init__(self, name: str, project: 'Project' = None):
+	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None):
 		self._name =                  name
 		self._project =               project
-		self._rootDirectory =         None
+		self._directory =             directory
 		self._fileSets =              {}
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
 		self._vhdlLibraries =         {}
@@ -472,13 +499,17 @@ class Design:
 	def Project(self) -> Nullable['Project']:
 		return self._project
 
-	@property
-	def RootDirectory(self) -> Path:
-		return self._rootDirectory
+	@Project.setter
+	def Project(self, value: 'Project') -> None:
+		self._project = value
 
-	@RootDirectory.setter
-	def RootDirectory(self, value: Path) -> None:
-		self._rootDirectory = value
+	@property
+	def Directory(self) -> Path:
+		return self._directory
+
+	@Directory.setter
+	def Directory(self, value: Path) -> None:
+		self._directory = value
 
 	@property
 	def DefaultFileSet(self) -> FileSet:
@@ -565,11 +596,11 @@ class Project:
 	:arg rootDirectory: Base-path to the project.
 	"""
 
-#	:arg path:    Relative or absolute path to the file.
 	_name:                  str
 	_rootDirectory:         Nullable[Path]
 	_designs:               Dict[str, Design]
 
+	# TODO: Feature - attributes
 
 	def __init__(self, name: str, rootDirectory: Path = None):
 		self._name =                  name
