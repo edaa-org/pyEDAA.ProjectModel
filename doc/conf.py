@@ -17,7 +17,7 @@ sys.path.insert(0, abspath('../pyEDAA/ProjectModel'))
 # Project information
 # ==============================================================================
 project =   "pyEDAA.ProjectModel"
-copyright = "2016-2021 Patrick Lehmann - Boetzingen, Germany"
+copyright = "2016-2021 Patrick Lehmann, Unai Martinez-Corral and contributors"
 author =    "Patrick Lehmann"
 
 
