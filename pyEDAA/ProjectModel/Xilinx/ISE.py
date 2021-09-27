@@ -31,7 +31,7 @@
 #
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile
+from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, HumanReadableContent
 
 
 @export
@@ -39,10 +39,6 @@ class ISEProjectFile(ProjectFile):
 	pass
 
 
-class HumanReadable:
-	pass
-
-
 @export
-class UCFConstraintFile(ConstraintFile, HumanReadable):
+class UCFConstraintFile(ConstraintFile, HumanReadableContent):
 	pass
