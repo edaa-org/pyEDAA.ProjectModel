@@ -23,8 +23,7 @@
 The pyEDAA.ProjectModel Documentation
 #####################################
 
-An abstract model of EDA tool projects.
-
+An abstract model of HDL design projects and EDA tooling.
 
 
 .. _goals:
@@ -32,13 +31,12 @@ An abstract model of EDA tool projects.
 Main Goals
 **********
 
-This package provides a unified abstract project model for EDA tools. Frameworks reading
-can derive own classes and implement additional logic to create a concrete project model
-for their tools.
+This package provides a unified abstract project model for HDL designs and EDA tools.
+Third-party frameworks can derive own classes and implement additional logic to create a concrete project model for
+their tools.
 
-Frameworks consuming this model can build higher level features and services on top of
-such a model, while supporting multiple input sources.
-
+Frameworks consuming this model can build higher level features and services on top of such a model, while supporting
+multiple input sources.
 
 
 .. _usecase:
@@ -46,8 +44,15 @@ such a model, while supporting multiple input sources.
 Use Cases
 *********
 
-* Describing VHDL projects for GHDL
-* Managing IP cores and projects with pyIPCMI
+* Describing HDL projects for open source simulation and synthesis tools:
+  `GHDL <https://hdl.github.io/awesome/items/ghdl/>`__,
+  `Icarus Verilog <https://hdl.github.io/awesome/items/iverilog/>`__,
+  `Verilator <https://hdl.github.io/awesome/items/verilator/>`__,
+  `Yosys <https://hdl.github.io/awesome/items/yosys/>`__,
+  `Verilog to Routing (VTR) <https://hdl.github.io/awesome/items/vtr/>`__,
+  `nextpnr <https://hdl.github.io/awesome/items/nextpnr/>`__,
+  etc.
+* Managing IP cores and projects with `pyIPCMI <https://github.com/Paebbels/pyIPCMI>`__.
 
 
 .. _news:
