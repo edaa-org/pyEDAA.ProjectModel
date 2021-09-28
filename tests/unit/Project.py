@@ -49,4 +49,17 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(project)
 		self.assertEqual(project.Name, "project")
-		self.assertIsNone(project.RootDirectory)
+		self.assertEqual(Path("."), project.RootDirectory)
+		self.assertEqual(0, len(project.Designs))
+		self.assertIsNone(project.VHDLVersion)
+		self.assertIsNone(project.VerilogVersion)
+		self.assertIsNone(project.SVVersion)
+
+		# todo: add path later and checks
+		rootDirectory = "temp/project"
+		rootDirectoryPath = Path(rootDirectory)
+		project.RootDirectory = rootDirectoryPath
+		self.assertIs(rootDirectoryPath, project.RootDirectory)
+
+		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
+

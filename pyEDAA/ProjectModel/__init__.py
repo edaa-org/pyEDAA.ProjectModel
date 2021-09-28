@@ -315,7 +315,7 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	@property
 	def SystemVerilogVersion(self) -> SystemVerilogVersion:
 		if self._svVersion is not None:
-			return self._systemVerilogVersion
+			return self._svVersion
 		else:
 			return self._fileSet.SystemVerilogVersion
 
@@ -780,6 +780,28 @@ class Design:
 		self._vhdlVersion = value
 
 	@property
+	def VerilogVersion(self) -> VerilogVersion:
+		if self._verilogVersion is not None:
+			return self._verilogVersion
+		else:
+			return self._parent.VerilogVersion
+
+	@VerilogVersion.setter
+	def VerilogVersion(self, value: VerilogVersion) -> None:
+		self._verilogVersion = value
+
+	@property
+	def SVVersion(self) -> SystemVerilogVersion:
+		if self._svVersion is not None:
+			return self._svVersion
+		else:
+			return self._parent.SVVersion
+
+	@SVVersion.setter
+	def SVVersion(self, value: SystemVerilogVersion) -> None:
+		self._svVersion = value
+
+	@property
 	def ExternalVHDLLibraries(self) -> List:
 		return self._externalVHDLLibraries
 
@@ -822,15 +844,25 @@ class Project:
 	_rootDirectory:         Nullable[Path]
 	_designs:               Dict[str, Design]
 	_vhdlVersion:           VHDLVersion
+	_verilogVersion:        VerilogVersion
+	_svVersion:             SystemVerilogVersion
 
 	# TODO: Feature - attributes
 
-	# TODO: verilogVersion and svVersion
-	def __init__(self, name: str, rootDirectory: Path = None, vhdlVersion: VHDLVersion = None):
-		self._name =          name
-		self._rootDirectory = rootDirectory
-		self._designs =       {}
-		self._vhdlVersion =   vhdlVersion
+	def __init__(
+		self,
+		name: str,
+		rootDirectory: Path = Path("."),
+		vhdlVersion: VHDLVersion = None,
+		verilogVersion: VerilogVersion = None,          # TODO: implement as attribute?
+		svVersion: SystemVerilogVersion = None          # TODO: implement as attribute?
+	):
+		self._name =            name
+		self._rootDirectory =   rootDirectory
+		self._designs =         {}
+		self._vhdlVersion =     vhdlVersion
+		self._verilogVersion =  verilogVersion
+		self._svVersion =       svVersion
 
 	@property
 	def Name(self) -> str:
@@ -861,3 +893,21 @@ class Project:
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
+
+	@property
+	def VerilogVersion(self) -> VerilogVersion:
+		# TODO: check for None and return exception
+		return self._verilogVersion
+
+	@VerilogVersion.setter
+	def VerilogVersion(self, value: VerilogVersion) -> None:
+		self._verilogVersion = value
+
+	@property
+	def SVVersion(self) -> SystemVerilogVersion:
+		# TODO: check for None and return exception
+		return self._svVersion
+
+	@SVVersion.setter
+	def SVVersion(self, value: SystemVerilogVersion) -> None:
+		self._svVersion = value
