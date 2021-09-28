@@ -580,6 +580,7 @@ class VHDLLibrary:
 	"""
 
 	_name:        str
+	_project:     Nullable['Project']
 	_design:      Nullable['Design']
 	_files:       List[File]
 	_vhdlVersion: VHDLVersion
@@ -796,6 +797,7 @@ class Project:
 
 	# TODO: Feature - attributes
 
+	# TODO: verilogVersion and svVersion
 	def __init__(self, name: str, rootDirectory: Path = None, vhdlVersion: VHDLVersion = None):
 		self._name =          name
 		self._rootDirectory = rootDirectory
