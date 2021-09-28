@@ -273,7 +273,9 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		else:
 			return self._fileSet.VHDLVersion
 
-	# TODO: setter
+	@VHDLVersion.setter
+	def VHDLVersion(self, value: VHDLVersion) -> None:
+		self._vhdlVersion = value
 
 
 @export
@@ -294,28 +296,32 @@ class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 		else:
 			return self._fileSet.VerilogVersion
 
-	# TODO: setter
+	@VerilogVersion.setter
+	def VerilogVersion(self, value: VerilogVersion) -> None:
+		self._verilogVersion = value
 
 
 @export
 class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A SystemVerilog source file (of any language version)."""
 
-	_systemVerilogVersion: VerilogVersion
+	_svVersion: SystemVerilogVersion
 
-	def __init__(self, path: Path, systemVerilogVersion: VerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: Path, svVersion: SystemVerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, design, fileSet)
 
-		self._systemVerilogVersion = systemVerilogVersion
+		self._svVersion = svVersion
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
-		if self._systemVerilogVersion is not None:
+	def SystemVerilogVersion(self) -> SystemVerilogVersion:
+		if self._svVersion is not None:
 			return self._systemVerilogVersion
 		else:
 			return self._fileSet.SystemVerilogVersion
 
-	# TODO: setter
+	@SystemVerilogVersion.setter
+	def SystemVerilogVersion(self, value: SystemVerilogVersion) -> None:
+		self._svVersion = value
 
 
 @export
@@ -556,7 +562,9 @@ class FileSet:
 		else:
 			return self._parent.VHDLVersion
 
-	# TODO: setter
+	@VHDLVersion.setter
+	def VHDLVersion(self, value: VHDLVersion) -> None:
+		self._vhdlVersion = value
 
 	@property
 	def VerilogVersion(self) -> VerilogVersion:
@@ -565,7 +573,9 @@ class FileSet:
 		else:
 			return self._parent.VerilogVersion
 
-	# TODO: setter
+	@VerilogVersion.setter
+	def VerilogVersion(self, value: VerilogVersion) -> None:
+		self._verilogVersion = value
 
 	@property
 	def SVVersion(self) -> SystemVerilogVersion:
@@ -574,7 +584,9 @@ class FileSet:
 		else:
 			return self._parent.SVVersion
 
-	# TODO: setter
+	@SVVersion.setter
+	def SVVersion(self, value: SystemVerilogVersion) -> None:
+		self._svVersion = value
 
 
 @export
@@ -646,7 +658,9 @@ class VHDLLibrary:
 		else:
 			return self._design.VHDLVersion
 
-	# TODO: setter
+	@VHDLVersion.setter
+	def VHDLVersion(self, value: VHDLVersion) -> None:
+		self._vhdlVersion = value
 
 
 @export
@@ -761,7 +775,9 @@ class Design:
 		else: # TODO: check for None, else return an exception
 			return self._project.VHDLVersion
 
-	# TODO: setter
+	@VHDLVersion.setter
+	def VHDLVersion(self, value: VHDLVersion) -> None:
+		self._vhdlVersion = value
 
 	@property
 	def ExternalVHDLLibraries(self) -> List:
@@ -841,3 +857,7 @@ class Project:
 	def VHDLVersion(self) -> VHDLVersion:
 		# TODO: check for None and return exception
 		return self._vhdlVersion
+
+	@VHDLVersion.setter
+	def VHDLVersion(self, value: VHDLVersion) -> None:
+		self._vhdlVersion = value
