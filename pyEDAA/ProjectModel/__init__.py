@@ -145,6 +145,10 @@ class File(metaclass=FileType):
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
 		self._design = value
+		if self._project is None:
+			self._project = value._project
+		elif self._project is not value._project:
+			raise Exception("The design's project is not identical to the already assign project.")
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
@@ -481,6 +485,10 @@ class FileSet:
 #			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
 
 		self._design = value
+		if self._project is None:
+			self._project = value._project
+		elif self._project is not value._project:
+			raise Exception("The design's project is not identical to the already assign project.")
 
 	@property
 	def Directory(self) -> Path:
@@ -621,6 +629,10 @@ class VHDLLibrary:
 			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
 
 		self._design = value
+		if self._project is None:
+			self._project = value._project
+		elif self._project is not value._project:
+			raise Exception("The design's project is not identical to the already assign project.")
 
 	@property
 	def Files(self) -> Generator[File, None, None]:
