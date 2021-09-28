@@ -34,6 +34,8 @@
 from pathlib import Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
+from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel import VHDLVersion
 from pydecor import export
 
 
@@ -123,6 +125,10 @@ class File(metaclass=FileType):
 	@property
 	def Path(self) -> Path:
 		return self._path
+
+	@property
+	def ResolvedPath(self) -> Path:
+		return (self._parent._directory / self._path).resolve()
 
 	@property
 	def Project(self) -> Nullable['Project']:
@@ -237,22 +243,75 @@ class EDIFNetlistFile(SourceFile):
 class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A VHDL source file (of any language version)."""
 
-	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'], design: 'Design' = None, fileSet: 'FileSet' = None):
+	_vhdlLibrary: 'VHDLLibrary'
+	_vhdlVersion: VHDLVersion
+
+	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, design, fileSet)
 
-# TODO: make vhdlLibrary = None
-#         go one level up in resolution if None
-# TODO: add vhdlVersion the same way
+		# TODO: handle if vhdlLibrary is a string
+		self._vhdlLibrary = vhdlLibrary
+		self._vhdlVersion = vhdlVersion
+
+	@property
+	def VHDLLibrary(self) -> 'VHDLLibrary':
+		if self._vhdlLibrary is not None:
+			return self._vhdlLibrary
+		else:
+			return self._fileSet.VHDLLibrary
+
+	# TODO: setter
+
+	@property
+	def VHDLVersion(self) -> VHDLVersion:
+		if self._vhdlVersion is not None:
+			return self._vhdlVersion
+		else:
+			return self._fileSet.VHDLVersion
+
+	# TODO: setter
 
 
 @export
 class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A Verilog source file (of any language version)."""
 
+	_verilogVersion: VerilogVersion
+
+	def __init__(self, path: Path, verilogVersion: VerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, design, fileSet)
+
+		self._verilogVersion = verilogVersion
+
+	@property
+	def VerilogVersion(self) -> VerilogVersion:
+		if self._verilogVersion is not None:
+			return self._verilogVersion
+		else:
+			return self._fileSet.VerilogVersion
+
+	# TODO: setter
+
 
 @export
 class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A SystemVerilog source file (of any language version)."""
+
+	_systemVerilogVersion: VerilogVersion
+
+	def __init__(self, path: Path, systemVerilogVersion: VerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, design, fileSet)
+
+		self._systemVerilogVersion = systemVerilogVersion
+
+	@property
+	def VerilogVersion(self) -> VerilogVersion:
+		if self._systemVerilogVersion is not None:
+			return self._systemVerilogVersion
+		else:
+			return self._fileSet.SystemVerilogVersion
+
+	# TODO: setter
 
 
 @export
@@ -338,23 +397,44 @@ class FileSet:
 	design and/or project can be associated immediately while creating the
 	fileset.
 
-	:arg name:      Name of this fileset.
-	:arg directory: Path of this fileset (absolute or relative to a parent fileset or design).
-	:arg project:   Project the file is associated with.
-	:arg design:    Design the file is associated with.
+	:arg name:            Name of this fileset.
+	:arg directory:       Path of this fileset (absolute or relative to a parent fileset or design).
+	:arg project:         Project the file is associated with.
+	:arg design:          Design the file is associated with.
+	:arg vhdlLibrary:     Default VHDL library for files in this fileset, if not specified for the file itself.
+	:arg vhdlVersion:     Default VHDL version for files in this fileset, if not specified for the file itself.
+	:arg verilogVersion:  Default Verilog version for files in this fileset, if not specified for the file itself.
+	:arg svVersion:       Default SystemVerilog version for files in this fileset, if not specified for the file itself.
 	"""
 
-	_name:      str
-	_project:   Nullable['Project']
-	_design:    Nullable['Design']
-	_directory: Nullable[Path]
-	_fileSets:  Dict[str, 'FileSet']
-	_files:     List[File]
+	_name:        str
+	_project:     Nullable['Project']
+	_design:      Nullable['Design']
+	_directory:   Nullable[Path]
+	_parent:      Union['FileSet', 'Design']
+	_fileSets:    Dict[str, 'FileSet']
+	_files:       List[File]
+
+	_vhdlLibrary:     'VHDLLibrary'
+	_vhdlVersion:     VHDLVersion
+	_verilogVersion:  VerilogVersion
+	_svVersion:       SystemVerilogVersion
 
 	# TODO: link parent fileset for relative path calculations
 	# TODO: Feature - attributes
 
-	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, design: 'Design' = None):
+	def __init__(
+		self,
+		name: str,
+		directory: Path = Path("."),
+		project: 'Project' = None,
+		design: 'Design' = None,
+		parent: Union['FileSet', 'Design'] = None,
+		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,  # TODO: implement as attribute?
+		vhdlVersion: VHDLVersion = None,                # TODO: implement as attribute?
+		verilogVersion: VerilogVersion = None,          # TODO: implement as attribute?
+		svVersion: SystemVerilogVersion = None          # TODO: implement as attribute?
+	):
 		self._name =      name
 		if project is not None:
 			self._project = project
@@ -366,11 +446,18 @@ class FileSet:
 			self._project = None
 			self._design =  None
 		self._directory = directory
+		self._parent =    parent
 		self._fileSets =  {}
 		self._files =     []
 
 		if design is not None:
 			design._fileSets[name] = self
+
+		# TODO: handle if vhdlLibrary is a string
+		self._vhdlLibrary =     vhdlLibrary
+		self._vhdlVersion =     vhdlVersion
+		self._verilogVersion =  verilogVersion
+		self._svVersion =       svVersion
 
 	@property
 	def Name(self) -> str:
@@ -402,6 +489,14 @@ class FileSet:
 	@Directory.setter
 	def Directory(self, value: Path) -> None:
 		self._directory = value
+
+	@property
+	def ResolvedPath(self) -> Path:
+		return (self._parent._directory / self._directory).resolve()
+
+	@property
+	def Parent(self) -> Union['FileSet', 'Design']:
+		return self._parent
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -437,6 +532,42 @@ class FileSet:
 			self._files.append(file)
 			file._fileSet = self
 
+	@property
+	def VHDLLibrary(self) -> 'VHDLLibrary':
+		if self._vhdlLibrary is not None:
+			return self._vhdlLibrary
+		else:
+			return self._parent.VHDLLibrary
+
+	# TODO: setter
+
+	@property
+	def VHDLVersion(self) -> VHDLVersion:
+		if self._vhdlVersion is not None:
+			return self._vhdlVersion
+		else:
+			return self._parent.VHDLVersion
+
+	# TODO: setter
+
+	@property
+	def VerilogVersion(self) -> VerilogVersion:
+		if self._verilogVersion is not None:
+			return self._verilogVersion
+		else:
+			return self._parent.VerilogVersion
+
+	# TODO: setter
+
+	@property
+	def SVVersion(self) -> SystemVerilogVersion:
+		if self._svVersion is not None:
+			return self._svVersion
+		else:
+			return self._parent.SVVersion
+
+	# TODO: setter
+
 
 @export
 class VHDLLibrary:
@@ -448,13 +579,12 @@ class VHDLLibrary:
 	:arg design:    Design the VHDL library is associated with.
 	"""
 
-	_name:    str
-	_design: Nullable['Design']
-	_files:   List[File]
+	_name:        str
+	_design:      Nullable['Design']
+	_files:       List[File]
+	_vhdlVersion: VHDLVersion
 
-# TODO: default VHDL version number
-
-	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None):
+	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None, vhdlVersion: VHDLVersion = None):
 		self._name =    name
 		if project is not None:
 			self._project = project
@@ -465,7 +595,8 @@ class VHDLLibrary:
 		else:
 			self._project = None
 			self._design =  None
-		self._files =   []
+		self._files =     []
+		self._vhdlVersion = vhdlVersion
 
 	@property
 	def Name(self) -> str:
@@ -495,6 +626,15 @@ class VHDLLibrary:
 		for file in self._files:
 			yield file
 
+	@property
+	def VHDLVersion(self) -> VHDLVersion:
+		if self._vhdlVersion is not None:
+			return self._vhdlVersion
+		else:
+			return self._design.VHDLVersion
+
+	# TODO: setter
+
 
 @export
 class Design:
@@ -516,17 +656,19 @@ class Design:
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
+	_vhdlVersion:           VHDLVersion
 	_externalVHDLLibraries: List
 
 	# TODO: Feature - attributes
 
-	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None):
+	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, vhdlVersion: VHDLVersion = None):
 		self._name =                  name
 		self._project =               project
 		self._directory =             directory
 		self._fileSets =              {}
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
 		self._vhdlLibraries =         {}
+		self._vhdlVersion =           vhdlVersion
 		self._externalVHDLLibraries = []
 
 	@property
@@ -548,6 +690,10 @@ class Design:
 	@Directory.setter
 	def Directory(self, value: Path) -> None:
 		self._directory = value
+
+	@property
+	def ResolvedPath(self) -> Path:
+		return (self._project._rootDirectory / self._directory).resolve()
 
 	@property
 	def DefaultFileSet(self) -> FileSet:
@@ -596,6 +742,15 @@ class Design:
 		return self._vhdlLibraries.values()
 
 	@property
+	def VHDLVersion(self) -> VHDLVersion:
+		if self._vhdlVersion is not None:
+			return self._vhdlVersion
+		else: # TODO: check for None, else return an exception
+			return self._project.VHDLVersion
+
+	# TODO: setter
+
+	@property
 	def ExternalVHDLLibraries(self) -> List:
 		return self._externalVHDLLibraries
 
@@ -637,13 +792,15 @@ class Project:
 	_name:                  str
 	_rootDirectory:         Nullable[Path]
 	_designs:               Dict[str, Design]
+	_vhdlVersion:           VHDLVersion
 
 	# TODO: Feature - attributes
 
-	def __init__(self, name: str, rootDirectory: Path = None):
-		self._name =                  name
-		self._rootDirectory =         rootDirectory
-		self._designs =               {}
+	def __init__(self, name: str, rootDirectory: Path = None, vhdlVersion: VHDLVersion = None):
+		self._name =          name
+		self._rootDirectory = rootDirectory
+		self._designs =       {}
+		self._vhdlVersion =   vhdlVersion
 
 	@property
 	def Name(self) -> str:
@@ -657,7 +814,16 @@ class Project:
 	def RootDirectory(self, value: Path) -> None:
 		self._rootDirectory = value
 
+	@property
+	def ResolvedPath(self) -> Path:
+		return self._rootDirectory.resolve()
+
 	# TODO: return generator with another method
 	@property
 	def Designs(self) -> Dict[str, Design]:
 		return self._designs
+
+	@property
+	def VHDLVersion(self) -> VHDLVersion:
+		# TODO: check for None and return exception
+		return self._vhdlVersion
