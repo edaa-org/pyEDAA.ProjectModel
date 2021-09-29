@@ -58,7 +58,7 @@ class Instantiate(TestCase):
 		self.assertIsNone(project.VerilogVersion)
 		self.assertIsNone(project.SVVersion)
 
-		# todo: add path later and checks
+		# now assign a root directory and check it
 		rootDirectory = "temp/project"
 		rootDirectoryPath = Path(rootDirectory)
 		project.RootDirectory = rootDirectoryPath
@@ -81,9 +81,8 @@ class Instantiate(TestCase):
 		)
 
 		self.assertEqual(VHDLVersion.VHDL2019, project.VHDLVersion)
-		# TODO: patch SVModel with Any value
-#		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
-#		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
+		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
+		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
 
 	def test_ProjectSetVersionsLater(self):
 		project = Project("project")
@@ -97,6 +96,5 @@ class Instantiate(TestCase):
 		project.SVVersion = svVersion
 
 		self.assertEqual(vhdlVersion, project.VHDLVersion)
-# TODO: patch SVModel with Any value
-#		self.assertEqual(verilogVersion, project.VerilogVersion)
-#		self.assertEqual(svVersion, project.SVVersion)
+		self.assertEqual(verilogVersion, project.VerilogVersion)
+		self.assertEqual(svVersion, project.SVVersion)
