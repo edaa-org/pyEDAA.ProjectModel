@@ -65,7 +65,7 @@ class FileType(type):
 	def __getattr__(cls, item) -> 'FileType':
 		if item[:2] != "__" and item[-2:] != "__":
 			return cls.FileTypes[item]
-		raise RuntimeError()
+#		raise RuntimeError()
 
 	def __contains__(cls, item) -> bool:
 		return issubclass(item, cls)
