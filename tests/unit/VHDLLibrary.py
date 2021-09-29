@@ -31,10 +31,12 @@
 #
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, VHDLLibrary
+from pyVHDLModel import VHDLVersion
+
+from pyEDAA.ProjectModel import Design, VHDLLibrary, Project
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
 	print("ERROR: you called a testcase declaration file as an executable module.")
 	print("Use: 'python -m unitest <testcase module>'")
 	exit(1)
@@ -46,14 +48,43 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(library)
 		self.assertEqual(library.Name, "library")
+		self.assertIsNone(library.Project)
 		self.assertIsNone(library.Design)
 		self.assertEqual(0, len(library._files))
 
-	def test_VHDLLibraryFromProject(self):
+	def test_VHDLLibraryFromDesign(self):
 		design =  Design("design")
 		library = VHDLLibrary("library", design=design)
 
-		self.assertIsNotNone(library)
-		self.assertEqual(library.Name, "library")
+		self.assertIsNone(library.Project)
+		self.assertIs(design, library.Design)
+
+	def test_VHDLLibraryFromProject(self):
+		project = Project("project")
+		library = VHDLLibrary("library", project=project)
+
+		self.assertIs(project, library.Project)
+		self.assertIsNone(library.Design)
+
+
+	def test_VHDLLibraryFromProjectAndDesign(self):
+		project = Project("project")
+		design =  Design("design", project=project)
+		library = VHDLLibrary("library", design=design)
+
+		self.assertIs(library.Project, project)
 		self.assertIs(library.Design, design)
-		self.assertEqual(0, len(library._files))
+
+	def test_VHDLLibraryWithVersion(self):
+		library = VHDLLibrary("library", vhdlVersion=VHDLVersion.VHDL2019)
+
+		self.assertEqual(VHDLVersion.VHDL2019, library.VHDLVersion)
+
+	def test_VHDLLibrarySetVersionLater(self):
+		library = VHDLLibrary("library")
+
+		vhdlVersion = VHDLVersion.VHDL2019
+
+		library.VHDLVersion = vhdlVersion
+
+		self.assertEqual(vhdlVersion, library.VHDLVersion)
