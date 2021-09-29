@@ -97,7 +97,34 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
 
-# todo: test composing path
+	def test_DesignGetVersionsFromProject(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		project = Project("project", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
+		design = Design("design", project=project)
+
+		self.assertEqual(vhdlVersion, design.VHDLVersion)
+		self.assertEqual(verilogVersion, design.VerilogVersion)
+		self.assertEqual(svVersion, design.SVVersion)
+
+	def test_DesignSetDirectoryLater(self):
+		directory = Path("design")
+		design = Design("design")
+
+		design.Directory = directory
+
+		self.assertIs(directory, design.Directory)
+
+	def testDesignResolveDirectory(self):
+		projectDirectory = "temp/project"
+		designDirectory = "design"
+
+		project = Project("project", Path(projectDirectory))
+		design = Design("design", Path(designDirectory), project=project)
+
+		self.assertEqual(f"{projectDirectory}/{designDirectory}", design.ResolvedPath.as_posix())
 
 	def test_Files(self):
 		project = Design("project")

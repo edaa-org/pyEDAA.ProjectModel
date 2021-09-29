@@ -796,7 +796,7 @@ class Design:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
 		else:
-			return self._parent.VerilogVersion
+			return self._project.VerilogVersion
 
 	@VerilogVersion.setter
 	def VerilogVersion(self, value: VerilogVersion) -> None:
@@ -807,7 +807,7 @@ class Design:
 		if self._svVersion is not None:
 			return self._svVersion
 		else:
-			return self._parent.SVVersion
+			return self._project.SVVersion
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
