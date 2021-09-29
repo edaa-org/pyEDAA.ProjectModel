@@ -148,7 +148,7 @@ class File(metaclass=FileType):
 		if self._project is None:
 			self._project = value._project
 		elif self._project is not value._project:
-			raise Exception("The design's project is not identical to the already assign project.")
+			raise Exception("The design's project is not identical to the already assigned project.")
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
@@ -494,7 +494,7 @@ class FileSet:
 		if self._project is None:
 			self._project = value._project
 		elif self._project is not value._project:
-			raise Exception("The design's project is not identical to the already assign project.")
+			raise Exception("The design's project is not identical to the already assigned project.")
 
 	@property
 	def Directory(self) -> Path:
@@ -644,7 +644,7 @@ class VHDLLibrary:
 		if self._project is None:
 			self._project = value._project
 		elif self._project is not value._project:
-			raise Exception("The design's project is not identical to the already assign project.")
+			raise Exception("The design's project is not identical to the already assigned project.")
 
 	@property
 	def Files(self) -> Generator[File, None, None]:

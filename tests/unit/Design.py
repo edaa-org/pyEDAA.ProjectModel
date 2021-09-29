@@ -81,7 +81,7 @@ class Instantiate(TestCase):
 		design.Project = project
 
 		self.assertIs(project, design.Project)
-		
+
 	def test_DesignSetVersionsLater(self):
 		design = Design("design")
 
