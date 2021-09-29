@@ -12,9 +12,7 @@
 #
 # License:
 # ==============================================================================
-# Copyright 2017-2021 Patrick Lehmann - Boetzingen, Germany
-# Copyright 2014-2016 Technische Universität Dresden - Germany
-#                     Chair of VLSI-Design, Diagnostics and Architecture
+# Copyright 2021-2021 Patrick Lehmann - Boetzingen, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +32,10 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, File
+from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel import VHDLVersion
+
+from pyEDAA.ProjectModel import Design, File, Project
 
 
 if __name__ == "__main__":
@@ -56,7 +57,45 @@ class Instantiate(TestCase):
 		self.assertIs(design.FileSets[design.DefaultFileSet.Name], design.DefaultFileSet)
 		self.assertEqual(0, len(design.VHDLLibraries))
 
-# todo: test design with project
+	def test_DesignWithProject(self):
+		project = Project("project")
+		design = Design("design", project=project)
+
+		self.assertIs(project, design.Project)
+
+	def test_DesignWithVersions(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
+
+		self.assertEqual(vhdlVersion, design.VHDLVersion)
+		self.assertEqual(verilogVersion, design.VerilogVersion)
+		self.assertEqual(svVersion, design.SVVersion)
+
+	def test_DesignSetProjectLater(self):
+		project = Project("project")
+		design = Design("design")
+
+		design.Project = project
+
+		self.assertIs(project, design.Project)
+		
+	def test_DesignSetVersionsLater(self):
+		design = Design("design")
+
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		design.VHDLVersion = vhdlVersion
+		design.VerilogVersion = verilogVersion
+		design.SVVersion = svVersion
+
+		self.assertEqual(vhdlVersion, design.VHDLVersion)
+		self.assertEqual(verilogVersion, design.VerilogVersion)
+		self.assertEqual(svVersion, design.SVVersion)
 
 # todo: test composing path
 

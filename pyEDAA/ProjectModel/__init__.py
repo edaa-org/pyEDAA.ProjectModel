@@ -684,11 +684,21 @@ class Design:
 	_defaultFileSet:        Nullable[FileSet]
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
+	_verilogVersion:        VerilogVersion
+	_svVersion:             SystemVerilogVersion
 	_externalVHDLLibraries: List
 
 	# TODO: Feature - attributes
 
-	def __init__(self, name: str, directory: Path = Path("."), project: 'Project' = None, vhdlVersion: VHDLVersion = None):
+	def __init__(
+		self,
+		name: str,
+		directory: Path = Path("."),
+		project: 'Project' = None,
+		vhdlVersion: VHDLVersion = None,
+		verilogVersion: VerilogVersion = None,
+		svVersion: SystemVerilogVersion = None
+	):
 		self._name =                  name
 		self._project =               project
 		self._directory =             directory
@@ -696,6 +706,8 @@ class Design:
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
 		self._vhdlLibraries =         {}
 		self._vhdlVersion =           vhdlVersion
+		self._verilogVersion =        verilogVersion
+		self._svVersion =             svVersion
 		self._externalVHDLLibraries = []
 
 	@property

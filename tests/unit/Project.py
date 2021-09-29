@@ -12,9 +12,7 @@
 #
 # License:
 # ==============================================================================
-# Copyright 2017-2021 Patrick Lehmann - Boetzingen, Germany
-# Copyright 2014-2016 Technische Universität Dresden - Germany
-#                     Chair of VLSI-Design, Diagnostics and Architecture
+# Copyright 2021-2021 Patrick Lehmann - Boetzingen, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
