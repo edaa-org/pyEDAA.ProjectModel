@@ -90,6 +90,35 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: ./coverage.xml
 
+
+  StaticTypeCheck:
+    name: 📈 Check Static Typing using Python 3.9
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHON: 3.9
+    outputs:
+      python: ${{ env.PYTHON }}
+
+    steps:
+      - name: ⏬ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 🐍 Setup Python ${{ env.PYTHON }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON }}
+
+      - name: 🗂 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tests/requirements.txt
+
+      - name: Check Static Typing
+        run: |
+          mypy pyEDAA/ProjectModel
+
+
   Release:
     name: 📝 Create 'Release Page' on GitHub
     runs-on: ubuntu-latest
@@ -98,6 +127,7 @@ jobs:
     needs:
       - UnitTesting
       - Coverage
+      - StaticTypeCheck
 
     env:
       PYTHON: ${{ needs.Coverage.outputs.python }}
