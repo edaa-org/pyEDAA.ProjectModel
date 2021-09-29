@@ -31,7 +31,7 @@
 #
 from pydecor import export
 
-from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformFile, TCLContent
+from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformConfigFile, TCLContent
 
 
 @export
@@ -45,5 +45,5 @@ class ModelSimINIFile(SettingFile, INIContent):
 
 
 @export
-class WaveDoFile(WaveformFile, TCLContent):
+class WaveDoFile(WaveformConfigFile, TCLContent):
 	pass
