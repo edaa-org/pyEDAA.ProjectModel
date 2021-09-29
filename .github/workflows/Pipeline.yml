@@ -117,7 +117,7 @@ jobs:
       - name: Check Static Typing
         continue-on-error: true
         run: |
-          mypy pyEDAA/ProjectModel
+          mypy --html-report mypyhtml --pretty pyEDAA/ProjectModel
 
 
   Release:
