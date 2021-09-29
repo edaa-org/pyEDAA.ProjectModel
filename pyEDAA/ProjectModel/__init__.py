@@ -313,14 +313,14 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 		self._svVersion = svVersion
 
 	@property
-	def SystemVerilogVersion(self) -> SystemVerilogVersion:
+	def SVVersion(self) -> SystemVerilogVersion:
 		if self._svVersion is not None:
 			return self._svVersion
 		else:
-			return self._fileSet.SystemVerilogVersion
+			return self._fileSet.SVVersion
 
-	@SystemVerilogVersion.setter
-	def SystemVerilogVersion(self, value: SystemVerilogVersion) -> None:
+	@SVVersion.setter
+	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
 
