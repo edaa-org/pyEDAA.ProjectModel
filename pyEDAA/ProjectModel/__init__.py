@@ -65,6 +65,7 @@ class FileType(type):
 	def __getattr__(cls, item) -> 'FileType':
 		if item[:2] != "__" and item[-2:] != "__":
 			return cls.FileTypes[item]
+		raise RuntimeError()
 
 	def __contains__(cls, item) -> bool:
 		return issubclass(item, cls)
@@ -128,7 +129,7 @@ class File(metaclass=FileType):
 
 	@property
 	def ResolvedPath(self) -> Path:
-		return (self._parent._directory / self._path).resolve()
+		return (self._fileSet._directory / self._path).resolve()
 
 	@property
 	def Project(self) -> Nullable['Project']:

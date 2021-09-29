@@ -115,6 +115,7 @@ jobs:
           pip install -r tests/requirements.txt
 
       - name: Check Static Typing
+        continue-on-error: true
         run: |
           mypy pyEDAA/ProjectModel
 
