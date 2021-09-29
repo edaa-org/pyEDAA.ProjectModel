@@ -34,7 +34,10 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Project, File
+from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel import VHDLVersion
+
+from pyEDAA.ProjectModel import Project
 
 
 if __name__ == "__main__":
@@ -60,6 +63,40 @@ class Instantiate(TestCase):
 		rootDirectoryPath = Path(rootDirectory)
 		project.RootDirectory = rootDirectoryPath
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
-
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
+	def test_ProjectWithPath(self):
+		rootDirectory = "temp/project"
+		rootDirectoryPath = Path(rootDirectory.replace("/", "/foo/../"))
+		project = Project("project", rootDirectory=rootDirectoryPath)
+		self.assertIs(rootDirectoryPath, project.RootDirectory)
+		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
+
+	def test_ProjectWithVersions(self):
+		project = Project(
+			"project",
+			vhdlVersion=VHDLVersion.VHDL2019,
+			verilogVersion=VerilogVersion.Verilog2005,
+			svVersion=SystemVerilogVersion.SystemVerilog2017
+		)
+
+		self.assertEqual(VHDLVersion.VHDL2019, project.VHDLVersion)
+		# TODO: patch SVModel with Any value
+#		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
+#		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
+
+	def test_ProjectSetVersionsLater(self):
+		project = Project("project")
+
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		project.VHDLVersion = vhdlVersion
+		project.VerilogVersion = verilogVersion
+		project.SVVersion = svVersion
+
+		self.assertEqual(vhdlVersion, project.VHDLVersion)
+# TODO: patch SVModel with Any value
+#		self.assertEqual(verilogVersion, project.VerilogVersion)
+#		self.assertEqual(svVersion, project.SVVersion)
