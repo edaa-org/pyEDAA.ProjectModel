@@ -32,7 +32,9 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, FileSet, File
+from pyVHDLModel import VHDLVersion
+
+from pyEDAA.ProjectModel import Design, FileSet, File, VHDLSourceFile, VHDLLibrary
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -42,34 +44,55 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_File(self):
+	def test_VHDLFile(self):
 		path = Path("example.vhdl")
-		file = File(path)
+		file = VHDLSourceFile(path)
 
-		self.assertIsNotNone(file)
 		self.assertEqual(path, file.Path)
-		self.assertIsNone(file.Design)
-		self.assertIsNone(file.FileSet)
+		with self.assertRaises(Exception):
+			lib = file.VHDLLibrary
+		with self.assertRaises(Exception):
+			version = file.VHDLVersion
 
-	def test_FileWithDesign(self):
+	def test_VHDLFileWithVHDLLibrary(self):
 		path = Path("example.vhdl")
-		design = Design("design")
-		file = File(path, design=design)
+		library = VHDLLibrary("library")
+		file = VHDLSourceFile(path, vhdlLibrary=library)
 
-		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
-		self.assertIs(design, file.Design)
-		self.assertIs(design.DefaultFileSet, file.FileSet)
+		self.assertIs(library, file.VHDLLibrary)
 
-	def test_FileWithFileSet(self):
+	def test_VHDLFileWithVHDLVersion(self):
 		path = Path("example.vhdl")
-		fileset = FileSet("fileset")
-		file = File(path, fileSet=fileset)
+		vhdlVersion = VHDLVersion.VHDL2019
+		file = VHDLSourceFile(path, vhdlVersion=vhdlVersion)
 
-		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
-		self.assertIsNone(file.Design)
-		self.assertIs(fileset, file.FileSet)
+		self.assertEqual(vhdlVersion, file.VHDLVersion)
+
+	def test_VHDLFileSetVHDLVersionLater(self):
+		path = Path("example.vhdl")
+		vhdlVersion = VHDLVersion.VHDL2019
+		file = VHDLSourceFile(path)
+
+		file.VHDLVersion = vhdlVersion
+
+		self.assertEqual(vhdlVersion, file.VHDLVersion)
+
+	def test_VHDLFileSetVHDLLibraryLater(self):
+		path = Path("example.vhdl")
+		vhdlLibrary = VHDLLibrary("library")
+		file = VHDLSourceFile(path)
+
+		file.VHDLLibrary = vhdlLibrary
+
+		self.assertEqual(vhdlLibrary, file.VHDLLibrary)
+
+	def test_VHDLFileGetVersionFromFileSet(self):
+		path = Path("example.vhdl")
+		vhdlVersion = VHDLVersion.VHDL2019
+		fileset = FileSet("fileset", vhdlVersion=vhdlVersion)
+		file = VHDLSourceFile(path, fileSet=fileset)
+
+		self.assertEqual(vhdlVersion, file.VHDLVersion)
 
 
 	def test_FileWithFileSetAndProject(self):
@@ -79,6 +102,6 @@ class Instantiate(TestCase):
 		file = File(path, fileSet=fileset)
 
 		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
-		self.assertIs(design, file.Design)
-		self.assertIs(fileset, file.FileSet)
+		self.assertEqual(file.Path, path)
+		self.assertIs(file.Design, design)
+		self.assertIs(file.FileSet, fileset)

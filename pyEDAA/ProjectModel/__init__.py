@@ -251,8 +251,8 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	_vhdlLibrary: 'VHDLLibrary'
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, design, fileSet)
+	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, design, fileSet)
 
 		# TODO: handle if vhdlLibrary is a string
 		self._vhdlLibrary = vhdlLibrary
@@ -262,17 +262,23 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	def VHDLLibrary(self) -> 'VHDLLibrary':
 		if self._vhdlLibrary is not None:
 			return self._vhdlLibrary
-		else:
+		elif self._fileSet is not None:
 			return self._fileSet.VHDLLibrary
+		else:
+			raise Exception("VHDLLibrary was neither set locally nor globally.")
 
-	# TODO: setter
+	@VHDLLibrary.setter
+	def VHDLLibrary(self, value: 'VHDLLibrary') -> None:
+		self._vhdlLibrary = value
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
-		else:
+		elif self._fileSet is not None:
 			return self._fileSet.VHDLVersion
+		else:
+			raise Exception("VHDLVersion was neither set locally nor globally.")
 
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
