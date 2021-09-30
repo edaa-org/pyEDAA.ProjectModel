@@ -80,11 +80,27 @@ class Instantiate(TestCase):
 
 		self.assertEqual(VHDLVersion.VHDL2019, library.VHDLVersion)
 
+	def test_VHDLLibrarySetProjectLater(self):
+		project = Project("project")
+		library = VHDLLibrary("library")
+
+		library.Project = project
+
+		self.assertIs(project, library.Project)
+
 	def test_VHDLLibrarySetVersionLater(self):
 		library = VHDLLibrary("library")
 
 		vhdlVersion = VHDLVersion.VHDL2019
 
 		library.VHDLVersion = vhdlVersion
+
+		self.assertEqual(vhdlVersion, library.VHDLVersion)
+
+	def test_VHDLLibraryGetVersionFromDesign(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+
+		design = Design("design", vhdlVersion=vhdlVersion)
+		library = VHDLLibrary("library", design=design)
 
 		self.assertEqual(vhdlVersion, library.VHDLVersion)

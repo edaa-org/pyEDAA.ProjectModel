@@ -32,7 +32,10 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile
+from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel import VHDLVersion
+
+from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -46,18 +49,44 @@ class Instantiate(TestCase):
 		fileset = FileSet("fileset")
 
 		self.assertIsNotNone(fileset)
-		self.assertEqual(fileset.Name, "fileset")
+		self.assertEqual("fileset", fileset.Name)
+		self.assertEqual(Path("."), fileset.Directory)
 		self.assertIsNone(fileset.Design)
 		self.assertEqual(0, len(fileset._files))
 
-	def test_FileSetFromProject(self):
+	def test_FileSetWithDesign(self):
 		design =  Design("design")
 		fileset = FileSet("fileset", design=design)
 
 		self.assertIsNotNone(fileset)
-		self.assertEqual(fileset.Name, "fileset")
-		self.assertIs(fileset.Design, design)
+		self.assertEqual("fileset", fileset.Name)
+		self.assertIs(design, fileset.Design)
 		self.assertEqual(0, len(fileset._files))
+
+	def test_FileSetWithProject(self):
+		project = Project("project")
+		fileset = FileSet("fileset", project=project)
+
+		self.assertIs(project, fileset.Project)
+
+	def test_FileSetWithVersions(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		fileset = FileSet("fileset", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
+
+		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
+		self.assertEqual(verilogVersion, fileset.VerilogVersion)
+		self.assertEqual(svVersion, fileset.SVVersion)
+
+	def test_FileSetSetProjectLater(self):
+		project = Project("project")
+		fileset = FileSet("fileset")
+
+		fileset.Project = project
+
+		self.assertIs(project, fileset.Project)
 
 
 class FileFilter(TestCase):
