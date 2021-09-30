@@ -80,6 +80,52 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
+	def test_VHDLLibrarySetVersionsLater(self):
+		fileset = FileSet("fileset")
+
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		fileset.VHDLVersion = vhdlVersion
+		fileset.VerilogVersion = verilogVersion
+		fileset.SVVersion = svVersion
+
+		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
+		self.assertEqual(verilogVersion, fileset.VerilogVersion)
+		self.assertEqual(svVersion, fileset.SVVersion)
+
+	def test_FileSetGetVersionsFromParentFileSet(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		parent = FileSet("parent", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
+		fileset = FileSet("fileset")
+
+		# FIXME: missing API
+		parent._fileSets["parent"] = parent
+		fileset._parent = parent
+
+		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
+		self.assertEqual(verilogVersion, fileset.VerilogVersion)
+		self.assertEqual(svVersion, fileset.SVVersion)
+
+	def test_FileSetGetVersionsFromDesign(self):
+		vhdlVersion = VHDLVersion.VHDL2019
+		verilogVersion = VerilogVersion.Verilog2005
+		svVersion = SystemVerilogVersion.SystemVerilog2017
+
+		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
+		fileset = FileSet("fileset", design=design)
+
+		# FIXME: missing API
+		fileset._parent = design
+
+		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
+		self.assertEqual(verilogVersion, fileset.VerilogVersion)
+		self.assertEqual(svVersion, fileset.SVVersion)
+
 	def test_FileSetSetProjectLater(self):
 		project = Project("project")
 		fileset = FileSet("fileset")
