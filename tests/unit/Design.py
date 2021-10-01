@@ -118,13 +118,13 @@ class Instantiate(TestCase):
 		self.assertIs(directory, design.Directory)
 
 	def testDesignResolveDirectory(self):
-		projectDirectory = "temp/project"
+		projectDirectoryPath = Path.cwd() / "temp/project"
 		designDirectory = "design"
 
-		project = Project("project", Path(projectDirectory))
+		project = Project("project", projectDirectoryPath)
 		design = Design("design", Path(designDirectory), project=project)
 
-		self.assertEqual(f"{projectDirectory}/{designDirectory}", design.ResolvedPath.as_posix())
+		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 
 	def test_Files(self):
 		project = Design("project")

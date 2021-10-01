@@ -129,6 +129,7 @@ class File(metaclass=FileType):
 
 	@property
 	def ResolvedPath(self) -> Path:
+		# TODO: check if absolute
 		return (self._fileSet._directory / self._path).resolve()
 
 	@property
@@ -513,6 +514,7 @@ class FileSet:
 
 	@property
 	def ResolvedPath(self) -> Path:
+		# TODO: check if absolute
 		return (self._parent._directory / self._directory).resolve()
 
 	@property
@@ -739,6 +741,7 @@ class Design:
 
 	@property
 	def ResolvedPath(self) -> Path:
+		# TODO: check if absolute
 		return (self._project._rootDirectory / self._directory).resolve()
 
 	@property
@@ -897,7 +900,11 @@ class Project:
 
 	@property
 	def ResolvedPath(self) -> Path:
-		return self._rootDirectory.resolve()
+		path = self._rootDirectory.resolve()
+		if self._rootDirectory.is_absolute():
+			return path
+		else:
+			return path.relative_to(Path.cwd())
 
 	# TODO: return generator with another method
 	@property
