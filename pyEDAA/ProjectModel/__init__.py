@@ -292,8 +292,8 @@ class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	_verilogVersion: VerilogVersion
 
-	def __init__(self, path: Path, verilogVersion: VerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, design, fileSet)
+	def __init__(self, path: Path, verilogVersion: VerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, design, fileSet)
 
 		self._verilogVersion = verilogVersion
 
@@ -301,8 +301,10 @@ class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	def VerilogVersion(self) -> VerilogVersion:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
-		else:
+		elif self._fileSet is not None:
 			return self._fileSet.VerilogVersion
+		else:
+			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
 	def VerilogVersion(self, value: VerilogVersion) -> None:
@@ -315,8 +317,8 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	_svVersion: SystemVerilogVersion
 
-	def __init__(self, path: Path, svVersion: SystemVerilogVersion = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, design, fileSet)
+	def __init__(self, path: Path, svVersion: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, design, fileSet)
 
 		self._svVersion = svVersion
 
@@ -324,8 +326,10 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 	def SVVersion(self) -> SystemVerilogVersion:
 		if self._svVersion is not None:
 			return self._svVersion
-		else:
+		elif self._fileSet is not None:
 			return self._fileSet.SVVersion
+		else:
+			raise Exception("SVVersion was neither set locally nor globally.")
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
@@ -794,8 +798,10 @@ class Design:
 	def VHDLVersion(self) -> VHDLVersion:
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
-		else: # TODO: check for None, else return an exception
+		elif self._project is not None:
 			return self._project.VHDLVersion
+		else:
+			raise Exception("VHDLVersion was neither set locally nor globally.")
 
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
@@ -805,8 +811,10 @@ class Design:
 	def VerilogVersion(self) -> VerilogVersion:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
-		else:
+		elif self._project is not None:
 			return self._project.VerilogVersion
+		else:
+			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
 	def VerilogVersion(self, value: VerilogVersion) -> None:
@@ -816,8 +824,10 @@ class Design:
 	def SVVersion(self) -> SystemVerilogVersion:
 		if self._svVersion is not None:
 			return self._svVersion
-		else:
+		elif self._project is not None:
 			return self._project.SVVersion
+		else:
+			raise Exception("SVVersion was neither set locally nor globally.")
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
