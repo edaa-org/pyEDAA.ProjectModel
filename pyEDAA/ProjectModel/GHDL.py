@@ -32,8 +32,5 @@
 from pyEDAA.ProjectModel import WaveformExchangeFile
 
 
-# TODO: GHDL signal selection file (*.ghdl?)
-
-
 class GHDLWaveformFile(WaveformExchangeFile):
 	"""GHDL's waveform file (``*.ghw``) supporting VHDL and Verilog simulation results."""

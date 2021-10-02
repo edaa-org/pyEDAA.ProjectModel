@@ -52,10 +52,3 @@ class IPCoreDescriptionFile(XMLFile):
 @export
 class IPCoreInstantiationFile(XMLFile):
 	"""A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``)."""
-
-# TODO: MIG file
-# TODO: BD file   XML / JSON
-# TODO: exported contents (A project TCL, a block design TCL)
-
-# TODO: DesignCheckpoint
-

@@ -92,9 +92,6 @@ class File(metaclass=FileType):
 	_design:   Nullable['Design']
 	_fileSet:  Nullable['FileSet']
 
-	# TODO: Feature - related file
-	# TODO: Feature - file attributes
-
 	def __init__(self, path: Path, project: 'Project' = None,  design: 'Design' = None, fileSet: 'FileSet' = None):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
@@ -407,9 +404,6 @@ class WaveformExchangeFile(File):
 	"""Base-class of all tool-independent waveform exchange files."""
 
 
-# TODO: SVCB - Streamed Value Change Blocks (SVCB)
-
-
 @export
 class FileSet:
 	"""
@@ -444,7 +438,6 @@ class FileSet:
 	_svVersion:       SystemVerilogVersion
 
 	# TODO: link parent fileset for relative path calculations
-	# TODO: Feature - attributes
 
 	def __init__(
 		self,
@@ -453,10 +446,10 @@ class FileSet:
 		project: 'Project' = None,
 		design: 'Design' = None,
 		parent: Nullable['FileSet'] = None,
-		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,  # TODO: implement as attribute?
-		vhdlVersion: VHDLVersion = None,                # TODO: implement as attribute?
-		verilogVersion: VerilogVersion = None,          # TODO: implement as attribute?
-		svVersion: SystemVerilogVersion = None          # TODO: implement as attribute?
+		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,
+		vhdlVersion: VHDLVersion = None,
+		verilogVersion: VerilogVersion = None,
+		svVersion: SystemVerilogVersion = None
 	):
 		self._name =      name
 		if project is not None:
@@ -534,7 +527,10 @@ class FileSet:
 	@property
 	def Parent(self) -> Nullable['FileSet']:
 		return self._parent
-	# TODO: setter
+
+	@Parent.setter
+	def Parent(self, value: 'FileSet') -> None:
+		self._parent = value
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -730,8 +726,6 @@ class Design:
 	_svVersion:             SystemVerilogVersion
 	_externalVHDLLibraries: List
 
-	# TODO: Feature - attributes
-
 	def __init__(
 		self,
 		name: str,
@@ -908,15 +902,13 @@ class Project:
 	_verilogVersion:        VerilogVersion
 	_svVersion:             SystemVerilogVersion
 
-	# TODO: Feature - attributes
-
 	def __init__(
 		self,
 		name: str,
 		rootDirectory: Path = Path("."),
 		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,          # TODO: implement as attribute?
-		svVersion: SystemVerilogVersion = None          # TODO: implement as attribute?
+		verilogVersion: VerilogVersion = None,
+		svVersion: SystemVerilogVersion = None
 	):
 		self._name =            name
 		self._rootDirectory =   rootDirectory
