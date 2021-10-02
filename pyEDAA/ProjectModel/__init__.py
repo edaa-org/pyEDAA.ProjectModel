@@ -434,7 +434,7 @@ class FileSet:
 	_project:     Nullable['Project']
 	_design:      Nullable['Design']
 	_directory:   Nullable[Path]
-	_parent:      Union['FileSet', 'Design']
+	_parent:      Nullable['FileSet']
 	_fileSets:    Dict[str, 'FileSet']
 	_files:       List[File]
 
@@ -452,7 +452,7 @@ class FileSet:
 		directory: Path = Path("."),
 		project: 'Project' = None,
 		design: 'Design' = None,
-		parent: Union['FileSet', 'Design'] = None,
+		parent: Nullable['FileSet'] = None,
 		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,  # TODO: implement as attribute?
 		vhdlVersion: VHDLVersion = None,                # TODO: implement as attribute?
 		verilogVersion: VerilogVersion = None,          # TODO: implement as attribute?
@@ -516,15 +516,25 @@ class FileSet:
 
 	@property
 	def ResolvedPath(self) -> Path:
-		directory = self._parent._directory / self._directory
+		if self._parent is not None:
+			directory = self._parent._directory
+		elif self._project is not None:
+			directory = self._project._rootDirectory
+		else:
+			# TODO: message and exception type
+			raise Exception()
+
+		directory /= self._directory
+
 		if directory.is_absolute():
 			return directory.resolve()
 		else:
 			return directory.relative_to(Path.cwd())
 
 	@property
-	def Parent(self) -> Union['FileSet', 'Design']:
+	def Parent(self) -> Nullable['FileSet']:
 		return self._parent
+	# TODO: setter
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -564,8 +574,12 @@ class FileSet:
 	def VHDLLibrary(self) -> 'VHDLLibrary':
 		if self._vhdlLibrary is not None:
 			return self._vhdlLibrary
-		else:
+		elif self._parent is not None:
 			return self._parent.VHDLLibrary
+		elif self._design is not None:
+			return self._design.VHDLLibrary
+		else:
+			raise Exception("VHDLLibrary was neither set locally nor globally.")
 
 	@VHDLLibrary.setter
 	def VHDLLibrary(self, value: 'VHDLLibrary') -> None:
@@ -575,8 +589,12 @@ class FileSet:
 	def VHDLVersion(self) -> VHDLVersion:
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
-		else:
+		elif self._parent is not None:
 			return self._parent.VHDLVersion
+		elif self._design is not None:
+			return self._design.VHDLVersion
+		else:
+			raise Exception("VHDLVersion was neither set locally nor globally.")
 
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
@@ -586,8 +604,12 @@ class FileSet:
 	def VerilogVersion(self) -> VerilogVersion:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
-		else:
+		elif self._parent is not None:
 			return self._parent.VerilogVersion
+		elif self._design is not None:
+			return self._design.VerilogVersion
+		else:
+			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
 	def VerilogVersion(self, value: VerilogVersion) -> None:
@@ -597,8 +619,12 @@ class FileSet:
 	def SVVersion(self) -> SystemVerilogVersion:
 		if self._svVersion is not None:
 			return self._svVersion
-		else:
+		elif self._parent is not None:
 			return self._parent.SVVersion
+		elif self._design is not None:
+			return self._design.SVVersion
+		else:
+			raise Exception("SVVersion was neither set locally nor globally.")
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:

@@ -141,6 +141,13 @@ class Properties(TestCase):
 
 		self.assertIs(vhdlLibrary, fileset.VHDLLibrary)
 
+	def test_GetVHDLLibraryFromParentFileSet(self):
+		vhdlLibrary = VHDLLibrary("library")
+		parent = FileSet("parent", vhdlLibrary=vhdlLibrary)
+		fileset = FileSet("fileset", parent=parent)
+
+		self.assertEqual(vhdlLibrary, fileset.VHDLLibrary)
+
 	def test_SetVersionsLater(self):
 		fileset = FileSet("fileset")
 
@@ -162,11 +169,7 @@ class Properties(TestCase):
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		parent = FileSet("parent", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
-		fileset = FileSet("fileset")
-
-		# FIXME: missing API
-		parent._fileSets["parent"] = parent
-		fileset._parent = parent
+		fileset = FileSet("fileset", parent=parent)
 
 		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
@@ -179,9 +182,6 @@ class Properties(TestCase):
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
 		fileset = FileSet("fileset", design=design)
-
-		# FIXME: missing API
-		fileset._parent = design
 
 		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
