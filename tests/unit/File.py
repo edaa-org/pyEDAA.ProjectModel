@@ -53,21 +53,21 @@ class Instantiate(TestCase):
 		self.assertIsNone(file.FileSet)
 		self.assertEqual(FileTypes.File, file.FileType)
 
-	def test_FileWithProject(self):
+	def test_WithProject(self):
 		path = Path("example.vhdl")
 		project = Project("project")
 		file = File(path, project=project)
 
 		self.assertIs(project, file.Project)
 
-	def test_FileWithDesign(self):
+	def test_WithDesign(self):
 		path = Path("example.vhdl")
 		design = Design("design")
 		file = File(path, design=design)
 
 		self.assertIs(design, file.Design)
 
-	def test_FileWithFileSet(self):
+	def test_WithFileSet(self):
 		path = Path("example.vhdl")
 		fileset = FileSet("fileset")
 		file = File(path, fileSet=fileset)
@@ -84,6 +84,8 @@ class Instantiate(TestCase):
 		self.assertIs(design, file.Design)
 		self.assertIs(fileset, file.FileSet)
 
+
+class Properties(TestCase):
 	def test_SetProjectLater(self):
 		path = Path("example.vhdl")
 		project = Project("project")

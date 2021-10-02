@@ -54,7 +54,7 @@ class Instantiate(TestCase):
 		self.assertIsNone(fileset.Design)
 		self.assertEqual(0, len(fileset._files))
 
-	def test_FileSetWithDesign(self):
+	def test_WithDesign(self):
 		design =  Design("design")
 		fileset = FileSet("fileset", design=design)
 
@@ -63,13 +63,13 @@ class Instantiate(TestCase):
 		self.assertIs(design, fileset.Design)
 		self.assertEqual(0, len(fileset._files))
 
-	def test_FileSetWithProject(self):
+	def test_WithProject(self):
 		project = Project("project")
 		fileset = FileSet("fileset", project=project)
 
 		self.assertIs(project, fileset.Project)
 
-	def test_FileSetWithVersions(self):
+	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
@@ -80,7 +80,9 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
-	def test_VHDLLibrarySetDirectoryLater(self):
+
+class Properties(TestCase):
+	def test_SetDirectoryLater(self):
 		path = Path("fileset")
 		fileset = FileSet("fileset")
 
@@ -88,7 +90,7 @@ class Instantiate(TestCase):
 
 		self.assertIs(path, fileset.Directory)
 
-	def testDesignResolveDirectory(self):
+	def test_ResolveDirectory(self):
 		projectPath = Path("temp/project")
 		designPath = Path("design")
 		filesetPath = Path("fileset")
@@ -99,7 +101,7 @@ class Instantiate(TestCase):
 
 		self.assertEqual(projectPath / designPath / filesetPath, fileset.ResolvedPath)
 
-	def test_VHDLLibrarySetDesignLater(self):
+	def test_SetDesignLater(self):
 		design =  Design("design")
 		fileset = FileSet("fileset")
 
@@ -107,7 +109,7 @@ class Instantiate(TestCase):
 
 		self.assertIs(design, fileset.Design)
 
-	def test_VHDLLibrarySetDesignWithProjectLater(self):
+	def test_SetDesignWithProjectLater(self):
 		project = Project("project")
 		design =  Design("design", project=project)
 		fileset = FileSet("fileset")
@@ -117,7 +119,7 @@ class Instantiate(TestCase):
 		self.assertIs(project, fileset.Project)
 		self.assertIs(design, fileset.Design)
 
-	def test_VHDLLibrarySetVersionsLater(self):
+	def test_SetVersionsLater(self):
 		fileset = FileSet("fileset")
 
 		vhdlVersion = VHDLVersion.VHDL2019
@@ -132,7 +134,7 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
-	def test_FileSetGetVersionsFromParentFileSet(self):
+	def test_GetVersionsFromParentFileSet(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
@@ -148,7 +150,7 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
-	def test_FileSetGetVersionsFromDesign(self):
+	def test_GetVersionsFromDesign(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
@@ -163,7 +165,7 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
-	def test_FileSetSetProjectLater(self):
+	def test_SetProjectLater(self):
 		project = Project("project")
 		fileset = FileSet("fileset")
 

@@ -57,13 +57,13 @@ class Instantiate(TestCase):
 		self.assertIs(design.FileSets[design.DefaultFileSet.Name], design.DefaultFileSet)
 		self.assertEqual(0, len(design.VHDLLibraries))
 
-	def test_DesignWithProject(self):
+	def test_WithProject(self):
 		project = Project("project")
 		design = Design("design", project=project)
 
 		self.assertIs(project, design.Project)
 
-	def test_DesignWithVersions(self):
+	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
@@ -74,7 +74,9 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
 
-	def test_DesignSetProjectLater(self):
+
+class Properties(TestCase):
+	def test_SetProjectLater(self):
 		project = Project("project")
 		design = Design("design")
 
@@ -82,7 +84,7 @@ class Instantiate(TestCase):
 
 		self.assertIs(project, design.Project)
 
-	def test_DesignSetDirectoryLater(self):
+	def test_SetDirectoryLater(self):
 		directory = Path("design")
 		design = Design("design")
 
@@ -90,7 +92,7 @@ class Instantiate(TestCase):
 
 		self.assertIs(directory, design.Directory)
 
-	def testDesignResolveDirectory(self):
+	def test_ResolveDirectory(self):
 		projectDirectoryPath = Path.cwd() / "temp/project"
 		designDirectory = "design"
 
@@ -99,7 +101,7 @@ class Instantiate(TestCase):
 
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 
-	def test_DesignSetVersionsLater(self):
+	def test_SetVersionsLater(self):
 		design = Design("design")
 
 		vhdlVersion = VHDLVersion.VHDL2019
@@ -114,7 +116,7 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
 
-	def test_DesignGetVersionsFromProject(self):
+	def test_GetVersionsFromProject(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017

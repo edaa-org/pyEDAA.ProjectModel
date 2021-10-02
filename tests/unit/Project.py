@@ -63,14 +63,14 @@ class Instantiate(TestCase):
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_ProjectWithPath(self):
+	def test_WithPath(self):
 		rootDirectoryPath = Path.cwd() / "temp/../project"
 		rootDirectory = (Path.cwd() / "project").as_posix()
 		project = Project("project", rootDirectory=rootDirectoryPath)
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_ProjectWithVersions(self):
+	def test_WithVersions(self):
 		project = Project(
 			"project",
 			vhdlVersion=VHDLVersion.VHDL2019,
@@ -82,7 +82,9 @@ class Instantiate(TestCase):
 		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
 		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
 
-	def test_ProjectSetVersionsLater(self):
+
+class Properties(TestCase):
+	def test_SetVersionsLater(self):
 		project = Project("project")
 
 		vhdlVersion = VHDLVersion.VHDL2019
