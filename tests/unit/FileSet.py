@@ -80,6 +80,43 @@ class Instantiate(TestCase):
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
 
+	def test_VHDLLibrarySetDirectoryLater(self):
+		path = Path("fileset")
+		fileset = FileSet("fileset")
+
+		fileset.Directory = path
+
+		self.assertIs(path, fileset.Directory)
+
+	def testDesignResolveDirectory(self):
+		projectPath = Path("temp/project")
+		designPath = Path("design")
+		filesetPath = Path("fileset")
+
+		project = Project("project", projectPath)
+		design = Design("design", directory=designPath, project=project)
+		fileset = FileSet("fileset", directory=filesetPath, design=design)
+
+		self.assertEqual(projectPath / designPath / filesetPath, fileset.ResolvedPath)
+
+	def test_VHDLLibrarySetDesignLater(self):
+		design =  Design("design")
+		fileset = FileSet("fileset")
+
+		fileset.Design = design
+
+		self.assertIs(design, fileset.Design)
+
+	def test_VHDLLibrarySetDesignWithProjectLater(self):
+		project = Project("project")
+		design =  Design("design", project=project)
+		fileset = FileSet("fileset")
+
+		fileset.Design = design
+
+		self.assertIs(project, fileset.Project)
+		self.assertIs(design, fileset.Design)
+
 	def test_VHDLLibrarySetVersionsLater(self):
 		fileset = FileSet("fileset")
 

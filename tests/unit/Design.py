@@ -82,6 +82,23 @@ class Instantiate(TestCase):
 
 		self.assertIs(project, design.Project)
 
+	def test_DesignSetDirectoryLater(self):
+		directory = Path("design")
+		design = Design("design")
+
+		design.Directory = directory
+
+		self.assertIs(directory, design.Directory)
+
+	def testDesignResolveDirectory(self):
+		projectDirectoryPath = Path.cwd() / "temp/project"
+		designDirectory = "design"
+
+		project = Project("project", projectDirectoryPath)
+		design = Design("design", Path(designDirectory), project=project)
+
+		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
+
 	def test_DesignSetVersionsLater(self):
 		design = Design("design")
 
@@ -108,23 +125,6 @@ class Instantiate(TestCase):
 		self.assertEqual(vhdlVersion, design.VHDLVersion)
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
-
-	def test_DesignSetDirectoryLater(self):
-		directory = Path("design")
-		design = Design("design")
-
-		design.Directory = directory
-
-		self.assertIs(directory, design.Directory)
-
-	def testDesignResolveDirectory(self):
-		projectDirectoryPath = Path.cwd() / "temp/project"
-		designDirectory = "design"
-
-		project = Project("project", projectDirectoryPath)
-		design = Design("design", Path(designDirectory), project=project)
-
-		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 
 	def test_Files(self):
 		project = Design("project")

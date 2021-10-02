@@ -32,7 +32,7 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, FileSet, File
+from pyEDAA.ProjectModel import Design, FileSet, File, Project, FileTypes
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -48,37 +48,47 @@ class Instantiate(TestCase):
 
 		self.assertIsNotNone(file)
 		self.assertEqual(path, file.Path)
+		self.assertIsNone(file.Project)
 		self.assertIsNone(file.Design)
 		self.assertIsNone(file.FileSet)
+		self.assertEqual(FileTypes.File, file.FileType)
+
+	def test_FileWithProject(self):
+		path = Path("example.vhdl")
+		project = Project("project")
+		file = File(path, project=project)
+
+		self.assertIs(project, file.Project)
 
 	def test_FileWithDesign(self):
 		path = Path("example.vhdl")
 		design = Design("design")
 		file = File(path, design=design)
 
-		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
 		self.assertIs(design, file.Design)
-		self.assertIs(design.DefaultFileSet, file.FileSet)
 
 	def test_FileWithFileSet(self):
 		path = Path("example.vhdl")
 		fileset = FileSet("fileset")
 		file = File(path, fileSet=fileset)
 
-		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
 		self.assertIsNone(file.Design)
 		self.assertIs(fileset, file.FileSet)
 
-
-	def test_FileWithFileSetAndProject(self):
+	def test_WithFileSetAndProject(self):
 		path = Path("example.vhdl")
 		design = Design("design")
 		fileset = FileSet("fileset", design=design)
 		file = File(path, fileSet=fileset)
 
-		self.assertIsNotNone(file)
-		self.assertEqual(path, file.Path)
 		self.assertIs(design, file.Design)
 		self.assertIs(fileset, file.FileSet)
+
+	def test_SetProjectLater(self):
+		path = Path("example.vhdl")
+		project = Project("project")
+		file = File(path)
+
+		file.Project = project
+
+		self.assertIs(project, file.Project)

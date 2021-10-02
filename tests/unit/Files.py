@@ -35,7 +35,7 @@ from unittest import TestCase
 from pyVHDLModel import VHDLVersion
 from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
 
-from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile
+from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -50,6 +50,7 @@ class VHDLFile(TestCase):
 		file = VHDLSourceFile(path)
 
 		self.assertEqual(path, file.Path)
+		self.assertEqual(FileTypes.VHDLSourceFile, file.FileType)
 		with self.assertRaises(Exception):
 			lib = file.VHDLLibrary
 		with self.assertRaises(Exception):
@@ -102,6 +103,7 @@ class VerilogFile(TestCase):
 		file = VerilogSourceFile(path)
 
 		self.assertEqual(path, file.Path)
+		self.assertEqual(FileTypes.VerilogSourceFile, file.FileType)
 		with self.assertRaises(Exception):
 			version = file.VerilogVersion
 
@@ -136,6 +138,7 @@ class SystemVerilogFile(TestCase):
 		file = SystemVerilogSourceFile(path)
 
 		self.assertEqual(path, file.Path)
+		self.assertEqual(FileTypes.SystemVerilogSourceFile, file.FileType)
 		with self.assertRaises(Exception):
 			version = file.SVVersion
 

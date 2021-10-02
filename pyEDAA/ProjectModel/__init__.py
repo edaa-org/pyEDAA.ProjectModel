@@ -101,7 +101,8 @@ class File(metaclass=FileType):
 		if project is not None:
 			self._project = project
 			self._design =  design
-			self.FileSet =  fileSet
+			if fileSet is not None:
+				self.FileSet =  fileSet
 		elif design is not None:
 			self._project = design._project
 			self._design =  design
@@ -499,9 +500,6 @@ class FileSet:
 
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
-#		if not isinstance(value, Design):
-#			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
-
 		self._design = value
 		if self._project is None:
 			self._project = value._project
@@ -518,8 +516,11 @@ class FileSet:
 
 	@property
 	def ResolvedPath(self) -> Path:
-		# TODO: check if absolute
-		return (self._parent._directory / self._directory).resolve()
+		directory = self._parent._directory / self._directory
+		if directory.is_absolute():
+			return directory.resolve()
+		else:
+			return directory.relative_to(Path.cwd())
 
 	@property
 	def Parent(self) -> Union['FileSet', 'Design']:
