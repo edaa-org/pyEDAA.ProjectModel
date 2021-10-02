@@ -35,7 +35,7 @@ from unittest import TestCase
 from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project
+from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -69,6 +69,12 @@ class Instantiate(TestCase):
 
 		self.assertIs(project, fileset.Project)
 
+	def test_WithVHDLLibrary(self):
+		vhdlLibrary = VHDLLibrary("library")
+		fileset = FileSet("fileset", vhdlLibrary=vhdlLibrary)
+
+		self.assertIs(vhdlLibrary, fileset.VHDLLibrary)
+
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
 		verilogVersion = VerilogVersion.Verilog2005
@@ -101,6 +107,14 @@ class Properties(TestCase):
 
 		self.assertEqual(projectPath / designPath / filesetPath, fileset.ResolvedPath)
 
+	def test_SetProjectLater(self):
+		project = Project("project")
+		fileset = FileSet("fileset")
+
+		fileset.Project = project
+
+		self.assertIs(project, fileset.Project)
+
 	def test_SetDesignLater(self):
 		design =  Design("design")
 		fileset = FileSet("fileset")
@@ -118,6 +132,14 @@ class Properties(TestCase):
 
 		self.assertIs(project, fileset.Project)
 		self.assertIs(design, fileset.Design)
+
+	def test_SetVHDLLibrary(self):
+		vhdlLibrary = VHDLLibrary("library")
+		fileset = FileSet("fileset")
+
+		fileset.VHDLLibrary = vhdlLibrary
+
+		self.assertIs(vhdlLibrary, fileset.VHDLLibrary)
 
 	def test_SetVersionsLater(self):
 		fileset = FileSet("fileset")
@@ -164,14 +186,6 @@ class Properties(TestCase):
 		self.assertEqual(vhdlVersion, fileset.VHDLVersion)
 		self.assertEqual(verilogVersion, fileset.VerilogVersion)
 		self.assertEqual(svVersion, fileset.SVVersion)
-
-	def test_SetProjectLater(self):
-		project = Project("project")
-		fileset = FileSet("fileset")
-
-		fileset.Project = project
-
-		self.assertIs(project, fileset.Project)
 
 
 class FileFilter(TestCase):

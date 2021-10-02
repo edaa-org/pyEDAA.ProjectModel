@@ -94,3 +94,23 @@ class Properties(TestCase):
 		file.Project = project
 
 		self.assertIs(project, file.Project)
+
+	def test_SetDesignLater(self):
+		path = Path("example.vhdl")
+		design = Design("design")
+		file = File(path)
+
+		file.Design = design
+
+		self.assertIs(design, file.Design)
+
+	def test_SetDesignWithProjectLater(self):
+		path = Path("example.vhdl")
+		project = Project("project")
+		design = Design("design", project=project)
+		file = File(path)
+
+		file.Design = design
+
+		self.assertIs(project, file.Project)
+		self.assertIs(design, file.Design)

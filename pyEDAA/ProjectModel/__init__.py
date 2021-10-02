@@ -567,7 +567,9 @@ class FileSet:
 		else:
 			return self._parent.VHDLLibrary
 
-	# TODO: setter
+	@VHDLLibrary.setter
+	def VHDLLibrary(self, value: 'VHDLLibrary') -> None:
+		self._vhdlLibrary = value
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
