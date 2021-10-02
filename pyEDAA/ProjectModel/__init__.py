@@ -127,8 +127,14 @@ class File(metaclass=FileType):
 
 	@property
 	def ResolvedPath(self) -> Path:
-		# TODO: check if absolute
-		return (self._fileSet._directory / self._path).resolve()
+		if self._path.is_absolute():
+			return self._path.resolve()
+		elif self._fileSet is not None:
+			path = (self._fileSet.ResolvedPath / self._directory).resolve()
+			return path.relative_to(Path.cwd())
+		else:
+			# TODO: message and exception type
+			raise Exception("")
 
 	@property
 	def Project(self) -> Nullable['Project']:
@@ -509,19 +515,18 @@ class FileSet:
 
 	@property
 	def ResolvedPath(self) -> Path:
-		if self._parent is not None:
-			directory = self._parent._directory
-		elif self._project is not None:
-			directory = self._project._rootDirectory
+		if self._directory.is_absolute():
+			return self._directory.resolve()
 		else:
-			# TODO: message and exception type
-			raise Exception()
+			if self._parent is not None:
+				directory = self._parent.ResolvedPath
+			elif self._design is not None:
+				directory = self._design.ResolvedPath
+			else:
+				# TODO: message and exception type
+				raise Exception("")
 
-		directory /= self._directory
-
-		if directory.is_absolute():
-			return directory.resolve()
-		else:
+			directory = (directory / self._directory).resolve()
 			return directory.relative_to(Path.cwd())
 
 	@property
@@ -768,8 +773,14 @@ class Design:
 
 	@property
 	def ResolvedPath(self) -> Path:
-		# TODO: check if absolute
-		return (self._project._rootDirectory / self._directory).resolve()
+		if self._directory.is_absolute():
+			return self._directory.resolve()
+		elif self._project is not None:
+			path = (self._project.ResolvedPath / self._directory).resolve()
+			return path.relative_to(Path.cwd())
+		else:
+			# TODO: message and exception type
+			raise Exception("")
 
 	@property
 	def DefaultFileSet(self) -> FileSet:
