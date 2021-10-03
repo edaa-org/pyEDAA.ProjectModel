@@ -5,27 +5,27 @@ Project
 
 Generic description of an EDA project.
 
-.. rubric:: Table of Content
-
-* :ref:`projectmodel-project2`
-
-
-.. rubric:: Class Hierarchy
-
-.. inheritance-diagram:: pyEDAA.ProjectModel.Project
-   :parts: 1
-
-
-.. _projectmodel-project2:
-
-Project
-=======
-
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyEDAA.ProjectModel.Project`:
+
+.. rubric:: Class Relationship
+
+.. mermaid::
+
+   graph TD;
+     Project --> Design;
+     Design  --> VHDLLibrary;
+     Design  --> FileSet;
+     VHDLLibrary --> File;
+     FileSet --> File
+
+     style Project fill:#ee9b00
+
+
+Condensed definition of class :class:`~pyEDAA.ProjectModel.Project`
+===================================================================
 
 .. code-block:: Python
 

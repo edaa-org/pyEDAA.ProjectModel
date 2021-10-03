@@ -5,27 +5,27 @@ VHDL Library
 
 Generic description of a VHDL library (group of VHDL files containing VHDL primary units).
 
-.. rubric:: Table of Content
-
-* :ref:`projectmodel-vhdllib2`
-
-
-.. rubric:: Class Hierarchy
-
-.. inheritance-diagram:: pyEDAA.ProjectModel.VHDLLibrary
-   :parts: 1
-
-
-.. _projectmodel-vhdllib2:
-
-VHDLLibrary
-===========
-
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyEDAA.ProjectModel.VHDLLibrary`:
+
+.. rubric:: Class Relationship
+
+.. mermaid::
+
+   graph TD;
+     Project --> Design;
+     Design  --> VHDLLibrary;
+     Design  --> FileSet;
+     VHDLLibrary --> File;
+     FileSet --> File
+
+     style VHDLLibrary fill:#ee9b00
+
+
+Condensed definition of class :class:`~pyEDAA.ProjectModel.VHDLLibrary`
+=======================================================================
 
 .. code-block:: Python
 

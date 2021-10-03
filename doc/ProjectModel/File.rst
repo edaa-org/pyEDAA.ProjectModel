@@ -5,27 +5,27 @@ File
 
 Generic description of a file in EDA design.
 
-.. rubric:: Table of Content
-
-* :ref:`projectmodel-file2`
-
-
-.. rubric:: Class Hierarchy
-
-.. inheritance-diagram:: pyEDAA.ProjectModel.File
-   :parts: 1
-
-
-.. _projectmodel-file2:
-
-File
-====
-
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyEDAA.ProjectModel.File`:
+
+.. rubric:: Class Relationship
+
+.. mermaid::
+
+   graph TD;
+     Project --> Design;
+     Design  --> VHDLLibrary;
+     Design  --> FileSet;
+     VHDLLibrary --> File;
+     FileSet --> File
+
+     style File fill:#ee9b00
+
+
+Condensed definition of class :class:`~pyEDAA.ProjectModel.File`
+================================================================
 
 .. code-block:: Python
 

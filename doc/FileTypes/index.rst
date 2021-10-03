@@ -13,12 +13,12 @@ Content Types
 .. mermaid::
 
    graph TD;
-     HumanReadableContent-->XMLContent;
-     HumanReadableContent-->YAMLContent;
-     HumanReadableContent-->JSONContent;
-     HumanReadableContent-->INIContent;
-     HumanReadableContent-->TOMLContent;
-     HumanReadableContent-->TCLContent-->SDCContent;
+     HRC[HumanReadableContent] --> XMLC[XMLContent];
+     HRC --> YAMLC[YAMLContent];
+     HRC --> JSONC[JSONContent];
+     HRC --> INIC[INIContent];
+     HRC --> TOMLC[TOMLContent];
+     HRC --> TCLC[TCLContent] --> SDCC[SDCContent];
 
 
 Overall Hierarchy
@@ -30,7 +30,7 @@ Overall Hierarchy
      File-->TextFile;
      File-->LogFile;
      File-->XMLFile;
-     File-->SourceFile;
+     File--->SourceFile;
      File-->ConstraintFile;
      File-->ProjectFile;
      File-->SettingFile;

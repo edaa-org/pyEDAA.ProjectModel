@@ -5,27 +5,27 @@ Design
 
 Generic description of an EDA design.
 
-.. rubric:: Table of Content
-
-* :ref:`projectmodel-design2`
-
-
-.. rubric:: Class Hierarchy
-
-.. inheritance-diagram:: pyEDAA.ProjectModel.Design
-   :parts: 1
-
-
-.. _projectmodel-design2:
-
-Design
-======
-
 .. todo::
 
    Write documentation.
 
-**Condensed definition of class** :class:`~pyEDAA.ProjectModel.Design`:
+
+.. rubric:: Class Relationship
+
+.. mermaid::
+
+   graph TD;
+     Project --> Design;
+     Design  --> VHDLLibrary;
+     Design  --> FileSet;
+     VHDLLibrary --> File;
+     FileSet --> File
+
+     style Design fill:#ee9b00
+
+
+Condensed definition of class :class:`~pyEDAA.ProjectModel.Design`
+==================================================================
 
 .. code-block:: Python
 
