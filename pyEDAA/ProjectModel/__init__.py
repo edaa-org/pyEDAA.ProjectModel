@@ -413,7 +413,7 @@ class WaveformExchangeFile(File):
 @export
 class FileSet:
 	"""
-	A :term:`Fileset` represents a group of files. Filesets can have sub-filesets.
+	A :term:`FileSet` represents a group of files. Filesets can have sub-filesets.
 
 	The order of insertion is preserved. A fileset can be created standalone and
 	later associated to another fileset, design and/or project. Or a fileset,

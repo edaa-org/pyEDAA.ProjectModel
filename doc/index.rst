@@ -148,6 +148,4 @@ License
    Doc-License
    Glossary
    genindex
-
-.. #
    py-modindex

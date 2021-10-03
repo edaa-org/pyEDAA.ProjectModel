@@ -52,9 +52,9 @@ class VHDLFile(TestCase):
 		self.assertEqual(path, file.Path)
 		self.assertEqual(FileTypes.VHDLSourceFile, file.FileType)
 		with self.assertRaises(Exception):
-			lib = file.VHDLLibrary
+			_ = file.VHDLLibrary
 		with self.assertRaises(Exception):
-			version = file.VHDLVersion
+			_ = file.VHDLVersion
 
 	def test_WithVHDLLibrary(self):
 		path = Path("example.vhdl")
@@ -105,7 +105,7 @@ class VerilogFile(TestCase):
 		self.assertEqual(path, file.Path)
 		self.assertEqual(FileTypes.VerilogSourceFile, file.FileType)
 		with self.assertRaises(Exception):
-			version = file.VerilogVersion
+			_ = file.VerilogVersion
 
 	def test_WithVerilogVersion(self):
 		path = Path("example.v")
@@ -140,7 +140,7 @@ class SystemVerilogFile(TestCase):
 		self.assertEqual(path, file.Path)
 		self.assertEqual(FileTypes.SystemVerilogSourceFile, file.FileType)
 		with self.assertRaises(Exception):
-			version = file.SVVersion
+			_ = file.SVVersion
 
 	def test_WithVerilogVersion(self):
 		path = Path("example.sv")
