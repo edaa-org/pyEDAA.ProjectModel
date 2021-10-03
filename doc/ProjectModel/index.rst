@@ -41,7 +41,3 @@ A design then has at least one but usually multiple file sets to group source fi
    VHDLLibrary
    FileSet
    File
-
-
-.. rubric:: Hierarchy of File Types
-

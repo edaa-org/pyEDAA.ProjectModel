@@ -251,7 +251,7 @@ class NetlistFile(SourceFile):
 
 
 @export
-class EDIFNetlistFile(SourceFile):
+class EDIFNetlistFile(NetlistFile):
 	"""Netlist file in EDIF (Electronic Design Interchange Format)."""
 
 
@@ -351,6 +351,7 @@ class PythonSourceFile(SourceFile, PythonContent):
 	"""A Python source file."""
 
 
+# TODO: move to a Cocotb module
 @export
 class CocotbPythonFile(PythonSourceFile):
 	"""A Python source file used by Cocotb."""
@@ -367,12 +368,12 @@ class ProjectFile(File):
 
 
 @export
-class CSourceFile(File):
+class CSourceFile(SourceFile):
 	"""Base-class of all ANSI-C source files."""
 
 
 @export
-class CppSourceFile(File):
+class CppSourceFile(SourceFile):
 	"""Base-class of all ANSI-C++ source files."""
 
 

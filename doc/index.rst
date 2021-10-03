@@ -122,6 +122,7 @@ License
    :hidden:
 
    ProjectModel/index
+   FileTypes/index
 
 
 .. raw:: latex
