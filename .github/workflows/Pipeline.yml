@@ -288,6 +288,10 @@ jobs:
 
 #    needs:
 #      - VerifyDocs
+    env:
+      ARTIFACT: pyEDAA-ProjectModel-documentation
+    outputs:
+      artifact: ${{ env.ARTIFACT }}
 
     steps:
       - name: Checkout repository
@@ -305,11 +309,12 @@ jobs:
         with:
           token: ${{ github.token }}
 
-      - name: 📤 Upload artifacts
+      - name: 📤 Upload 'documentation' artifacts
         uses: actions/upload-artifact@master
         with:
-          name: doc
+          name: ${{ env.ARTIFACT }}
           path: doc/_build/html
+          retention-days: 7
 
   ArtifactCleanUp:
     name: 🗑️ Artifact Cleanup
