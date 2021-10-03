@@ -181,6 +181,7 @@ extensions = [
 
 # SphinxContrib extensions
 # 'sphinxcontrib.actdiag',
+	'sphinxcontrib.mermaid',
 # 'sphinxcontrib.seqdiag',
 # 'sphinxcontrib.textstyle',
 # 'sphinxcontrib.spelling',

@@ -92,7 +92,13 @@ class File(metaclass=FileType):
 	_design:   Nullable['Design']
 	_fileSet:  Nullable['FileSet']
 
-	def __init__(self, path: Path, project: 'Project' = None,  design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(
+		self,
+		path: Path,
+		project: 'Project' = None,
+		design: 'Design' = None,
+		fileSet: 'FileSet' = None
+	):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
 		if project is not None:
@@ -648,7 +654,13 @@ class VHDLLibrary:
 	_files:       List[File]
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, name: str, project: 'Project' = None, design: 'Design' = None, vhdlVersion: VHDLVersion = None):
+	def __init__(
+		self,
+		name: str,
+		project: 'Project' = None,
+		design: 'Design' = None,
+		vhdlVersion: VHDLVersion = None
+	):
 		self._name =    name
 		if project is not None:
 			self._project = project
