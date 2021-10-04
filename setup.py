@@ -84,7 +84,6 @@ setuptools_setup(
 		"License :: OSI Approved :: Apache Software License",
 		"Operating System :: OS Independent",
 		"Programming Language :: Python :: 3 :: Only",
-		"Programming Language :: Python :: 3.6",
 		"Programming Language :: Python :: 3.7",
 		"Programming Language :: Python :: 3.8",
 		"Programming Language :: Python :: 3.9",
@@ -96,6 +95,6 @@ setuptools_setup(
 	],
 	keywords="Python3 EDA Project Model Abstract",
 
-	python_requires='>=3.6',
+	python_requires='>=3.7',
 	install_requires=requirements,
 )
