@@ -1,5 +1,5 @@
-[![Sourcecode on GitHub](https://img.shields.io/badge/edaa-org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
-[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=GitHub&label=code%20license)](LICENSE.md)
+[![Sourcecode on GitHub](https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
+[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=Github&label=code%20license)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)
