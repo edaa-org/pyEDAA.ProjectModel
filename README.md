@@ -33,7 +33,17 @@
 
 
 ```python
-print(some.python.code.here())
+from pathlib import Path
+from pyEDAA.ProjectModel import Project, Design, FileSet, VHDLSourceFile
+
+projectPath = Path("temp/project")
+project = Project("project", rootDirectory=projectPath)
+design = Design("design", project=project)
+fileset = FileSet("uart", Path("src/uart"), design=design)
+
+for vhdlFilePath in fileset.ResolvedPath.glob("*.vhdl"):
+	vhdlFile = VHDLSourceFile(vhdlFilePath)
+	fileset.AddFile(vhdlFile)
 ```
 
 

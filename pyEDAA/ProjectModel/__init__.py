@@ -34,7 +34,7 @@
 from pathlib import Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
-from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pySVModel import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 

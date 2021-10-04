@@ -33,7 +33,7 @@ from pathlib import Path
 from unittest import TestCase
 
 from pyVHDLModel import VHDLVersion
-from pySystemVerilogModel import VerilogVersion, SystemVerilogVersion
+from pySVModel import VerilogVersion, SystemVerilogVersion
 
 from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes
 
