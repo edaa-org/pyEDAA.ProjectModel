@@ -114,3 +114,14 @@ class Properties(TestCase):
 
 		self.assertIs(project, file.Project)
 		self.assertIs(design, file.Design)
+
+	def test_ResolveDirectory(self):
+		projectDirectoryPath = Path.cwd() / "project"
+		designDirectory = "designA"
+		filePath = "file_A1.vhdl"
+
+		project = Project("project", projectDirectoryPath)
+		design = Design("design", Path(designDirectory), project=project)
+		file = File(Path(filePath), design=design)
+
+		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}/{filePath}", file.ResolvedPath.as_posix())

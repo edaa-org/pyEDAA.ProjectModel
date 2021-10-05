@@ -99,15 +99,15 @@ class Properties(TestCase):
 		self.assertIs(path, fileset.Directory)
 
 	def test_ResolveDirectory(self):
-		projectPath = Path("temp/project")
-		designPath = Path("design")
-		filesetPath = Path("fileset")
+		projectDirectoryPath = Path.cwd() / "project"
+		designDirectory = "designA"
+		filesetDirectoy = "fileset"
 
-		project = Project("project", projectPath)
-		design = Design("design", directory=designPath, project=project)
-		fileset = FileSet("fileset", directory=filesetPath, design=design)
+		project = Project("project", projectDirectoryPath)
+		design = Design("design", directory=Path(designDirectory), project=project)
+		fileset = FileSet("fileset", directory=Path(filesetDirectoy), design=design)
 
-		self.assertEqual(projectPath / designPath / filesetPath, fileset.ResolvedPath)
+		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}/{filesetDirectoy}", fileset.ResolvedPath.as_posix())
 
 	def test_SetProjectLater(self):
 		project = Project("project")

@@ -98,3 +98,10 @@ class Properties(TestCase):
 		self.assertEqual(vhdlVersion, project.VHDLVersion)
 		self.assertEqual(verilogVersion, project.VerilogVersion)
 		self.assertEqual(svVersion, project.SVVersion)
+
+	def test_ResolveDirectory(self):
+		projectDirectoryPath = Path.cwd() / "project"
+
+		project = Project("project", projectDirectoryPath)
+
+		self.assertEqual(projectDirectoryPath.as_posix(), project.ResolvedPath.as_posix())
