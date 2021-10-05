@@ -31,23 +31,27 @@
 
 ## Examples
 
-
 ```python
 from pathlib import Path
 from pyEDAA.ProjectModel import Project, Design, FileSet, VHDLSourceFile
 
-projectPath = Path("temp/project")
-project = Project("project", rootDirectory=projectPath)
-design = Design("design", project=project)
-fileset = FileSet("uart", Path("src/uart"), design=design)
+print(f"Current working directory: {Path.cwd()}")
+projectDirectory = Path.cwd() / "../project"
+print(f"Project directory: {projectDirectory!s} - {projectDirectory.exists()}")
 
-for vhdlFilePath in fileset.ResolvedPath.glob("*.vhdl"):
-	vhdlFile = VHDLSourceFile(vhdlFilePath)
-	fileset.AddFile(vhdlFile)
+project = Project("myProject", rootDirectory=projectDirectory)
+designA = Design("designA", project=project, directory=Path("designA"))
+designAFileset = FileSet("srcA", design=designA)
+for vhdlFilePath in designAFileset.ResolvedPath.glob("*.vhdl"):
+	designAFileset.AddFile(VHDLSourceFile(vhdlFilePath))
 
-print(f"All VHDL files in {project.Name}:")
-#for file in project.Designs["design"].Files(fileType=VHDLSourceFile):
-#	print(f"  {file.Path}")
+libFileset = FileSet("lib", Path("../lib"), design=designA)
+for vhdlFilePath in libFileset.ResolvedPath.glob("*.vhdl"):
+	libFileset.AddFile(VHDLSourceFile(vhdlFilePath))
+
+print(f"All VHDL files in {designA.Name}:")
+for file in designA.Files(fileType=VHDLSourceFile):
+	print(f"  {file.Path}")
 ```
 
 

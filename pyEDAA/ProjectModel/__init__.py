@@ -136,8 +136,12 @@ class File(metaclass=FileType):
 		if self._path.is_absolute():
 			return self._path.resolve()
 		elif self._fileSet is not None:
-			path = (self._fileSet.ResolvedPath / self._directory).resolve()
-			return path.relative_to(Path.cwd())
+			path = (self._fileSet.ResolvedPath / self._path).resolve()
+
+			if path.is_absolute():
+				return path
+			else:
+				return path.relative_to(Path.cwd())
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -534,7 +538,10 @@ class FileSet:
 				raise Exception("")
 
 			directory = (directory / self._directory).resolve()
-			return directory.relative_to(Path.cwd())
+			if directory.is_absolute():
+				return directory
+			else:
+				return directory.relative_to(Path.cwd())
 
 	@property
 	def Parent(self) -> Nullable['FileSet']:
@@ -638,6 +645,9 @@ class FileSet:
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
+	def __str__(self):
+		return self._name
+
 
 @export
 class VHDLLibrary:
@@ -718,6 +728,9 @@ class VHDLLibrary:
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
 
+	def __str__(self):
+		return self._name
+
 
 @export
 class Design:
@@ -755,6 +768,8 @@ class Design:
 	):
 		self._name =                  name
 		self._project =               project
+		if project is not None:
+			project._designs[name] = self
 		self._directory =             directory
 		self._fileSets =              {}
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
@@ -790,7 +805,11 @@ class Design:
 			return self._directory.resolve()
 		elif self._project is not None:
 			path = (self._project.ResolvedPath / self._directory).resolve()
-			return path.relative_to(Path.cwd())
+
+			if path.is_absolute():
+				return path
+			else:
+				return path.relative_to(Path.cwd())
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -814,6 +833,8 @@ class Design:
 		else:
 			raise ValueError("Unsupported parameter type for 'value'.")
 
+	def __getitem__(self, name: str):
+		return self._fileSets[name]
 
 	# TODO: return generator with another method
 	@property
@@ -909,6 +930,9 @@ class Design:
 		for file in files:
 			self.AddFile(file)
 
+	def __str__(self):
+		return self._name
+
 
 @export
 class Project:
@@ -961,6 +985,9 @@ class Project:
 		else:
 			return path.relative_to(Path.cwd())
 
+	def __getitem__(self, name: str):
+		return self._designs[name]
+
 	# TODO: return generator with another method
 	@property
 	def Designs(self) -> Dict[str, Design]:
@@ -992,3 +1019,6 @@ class Project:
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
+
+	def __str__(self):
+		return self._name
