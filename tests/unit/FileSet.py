@@ -56,11 +56,13 @@ class Instantiate(TestCase):
 
 	def test_WithDesign(self):
 		design =  Design("design")
-		fileset = FileSet("fileset", design=design)
+		filesetName = "fileset"
+		fileset = FileSet(filesetName, design=design)
 
 		self.assertIsNotNone(fileset)
-		self.assertEqual("fileset", fileset.Name)
+		self.assertEqual(filesetName, fileset.Name)
 		self.assertIs(design, fileset.Design)
+		self.assertIs(fileset, design[filesetName])
 		self.assertEqual(0, len(fileset._files))
 
 	def test_WithProject(self):

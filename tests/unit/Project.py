@@ -57,7 +57,7 @@ class Instantiate(TestCase):
 		self.assertIsNone(project.SVVersion)
 
 		# now assign a root directory and check it
-		rootDirectoryPath = Path.cwd() / "temp/project"
+		rootDirectoryPath = Path.cwd() / "project"
 		rootDirectory = rootDirectoryPath.as_posix()
 		project.RootDirectory = rootDirectoryPath
 		self.assertIs(rootDirectoryPath, project.RootDirectory)

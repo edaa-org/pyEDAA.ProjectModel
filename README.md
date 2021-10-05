@@ -46,8 +46,8 @@ for vhdlFilePath in fileset.ResolvedPath.glob("*.vhdl"):
 	fileset.AddFile(vhdlFile)
 
 print(f"All VHDL files in {project.Name}:")
-#for file in project.Designs["design"].Files(fileType=VHDLSourceFile):
-#	print(f"  {file.Path}")
+for file in project["design"].Files(fileType=VHDLSourceFile):
+	print(f"  {file.Path}")
 ```
 
 
