@@ -15,10 +15,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-#          - {python: 3.6, icon: 🔴}
-          - {python: 3.7, icon: 🟠}
-          - {python: 3.8, icon: 🟡}
-          - {python: 3.9, icon: 🟢}
+#          - {python: "3.6", icon: 🔴}  # until 23.12.2021
+          - {python: "3.7", icon: 🟠}  # until 27.06.2023
+          - {python: "3.8", icon: 🟡}  # until Oct. 2024
+          - {python: "3.9", icon: 🟢}  # until Oct. 2025
+          - {python: "3.10", icon: 🟢} # until Oct. 2026
 
     env:
       PYTHON: ${{ matrix.python }}
@@ -44,11 +45,11 @@ jobs:
           python -m pytest -rA tests/unit
 
   Coverage:
-    name: 📈 Collect Coverage Data using Python 3.9
+    name: 📈 Collect Coverage Data using Python 3.10
     runs-on: ubuntu-latest
 
     env:
-      PYTHON: 3.9
+      PYTHON: "3.10"
       ARTIFACT: pyEDAA-ProjectModel-coverage-html
     outputs:
       python: ${{ env.PYTHON }}
@@ -106,11 +107,11 @@ jobs:
           retention-days: 1
 
   StaticTypeCheck:
-    name: 📈 Check Static Typing using Python 3.9
+    name: 📈 Check Static Typing using Python 3.10
     runs-on: ubuntu-latest
 
     env:
-      PYTHON: 3.9
+      PYTHON: "3.10"
       ARTIFACT: pyEDAA-ProjectModel-typing-html
     outputs:
       python: ${{ env.PYTHON }}
@@ -283,11 +284,11 @@ jobs:
           twine upload dist/*
 
   VerifyDocs:
-    name: 👍 Verify example snippets using Python 3.9
+    name: 👍 Verify example snippets using Python 3.10
     runs-on: ubuntu-latest
 
     env:
-      PYTHON: 3.9
+      PYTHON: "3.10"
     outputs:
       python: ${{ env.PYTHON }}
 
