@@ -88,6 +88,7 @@ class File(metaclass=FileType):
 	"""
 
 	_path:     Path
+	_fileType: 'FileType'
 	_project:  Nullable['Project']
 	_design:   Nullable['Design']
 	_fileSet:  Nullable['FileSet']
@@ -154,6 +155,9 @@ class File(metaclass=FileType):
 	def Project(self, value: 'Project') -> None:
 		self._project = value
 
+		if self._fileSet is None:
+			self._project.DefaultDesign.DefaultFileSet.AddFile(self)
+
 	@property
 	def Design(self) -> Nullable['Design']:
 		return self._design
@@ -161,6 +165,10 @@ class File(metaclass=FileType):
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
 		self._design = value
+
+		if self._fileSet is None:
+			self._design.DefaultFileSet.AddFile(self)
+
 		if self._project is None:
 			self._project = value._project
 		elif self._project is not value._project:
@@ -943,12 +951,13 @@ class Project:
 	:arg rootDirectory: Base-path to the project.
 	"""
 
-	_name:                  str
-	_rootDirectory:         Nullable[Path]
-	_designs:               Dict[str, Design]
-	_vhdlVersion:           VHDLVersion
-	_verilogVersion:        VerilogVersion
-	_svVersion:             SystemVerilogVersion
+	_name:            str
+	_rootDirectory:   Nullable[Path]
+	_designs:         Dict[str, Design]
+	_defaultDesign:   Design
+	_vhdlVersion:     VHDLVersion
+	_verilogVersion:  VerilogVersion
+	_svVersion:       SystemVerilogVersion
 
 	def __init__(
 		self,
@@ -961,6 +970,7 @@ class Project:
 		self._name =            name
 		self._rootDirectory =   rootDirectory
 		self._designs =         {}
+		self._defaultDesign =   Design("default", project=self)
 		self._vhdlVersion =     vhdlVersion
 		self._verilogVersion =  verilogVersion
 		self._svVersion =       svVersion
@@ -992,6 +1002,10 @@ class Project:
 	@property
 	def Designs(self) -> Dict[str, Design]:
 		return self._designs
+
+	@property
+	def DefaultDesign(self) -> Design:
+		return self._defaultDesign
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:

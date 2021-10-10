@@ -51,7 +51,8 @@ class Instantiate(TestCase):
 		self.assertIsNotNone(project)
 		self.assertEqual(project.Name, "project")
 		self.assertEqual(Path("."), project.RootDirectory)
-		self.assertEqual(0, len(project.Designs))
+		self.assertEqual(1, len(project.Designs))
+		# todo: test for "default" design
 		self.assertIsNone(project.VHDLVersion)
 		self.assertIsNone(project.VerilogVersion)
 		self.assertIsNone(project.SVVersion)
