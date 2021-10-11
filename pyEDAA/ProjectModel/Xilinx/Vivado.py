@@ -31,12 +31,29 @@
 #
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent
+from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent, Project
 
 
 @export
 class VivadoProjectFile(ProjectFile, XMLContent):
 	"""A Vivado project file (``*.xpr``)."""
+
+	_xprProject: Project
+
+	def Parse(self):
+		pass
+
+	def _ParseRootElement(self):
+		pass
+
+	def _ParseFileSets(self):
+		pass
+
+	def _ParseFile(self):
+		pass
+
+	def _ParseVHDLFile(self):
+		pass
 
 
 @export
