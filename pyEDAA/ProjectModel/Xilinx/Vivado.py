@@ -45,6 +45,10 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 	_xprProject: Project
 
+	@property
+	def ProjectModel(self) -> Project:
+		return self._xprProject
+
 	def Parse(self):
 		if not self._path.exists():
 			raise Exception("File not found!")

@@ -32,10 +32,6 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyVHDLModel import VHDLVersion
-from pySVModel import VerilogVersion, SystemVerilogVersion
-
-from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes
 from pyEDAA.ProjectModel.Xilinx.Vivado import VivadoProjectFile
 
 if __name__ == "__main__": # pragma: no cover
@@ -46,11 +42,6 @@ if __name__ == "__main__": # pragma: no cover
 
 class FileSets(TestCase):
 	def test_Parsing(self):
-		print(Path.cwd())
-		path = Path('../../example/RootComplex/project/PCIe_SubSystem.xpr')
-
-		file = VivadoProjectFile(path)
-
-		file.Parse()
-		print('...')
-
+		xprPath = Path('VivadoProject/StopWatch/project/StopWatch.xpr')
+		xprFile = VivadoProjectFile(xprPath)
+		xprFile.Parse()
