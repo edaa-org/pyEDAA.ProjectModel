@@ -1,0 +1,55 @@
+[*]
+[*] GTKWave Analyzer v3.3.88 (w)1999-2018 BSI
+[*] Sun Oct 14 10:46:47 2018
+[*]
+[dumpfile] "C:\Training\Solutions\StopWatch\toplevel_tb.ghw"
+[dumpfile_mtime] "Sun Oct 14 10:45:02 2018"
+[dumpfile_size] 67424942
+[savefile] "C:\Training\Solutions\StopWatch\toplevel_tb.gtkw"
+[timestart] 0
+[size] 2048 1048
+[pos] -1 -1
+*-41.719524 10040000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.toplevel_tb.
+[treeopen] top.toplevel_tb.dut.
+[sst_width] 197
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 311
+@28
+top.toplevel_tb.stopsimulation
+top.toplevel_tb.clock
+top.toplevel_tb.reset
+top.toplevel_tb.startbutton
+@200
+-StopWatch
+@28
+top.toplevel_tb.dut.start
+top.toplevel_tb.dut.reset
+@420
+top.toplevel_tb.dut.sw.state
+@200
+-Digits
+@c00022
+#{top.toplevel_tb.dut.digits[0][3:0]} top.toplevel_tb.dut.digits[0][3] top.toplevel_tb.dut.digits[0][2] top.toplevel_tb.dut.digits[0][1] top.toplevel_tb.dut.digits[0][0]
+@28
+top.toplevel_tb.dut.digits[0][3]
+top.toplevel_tb.dut.digits[0][2]
+top.toplevel_tb.dut.digits[0][1]
+top.toplevel_tb.dut.digits[0][0]
+@1401200
+-group_end
+@22
+#{top.toplevel_tb.dut.digits[1][3:0]} top.toplevel_tb.dut.digits[1][3] top.toplevel_tb.dut.digits[1][2] top.toplevel_tb.dut.digits[1][1] top.toplevel_tb.dut.digits[1][0]
+#{top.toplevel_tb.dut.digits[2][3:0]} top.toplevel_tb.dut.digits[2][3] top.toplevel_tb.dut.digits[2][2] top.toplevel_tb.dut.digits[2][1] top.toplevel_tb.dut.digits[2][0]
+#{top.toplevel_tb.dut.digits[3][3:0]} top.toplevel_tb.dut.digits[3][3] top.toplevel_tb.dut.digits[3][2] top.toplevel_tb.dut.digits[3][1] top.toplevel_tb.dut.digits[3][0]
+#{top.toplevel_tb.dut.digits[4][3:0]} top.toplevel_tb.dut.digits[4][3] top.toplevel_tb.dut.digits[4][2] top.toplevel_tb.dut.digits[4][1] top.toplevel_tb.dut.digits[4][0]
+#{top.toplevel_tb.dut.digits[5][3:0]} top.toplevel_tb.dut.digits[5][3] top.toplevel_tb.dut.digits[5][2] top.toplevel_tb.dut.digits[5][1] top.toplevel_tb.dut.digits[5][0]
+@201
+-Outputs
+@22
+#{top.toplevel_tb.dut.cathode[7:0]} top.toplevel_tb.dut.cathode[7] top.toplevel_tb.dut.cathode[6] top.toplevel_tb.dut.cathode[5] top.toplevel_tb.dut.cathode[4] top.toplevel_tb.dut.cathode[3] top.toplevel_tb.dut.cathode[2] top.toplevel_tb.dut.cathode[1] top.toplevel_tb.dut.cathode[0]
+#{top.toplevel_tb.dut.anode[5:0]} top.toplevel_tb.dut.anode[5] top.toplevel_tb.dut.anode[4] top.toplevel_tb.dut.anode[3] top.toplevel_tb.dut.anode[2] top.toplevel_tb.dut.anode[1] top.toplevel_tb.dut.anode[0]
+[pattern_trace] 1
+[pattern_trace] 0
