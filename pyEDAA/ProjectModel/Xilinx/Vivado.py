@@ -29,14 +29,91 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+from pathlib import Path
+
+from lxml import etree
+from pyVHDLModel import VHDLVersion
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent
+from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, \
+	VHDLSourceFile, File, VerilogSourceFile
 
 
 @export
 class VivadoProjectFile(ProjectFile, XMLContent):
 	"""A Vivado project file (``*.xpr``)."""
+
+	_xprProject: Project
+
+	@property
+	def ProjectModel(self) -> Project:
+		return self._xprProject
+
+	def Parse(self):
+		if not self._path.exists():
+			raise Exception(f"Vivado project file '{self._path!s}' not found.") from FileNotFoundError(f"File '{self._path!s}' not found.")
+
+		try:
+			with self._path.open(encoding="utf-8") as fileHandle:
+				content = fileHandle.read()
+				content = bytes(bytearray(content, encoding="utf-8"))
+		except OSError as ex:
+			raise Exception(f"Couldn't open '{self._path!s}'.") from ex
+
+		XMLParser = etree.XMLParser(remove_blank_text=True, encoding="utf-8")
+		root = etree.XML(content, XMLParser)
+
+		self._xprProject = Project(self._path.stem, rootDirectory=self._path.parent)
+		self._ParseRootElement(root)
+
+	def _ParseRootElement(self, root):
+		filesetsNode = root.find("FileSets")
+		for filesetNode in filesetsNode:
+			self._ParseFileSet(filesetNode)
+
+	def _ParseFileSet(self, filesetNode):
+		filesetName = filesetNode.get("Name")
+		fileset = FileSet(filesetName, design=self._xprProject.DefaultDesign)
+
+		for fileNode in filesetNode:
+			if fileNode.tag == "File":
+				self._ParseFile(fileNode, fileset)
+
+	def _ParseFile(self, fileNode, fileset):
+		croppedPath = fileNode.get("Path").replace("$PPRDIR/", "")
+		filePath = Path(croppedPath)
+		if filePath.suffix in (".vhd", ".vhdl"):
+			self._ParseVHDLFile(fileNode, filePath, fileset)
+		elif filePath.suffix == ".xdc":
+			self._ParseXDCFile(fileNode, filePath, fileset)
+		elif filePath.suffix == ".v":
+			self._ParseVerilogFile(fileNode, filePath, fileset)
+		elif filePath.suffix == ".xci":
+			self._ParseXCIFile(fileNode, filePath, fileset)
+		else:
+			self._ParseDefaultFile(fileNode, filePath, fileset)
+
+	def _ParseVHDLFile(self, fileNode, path, fileset):
+		vhdlFile = VHDLSourceFile(path)
+		fileset.AddFile(vhdlFile)
+
+		if fileNode[0].tag == "FileInfo":
+			if fileNode[0].get("SFType") == "VHDL2008":
+				vhdlFile.VHDLVersion = VHDLVersion.VHDL2008
+			else:
+				vhdlFile.VHDLVersion = VHDLVersion.VHDL93
+
+	def _ParseDefaultFile(self, _, path, fileset):
+		File(path, fileSet=fileset)
+
+	def _ParseXDCFile(self, _, path, fileset):
+		XDCConstraintFile(path, fileSet=fileset)
+
+	def _ParseVerilogFile(self, _, path, fileset):
+		VerilogSourceFile(path, fileSet=fileset)
+
+	def _ParseXCIFile(self, _, path, fileset):
+		IPCoreInstantiationFile(path, fileSet=fileset)
 
 
 @export
