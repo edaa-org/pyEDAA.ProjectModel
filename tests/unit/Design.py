@@ -98,8 +98,8 @@ class Properties(TestCase):
 		projectDirectoryPath = Path.cwd() / "project"
 		designDirectory = "designA"
 
-		project = Project("project", projectDirectoryPath)
-		design = Design("design", Path(designDirectory), project=project)
+		project = Project("project", rootDirectory=projectDirectoryPath)
+		design = Design("design", directory=Path(designDirectory), project=project)
 
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 
