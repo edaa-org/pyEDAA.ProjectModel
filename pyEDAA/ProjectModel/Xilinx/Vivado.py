@@ -93,7 +93,6 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		else:
 			self._ParseDefaultFile(fileNode, filePath, fileset)
 
-
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
@@ -115,7 +114,6 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 	def _ParseXCIFile(self, _, path, fileset):
 		IPCoreInstantiationFile(path, fileSet=fileset)
-
 
 
 @export
