@@ -51,70 +51,70 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 	def Parse(self):
 		if not self._path.exists():
-			raise Exception("File not found!")
+			raise Exception(f"Vivado project file '{self._path!s}' not found.") from FileNotFoundError(f"File '{self._path!s}' not found.")
 
 		try:
 			with self._path.open(encoding="utf-8") as fileHandle:
 				content = fileHandle.read()
-				content = bytes(bytearray(content, encoding='utf-8'))
-		except OSError:
-			raise Exception("Couldn't open '{0!s}'.".format(self._path))
+				content = bytes(bytearray(content, encoding="utf-8"))
+		except OSError as ex:
+			raise Exception(f"Couldn't open '{self._path!s}'.") from ex
 
-		XMLParser = etree.XMLParser(remove_blank_text=True, encoding='utf-8')
+		XMLParser = etree.XMLParser(remove_blank_text=True, encoding="utf-8")
 		root = etree.XML(content, XMLParser)
 
 		self._xprProject = Project(self._path.stem, rootDirectory=self._path.parent)
 		self._ParseRootElement(root)
 
 	def _ParseRootElement(self, root):
-		filesetsNode = root.find('FileSets')
+		filesetsNode = root.find("FileSets")
 		for filesetNode in filesetsNode:
 			self._ParseFileSet(filesetNode)
 
-
 	def _ParseFileSet(self, filesetNode):
-		filesetName = filesetNode.get('Name')
+		filesetName = filesetNode.get("Name")
 		fileset = FileSet(filesetName, design=self._xprProject.DefaultDesign)
 
 		for fileNode in filesetNode:
-			if fileNode.tag == 'File':
+			if fileNode.tag == "File":
 				self._ParseFile(fileNode, fileset)
 
 	def _ParseFile(self, fileNode, fileset):
-		filePath = Path(fileNode.get('Path'))
-		if filePath.suffix in ('.vhd', '.vhdl'):
+		croppedPath = fileNode.get("Path").replace("$PPRDIR/", "")
+		filePath = Path(croppedPath)
+		if filePath.suffix in (".vhd", ".vhdl"):
 			self._ParseVHDLFile(fileNode, filePath, fileset)
-		elif filePath.suffix == '.xdc':
+		elif filePath.suffix == ".xdc":
 			self._ParseXDCFile(fileNode, filePath, fileset)
-		elif filePath.suffix == '.v':
+		elif filePath.suffix == ".v":
 			self._ParseVerilogFile(fileNode, filePath, fileset)
-		elif filePath.suffix == '.xci':
+		elif filePath.suffix == ".xci":
 			self._ParseXCIFile(fileNode, filePath, fileset)
 		else:
 			self._ParseDefaultFile(fileNode, filePath, fileset)
 
 
 	def _ParseVHDLFile(self, fileNode, path, fileset):
-		vhdlFile = VHDLSourceFile(Path(*path.parts[1:]))
+		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
 
-		if fileNode[0].tag == 'FileInfo':
-			if fileNode[0].get('SFType') == 'VHDL2008':
+		if fileNode[0].tag == "FileInfo":
+			if fileNode[0].get("SFType") == "VHDL2008":
 				vhdlFile.VHDLVersion = VHDLVersion.VHDL2008
 			else:
 				vhdlFile.VHDLVersion = VHDLVersion.VHDL93
 
 	def _ParseDefaultFile(self, _, path, fileset):
-		File(Path(*path.parts[1:]), fileSet=fileset)
+		File(path, fileSet=fileset)
 
 	def _ParseXDCFile(self, _, path, fileset):
-		XDCConstraintFile(Path(*path.parts[1:]), fileSet=fileset)
+		XDCConstraintFile(path, fileSet=fileset)
 
 	def _ParseVerilogFile(self, _, path, fileset):
-		VerilogSourceFile(Path(*path.parts[1:]), fileSet=fileset)
+		VerilogSourceFile(path, fileSet=fileset)
 
 	def _ParseXCIFile(self, _, path, fileset):
-		IPCoreInstantiationFile(Path(*path.parts[1:]), fileSet=fileset)
+		IPCoreInstantiationFile(path, fileSet=fileset)
 
 
 
