@@ -58,7 +58,6 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 		XMLParser = etree.XMLParser(remove_blank_text=True, encoding='utf-8')
 		root = etree.XML(content, XMLParser)
-		rootTag = etree.QName(root.tag)
 
 		self._xprProject = Project(self._path.stem, rootDirectory=self._path.parent)
 		self._ParseRootElement(root)
