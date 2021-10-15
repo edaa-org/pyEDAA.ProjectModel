@@ -42,6 +42,7 @@ from pydecor import export
 __version__ = "0.1.1"
 
 
+@export
 class FileType(type):
 	"""
 	A :term:`meta-class` to construct *FileType* classes.
@@ -450,6 +451,7 @@ class FileSet:
 	"""
 
 	_name:        str
+	_topLevel:    Nullable[str]
 	_project:     Nullable['Project']
 	_design:      Nullable['Design']
 	_directory:   Nullable[Path]
@@ -462,11 +464,10 @@ class FileSet:
 	_verilogVersion:  VerilogVersion
 	_svVersion:       SystemVerilogVersion
 
-	# TODO: link parent fileset for relative path calculations
-
 	def __init__(
 		self,
 		name: str,
+		topLevel: str = None,
 		directory: Path = Path("."),
 		project: 'Project' = None,
 		design: 'Design' = None,
@@ -477,6 +478,7 @@ class FileSet:
 		svVersion: SystemVerilogVersion = None
 	):
 		self._name =      name
+		self._topLevel =  topLevel
 		if project is not None:
 			self._project = project
 			self._design =  design
@@ -503,6 +505,18 @@ class FileSet:
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def TopLevel(self) -> str:
+		return self._topLevel
+
+	@TopLevel.setter
+	def TopLevel(self, value: str) -> None:
+		self._topLevel = value
 
 	@property
 	def Project(self) -> Nullable['Project']:
@@ -755,6 +769,7 @@ class Design:
 	"""
 
 	_name:                  str
+	_topLevel:              Nullable[str]
 	_project:               Nullable['Project']
 	_directory:             Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
@@ -768,6 +783,7 @@ class Design:
 	def __init__(
 		self,
 		name: str,
+		topLevel: str = None,
 		directory: Path = Path("."),
 		project: 'Project' = None,
 		vhdlVersion: VHDLVersion = None,
@@ -775,6 +791,7 @@ class Design:
 		svVersion: SystemVerilogVersion = None
 	):
 		self._name =                  name
+		self._topLevel =              topLevel
 		self._project =               project
 		if project is not None:
 			project._designs[name] = self
@@ -790,6 +807,18 @@ class Design:
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def TopLevel(self) -> str:
+		return self._topLevel
+
+	@TopLevel.setter
+	def TopLevel(self, value: str) -> None:
+		self._topLevel = value
 
 	@property
 	def Project(self) -> Nullable['Project']:
