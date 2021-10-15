@@ -78,6 +78,8 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		for fileNode in filesetNode:
 			if fileNode.tag == "File":
 				self._ParseFile(fileNode, fileset)
+			elif fileNode.tag == "Config":
+				self._ParseFileSetConfig(fileNode, fileset)
 
 	def _ParseFile(self, fileNode, fileset):
 		croppedPath = fileNode.get("Path").replace("$PPRDIR/", "")
@@ -114,6 +116,12 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 	def _ParseXCIFile(self, _, path, fileset):
 		IPCoreInstantiationFile(path, fileSet=fileset)
+
+	def _ParseFileSetConfig(self, fileNode, fileset):
+		for option in fileNode:
+			if option.tag == "Option":
+				if option.get("Name") == "TopModule":
+					fileset.TopLevel = option.get("Val")
 
 
 @export
