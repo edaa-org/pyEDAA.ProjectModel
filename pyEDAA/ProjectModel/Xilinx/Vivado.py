@@ -96,12 +96,22 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
+
+		usedInAttr = []
 		for childNode in fileNode.childNodes:
 			if childNode.nodeType == Node.ELEMENT_NODE and childNode.tagName == "FileInfo":
 				if childNode.getAttribute("SFType") == "VHDL2008":
 					vhdlFile.VHDLVersion = VHDLVersion.VHDL2008
 				else:
 					vhdlFile.VHDLVersion = VHDLVersion.VHDL93
+
+				for fileAttribute in childNode.childNodes:
+					if fileAttribute.nodeType == Node.ELEMENT_NODE and fileAttribute.tagName == "Attr":
+						if fileAttribute.getAttribute("Name") == "Library":
+							libraryName = fileAttribute.getAttribute("Val")
+							vhdlFile.VHDLLibrary = fileset.GetOrCreateVHDLLibrary(libraryName)
+						elif fileAttribute.getAttribute("Val") == "UsedIn":
+							usedInAttr.append(fileAttribute.getAttribute("Val"))
 
 	def _ParseDefaultFile(self, _, path, fileset):
 		File(path, fileSet=fileset)
