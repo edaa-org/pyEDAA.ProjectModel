@@ -31,7 +31,7 @@
 #
 from pathlib import Path
 
-from lxml import etree
+from xml.dom import minidom, Node
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 
@@ -54,35 +54,33 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 			raise Exception(f"Vivado project file '{self._path!s}' not found.") from FileNotFoundError(f"File '{self._path!s}' not found.")
 
 		try:
-			with self._path.open(encoding="utf-8") as fileHandle:
-				content = fileHandle.read()
-				content = bytes(bytearray(content, encoding="utf-8"))
-		except OSError as ex:
+			root = minidom.parse(str(self._path)).documentElement
+		except Exception as ex:
 			raise Exception(f"Couldn't open '{self._path!s}'.") from ex
-
-		XMLParser = etree.XMLParser(remove_blank_text=True, encoding="utf-8")
-		root = etree.XML(content, XMLParser)
 
 		self._xprProject = Project(self._path.stem, rootDirectory=self._path.parent)
 		self._ParseRootElement(root)
 
 	def _ParseRootElement(self, root):
-		filesetsNode = root.find("FileSets")
-		for filesetNode in filesetsNode:
-			self._ParseFileSet(filesetNode)
+		for rootNode in root.childNodes:
+			if rootNode.nodeName == "FileSets":
+				for fileSetsNode in rootNode.childNodes:
+					if fileSetsNode.nodeType == Node.ELEMENT_NODE and fileSetsNode.tagName == "FileSet":
+						self._ParseFileSet(fileSetsNode)
 
 	def _ParseFileSet(self, filesetNode):
-		filesetName = filesetNode.get("Name")
+		filesetName = filesetNode.getAttribute("Name")
 		fileset = FileSet(filesetName, design=self._xprProject.DefaultDesign)
 
-		for fileNode in filesetNode:
-			if fileNode.tag == "File":
-				self._ParseFile(fileNode, fileset)
-			elif fileNode.tag == "Config":
-				self._ParseFileSetConfig(fileNode, fileset)
+		for fileNode in filesetNode.childNodes:
+			if fileNode.nodeType == Node.ELEMENT_NODE:
+				if fileNode.tagName == "File":
+					self._ParseFile(fileNode, fileset)
+				elif fileNode.nodeType == Node.ELEMENT_NODE and fileNode.tagName == "Config":
+					self._ParseFileSetConfig(fileNode, fileset)
 
 	def _ParseFile(self, fileNode, fileset):
-		croppedPath = fileNode.get("Path").replace("$PPRDIR/", "")
+		croppedPath = fileNode.getAttribute("Path").replace("$PPRDIR/", "")
 		filePath = Path(croppedPath)
 		if filePath.suffix in (".vhd", ".vhdl"):
 			self._ParseVHDLFile(fileNode, filePath, fileset)
@@ -98,12 +96,12 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
-
-		if fileNode[0].tag == "FileInfo":
-			if fileNode[0].get("SFType") == "VHDL2008":
-				vhdlFile.VHDLVersion = VHDLVersion.VHDL2008
-			else:
-				vhdlFile.VHDLVersion = VHDLVersion.VHDL93
+		for childNode in fileNode.childNodes:
+			if childNode.nodeType == Node.ELEMENT_NODE and childNode.tagName == "FileInfo":
+				if childNode.getAttribute("SFType") == "VHDL2008":
+					vhdlFile.VHDLVersion = VHDLVersion.VHDL2008
+				else:
+					vhdlFile.VHDLVersion = VHDLVersion.VHDL93
 
 	def _ParseDefaultFile(self, _, path, fileset):
 		File(path, fileSet=fileset)
@@ -118,10 +116,10 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		IPCoreInstantiationFile(path, fileSet=fileset)
 
 	def _ParseFileSetConfig(self, fileNode, fileset):
-		for option in fileNode:
-			if option.tag == "Option":
-				if option.get("Name") == "TopModule":
-					fileset.TopLevel = option.get("Val")
+		for option in fileNode.childNodes:
+			if option.nodeType == Node.ELEMENT_NODE and option.tagName == "Option":
+				if option.getAttribute("Name") == "TopModule":
+					fileset.TopLevel = option.getAttribute("Val")
 
 
 @export
