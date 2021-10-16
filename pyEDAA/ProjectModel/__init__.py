@@ -43,6 +43,12 @@ __version__ = "0.1.1"
 
 
 @export
+class Attribute:
+	KEY: str
+	VALUE_TYPE: typing_Any
+
+
+@export
 class FileType(type):
 	"""
 	A :term:`meta-class` to construct *FileType* classes.
@@ -93,7 +99,7 @@ class File(metaclass=FileType):
 	_project:    Nullable['Project']
 	_design:     Nullable['Design']
 	_fileSet:    Nullable['FileSet']
-	_attributes: Dict[str, Any] = {}
+	_attributes: Dict[Attribute, typing_Any] = {}
 
 	def __init__(
 		self,
@@ -184,6 +190,16 @@ class File(metaclass=FileType):
 	def FileSet(self, value: 'FileSet') -> None:
 		self._fileSet = value
 		value._files.append(self)
+
+	def __getitem__(self, key: Attribute):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key: Attribute, value: typing_Any):
+		x = key.VALUE_TYPE
+		self._attributes[key] = value
 
 
 FileTypes = File
@@ -459,8 +475,8 @@ class FileSet:
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
-	_attributes:      Dict[str, Any]
-	_vhdlLibraries:   Dict[str, VHDLLibrary]
+	_attributes:      Dict[Attribute, typing_Any]
+	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
@@ -611,6 +627,15 @@ class FileSet:
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
+
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
 
 	def GetOrCreateVHDLLibrary(self, name):
 		if name in self._vhdlLibraries:
@@ -787,7 +812,7 @@ class Design:
 	_directory:             Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
-	_attributes:            Dict[str, Any]
+	_attributes:            Dict[Attribute, typing_Any]
 
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
@@ -908,6 +933,15 @@ class Design:
 			for file in fileSet.Files(fileType):
 				yield file
 
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
+
 	@property
 	def VHDLLibraries(self) -> List[VHDLLibrary]:
 		return self._vhdlLibraries.values()
@@ -997,7 +1031,7 @@ class Project:
 	_rootDirectory:   Nullable[Path]
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
-	_attributes:      Dict[str, Any]
+	_attributes:      Dict[Attribute, typing_Any]
 
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
@@ -1048,6 +1082,15 @@ class Project:
 	@property
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
+
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:

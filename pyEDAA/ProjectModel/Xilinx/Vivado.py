@@ -30,13 +30,46 @@
 # ============================================================================
 #
 from pathlib import Path
+from typing import Iterable
 
 from lxml import etree
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, \
-	VHDLSourceFile, File, VerilogSourceFile
+from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, File, Attribute
+from pyEDAA.ProjectModel import File as Model_File
+from pyEDAA.ProjectModel import ConstraintFile as Model_ConstraintFile
+from pyEDAA.ProjectModel import VerilogSourceFile as Model_VerilogSourceFile
+from pyEDAA.ProjectModel import VHDLSourceFile as Model_VHDLSourceFile
+
+
+@export
+class UsedInAttribute(Attribute):
+	KEY = "UsedIn"
+	VALUE_TYPE = Iterable[str]
+
+	def __init__(self):
+		super().__init__()
+
+
+@export
+class File(Model_File):
+	pass
+
+
+@export
+class ConstraintFile(Model_ConstraintFile):
+	pass
+
+
+@export
+class VerilogSourceFile(Model_VerilogSourceFile):
+	pass
+
+
+@export
+class VHDLSourceFile(Model_VHDLSourceFile):
+	pass
 
 
 @export
@@ -95,6 +128,8 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
+		vhdlFile[UsedInAttribute] = ("Synthesis", "Implementation")
+
 		fileset.AddFile(vhdlFile)
 
 		if fileNode[0].tag == "FileInfo":
