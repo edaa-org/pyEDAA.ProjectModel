@@ -88,11 +88,12 @@ class File(metaclass=FileType):
 	:arg fileSet: Fileset the file is associated with.
 	"""
 
-	_path:     Path
-	_fileType: 'FileType'
-	_project:  Nullable['Project']
-	_design:   Nullable['Design']
-	_fileSet:  Nullable['FileSet']
+	_path:       Path
+	_fileType:   'FileType'
+	_project:    Nullable['Project']
+	_design:     Nullable['Design']
+	_fileSet:    Nullable['FileSet']
+	_attributes: Dict[str, Any] = {}
 
 	def __init__(
 		self,
@@ -450,15 +451,16 @@ class FileSet:
 	:arg svVersion:       Default SystemVerilog version for files in this fileset, if not specified for the file itself.
 	"""
 
-	_name:        str
-	_topLevel:    Nullable[str]
-	_project:     Nullable['Project']
-	_design:      Nullable['Design']
-	_directory:   Nullable[Path]
-	_parent:      Nullable['FileSet']
-	_fileSets:    Dict[str, 'FileSet']
-	_files:       List[File]
-
+	_name:            str
+	_topLevel:        Nullable[str]
+	_project:         Nullable['Project']
+	_design:          Nullable['Design']
+	_directory:       Nullable[Path]
+	_parent:          Nullable['FileSet']
+	_fileSets:        Dict[str, 'FileSet']
+	_files:           List[File]
+	_attributes:      Dict[str, Any]
+	_vhdlLibraries:   Dict[str, VHDLLibrary]
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
@@ -495,6 +497,9 @@ class FileSet:
 
 		if design is not None:
 			design._fileSets[name] = self
+
+		self._attributes =      {}
+		self._vhdlLibraries =   {}
 
 		# TODO: handle if vhdlLibrary is a string
 		self._vhdlLibrary =     vhdlLibrary
@@ -606,6 +611,14 @@ class FileSet:
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
+
+	def GetOrCreateVHDLLibrary(self, name):
+		if name in self._vhdlLibraries:
+			return self._vhdlLibraries[name]
+		else:
+			library = VHDLLibrary(name, design=self._design, vhdlVersion=self._vhdlVersion)
+			self._vhdlLibraries[name] = library
+			return library
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
@@ -774,6 +787,8 @@ class Design:
 	_directory:             Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
+	_attributes:            Dict[str, Any]
+
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
 	_verilogVersion:        VerilogVersion
@@ -798,6 +813,7 @@ class Design:
 		self._directory =             directory
 		self._fileSets =              {}
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
+		self._attributes =            {}
 		self._vhdlLibraries =         {}
 		self._vhdlVersion =           vhdlVersion
 		self._verilogVersion =        verilogVersion
@@ -869,9 +885,6 @@ class Design:
 			self._defaultFileSet = value
 		else:
 			raise ValueError("Unsupported parameter type for 'value'.")
-
-	def __getitem__(self, name: str):
-		return self._fileSets[name]
 
 	# TODO: return generator with another method
 	@property
@@ -984,6 +997,8 @@ class Project:
 	_rootDirectory:   Nullable[Path]
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
+	_attributes:      Dict[str, Any]
+
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
 	_svVersion:       SystemVerilogVersion
@@ -1000,6 +1015,7 @@ class Project:
 		self._rootDirectory =   rootDirectory
 		self._designs =         {}
 		self._defaultDesign =   Design("default", project=self)
+		self._attributes =      {}
 		self._vhdlVersion =     vhdlVersion
 		self._verilogVersion =  verilogVersion
 		self._svVersion =       svVersion
@@ -1023,9 +1039,6 @@ class Project:
 			return path
 		else:
 			return path.relative_to(Path.cwd())
-
-	def __getitem__(self, name: str):
-		return self._designs[name]
 
 	# TODO: return generator with another method
 	@property
