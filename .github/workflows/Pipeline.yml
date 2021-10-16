@@ -42,7 +42,7 @@ jobs:
 
       - name: ☑ Run unit tests
         run: |
-          python -m pytest -rA tests/unit
+          python -m pytest -rA tests/unit --color=yes
 
   Coverage:
     name: 📈 Collect Coverage Data using Python 3.10
@@ -72,7 +72,7 @@ jobs:
       - name: Collect coverage
         continue-on-error: true
         run: |
-          python -m pytest -rA --cov=.. --cov-config=tests/.coveragerc tests/unit
+          python -m pytest -rA --cov=.. --cov-config=tests/.coveragerc tests/unit --color=yes
 
       - name: Convert to cobertura format
         run: |
