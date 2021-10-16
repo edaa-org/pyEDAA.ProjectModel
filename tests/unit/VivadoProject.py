@@ -49,6 +49,24 @@ class FileSets(TestCase):
 		xprFile.Parse()
 
 		project = xprFile.ProjectModel
+
+		self.assertEqual("StopWatch", project.Name)
+
+		designs = [d for d in project.Designs.values()]
+		self.assertEqual(1, len(designs))
+
+		design = designs[0]
+		self.assertEqual("default", design.Name)
+		self.assertIs(project.DefaultDesign, design)
+
+		expectedFilsesetNames = (
+			"default", "src_Encoder", "src_Display", "src_StopWatch", "const_Encoder", "const_Display",	"const_StopWatch",
+			"sim_StopWatch", "utils_1"
+		)
+		filesets = [fs for fs in design.FileSets.keys()]
+		self.assertEqual(len(expectedFilsesetNames), len(filesets))
+		self.assertSequenceEqual(expectedFilsesetNames,	filesets)
+
 		print(f"Project: {project.Name}")
 		for designName, design in project.Designs.items():
 			print(f"  Design: {designName}")
