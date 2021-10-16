@@ -311,6 +311,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	@VHDLLibrary.setter
 	def VHDLLibrary(self, value: 'VHDLLibrary') -> None:
 		self._vhdlLibrary = value
+		value._files.append(self)
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
