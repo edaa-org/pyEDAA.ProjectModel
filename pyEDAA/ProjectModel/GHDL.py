@@ -29,8 +29,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+from pydecor import export
+
 from pyEDAA.ProjectModel import WaveformExchangeFile
 
 
+@export
 class GHDLWaveformFile(WaveformExchangeFile):
 	"""GHDL's waveform file (``*.ghw``) supporting VHDL and Verilog simulation results."""

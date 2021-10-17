@@ -135,7 +135,8 @@ jobs:
       - name: Check Static Typing
         continue-on-error: true
         run: |
-          mypy --html-report htmlmypy --pretty pyEDAA/ProjectModel
+          pwd
+          mypy --html-report htmlmypy -m pyEDAA.ProjectModel
 
       - name: 📤 Upload 'Static Typing Report' artifact
         continue-on-error: true

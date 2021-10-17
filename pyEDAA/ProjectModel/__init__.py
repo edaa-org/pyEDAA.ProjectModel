@@ -31,7 +31,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from pathlib import Path
+from pathlib import Path as pathlib_Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
 
 from pySVModel import VerilogVersion, SystemVerilogVersion
@@ -72,7 +72,8 @@ class FileType(type):
 	def __getattr__(cls, item) -> 'FileType':
 		if item[:2] != "__" and item[-2:] != "__":
 			return cls.FileTypes[item]
-#		raise RuntimeError()
+		else:
+			return super().__getattribute__(item)
 
 	def __contains__(cls, item) -> bool:
 		return issubclass(item, cls)
@@ -94,7 +95,7 @@ class File(metaclass=FileType):
 	:arg fileSet: Fileset the file is associated with.
 	"""
 
-	_path:       Path
+	_path:       pathlib_Path
 	_fileType:   'FileType'
 	_project:    Nullable['Project']
 	_design:     Nullable['Design']
@@ -103,7 +104,7 @@ class File(metaclass=FileType):
 
 	def __init__(
 		self,
-		path: Path,
+		path: pathlib_Path,
 		project: 'Project' = None,
 		design: 'Design' = None,
 		fileSet: 'FileSet' = None
@@ -137,11 +138,11 @@ class File(metaclass=FileType):
 		return self._fileType
 
 	@property
-	def Path(self) -> Path:
+	def Path(self) -> pathlib_Path:
 		return self._path
 
 	@property
-	def ResolvedPath(self) -> Path:
+	def ResolvedPath(self) -> pathlib_Path:
 		if self._path.is_absolute():
 			return self._path.resolve()
 		elif self._fileSet is not None:
@@ -150,7 +151,7 @@ class File(metaclass=FileType):
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(Path.cwd())
+				return path.relative_to(pathlib_Path.cwd())
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -292,7 +293,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	_vhdlLibrary: 'VHDLLibrary'
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, path: Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
 		# TODO: handle if vhdlLibrary is a string
@@ -333,7 +334,7 @@ class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	_verilogVersion: VerilogVersion
 
-	def __init__(self, path: Path, verilogVersion: VerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, verilogVersion: VerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
 		self._verilogVersion = verilogVersion
@@ -358,7 +359,7 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	_svVersion: SystemVerilogVersion
 
-	def __init__(self, path: Path, svVersion: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, svVersion: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
 		self._svVersion = svVersion
@@ -472,7 +473,7 @@ class FileSet:
 	_topLevel:        Nullable[str]
 	_project:         Nullable['Project']
 	_design:          Nullable['Design']
-	_directory:       Nullable[Path]
+	_directory:       pathlib_Path
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
@@ -487,7 +488,7 @@ class FileSet:
 		self,
 		name: str,
 		topLevel: str = None,
-		directory: Path = Path("."),
+		directory: pathlib_Path = pathlib_Path("."),
 		project: 'Project' = None,
 		design: 'Design' = None,
 		parent: Nullable['FileSet'] = None,
@@ -561,15 +562,15 @@ class FileSet:
 			raise Exception("The design's project is not identical to the already assigned project.")
 
 	@property
-	def Directory(self) -> Path:
+	def Directory(self) -> pathlib_Path:
 		return self._directory
 
 	@Directory.setter
-	def Directory(self, value: Path) -> None:
+	def Directory(self, value: pathlib_Path) -> None:
 		self._directory = value
 
 	@property
-	def ResolvedPath(self) -> Path:
+	def ResolvedPath(self) -> pathlib_Path:
 		if self._directory.is_absolute():
 			return self._directory.resolve()
 		else:
@@ -585,7 +586,7 @@ class FileSet:
 			if directory.is_absolute():
 				return directory
 			else:
-				return directory.relative_to(Path.cwd())
+				return directory.relative_to(pathlib_Path.cwd())
 
 	@property
 	def Parent(self) -> Nullable['FileSet']:
@@ -610,10 +611,11 @@ class FileSet:
 
 		else:
 			if isinstance(fileSet, str):
+				fileSetName = fileSet
 				try:
-					fileSet = self._fileSets[fileSet]
+					fileSet = self._fileSets[fileSetName]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSet.Name, fileset=self.Name)) from ex
+					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSetName, fileset=self.Name)) from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -782,8 +784,10 @@ class VHDLLibrary:
 	def VHDLVersion(self) -> VHDLVersion:
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
-		else:
+		elif self._design is not None:
 			return self._design.VHDLVersion
+		else:
+			raise Exception("VHDLVersion is not set on VHDLLibrary nor parent object.")
 
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
@@ -810,7 +814,7 @@ class Design:
 	_name:                  str
 	_topLevel:              Nullable[str]
 	_project:               Nullable['Project']
-	_directory:             Nullable[Path]
+	_directory:             pathlib_Path
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
 	_attributes:            Dict[Attribute, typing_Any]
@@ -825,7 +829,7 @@ class Design:
 		self,
 		name: str,
 		topLevel: str = None,
-		directory: Path = Path("."),
+		directory: pathlib_Path = pathlib_Path("."),
 		project: 'Project' = None,
 		vhdlVersion: VHDLVersion = None,
 		verilogVersion: VerilogVersion = None,
@@ -871,15 +875,15 @@ class Design:
 		self._project = value
 
 	@property
-	def Directory(self) -> Path:
+	def Directory(self) -> pathlib_Path:
 		return self._directory
 
 	@Directory.setter
-	def Directory(self, value: Path) -> None:
+	def Directory(self, value: pathlib_Path) -> None:
 		self._directory = value
 
 	@property
-	def ResolvedPath(self) -> Path:
+	def ResolvedPath(self) -> pathlib_Path:
 		if self._directory.is_absolute():
 			return self._directory.resolve()
 		elif self._project is not None:
@@ -888,7 +892,7 @@ class Design:
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(Path.cwd())
+				return path.relative_to(pathlib_Path.cwd())
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -1029,7 +1033,7 @@ class Project:
 	"""
 
 	_name:            str
-	_rootDirectory:   Nullable[Path]
+	_rootDirectory:   pathlib_Path
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
 	_attributes:      Dict[Attribute, typing_Any]
@@ -1041,7 +1045,7 @@ class Project:
 	def __init__(
 		self,
 		name: str,
-		rootDirectory: Path = Path("."),
+		rootDirectory: pathlib_Path = pathlib_Path("."),
 		vhdlVersion: VHDLVersion = None,
 		verilogVersion: VerilogVersion = None,
 		svVersion: SystemVerilogVersion = None
@@ -1060,20 +1064,20 @@ class Project:
 		return self._name
 
 	@property
-	def RootDirectory(self) -> Path:
+	def RootDirectory(self) -> pathlib_Path:
 		return self._rootDirectory
 
 	@RootDirectory.setter
-	def RootDirectory(self, value: Path) -> None:
+	def RootDirectory(self, value: pathlib_Path) -> None:
 		self._rootDirectory = value
 
 	@property
-	def ResolvedPath(self) -> Path:
+	def ResolvedPath(self) -> pathlib_Path:
 		path = self._rootDirectory.resolve()
 		if self._rootDirectory.is_absolute():
 			return path
 		else:
-			return path.relative_to(Path.cwd())
+			return path.relative_to(pathlib_Path.cwd())
 
 	# TODO: return generator with another method
 	@property
