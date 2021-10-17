@@ -42,6 +42,13 @@ from pydecor import export
 __version__ = "0.1.1"
 
 
+@export
+class Attribute:
+	KEY: str
+	VALUE_TYPE: typing_Any
+
+
+@export
 class FileType(type):
 	"""
 	A :term:`meta-class` to construct *FileType* classes.
@@ -87,11 +94,12 @@ class File(metaclass=FileType):
 	:arg fileSet: Fileset the file is associated with.
 	"""
 
-	_path:     Path
-	_fileType: 'FileType'
-	_project:  Nullable['Project']
-	_design:   Nullable['Design']
-	_fileSet:  Nullable['FileSet']
+	_path:       Path
+	_fileType:   'FileType'
+	_project:    Nullable['Project']
+	_design:     Nullable['Design']
+	_fileSet:    Nullable['FileSet']
+	_attributes: Dict[Attribute, typing_Any] = {}
 
 	def __init__(
 		self,
@@ -182,6 +190,16 @@ class File(metaclass=FileType):
 	def FileSet(self, value: 'FileSet') -> None:
 		self._fileSet = value
 		value._files.append(self)
+
+	def __getitem__(self, key: Attribute):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key: Attribute, value: typing_Any):
+		x = key.VALUE_TYPE
+		self._attributes[key] = value
 
 
 FileTypes = File
@@ -293,6 +311,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	@VHDLLibrary.setter
 	def VHDLLibrary(self, value: 'VHDLLibrary') -> None:
 		self._vhdlLibrary = value
+		value._files.append(self)
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
@@ -449,24 +468,25 @@ class FileSet:
 	:arg svVersion:       Default SystemVerilog version for files in this fileset, if not specified for the file itself.
 	"""
 
-	_name:        str
-	_project:     Nullable['Project']
-	_design:      Nullable['Design']
-	_directory:   Nullable[Path]
-	_parent:      Nullable['FileSet']
-	_fileSets:    Dict[str, 'FileSet']
-	_files:       List[File]
-
+	_name:            str
+	_topLevel:        Nullable[str]
+	_project:         Nullable['Project']
+	_design:          Nullable['Design']
+	_directory:       Nullable[Path]
+	_parent:          Nullable['FileSet']
+	_fileSets:        Dict[str, 'FileSet']
+	_files:           List[File]
+	_attributes:      Dict[Attribute, typing_Any]
+	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
 	_svVersion:       SystemVerilogVersion
 
-	# TODO: link parent fileset for relative path calculations
-
 	def __init__(
 		self,
 		name: str,
+		topLevel: str = None,
 		directory: Path = Path("."),
 		project: 'Project' = None,
 		design: 'Design' = None,
@@ -477,6 +497,7 @@ class FileSet:
 		svVersion: SystemVerilogVersion = None
 	):
 		self._name =      name
+		self._topLevel =  topLevel
 		if project is not None:
 			self._project = project
 			self._design =  design
@@ -494,6 +515,9 @@ class FileSet:
 		if design is not None:
 			design._fileSets[name] = self
 
+		self._attributes =      {}
+		self._vhdlLibraries =   {}
+
 		# TODO: handle if vhdlLibrary is a string
 		self._vhdlLibrary =     vhdlLibrary
 		self._vhdlVersion =     vhdlVersion
@@ -503,6 +527,18 @@ class FileSet:
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def TopLevel(self) -> str:
+		return self._topLevel
+
+	@TopLevel.setter
+	def TopLevel(self, value: str) -> None:
+		self._topLevel = value
 
 	@property
 	def Project(self) -> Nullable['Project']:
@@ -592,6 +628,23 @@ class FileSet:
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
+
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
+
+	def GetOrCreateVHDLLibrary(self, name):
+		if name in self._vhdlLibraries:
+			return self._vhdlLibraries[name]
+		else:
+			library = VHDLLibrary(name, design=self._design, vhdlVersion=self._vhdlVersion)
+			self._vhdlLibraries[name] = library
+			return library
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
@@ -755,10 +808,13 @@ class Design:
 	"""
 
 	_name:                  str
+	_topLevel:              Nullable[str]
 	_project:               Nullable['Project']
 	_directory:             Nullable[Path]
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
+	_attributes:            Dict[Attribute, typing_Any]
+
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
 	_verilogVersion:        VerilogVersion
@@ -768,6 +824,7 @@ class Design:
 	def __init__(
 		self,
 		name: str,
+		topLevel: str = None,
 		directory: Path = Path("."),
 		project: 'Project' = None,
 		vhdlVersion: VHDLVersion = None,
@@ -775,12 +832,14 @@ class Design:
 		svVersion: SystemVerilogVersion = None
 	):
 		self._name =                  name
+		self._topLevel =              topLevel
 		self._project =               project
 		if project is not None:
 			project._designs[name] = self
 		self._directory =             directory
 		self._fileSets =              {}
 		self._defaultFileSet =        FileSet("default", project=project, design=self)
+		self._attributes =            {}
 		self._vhdlLibraries =         {}
 		self._vhdlVersion =           vhdlVersion
 		self._verilogVersion =        verilogVersion
@@ -790,6 +849,18 @@ class Design:
 	@property
 	def Name(self) -> str:
 		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def TopLevel(self) -> str:
+		return self._topLevel
+
+	@TopLevel.setter
+	def TopLevel(self, value: str) -> None:
+		self._topLevel = value
 
 	@property
 	def Project(self) -> Nullable['Project']:
@@ -841,9 +912,6 @@ class Design:
 		else:
 			raise ValueError("Unsupported parameter type for 'value'.")
 
-	def __getitem__(self, name: str):
-		return self._fileSets[name]
-
 	# TODO: return generator with another method
 	@property
 	def FileSets(self) -> Dict[str, FileSet]:
@@ -865,6 +933,15 @@ class Design:
 
 			for file in fileSet.Files(fileType):
 				yield file
+
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
 
 	@property
 	def VHDLLibraries(self) -> List[VHDLLibrary]:
@@ -955,6 +1032,8 @@ class Project:
 	_rootDirectory:   Nullable[Path]
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
+	_attributes:      Dict[Attribute, typing_Any]
+
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
 	_svVersion:       SystemVerilogVersion
@@ -971,6 +1050,7 @@ class Project:
 		self._rootDirectory =   rootDirectory
 		self._designs =         {}
 		self._defaultDesign =   Design("default", project=self)
+		self._attributes =      {}
 		self._vhdlVersion =     vhdlVersion
 		self._verilogVersion =  verilogVersion
 		self._svVersion =       svVersion
@@ -995,9 +1075,6 @@ class Project:
 		else:
 			return path.relative_to(Path.cwd())
 
-	def __getitem__(self, name: str):
-		return self._designs[name]
-
 	# TODO: return generator with another method
 	@property
 	def Designs(self) -> Dict[str, Design]:
@@ -1006,6 +1083,15 @@ class Project:
 	@property
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
+
+	def __getitem__(self, key):
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return self._fileSet[key]
+
+	def __setitem__(self, key, value):
+		self._attributes[key] = value
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
