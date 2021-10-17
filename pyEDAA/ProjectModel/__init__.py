@@ -32,7 +32,7 @@
 # ============================================================================
 #
 from pathlib import Path as pathlib_Path
-from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
+from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
 from pySVModel import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
@@ -46,6 +46,17 @@ __version__ = "0.2.0"
 class Attribute:
 	KEY: str
 	VALUE_TYPE: typing_Any
+
+	@staticmethod
+	def resolve(obj: typing_Any, key: Type['Attribute']):
+		if isinstance(obj, File):
+			return obj._fileSet[key]
+		elif isinstance(obj, FileSet):
+			return obj._design[key]
+		elif isinstance(obj, Design):
+			return obj._project[key]
+		else:
+			raise Exception("Resolution error")
 
 
 @export
@@ -100,7 +111,7 @@ class File(metaclass=FileType):
 	_project:    Nullable['Project']
 	_design:     Nullable['Design']
 	_fileSet:    Nullable['FileSet']
-	_attributes: Dict[Attribute, typing_Any] = {}
+	_attributes: Dict[Type[Attribute], typing_Any]
 
 	def __init__(
 		self,
@@ -132,6 +143,12 @@ class File(metaclass=FileType):
 			self._project = None
 			self._design =  None
 			self._fileSet = None
+
+		self._attributes = {}
+		self._registerAttributes()
+
+	def _registerAttributes(self):
+		pass
 
 	@property
 	def FileType(self) -> 'FileType':
@@ -192,13 +209,16 @@ class File(metaclass=FileType):
 		self._fileSet = value
 		value._files.append(self)
 
-	def __getitem__(self, key: Attribute):
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key: Attribute, value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		x = key.VALUE_TYPE
 		self._attributes[key] = value
 
@@ -477,7 +497,7 @@ class FileSet:
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
-	_attributes:      Dict[Attribute, typing_Any]
+	_attributes:      Dict[Type[Attribute], typing_Any]
 	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
@@ -631,13 +651,16 @@ class FileSet:
 			self._files.append(file)
 			file._fileSet = self
 
-	def __getitem__(self, key):
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	def GetOrCreateVHDLLibrary(self, name):
@@ -817,7 +840,7 @@ class Design:
 	_directory:             pathlib_Path
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
-	_attributes:            Dict[Attribute, typing_Any]
+	_attributes:            Dict[Type[Attribute], typing_Any]
 
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
@@ -938,13 +961,16 @@ class Design:
 			for file in fileSet.Files(fileType):
 				yield file
 
-	def __getitem__(self, key):
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	@property
@@ -1036,7 +1062,7 @@ class Project:
 	_rootDirectory:   pathlib_Path
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
-	_attributes:      Dict[Attribute, typing_Any]
+	_attributes:      Dict[Type[Attribute], typing_Any]
 
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
@@ -1088,13 +1114,16 @@ class Project:
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
 
-	def __getitem__(self, key):
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	@property

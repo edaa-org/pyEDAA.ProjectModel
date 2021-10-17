@@ -48,28 +48,36 @@ class UsedInAttribute(Attribute):
 	KEY = "UsedIn"
 	VALUE_TYPE = Iterable[str]
 
-	def __init__(self):
-		super().__init__()
-
 
 @export
 class File(Model_File):
 	pass
 
 
+class VivadoFileMixIn:
+	def _registerAttributes(self):
+		self._attributes[UsedInAttribute] = []
+
+
 @export
-class ConstraintFile(Model_ConstraintFile):
-	pass
+class ConstraintFile(Model_ConstraintFile, VivadoFileMixIn):
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VerilogSourceFile(Model_VerilogSourceFile):
-	pass
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VHDLSourceFile(Model_VHDLSourceFile):
-	pass
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
@@ -129,7 +137,7 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
-		usedInAttr = []
+		usedInAttr = vhdlFile[UsedInAttribute]
 
 		for childNode in fileNode.childNodes:
 			if childNode.nodeType == Node.ELEMENT_NODE and childNode.tagName == "FileInfo":
@@ -145,8 +153,6 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 							vhdlFile.VHDLLibrary = fileset.GetOrCreateVHDLLibrary(libraryName)
 						elif fileAttribute.getAttribute("Val") == "UsedIn":
 							usedInAttr.append(fileAttribute.getAttribute("Val"))
-
-		vhdlFile[UsedInAttribute] = usedInAttr
 
 	def _ParseDefaultFile(self, _, path, fileset):
 		File(path, fileSet=fileset)
