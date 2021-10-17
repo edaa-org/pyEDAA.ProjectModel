@@ -43,16 +43,34 @@ if __name__ == "__main__": # pragma: no cover
 class FileSets(TestCase):
 	def test_Parsing(self):
 		xprPath = Path.cwd() / "tests/VivadoProject/StopWatch/project/StopWatch.xpr"
-		print()
-		print(f"{xprPath}")
+		# print()
+		# print(f"{xprPath}")
 		xprFile = VivadoProjectFile(xprPath)
 		xprFile.Parse()
 
 		project = xprFile.ProjectModel
-		print(f"Project: {project.Name}")
-		for designName, design in project.Designs.items():
-			print(f"  Design: {designName}")
-			for fileSetName, fileSet in design.FileSets.items():
-				print(f"    FileSet: {fileSetName}")
-				for file in fileSet.Files():
-					print(f"        {file.ResolvedPath}")
+
+		self.assertEqual("StopWatch", project.Name)
+
+		designs = [d for d in project.Designs.values()]
+		self.assertEqual(1, len(designs))
+
+		design = designs[0]
+		self.assertEqual("default", design.Name)
+		self.assertIs(project.DefaultDesign, design)
+
+		expectedFilsesetNames = (
+			"default", "src_Encoder", "src_Display", "src_StopWatch", "const_Encoder", "const_Display",	"const_StopWatch",
+			"sim_StopWatch", "utils_1"
+		)
+		filesets = [fs for fs in design.FileSets.keys()]
+		self.assertEqual(len(expectedFilsesetNames), len(filesets))
+		self.assertSequenceEqual(expectedFilsesetNames,	filesets)
+
+		# print(f"Project: {project.Name}")
+		# for designName, design in project.Designs.items():
+		# 	print(f"  Design: {designName}")
+		# 	for fileSetName, fileSet in design.FileSets.items():
+		# 		print(f"    FileSet: {fileSetName}")
+		# 		for file in fileSet.Files():
+		# 			print(f"        {file.ResolvedPath}")

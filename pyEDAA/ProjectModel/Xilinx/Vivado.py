@@ -36,7 +36,7 @@ from xml.dom import minidom, Node
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 
-from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, File, Attribute
+from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute
 from pyEDAA.ProjectModel import File as Model_File
 from pyEDAA.ProjectModel import ConstraintFile as Model_ConstraintFile
 from pyEDAA.ProjectModel import VerilogSourceFile as Model_VerilogSourceFile
