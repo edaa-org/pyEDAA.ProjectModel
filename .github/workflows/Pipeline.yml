@@ -252,6 +252,7 @@ jobs:
 
     if: startsWith(github.ref, 'refs/tags')
     needs:
+      - Release
       - Package
 
     env:
