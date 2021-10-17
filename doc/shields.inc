@@ -74,21 +74,21 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Test+and+Coverage%22
 
 .. # Codacy - quality
-.. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/2286426d2b11417e90010427b7fed8e7?logo=codacy
+.. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=codacy
    :alt: Codacy - Quality
    :height: 22
    :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-codacy-quality| image:: https://raster.shields.io/codacy/grade/2286426d2b11417e90010427b7fed8e7?logo=codacy
+.. |SHIELD:png:ProjectModel-codacy-quality| image:: https://raster.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=codacy
    :alt: Codacy - Quality
    :height: 22
    :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
 
 .. # Codacy - coverage
-.. |SHIELD:svg:ProjectModel-codacy-coverage| image:: https://img.shields.io/codacy/coverage/2286426d2b11417e90010427b7fed8e7?logo=codacy
+.. |SHIELD:svg:ProjectModel-codacy-coverage| image:: https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
    :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-codacy-coverage| image:: https://raster.shields.io/codacy/coverage/2286426d2b11417e90010427b7fed8e7?logo=codacy
+.. |SHIELD:png:ProjectModel-codacy-coverage| image:: https://raster.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
    :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel

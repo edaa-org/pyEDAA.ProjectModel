@@ -1,12 +1,12 @@
-[![Sourcecode on GitHub](https://img.shields.io/badge/edaa-org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
-[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=GitHub&label=code%20license)](LICENSE.md)
+[![Sourcecode on GitHub](https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
+[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=Github&label=code%20license)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)  
 [![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Test%20and%20Coverage?label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Test+and+Coverage%22)
-[![Codacy - Quality](https://img.shields.io/codacy/grade/2286426d2b11417e90010427b7fed8e7?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
-[![Codacy - Coverage](https://img.shields.io/codacy/coverage/2286426d2b11417e90010427b7fed8e7?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
+[![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
+[![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
 [![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?logo=Codecov)](https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank)  
 [![GitHub Workflow Release Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Release?label=release&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Release%22)
@@ -31,19 +31,27 @@
 
 ## Examples
 
-
 ```python
 from pathlib import Path
 from pyEDAA.ProjectModel import Project, Design, FileSet, VHDLSourceFile
 
-projectPath = Path("temp/project")
-project = Project("project", rootDirectory=projectPath)
-design = Design("design", project=project)
-fileset = FileSet("uart", Path("src/uart"), design=design)
+print(f"Current working directory: {Path.cwd()}")
+projectDirectory = Path.cwd() / "../project"
+print(f"Project directory: {projectDirectory!s} - {projectDirectory.exists()}")
 
-for vhdlFilePath in fileset.ResolvedPath.glob("*.vhdl"):
-	vhdlFile = VHDLSourceFile(vhdlFilePath)
-	fileset.AddFile(vhdlFile)
+project = Project("myProject", rootDirectory=projectDirectory)
+designA = Design("designA", project=project, directory=Path("designA"))
+designAFileset = FileSet("srcA", design=designA)
+for vhdlFilePath in designAFileset.ResolvedPath.glob("*.vhdl"):
+	designAFileset.AddFile(VHDLSourceFile(vhdlFilePath))
+
+libFileset = FileSet("lib", Path("../lib"), design=designA)
+for vhdlFilePath in libFileset.ResolvedPath.glob("*.vhdl"):
+	libFileset.AddFile(VHDLSourceFile(vhdlFilePath))
+
+print(f"All VHDL files in {designA.Name}:")
+for file in designA.Files(fileType=VHDLSourceFile):
+	print(f"  {file.Path}")
 ```
 
 

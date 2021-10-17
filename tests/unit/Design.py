@@ -59,9 +59,11 @@ class Instantiate(TestCase):
 
 	def test_WithProject(self):
 		project = Project("project")
-		design = Design("design", project=project)
+		designName = "design"
+		design = Design(designName, project=project)
 
 		self.assertIs(project, design.Project)
+#		self.assertIs(design, project[designName])
 
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
@@ -93,11 +95,11 @@ class Properties(TestCase):
 		self.assertIs(directory, design.Directory)
 
 	def test_ResolveDirectory(self):
-		projectDirectoryPath = Path.cwd() / "temp/project"
-		designDirectory = "design"
+		projectDirectoryPath = Path.cwd() / "project"
+		designDirectory = "designA"
 
-		project = Project("project", projectDirectoryPath)
-		design = Design("design", Path(designDirectory), project=project)
+		project = Project("project", rootDirectory=projectDirectoryPath)
+		design = Design("design", directory=Path(designDirectory), project=project)
 
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 

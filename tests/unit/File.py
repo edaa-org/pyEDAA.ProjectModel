@@ -114,3 +114,31 @@ class Properties(TestCase):
 
 		self.assertIs(project, file.Project)
 		self.assertIs(design, file.Design)
+
+		files = [f for f in design.DefaultFileSet.Files()]
+		self.assertEqual(1, len(files))
+		self.assertIs(file, files[0])
+
+	def test_SetFileSetLater(self):
+		path = Path("example.vhdl")
+		fileset = FileSet("fileset")
+		file = File(path)
+
+		file.FileSet = fileset
+
+		self.assertIs(fileset, file.FileSet)
+
+		files = [f for f in fileset.Files()]
+		self.assertEqual(1, len(files))
+		self.assertIs(file, files[0])
+
+	def test_ResolveDirectory(self):
+		projectDirectoryPath = Path.cwd() / "project"
+		designDirectory = "designA"
+		filePath = "file_A1.vhdl"
+
+		project = Project("project", projectDirectoryPath)
+		design = Design("design", directory=Path(designDirectory), project=project)
+		file = File(Path(filePath), design=design)
+
+		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}/{filePath}", file.ResolvedPath.as_posix())
