@@ -43,8 +43,8 @@ if __name__ == "__main__": # pragma: no cover
 class FileSets(TestCase):
 	def test_Parsing(self):
 		xprPath = Path.cwd() / "tests/VivadoProject/StopWatch/project/StopWatch.xpr"
-		print()
-		print(f"{xprPath}")
+		# print()
+		# print(f"{xprPath}")
 		xprFile = VivadoProjectFile(xprPath)
 		xprFile.Parse()
 
@@ -67,10 +67,10 @@ class FileSets(TestCase):
 		self.assertEqual(len(expectedFilsesetNames), len(filesets))
 		self.assertSequenceEqual(expectedFilsesetNames,	filesets)
 
-		print(f"Project: {project.Name}")
-		for designName, design in project.Designs.items():
-			print(f"  Design: {designName}")
-			for fileSetName, fileSet in design.FileSets.items():
-				print(f"    FileSet: {fileSetName}")
-				for file in fileSet.Files():
-					print(f"        {file.ResolvedPath}")
+		# print(f"Project: {project.Name}")
+		# for designName, design in project.Designs.items():
+		# 	print(f"  Design: {designName}")
+		# 	for fileSetName, fileSet in design.FileSets.items():
+		# 		print(f"    FileSet: {fileSetName}")
+		# 		for file in fileSet.Files():
+		# 			print(f"        {file.ResolvedPath}")
