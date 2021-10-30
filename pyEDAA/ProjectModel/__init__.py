@@ -31,6 +31,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
@@ -168,7 +169,8 @@ class File(metaclass=FileType):
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -304,6 +306,11 @@ class NetlistFile(SourceFile):
 @export
 class EDIFNetlistFile(NetlistFile):
 	"""Netlist file in EDIF (Electronic Design Interchange Format)."""
+
+
+@export
+class TCLSourceFile(SourceFile, TCLContent):
+	"""A TCL source file."""
 
 
 @export
@@ -571,7 +578,14 @@ class FileSet:
 
 	@property
 	def Design(self) -> Nullable['Design']:
-		return self._design
+		if self._design is not None:
+			return self._design
+		elif self._parent is not None:
+			return self._parent.Design
+		else:
+			return None
+			# TODO: raise exception instead
+			# QUESTION: how to handle if design and parent is set?
 
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
@@ -598,6 +612,8 @@ class FileSet:
 				directory = self._parent.ResolvedPath
 			elif self._design is not None:
 				directory = self._design.ResolvedPath
+			elif self._project is not None:
+				directory = self._project.ResolvedPath
 			else:
 				# TODO: message and exception type
 				raise Exception("")
@@ -606,7 +622,8 @@ class FileSet:
 			if directory.is_absolute():
 				return directory
 			else:
-				return directory.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(directory, pathlib_Path.cwd()))
 
 	@property
 	def Parent(self) -> Nullable['FileSet']:
@@ -615,6 +632,9 @@ class FileSet:
 	@Parent.setter
 	def Parent(self, value: 'FileSet') -> None:
 		self._parent = value
+		value._fileSets[self._name] = self
+		# TODO: check it it already exists
+		# QUESTION: make an Add fileset method?
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
@@ -650,6 +670,13 @@ class FileSet:
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
+
+	def __len__(self):
+		fileCount = self._files.__len__()
+		for fileSet in self._fileSets:
+			fileCount += fileSet.__len__()
+
+		return fileCount
 
 	def __getitem__(self, key: Type[Attribute]):
 		if not issubclass(key, Attribute):
@@ -915,7 +942,8 @@ class Design:
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -960,6 +988,9 @@ class Design:
 
 			for file in fileSet.Files(fileType):
 				yield file
+
+	def __len__(self):
+		return self._fileSets.__len__()
 
 	def __getitem__(self, key: Type[Attribute]):
 		if not issubclass(key, Attribute):
@@ -1045,6 +1076,13 @@ class Design:
 		for file in files:
 			self.AddFile(file)
 
+	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary):
+		if vhdlLibrary.Name in self._vhdlLibraries:
+			if self._vhdlLibraries[vhdlLibrary.Name] is vhdlLibrary:
+				raise Exception(f"The VHDLLibrary '{vhdlLibrary.Name}' was already added to the design.")
+			else:
+				raise Exception(f"A VHDLLibrary with same name ('{vhdlLibrary.Name}') already exists for this design.")
+
 	def __str__(self):
 		return self._name
 
@@ -1103,7 +1141,8 @@ class Project:
 		if self._rootDirectory.is_absolute():
 			return path
 		else:
-			return path.relative_to(pathlib_Path.cwd())
+			# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+			return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 
 	# TODO: return generator with another method
 	@property
@@ -1113,6 +1152,9 @@ class Project:
 	@property
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
+
+	def __len__(self):
+		return self._designs.__len__()
 
 	def __getitem__(self, key: Type[Attribute]):
 		if not issubclass(key, Attribute):

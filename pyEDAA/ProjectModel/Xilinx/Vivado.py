@@ -36,7 +36,7 @@ from xml.dom import minidom, Node
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 
-from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute
+from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design
 from pyEDAA.ProjectModel import File as Model_File
 from pyEDAA.ProjectModel import ConstraintFile as Model_ConstraintFile
 from pyEDAA.ProjectModel import VerilogSourceFile as Model_VerilogSourceFile
@@ -85,6 +85,17 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	"""A Vivado project file (``*.xpr``)."""
 
 	_xprProject: Project
+
+	def __init__(
+		self,
+		path: Path,
+		project: Project = None,
+		design: Design = None,
+		fileSet: FileSet = None
+	):
+		super().__init__(path, project, design, fileSet)
+
+		self._xprProject = None
 
 	@property
 	def ProjectModel(self) -> Project:
