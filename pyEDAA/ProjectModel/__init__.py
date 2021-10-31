@@ -640,15 +640,18 @@ class FileSet:
 	def FileSets(self) -> Dict[str, 'FileSet']:
 		return self._fileSets
 
-	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, 'FileSet'] = None) -> Generator[File, None, None]:
-		if fileSet is None:
+	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[bool, str, 'FileSet'] = None) -> Generator[File, None, None]:
+		if fileSet is False:
+			for file in self._files:
+				if (file.FileType in fileType):
+					yield file
+		elif fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
 					yield file
 			for file in self._files:
 				if (file.FileType in fileType):
 					yield file
-
 		else:
 			if isinstance(fileSet, str):
 				fileSetName = fileSet
