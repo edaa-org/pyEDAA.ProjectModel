@@ -211,6 +211,25 @@ class File(metaclass=FileType):
 		self._fileSet = value
 		value._files.append(self)
 
+	def Validate(self):
+		if self._path is None:
+			raise Exception("Validation: File has no path.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: File '{self._path}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: File '{self._path}' (={path}) does not exist.")
+		if not path.is_file():
+			raise Exception(f"Validation: File '{self._path}' (={path}) is not a file.")
+
+		if self._fileSet is None:
+			raise Exception(f"Validation: File '{self._path}' has no fileset.")
+		if self._design is None:
+			raise Exception(f"Validation: File '{self._path}' has no design.")
+		if self._project is None:
+			raise Exception(f"Validation: File '{self._path}' has no project.")
+
 	def __getitem__(self, key: Type[Attribute]):
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
@@ -326,6 +345,18 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		# TODO: handle if vhdlLibrary is a string
 		self._vhdlLibrary = vhdlLibrary
 		self._vhdlVersion = vhdlVersion
+
+	def Validate(self):
+		super().Validate()
+
+		try:
+			_ = self.VHDLLibrary
+		except Exception as ex:
+			raise Exception(f"Validation: VHDLSourceFile '{self._path}' (={self.ResolvedPath}) has no VHDLLibrary assigned.") from ex
+		try:
+			_ = self.VHDLVersion
+		except Exception as ex:
+			raise Exception(f"Validation: VHDLSourceFile '{self._path}' (={self.ResolvedPath}) has no VHDLVersion assigned.") from ex
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
@@ -674,6 +705,31 @@ class FileSet:
 			self._files.append(file)
 			file._fileSet = self
 
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: FileSet has no name.")
+
+		if self._directory is None:
+			raise Exception(f"Validation: FileSet '{self._name}' has no directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: FileSet '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' is not a directory.")
+
+		if self._design is None:
+			raise Exception(f"Validation: FileSet '{self._path}' has no design.")
+		if self._project is None:
+			raise Exception(f"Validation: FileSet '{self._path}' has no project.")
+
+		for fileSet in self._fileSets.values():
+			fileSet.Validate()
+		for file in self._files:
+			file.Validate()
+
 	def __len__(self):
 		fileCount = self._files.__len__()
 		for fileSet in self._fileSets:
@@ -992,6 +1048,34 @@ class Design:
 			for file in fileSet.Files(fileType):
 				yield file
 
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: Design has no name.")
+
+		if self._directory is None:
+			raise Exception(f"Validation: Design '{self._name}' has no directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: Design '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: Design '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: Design '{self._name}'s directory '{path}' is not a directory.")
+
+		if len(self._fileSets) == 0:
+			raise Exception(f"Validation: Design '{self._name}' has no fileset.")
+		try:
+			if self._defaultFileSet is not self._fileSets[self._defaultFileSet.Name]:
+				raise Exception(f"Validation: Design '{self._name}'s default fileset is the same as listed in filesets.")
+		except KeyError as ex:
+			raise Exception(f"Validation: Design '{self._name}'s default fileset is not in list of filesets.") from ex
+		if self._project is None:
+			raise Exception(f"Validation: Design '{self._path}' has no project.")
+
+		for fileSet in self._fileSets.values():
+			fileSet.Validate()
+
 	def __len__(self):
 		return self._fileSets.__len__()
 
@@ -1155,6 +1239,32 @@ class Project:
 	@property
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
+
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: Project has no name.")
+
+		if self._rootDirectory is None:
+			raise Exception(f"Validation: Project '{self._name}' has no root directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: Project '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: Project '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: Project '{self._name}'s directory '{path}' is not a directory.")
+
+		if len(self._designs) == 0:
+			raise Exception(f"Validation: Project '{self._name}' has no design.")
+		try:
+			if self._defaultDesign is not self._designs[self._defaultDesign.Name]:
+				raise Exception(f"Validation: Project '{self._name}'s default design is the same as listed in designs.")
+		except KeyError as ex:
+			raise Exception(f"Validation: Project '{self._name}'s default design is not in list of designs.") from ex
+
+		for design in self._designs.values():
+			design.Validate()
 
 	def __len__(self):
 		return self._designs.__len__()

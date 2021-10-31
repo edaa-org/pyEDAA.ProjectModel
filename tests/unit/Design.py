@@ -137,3 +137,11 @@ class Properties(TestCase):
 		project.AddFile(file)
 
 		self.assertListEqual([file], [f for f in project.Files()])
+
+
+class Validate(TestCase):
+	def test_Design(self):
+		project = Project("project", rootDirectory=Path("tests/project"))
+		design = Design("design", directory=Path("designA"), project=project)
+
+		design.Validate()
