@@ -148,8 +148,6 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 			elif not isinstance(instruction, (OSVVMProjectFile.Empty, OSVVMProjectFile.Comment)):
 				raise Exception(f"Unknown instruction '{instruction.__class__.__name__}' in OSVVM project file '{self.ResolvedPath}'")
 
-
-
 	def _Parse(self):
 		path = self.ResolvedPath
 		if not path.exists():
