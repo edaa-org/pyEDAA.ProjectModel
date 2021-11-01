@@ -35,7 +35,7 @@ from unittest import TestCase
 from pyVHDLModel import VHDLVersion
 from pySVModel import VerilogVersion, SystemVerilogVersion
 
-from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes
+from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes, Project, Design
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -95,6 +95,15 @@ class VHDLFile(TestCase):
 		file = VHDLSourceFile(path, fileSet=fileset)
 
 		self.assertEqual(vhdlVersion, file.VHDLVersion)
+
+	def test_Validate(self):
+		project = Project("project", rootDirectory=Path("tests/project"), vhdlVersion=VHDLVersion.VHDL2019)
+		design = Design("design", directory=Path("designA"), project=project)
+		vhdlLibrary = VHDLLibrary("library", design=design)
+		fileSet = FileSet("fileset", vhdlLibrary=vhdlLibrary, design=design)
+		file = VHDLSourceFile(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		file.Validate()
 
 
 class VerilogFile(TestCase):

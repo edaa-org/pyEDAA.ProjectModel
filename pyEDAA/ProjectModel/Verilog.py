@@ -29,8 +29,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+from pydecor import export
+
 from pyEDAA.ProjectModel import WaveformExchangeFile
 
 
+@export
 class ValueChangeDumpFile(WaveformExchangeFile):
 	"""Verilog's waveform file (``*.vcd``) for exchanging value changes as defined by IEEE Std. 1364."""

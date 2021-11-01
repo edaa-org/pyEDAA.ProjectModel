@@ -36,7 +36,7 @@ from xml.dom import minidom, Node
 from pyVHDLModel import VHDLVersion
 from pydecor import export
 
-from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute
+from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design
 from pyEDAA.ProjectModel import File as Model_File
 from pyEDAA.ProjectModel import ConstraintFile as Model_ConstraintFile
 from pyEDAA.ProjectModel import VerilogSourceFile as Model_VerilogSourceFile
@@ -48,28 +48,36 @@ class UsedInAttribute(Attribute):
 	KEY = "UsedIn"
 	VALUE_TYPE = Iterable[str]
 
-	def __init__(self):
-		super().__init__()
-
 
 @export
 class File(Model_File):
 	pass
 
 
+class VivadoFileMixIn:
+	def _registerAttributes(self):
+		self._attributes[UsedInAttribute] = []
+
+
 @export
-class ConstraintFile(Model_ConstraintFile):
-	pass
+class ConstraintFile(Model_ConstraintFile, VivadoFileMixIn):
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VerilogSourceFile(Model_VerilogSourceFile):
-	pass
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VHDLSourceFile(Model_VHDLSourceFile):
-	pass
+	def _registerAttributes(self):
+		super()._registerAttributes()
+		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
@@ -77,6 +85,17 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	"""A Vivado project file (``*.xpr``)."""
 
 	_xprProject: Project
+
+	def __init__(
+		self,
+		path: Path,
+		project: Project = None,
+		design: Design = None,
+		fileSet: FileSet = None
+	):
+		super().__init__(path, project, design, fileSet)
+
+		self._xprProject = None
 
 	@property
 	def ProjectModel(self) -> Project:
@@ -129,7 +148,7 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def _ParseVHDLFile(self, fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
-		usedInAttr = []
+		usedInAttr = vhdlFile[UsedInAttribute]
 
 		for childNode in fileNode.childNodes:
 			if childNode.nodeType == Node.ELEMENT_NODE and childNode.tagName == "FileInfo":
@@ -145,8 +164,6 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 							vhdlFile.VHDLLibrary = fileset.GetOrCreateVHDLLibrary(libraryName)
 						elif fileAttribute.getAttribute("Val") == "UsedIn":
 							usedInAttr.append(fileAttribute.getAttribute("Val"))
-
-		vhdlFile[UsedInAttribute] = usedInAttr
 
 	def _ParseDefaultFile(self, _, path, fileset):
 		File(path, fileSet=fileset)
