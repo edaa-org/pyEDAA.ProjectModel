@@ -34,7 +34,7 @@ such a model, while supporting multiple input sources.
 1. The toplevel element is a `Project`, which contains one or multiple designs.
 2. A `Design` is a variant of a project and contains filesets.
 3. A `FileSet` contains files or further sub-filesets.
-4. A `File` represents a single file. E.g. source files, configuration files, constraint files
+4. A `File` represents a single file. E.g. source files, configuration files, constraint files.
 5. A `VHDLLibrary` represents a group of `VHDLSourceFile`s being compiled into the same VHDL library.
 
 ![img.png](doc/datamodel.png)
@@ -48,7 +48,7 @@ such a model, while supporting multiple input sources.
 * Designs, filesets and files can use absolute or relative paths.
   * `ResolvedPath` returns the resolved absolute path to an object.
 * Projects, designs, filesets and files can be validated (e.g. if the path exists).
-* Projects, designs, filesets and files can hav user-defined attributes.
+* Projects, designs, filesets and files can have user-defined attributes.
   * User-defined attributes are resolved bottom-up.
 
 
@@ -111,6 +111,7 @@ for file in designA.Files(fileType=VHDLSourceFile):
 ## Contributors
 * [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)
 * [Unai Martinez-Corral](https://github.com/umarcor)
+* [Stefan Unrein](https://github.com/stefanunrein)
 * [and more...](https://github.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors)
 
 
