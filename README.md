@@ -2,8 +2,7 @@
 [![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=Github&label=code%20license)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
-[![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)
-[![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)  
+[![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)  
 [![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22)
 [![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
 [![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
@@ -17,6 +16,9 @@
 [![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green)](LICENSE.md)
 [![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
 
+<!--
+[![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)
+-->
 
 # pyEDAA.ProjectModel
 
@@ -36,6 +38,18 @@ such a model, while supporting multiple input sources.
 5. A `VHDLLibrary` represents a group of `VHDLSourceFile`s being compiled into the same VHDL library.
 
 ![img.png](doc/datamodel.png)
+
+## Features
+
+* Construct a project model:  
+  * top-down (project &rarr; design &rarr; fileset &rarr; file) or
+  * bottom-up (file &rarr; fileset &rarr; design &rarr; project) or
+  * parsing a project file.
+* Designs, filesets and files can use absolute or relative paths.
+  * `ResolvedPath` returns the resolved absolute path to an object.
+* Projects, designs, filesets and files can be validated (e.g. if the path exists).
+* Projects, designs, filesets and files can hav user-defined attributes.
+  * User-defined attributes are resolved bottom-up.
 
 
 ## Project File Readers
