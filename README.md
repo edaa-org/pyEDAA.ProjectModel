@@ -4,29 +4,55 @@
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)  
-[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Test%20and%20Coverage?label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Test+and+Coverage%22)
+[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22)
 [![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
 [![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
 [![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?logo=Codecov)](https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank)  
-[![GitHub Workflow Release Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Release?label=release&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Release%22)
 [![PyPI](https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyEDAA.ProjectModel/)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
 [![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)
 [![Requires.io](https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel)](https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main)  
-[![GitHub Workflow - Documentation Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Documentation?label=documentation&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Documentation%22)
 [![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green)](LICENSE.md)
 [![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
 
+
 # pyEDAA.ProjectModel
 
-* abstract model of EDA tool projects
-* filesets, filetypes, ...
+This package provides a unified abstract project model for HDL designs and EDA tools.
+Third-party frameworks can derive own classes and implement additional logic to create
+a concrete project model for their tools.
 
+Frameworks consuming this model can build higher level features and services on top of
+such a model, while supporting multiple input sources.
+
+## Data Model
+
+1. The toplevel element is a `Project`, which contains one or multiple designs.
+2. A `Design` is a variant of a project and contains filesets.
+3. A `FileSet` contains files or further sub-filesets.
+4. A `File` represents a single file. E.g. source files, configuration files, constraint files
+5. A `VHDLLibrary` represents a group of `VHDLSourceFile`s being compiled into the same VHDL library.
+
+![img.png](doc/datamodel.png)
+
+
+## Project File Readers
+
+### OSVVM `*.pro` File Reader
+
+ProjectModel can read `*.pro` files and extract source files. Included `*.pro` files
+are represented as sub-filesets.
+
+### Xilinx Vivado `*.xpr` Reader
+
+ProjectModel can read `*.xpr` files and extract source, constraint and simulation
+files while preserving the fileset structure.
 
 ## Use Cases
-* *tbd*
+* Reading OSVVM's `*.pro` files.
+* Reading Xilinx Vivado's `*.xpr` files.
 
 
 ## Examples
