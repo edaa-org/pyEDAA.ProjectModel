@@ -62,6 +62,20 @@ News
 
 .. only:: html
 
+   Oct. 2021 - Reading ``*.xpr`` and ``*.pro`` Files
+   =================================================
+
+.. only:: latex
+
+   .. rubric:: Reading ``*.xpr`` and ``*.pro`` Files
+
+* Xilinx Vivado's ``*.xpr`` and OSVVM's ``*.pro`` files can now be read.
+* Filesets can be nested.
+* The dataset can be validated.
+
+
+.. only:: html
+
    Sep. 2021 - Extracted ProjectModel from pyIPCMI
    ===============================================
 
