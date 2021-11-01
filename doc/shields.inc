@@ -64,14 +64,14 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 
 .. # GHA test and coverage
-.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Test%20and%20Coverage?label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Test+and+Coverage%22
-.. |SHIELD:png:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Test%20and%20Coverage?label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
+.. |SHIELD:png:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Test+and+Coverage%22
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
 
 .. # Codacy - quality
 .. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=codacy
@@ -112,16 +112,6 @@
    :alt: Libraries.io SourceRank
    :height: 22
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank
-
-.. # GHA release
-.. |SHIELD:svg:ProjectModel-gha-release| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Release?label=release&logo=GitHub%20Actions&logoColor=FFFFFF
-   :alt: GitHub Workflow - Release Status
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Release%22
-.. |SHIELD:png:ProjectModel-gha-release| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Release?label=release&logo=GitHub%20Actions&logoColor=FFFFFF
-   :alt: GitHub Workflow - Release Status
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Release%22
 
 .. # PyPI tag
 .. |SHIELD:svg:ProjectModel-pypi-tag| image:: https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI
@@ -168,16 +158,6 @@
    :alt: Requires.io
    :height: 22
    :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main
-
-.. # GHA - documentation
-.. |SHIELD:svg:ProjectModel-gha-doc| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Documentation?label=Documentation&logo=GitHub%20Actions&logoColor=FFFFFF
-   :alt: GitHub Workflow - Documentation Status
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Documentation%22
-.. |SHIELD:png:ProjectModel-gha-doc| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Documentation?label=Documentation&logo=GitHub%20Actions&logoColor=FFFFFF
-   :alt: GitHub Workflow - Documentation Status
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Documentation%22
 
 .. # Documentation license
 .. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green
