@@ -72,11 +72,11 @@ class FileType(type):
 	FileTypes: Dict[str, 'FileType'] = {}     #: Dictionary of all classes of type :class:`FileType` or derived variants
 	Any: 'FileType'
 
-	def __init__(cls, name: str, bases: Tuple[type, ...], dict: Dict[str, typing_Any], **kwargs):
-		super().__init__(name, bases, dict, **kwargs)
+	def __init__(cls, name: str, bases: Tuple[type, ...], dictionary: Dict[str, typing_Any], **kwargs):
+		super().__init__(name, bases, dictionary, **kwargs)
 		cls.Any = cls
 
-	def __new__(cls, className, baseClasses, classMembers: dict):
+	def __new__(cls, className, baseClasses, classMembers: Dict):
 		fileType = super().__new__(cls, className, baseClasses, classMembers)
 		cls.FileTypes[className] = fileType
 		return fileType
@@ -153,14 +153,19 @@ class File(metaclass=FileType):
 
 	@property
 	def FileType(self) -> 'FileType':
+		"""Read-only property to return the file type of this file."""
 		return self._fileType
 
 	@property
 	def Path(self) -> pathlib_Path:
+		"""Read-only property returning the path of this file."""
 		return self._path
+
+	# TODO: setter?
 
 	@property
 	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this file."""
 		if self._path.is_absolute():
 			return self._path.resolve()
 		elif self._fileSet is not None:
@@ -177,6 +182,7 @@ class File(metaclass=FileType):
 
 	@property
 	def Project(self) -> Nullable['Project']:
+		"""Property setting or returning the project this file is used in."""
 		return self._project
 
 	@Project.setter
@@ -188,6 +194,7 @@ class File(metaclass=FileType):
 
 	@property
 	def Design(self) -> Nullable['Design']:
+		"""Property setting or returning the design this file is used in."""
 		return self._design
 
 	@Design.setter
@@ -204,6 +211,7 @@ class File(metaclass=FileType):
 
 	@property
 	def FileSet(self) -> Nullable['FileSet']:
+		"""Property setting or returning the fileset this file is used in."""
 		return self._fileSet
 
 	@FileSet.setter
@@ -212,6 +220,7 @@ class File(metaclass=FileType):
 		value._files.append(self)
 
 	def Validate(self):
+		"""Validate this file."""
 		if self._path is None:
 			raise Exception("Validation: File has no path.")
 		try:
@@ -231,6 +240,7 @@ class File(metaclass=FileType):
 			raise Exception(f"Validation: File '{self._path}' has no project.")
 
 	def __getitem__(self, key: Type[Attribute]):
+		"""Index access for returning attributes on this file."""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -240,6 +250,7 @@ class File(metaclass=FileType):
 			return key.resolve(self, key)
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+		"""Index access for setting attributes on this file."""
 		x = key.VALUE_TYPE
 		self._attributes[key] = value
 
@@ -334,7 +345,16 @@ class TCLSourceFile(SourceFile, TCLContent):
 
 @export
 class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
-	"""A VHDL source file (of any language version)."""
+	"""
+	A VHDL source file (of any language version).
+
+	:arg path:        Relative or absolute path to the file.
+	:arg vhdlLibrary: VHDLLibrary this VHDL source file is associated wih.
+	:arg vhdlVersion: VHDLVersion this VHDL source file is associated wih.
+	:arg project:     Project the file is associated with.
+	:arg design:      Design the file is associated with.
+	:arg fileSet:     Fileset the file is associated with.
+	"""
 
 	_vhdlLibrary: 'VHDLLibrary'
 	_vhdlVersion: VHDLVersion
@@ -347,6 +367,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		self._vhdlVersion = vhdlVersion
 
 	def Validate(self):
+		"""Validate this VHDL source file."""
 		super().Validate()
 
 		try:
@@ -360,6 +381,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
+		"""Property setting or returning the VHDL library this VHDL source file is used in."""
 		if self._vhdlLibrary is not None:
 			return self._vhdlLibrary
 		elif self._fileSet is not None:
@@ -374,6 +396,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
+		"""Property setting or returning the VHDL version this VHDL source file is used in."""
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
 		elif self._fileSet is not None:
@@ -399,6 +422,7 @@ class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@property
 	def VerilogVersion(self) -> VerilogVersion:
+		"""Property setting or returning the Verilog version this Verilog source file is used in."""
 		if self._verilogVersion is not None:
 			return self._verilogVersion
 		elif self._fileSet is not None:
@@ -424,6 +448,7 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@property
 	def SVVersion(self) -> SystemVerilogVersion:
+		"""Property setting or returning the SystemVerilog version this SystemVerilog source file is used in."""
 		if self._svVersion is not None:
 			return self._svVersion
 		elif self._fileSet is not None:
@@ -518,9 +543,11 @@ class FileSet:
 	fileset.
 
 	:arg name:            Name of this fileset.
+	:arg topLevel:        Name of the fileset's toplevel.
 	:arg directory:       Path of this fileset (absolute or relative to a parent fileset or design).
 	:arg project:         Project the file is associated with.
 	:arg design:          Design the file is associated with.
+	:arg parent:          Parent fileset if this fileset is nested.
 	:arg vhdlLibrary:     Default VHDL library for files in this fileset, if not specified for the file itself.
 	:arg vhdlVersion:     Default VHDL version for files in this fileset, if not specified for the file itself.
 	:arg verilogVersion:  Default Verilog version for files in this fileset, if not specified for the file itself.
@@ -585,6 +612,7 @@ class FileSet:
 
 	@property
 	def Name(self) -> str:
+		"""Property setting or returning the fileset's name."""
 		return self._name
 
 	@Name.setter
@@ -593,6 +621,7 @@ class FileSet:
 
 	@property
 	def TopLevel(self) -> str:
+		"""Property setting or returning the fileset's toplevel."""
 		return self._topLevel
 
 	@TopLevel.setter
@@ -601,6 +630,7 @@ class FileSet:
 
 	@property
 	def Project(self) -> Nullable['Project']:
+		"""Property setting or returning the project this fileset is used in."""
 		return self._project
 
 	@Project.setter
@@ -609,6 +639,7 @@ class FileSet:
 
 	@property
 	def Design(self) -> Nullable['Design']:
+		"""Property setting or returning the design this fileset is used in."""
 		if self._design is not None:
 			return self._design
 		elif self._parent is not None:
@@ -628,6 +659,7 @@ class FileSet:
 
 	@property
 	def Directory(self) -> pathlib_Path:
+		"""Property setting or returning the directory this fileset is located in."""
 		return self._directory
 
 	@Directory.setter
@@ -636,6 +668,7 @@ class FileSet:
 
 	@property
 	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this fileset."""
 		if self._directory.is_absolute():
 			return self._directory.resolve()
 		else:
@@ -658,6 +691,7 @@ class FileSet:
 
 	@property
 	def Parent(self) -> Nullable['FileSet']:
+		"""Property setting or returning the parent fileset this fileset is used in."""
 		return self._parent
 
 	@Parent.setter
@@ -669,9 +703,16 @@ class FileSet:
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
+		"""Read-only property returning the a dictionary of sub-filesets."""
 		return self._fileSets
 
 	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[bool, str, 'FileSet'] = None) -> Generator[File, None, None]:
+		"""
+		Method returning the files of this fileset.
+
+		:arg fileType: A filter for file types. Default: `Any`.
+		:arg fileSet:  Specifies how to handle sub-filesets.
+		"""
 		if fileSet is False:
 			for file in self._files:
 				if (file.FileType in fileType):
@@ -697,15 +738,26 @@ class FileSet:
 				yield file
 
 	def AddFile(self, file: File) -> None:
+		"""
+		Method to add a single file to this fileset.
+
+		:arg file: A file to add to this fileset.
+		"""
 		self._files.append(file)
 		file._fileSet = self
 
 	def AddFiles(self, files: Iterable[File]) -> None:
+		"""
+		Method to add a multiple files to this fileset.
+
+		:arg files: An iterable of files to add to the fileset.
+		"""
 		for file in files:
 			self._files.append(file)
 			file._fileSet = self
 
 	def Validate(self):
+		"""Validate this fileset."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: FileSet has no name.")
 
@@ -731,6 +783,7 @@ class FileSet:
 			file.Validate()
 
 	def __len__(self):
+		"""Returns number of files incl. the files in the sub-filesets."""
 		fileCount = self._files.__len__()
 		for fileSet in self._fileSets:
 			fileCount += fileSet.__len__()
@@ -738,6 +791,7 @@ class FileSet:
 		return fileCount
 
 	def __getitem__(self, key: Type[Attribute]):
+		"""Index access for returning attributes on this file."""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -747,6 +801,7 @@ class FileSet:
 			return key.resolve(self, key)
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+		"""Index access for setting attributes on this file."""
 		self._attributes[key] = value
 
 	def GetOrCreateVHDLLibrary(self, name):
@@ -759,6 +814,7 @@ class FileSet:
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
+		"""Property setting or returning the VHDL library of this fileset."""
 		if self._vhdlLibrary is not None:
 			return self._vhdlLibrary
 		elif self._parent is not None:
@@ -774,6 +830,7 @@ class FileSet:
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
+		"""Property setting or returning the VHDL version of this fileset."""
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
 		elif self._parent is not None:
@@ -789,6 +846,7 @@ class FileSet:
 
 	@property
 	def VerilogVersion(self) -> VerilogVersion:
+		"""Property setting or returning the Verilog version of this fileset."""
 		if self._verilogVersion is not None:
 			return self._verilogVersion
 		elif self._parent is not None:
@@ -804,6 +862,7 @@ class FileSet:
 
 	@property
 	def SVVersion(self) -> SystemVerilogVersion:
+		"""Property setting or returning the SystemVerilog version of this fileset."""
 		if self._svVersion is not None:
 			return self._svVersion
 		elif self._parent is not None:
@@ -818,6 +877,7 @@ class FileSet:
 		self._svVersion = value
 
 	def __str__(self):
+		"""Returns the fileset's name."""
 		return self._name
 
 
@@ -826,9 +886,10 @@ class VHDLLibrary:
 	"""
 	A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
 
-	:arg name:      The VHDL libraries' name.
-	:arg project:   Project the VHDL library is associated with.
-	:arg design:    Design the VHDL library is associated with.
+	:arg name:        The VHDL libraries' name.
+	:arg project:     Project the VHDL library is associated with.
+	:arg design:      Design the VHDL library is associated with.
+	:arg vhdlVersion: Default VHDL version for files in this VHDL library, if not specified for the file itself.
 	"""
 
 	_name:        str
@@ -863,6 +924,7 @@ class VHDLLibrary:
 
 	@property
 	def Project(self) -> Nullable['Project']:
+		"""Property setting or returning the project this VHDL library is used in."""
 		return self._project
 
 	@Project.setter
@@ -871,6 +933,7 @@ class VHDLLibrary:
 
 	@property
 	def Design(self) -> Nullable['Design']:
+		"""Property setting or returning the design this VHDL library is used in."""
 		return self._design
 
 	@Design.setter
@@ -886,11 +949,13 @@ class VHDLLibrary:
 
 	@property
 	def Files(self) -> Generator[File, None, None]:
+		"""Read-only property to return all files in this VHDL library."""
 		for file in self._files:
 			yield file
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
+		"""Property setting or returning the VHDL version of this VHDL library."""
 		if self._vhdlVersion is not None:
 			return self._vhdlVersion
 		elif self._design is not None:
@@ -903,6 +968,7 @@ class VHDLLibrary:
 		self._vhdlVersion = value
 
 	def __str__(self):
+		"""Returns the VHDL library's name."""
 		return self._name
 
 
