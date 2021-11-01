@@ -710,7 +710,7 @@ class FileSet:
 		"""
 		Method returning the files of this fileset.
 
-		:arg fileType: A filter for file types. Default: `Any`.
+		:arg fileType: A filter for file types. Default: ``Any``.
 		:arg fileSet:  Specifies how to handle sub-filesets.
 		"""
 		if fileSet is False:
@@ -981,9 +981,13 @@ class Design:
 	designs with VHDL source files, a independent `VHDLLibraries` overlay structure
 	exists.
 
-	:arg name:      The design's name.
-	:arg directory: Path of this design (absolute or relative to the project).
-	:arg project:   Project the design is associated with.
+	:arg name:            The design's name.
+	:arg topLevel:        Name of the design's toplevel.
+	:arg directory:       Path of this design (absolute or relative to the project).
+	:arg project:         Project the design is associated with.
+	:arg vhdlVersion:     Default VHDL version for files in this design, if not specified for the file itself.
+	:arg verilogVersion:  Default Verilog version for files in this design, if not specified for the file itself.
+	:arg svVersion:       Default SystemVerilog version for files in this design, if not specified for the file itself.
 	"""
 
 	_name:                  str
@@ -1027,6 +1031,7 @@ class Design:
 
 	@property
 	def Name(self) -> str:
+		"""Property setting or returning the design's name."""
 		return self._name
 
 	@Name.setter
@@ -1035,6 +1040,7 @@ class Design:
 
 	@property
 	def TopLevel(self) -> str:
+		"""Property setting or returning the fileset's toplevel."""
 		return self._topLevel
 
 	@TopLevel.setter
@@ -1043,6 +1049,7 @@ class Design:
 
 	@property
 	def Project(self) -> Nullable['Project']:
+		"""Property setting or returning the project this design is used in."""
 		return self._project
 
 	@Project.setter
@@ -1051,6 +1058,7 @@ class Design:
 
 	@property
 	def Directory(self) -> pathlib_Path:
+		"""Property setting or returning the directory this design is located in."""
 		return self._directory
 
 	@Directory.setter
@@ -1059,6 +1067,7 @@ class Design:
 
 	@property
 	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this fileset."""
 		if self._directory.is_absolute():
 			return self._directory.resolve()
 		elif self._project is not None:
@@ -1075,6 +1084,7 @@ class Design:
 
 	@property
 	def DefaultFileSet(self) -> FileSet:
+		"""Property setting or returning the default fileset of this design."""
 		return self._defaultFileSet
 
 	@DefaultFileSet.setter
@@ -1095,9 +1105,16 @@ class Design:
 	# TODO: return generator with another method
 	@property
 	def FileSets(self) -> Dict[str, FileSet]:
+		"""Read-only property returning the a dictionary of filesets."""
 		return self._fileSets
 
 	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, FileSet] = None) -> Generator[File, None, None]:
+		"""
+		Method returning the files of this design.
+
+		:arg fileType: A filter for file types. Default: ``Any``.
+		:arg fileSet:  Specifies if all files from all filesets (``fileSet=None``) are files from a single fileset are returned.
+		"""
 		if fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
@@ -1115,6 +1132,7 @@ class Design:
 				yield file
 
 	def Validate(self):
+		"""Validate this design."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Design has no name.")
 
@@ -1245,8 +1263,11 @@ class Project:
 	"""
 	A :term:`Project` represents a group of designs and the source files therein.
 
-	:arg name:          The project's name.
-	:arg rootDirectory: Base-path to the project.
+	:arg name:            The project's name.
+	:arg rootDirectory:   Base-path to the project.
+	:arg vhdlVersion:     Default VHDL version for files in this project, if not specified for the file itself.
+	:arg verilogVersion:  Default Verilog version for files in this project, if not specified for the file itself.
+	:arg svVersion:       Default SystemVerilog version for files in this project, if not specified for the file itself.
 	"""
 
 	_name:            str
@@ -1278,10 +1299,12 @@ class Project:
 
 	@property
 	def Name(self) -> str:
+		"""Property setting or returning the project's name."""
 		return self._name
 
 	@property
 	def RootDirectory(self) -> pathlib_Path:
+		"""Property setting or returning the root directory this project is located in."""
 		return self._rootDirectory
 
 	@RootDirectory.setter
@@ -1290,6 +1313,7 @@ class Project:
 
 	@property
 	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this fileset."""
 		path = self._rootDirectory.resolve()
 		if self._rootDirectory.is_absolute():
 			return path
@@ -1307,6 +1331,7 @@ class Project:
 		return self._defaultDesign
 
 	def Validate(self):
+		"""Validate this project."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Project has no name.")
 
