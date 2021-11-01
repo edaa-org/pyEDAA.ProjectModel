@@ -164,3 +164,10 @@ License
    Glossary
    genindex
    py-modindex
+
+.. toctree::
+   :caption: Reports
+   :hidden:
+
+   coverage/index
+   typing/index

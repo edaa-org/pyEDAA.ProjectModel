@@ -1,0 +1,2 @@
+Static Type Checking
+####################
