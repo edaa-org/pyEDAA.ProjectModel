@@ -158,16 +158,11 @@ License
    :caption: Appendix
    :hidden:
 
+   coverage/index
+   typing/index
    ChangeLog/index
    License
    Doc-License
    Glossary
    genindex
    py-modindex
-
-.. toctree::
-   :caption: Reports
-   :hidden:
-
-   coverage/index
-   typing/index

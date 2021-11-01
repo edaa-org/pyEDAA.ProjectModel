@@ -1,2 +1,2 @@
-Static Type Checking
-####################
+Static Type Checking Report
+###########################

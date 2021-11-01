@@ -1,2 +1,2 @@
-Coverage
-########
+Coverage Report
+###############
