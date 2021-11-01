@@ -106,3 +106,10 @@ class Properties(TestCase):
 		project = Project("project", projectDirectoryPath)
 
 		self.assertEqual(projectDirectoryPath.as_posix(), project.ResolvedPath.as_posix())
+
+
+class Validate(TestCase):
+	def test_Project(self):
+		project = Project("project", rootDirectory=Path("tests/project"))
+
+		project.Validate()

@@ -142,3 +142,13 @@ class Properties(TestCase):
 		file = File(Path(filePath), design=design)
 
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}/{filePath}", file.ResolvedPath.as_posix())
+
+
+class Validate(TestCase):
+	def test_File(self):
+		project = Project("project", rootDirectory=Path("tests/project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		file.Validate()

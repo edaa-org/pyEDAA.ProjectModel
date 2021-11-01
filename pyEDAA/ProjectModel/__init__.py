@@ -31,8 +31,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any
+from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
 from pySVModel import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
@@ -46,6 +47,17 @@ __version__ = "0.2.0"
 class Attribute:
 	KEY: str
 	VALUE_TYPE: typing_Any
+
+	@staticmethod
+	def resolve(obj: typing_Any, key: Type['Attribute']):
+		if isinstance(obj, File):
+			return obj._fileSet[key]
+		elif isinstance(obj, FileSet):
+			return obj._design[key]
+		elif isinstance(obj, Design):
+			return obj._project[key]
+		else:
+			raise Exception("Resolution error")
 
 
 @export
@@ -100,7 +112,7 @@ class File(metaclass=FileType):
 	_project:    Nullable['Project']
 	_design:     Nullable['Design']
 	_fileSet:    Nullable['FileSet']
-	_attributes: Dict[Attribute, typing_Any] = {}
+	_attributes: Dict[Type[Attribute], typing_Any]
 
 	def __init__(
 		self,
@@ -133,6 +145,12 @@ class File(metaclass=FileType):
 			self._design =  None
 			self._fileSet = None
 
+		self._attributes = {}
+		self._registerAttributes()
+
+	def _registerAttributes(self):
+		pass
+
 	@property
 	def FileType(self) -> 'FileType':
 		return self._fileType
@@ -151,7 +169,8 @@ class File(metaclass=FileType):
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -192,13 +211,35 @@ class File(metaclass=FileType):
 		self._fileSet = value
 		value._files.append(self)
 
-	def __getitem__(self, key: Attribute):
+	def Validate(self):
+		if self._path is None:
+			raise Exception("Validation: File has no path.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: File '{self._path}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: File '{self._path}' (={path}) does not exist.")
+		if not path.is_file():
+			raise Exception(f"Validation: File '{self._path}' (={path}) is not a file.")
+
+		if self._fileSet is None:
+			raise Exception(f"Validation: File '{self._path}' has no fileset.")
+		if self._design is None:
+			raise Exception(f"Validation: File '{self._path}' has no design.")
+		if self._project is None:
+			raise Exception(f"Validation: File '{self._path}' has no project.")
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key: Attribute, value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		x = key.VALUE_TYPE
 		self._attributes[key] = value
 
@@ -287,6 +328,11 @@ class EDIFNetlistFile(NetlistFile):
 
 
 @export
+class TCLSourceFile(SourceFile, TCLContent):
+	"""A TCL source file."""
+
+
+@export
 class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	"""A VHDL source file (of any language version)."""
 
@@ -299,6 +345,18 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		# TODO: handle if vhdlLibrary is a string
 		self._vhdlLibrary = vhdlLibrary
 		self._vhdlVersion = vhdlVersion
+
+	def Validate(self):
+		super().Validate()
+
+		try:
+			_ = self.VHDLLibrary
+		except Exception as ex:
+			raise Exception(f"Validation: VHDLSourceFile '{self._path}' (={self.ResolvedPath}) has no VHDLLibrary assigned.") from ex
+		try:
+			_ = self.VHDLVersion
+		except Exception as ex:
+			raise Exception(f"Validation: VHDLSourceFile '{self._path}' (={self.ResolvedPath}) has no VHDLVersion assigned.") from ex
 
 	@property
 	def VHDLLibrary(self) -> 'VHDLLibrary':
@@ -477,7 +535,7 @@ class FileSet:
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
-	_attributes:      Dict[Attribute, typing_Any]
+	_attributes:      Dict[Type[Attribute], typing_Any]
 	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
@@ -551,7 +609,14 @@ class FileSet:
 
 	@property
 	def Design(self) -> Nullable['Design']:
-		return self._design
+		if self._design is not None:
+			return self._design
+		elif self._parent is not None:
+			return self._parent.Design
+		else:
+			return None
+			# TODO: raise exception instead
+			# QUESTION: how to handle if design and parent is set?
 
 	@Design.setter
 	def Design(self, value: 'Design') -> None:
@@ -578,6 +643,8 @@ class FileSet:
 				directory = self._parent.ResolvedPath
 			elif self._design is not None:
 				directory = self._design.ResolvedPath
+			elif self._project is not None:
+				directory = self._project.ResolvedPath
 			else:
 				# TODO: message and exception type
 				raise Exception("")
@@ -586,7 +653,8 @@ class FileSet:
 			if directory.is_absolute():
 				return directory
 			else:
-				return directory.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(directory, pathlib_Path.cwd()))
 
 	@property
 	def Parent(self) -> Nullable['FileSet']:
@@ -595,20 +663,26 @@ class FileSet:
 	@Parent.setter
 	def Parent(self, value: 'FileSet') -> None:
 		self._parent = value
+		value._fileSets[self._name] = self
+		# TODO: check it it already exists
+		# QUESTION: make an Add fileset method?
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
 		return self._fileSets
 
-	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, 'FileSet'] = None) -> Generator[File, None, None]:
-		if fileSet is None:
+	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[bool, str, 'FileSet'] = None) -> Generator[File, None, None]:
+		if fileSet is False:
+			for file in self._files:
+				if (file.FileType in fileType):
+					yield file
+		elif fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
 					yield file
 			for file in self._files:
 				if (file.FileType in fileType):
 					yield file
-
 		else:
 			if isinstance(fileSet, str):
 				fileSetName = fileSet
@@ -631,13 +705,48 @@ class FileSet:
 			self._files.append(file)
 			file._fileSet = self
 
-	def __getitem__(self, key):
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: FileSet has no name.")
+
+		if self._directory is None:
+			raise Exception(f"Validation: FileSet '{self._name}' has no directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: FileSet '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' is not a directory.")
+
+		if self._design is None:
+			raise Exception(f"Validation: FileSet '{self._path}' has no design.")
+		if self._project is None:
+			raise Exception(f"Validation: FileSet '{self._path}' has no project.")
+
+		for fileSet in self._fileSets.values():
+			fileSet.Validate()
+		for file in self._files:
+			file.Validate()
+
+	def __len__(self):
+		fileCount = self._files.__len__()
+		for fileSet in self._fileSets:
+			fileCount += fileSet.__len__()
+
+		return fileCount
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	def GetOrCreateVHDLLibrary(self, name):
@@ -817,7 +926,7 @@ class Design:
 	_directory:             pathlib_Path
 	_fileSets:              Dict[str, FileSet]
 	_defaultFileSet:        Nullable[FileSet]
-	_attributes:            Dict[Attribute, typing_Any]
+	_attributes:            Dict[Type[Attribute], typing_Any]
 
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
@@ -892,7 +1001,8 @@ class Design:
 			if path.is_absolute():
 				return path
 			else:
-				return path.relative_to(pathlib_Path.cwd())
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 		else:
 			# TODO: message and exception type
 			raise Exception("")
@@ -938,13 +1048,47 @@ class Design:
 			for file in fileSet.Files(fileType):
 				yield file
 
-	def __getitem__(self, key):
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: Design has no name.")
+
+		if self._directory is None:
+			raise Exception(f"Validation: Design '{self._name}' has no directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: Design '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: Design '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: Design '{self._name}'s directory '{path}' is not a directory.")
+
+		if len(self._fileSets) == 0:
+			raise Exception(f"Validation: Design '{self._name}' has no fileset.")
+		try:
+			if self._defaultFileSet is not self._fileSets[self._defaultFileSet.Name]:
+				raise Exception(f"Validation: Design '{self._name}'s default fileset is the same as listed in filesets.")
+		except KeyError as ex:
+			raise Exception(f"Validation: Design '{self._name}'s default fileset is not in list of filesets.") from ex
+		if self._project is None:
+			raise Exception(f"Validation: Design '{self._path}' has no project.")
+
+		for fileSet in self._fileSets.values():
+			fileSet.Validate()
+
+	def __len__(self):
+		return self._fileSets.__len__()
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	@property
@@ -1019,6 +1163,13 @@ class Design:
 		for file in files:
 			self.AddFile(file)
 
+	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary):
+		if vhdlLibrary.Name in self._vhdlLibraries:
+			if self._vhdlLibraries[vhdlLibrary.Name] is vhdlLibrary:
+				raise Exception(f"The VHDLLibrary '{vhdlLibrary.Name}' was already added to the design.")
+			else:
+				raise Exception(f"A VHDLLibrary with same name ('{vhdlLibrary.Name}') already exists for this design.")
+
 	def __str__(self):
 		return self._name
 
@@ -1036,7 +1187,7 @@ class Project:
 	_rootDirectory:   pathlib_Path
 	_designs:         Dict[str, Design]
 	_defaultDesign:   Design
-	_attributes:      Dict[Attribute, typing_Any]
+	_attributes:      Dict[Type[Attribute], typing_Any]
 
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
@@ -1077,7 +1228,8 @@ class Project:
 		if self._rootDirectory.is_absolute():
 			return path
 		else:
-			return path.relative_to(pathlib_Path.cwd())
+			# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+			return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
 
 	# TODO: return generator with another method
 	@property
@@ -1088,13 +1240,45 @@ class Project:
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
 
-	def __getitem__(self, key):
+	def Validate(self):
+		if self._name is None or self._name == "":
+			raise Exception("Validation: Project has no name.")
+
+		if self._rootDirectory is None:
+			raise Exception(f"Validation: Project '{self._name}' has no root directory.")
+		try:
+			path = self.ResolvedPath
+		except Exception as ex:
+			raise Exception(f"Validation: Project '{self._name}' could not compute resolved path.") from ex
+		if not path.exists():
+			raise Exception(f"Validation: Project '{self._name}'s directory '{path}' does not exist.")
+		if not path.is_dir():
+			raise Exception(f"Validation: Project '{self._name}'s directory '{path}' is not a directory.")
+
+		if len(self._designs) == 0:
+			raise Exception(f"Validation: Project '{self._name}' has no design.")
+		try:
+			if self._defaultDesign is not self._designs[self._defaultDesign.Name]:
+				raise Exception(f"Validation: Project '{self._name}'s default design is the same as listed in designs.")
+		except KeyError as ex:
+			raise Exception(f"Validation: Project '{self._name}'s default design is not in list of designs.") from ex
+
+		for design in self._designs.values():
+			design.Validate()
+
+	def __len__(self):
+		return self._designs.__len__()
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return self._fileSet[key]
+			return key.resolve(self, key)
 
-	def __setitem__(self, key, value):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		self._attributes[key] = value
 
 	@property
