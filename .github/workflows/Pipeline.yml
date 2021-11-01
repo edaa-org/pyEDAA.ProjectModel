@@ -82,6 +82,7 @@ jobs:
       - name: Convert to HTML format
         run: |
           coverage html
+          rm htmlcov/.gitignore
 
       - name: 📊 Publish coverage at CodeCov
         continue-on-error: true
