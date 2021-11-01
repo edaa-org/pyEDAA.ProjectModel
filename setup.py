@@ -40,7 +40,7 @@ from setuptools import (
 gitHubNamespace =       "edaa-org"
 projectName =           "ProjectModel"
 projectNameWithPrefix = "pyEDAA." + projectName
-version =               "0.2.0"
+version =               "0.3.1"
 
 # Read README for upload to PyPI
 readmeFile = Path("README.md")
