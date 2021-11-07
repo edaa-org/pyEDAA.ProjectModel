@@ -20,7 +20,11 @@
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)
 -->
 
-# pyEDAA.ProjectModel
+<p align="center">
+  <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
+</p>
+
+# Main Goals
 
 This package provides a unified abstract project model for HDL designs and EDA tools.
 Third-party frameworks can derive own classes and implement additional logic to create
