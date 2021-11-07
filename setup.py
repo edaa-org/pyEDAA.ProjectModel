@@ -53,8 +53,8 @@ with requirementsFile.open("r") as file:
 	requirements = [line for line in file.readlines()]
 
 # Derive URLs
-sourceCodeURL =     "https://github.com/{namespace}/{projectName}".format(namespace=gitHubNamespace, projectName=projectName)
-documentationURL =  "https://{namespace}.github.io/{projectName}".format(namespace=gitHubNamespace, projectName=projectName)
+sourceCodeURL =     f"https://github.com/{gitHubNamespace}/{projectName}"
+documentationURL =  f"https://{gitHubNamespace}.github.io/{projectName}"
 
 # Assemble all package information
 setuptools_setup(
@@ -73,9 +73,9 @@ setuptools_setup(
 
 	url=sourceCodeURL,
 	project_urls={
-		'Documentation': documentationURL,
-		'Source Code':   sourceCodeURL,
-		'Issue Tracker': sourceCodeURL + "/issues"
+		'Documentation': f"{documentationURL}",
+		'Source Code':   f"{sourceCodeURL}",
+		'Issue Tracker': f"{sourceCodeURL}/issues"
 	},
 	# download_url="https://github.com/vhdl/pyVHDLModel/tarball/0.1.0",
 
@@ -87,6 +87,7 @@ setuptools_setup(
 		"Programming Language :: Python :: 3.7",
 		"Programming Language :: Python :: 3.8",
 		"Programming Language :: Python :: 3.9",
+		"Programming Language :: Python :: 3.10",
    "Development Status :: 4 - Beta",
 #		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
