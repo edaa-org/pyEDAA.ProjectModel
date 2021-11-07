@@ -114,28 +114,28 @@
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank
 
 .. # PyPI tag
-.. |SHIELD:svg:ProjectModel-pypi-tag| image:: https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:svg:ProjectModel-pypi-tag| image:: https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Tag
    :height: 22
    :target: https://pypi.org/project/pyEDAA.ProjectModel/
-.. |SHIELD:png:ProjectModel-pypi-tag| image:: https://raster.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:png:ProjectModel-pypi-tag| image:: https://raster.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Tag
    :height: 22
    :target: https://pypi.org/project/pyEDAA.ProjectModel/
 
 .. # PyPI project status
-.. |SHIELD:svg:ProjectModel-pypi-status| image:: https://img.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:svg:ProjectModel-pypi-status| image:: https://img.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Status
    :height: 22
-.. |SHIELD:png:ProjectModel-pypi-status| image:: https://raster.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:png:ProjectModel-pypi-status| image:: https://raster.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Status
    :height: 22
 
 .. # PyPI Python versions
-.. |SHIELD:svg:ProjectModel-pypi-python| image:: https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:svg:ProjectModel-pypi-python| image:: https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Python Version
    :height: 22
-.. |SHIELD:png:ProjectModel-pypi-python| image:: https://raster.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI
+.. |SHIELD:png:ProjectModel-pypi-python| image:: https://raster.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072
    :alt: PyPI - Python Version
    :height: 22
 

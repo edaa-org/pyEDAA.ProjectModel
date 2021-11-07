@@ -1,3 +1,7 @@
+<p align="center">
+  <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
+</p>
+
 [![Sourcecode on GitHub](https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
 [![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=Github&label=code%20license)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
@@ -11,18 +15,14 @@
 [![PyPI](https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyEDAA.ProjectModel/)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
-[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)
-[![Requires.io](https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel)](https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main)  
+[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)  
 [![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green)](LICENSE.md)
 [![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
 
 <!--
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)
+[![Requires.io](https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel)](https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main)
 -->
-
-<p align="center">
-  <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
-</p>
 
 # Main Goals
 
