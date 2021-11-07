@@ -4,6 +4,15 @@
 
    \part{Introduction}
 
+.. image:: _static/logo_on_light.svg
+   :height: 90 px
+   :align: center
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel
+
+.. raw:: html
+
+    <br>
+
 .. only:: html
 
    |  |SHIELD:svg:ProjectModel-github| |SHIELD:svg:ProjectModel-src-license| |SHIELD:svg:ProjectModel-tag| |SHIELD:svg:ProjectModel-release| |SHIELD:svg:ProjectModel-date| |SHIELD:svg:ProjectModel-lib-dep|
