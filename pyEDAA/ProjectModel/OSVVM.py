@@ -32,7 +32,7 @@
 from enum import Enum, unique
 from pathlib import Path
 
-from pydecor import export
+from pyTooling.Decorators import export
 from typing import Optional as Nullable, List
 
 from pyEDAA.ProjectModel import ProjectFile, TCLContent, Project, Design, FileSet, VHDLLibrary, VHDLSourceFile

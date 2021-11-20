@@ -36,8 +36,8 @@ from pathlib import Path as pathlib_Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
 from pySVModel import VerilogVersion, SystemVerilogVersion
+from pyTooling.Decorators import export
 from pyVHDLModel import VHDLVersion
-from pydecor import export
 
 
 __version__ = "0.4.0"
@@ -703,7 +703,7 @@ class FileSet:
 
 	@property
 	def FileSets(self) -> Dict[str, 'FileSet']:
-		"""Read-only property returning the a dictionary of sub-filesets."""
+		"""Read-only property returning the dictionary of sub-filesets."""
 		return self._fileSets
 
 	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[bool, str, 'FileSet'] = None) -> Generator[File, None, None]:
@@ -1105,7 +1105,7 @@ class Design:
 	# TODO: return generator with another method
 	@property
 	def FileSets(self) -> Dict[str, FileSet]:
-		"""Read-only property returning the a dictionary of filesets."""
+		"""Read-only property returning the dictionary of filesets."""
 		return self._fileSets
 
 	def Files(self, fileType: FileType = FileTypes.Any, fileSet: Union[str, FileSet] = None) -> Generator[File, None, None]:

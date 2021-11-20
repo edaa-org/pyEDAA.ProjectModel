@@ -34,7 +34,7 @@ from typing import Iterable
 
 from xml.dom import minidom, Node
 from pyVHDLModel import VHDLVersion
-from pydecor import export
+from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design
 from pyEDAA.ProjectModel import File as Model_File
