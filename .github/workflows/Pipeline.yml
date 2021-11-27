@@ -29,45 +29,13 @@ jobs:
       codacy_token: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
   StaticTypeCheck:
-    name: 👀 Check Static Typing using Python 3.10
-    runs-on: ubuntu-latest
-
-    env:
-      PYTHON: "3.10"
-      ARTIFACT: pyEDAA-ProjectModel-typing-html
-    outputs:
-      python: ${{ env.PYTHON }}
-      artifact: ${{ env.ARTIFACT }}
-
-    steps:
-      - name: ⏬ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 🐍 Setup Python ${{ env.PYTHON }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ env.PYTHON }}
-
-      - name: 🗂 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r tests/requirements.txt
-
-      - name: Check Static Typing
-        continue-on-error: true
-        run: |
-          pwd
-          mypy --html-report htmlmypy -m pyEDAA.ProjectModel
-
-      - name: 📤 Upload 'Static Typing Report' artifact
-        continue-on-error: true
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT }}
-          path: htmlmypy
-          if-no-files-found: error
-          retention-days: 1
-
+    uses: pyTooling/Actions/.github/workflows/StaticTypeCheck.yml@dev
+    needs:
+      - Params
+    with:
+      package: ${{ fromJson(needs.Params.outputs.params).package }}
+      pyver: ${{ fromJson(needs.Params.outputs.params).pyver }}
+      artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
 
   Release:
     name: 📝 Create 'Release Page' on GitHub
