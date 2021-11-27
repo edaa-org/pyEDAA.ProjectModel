@@ -1,6 +1,8 @@
 name: Unit Testing, Coverage Collection, Package, Release, Documentation and Publish
 
-on: [ push ]
+on: 
+  push:
+  workflow_dispatch:
 
 defaults:
   run:
