@@ -76,38 +76,12 @@ jobs:
       pyver: ${{ fromJson(needs.Params.outputs.params).pyver }}
 
   BuildTheDocs:
-    name: 📓 Run BuildTheDocs
-    runs-on: ubuntu-latest
+    uses: pyTooling/Actions/.github/workflows/BuildTheDocs.yml@dev
     needs:
+      - Params
       - VerifyDocs
-
-    env:
-      ARTIFACT: pyEDAA-ProjectModel-documentation
-    outputs:
-      artifact: ${{ env.ARTIFACT }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 🚢 Build container image 'vhdl/doc'
-        run: |
-          docker build -t edaa/doc - <<-EOF
-          FROM btdi/sphinx:featured
-          RUN apk add -U --no-cache graphviz
-          EOF
-
-      - name: 🛳️ Build documentation using container edaa/doc
-        uses: buildthedocs/btd@v0
-        with:
-          skip-deploy: true
-
-      - name: 📤 Upload 'documentation' artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: ${{ env.ARTIFACT }}
-          path: doc/_build/html
-          retention-days: 7
+    with:
+      artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.doc }}
 
   PublishToGitHubPages:
     name: 📚 Publish to GH-Pages
