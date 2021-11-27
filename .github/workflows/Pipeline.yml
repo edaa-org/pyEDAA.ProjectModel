@@ -17,69 +17,16 @@ jobs:
     uses: pyTooling/Actions/.github/workflows/UnitTesting.yml@dev
     with:
       TestReport: true
-      
+
   Coverage:
-    name: 📈 Collect Coverage Data using Python 3.10
-    runs-on: ubuntu-latest
-
-    env:
-      PYTHON: "3.10"
-      ARTIFACT: pyEDAA-ProjectModel-coverage-html
-    outputs:
-      python: ${{ env.PYTHON }}
-      artifact: ${{ env.ARTIFACT }}
-
-    steps:
-      - name: ⏬ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 🐍 Setup Python ${{ env.PYTHON }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ env.PYTHON }}
-
-      - name: 🗂 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r tests/requirements.txt
-
-      - name: Collect coverage
-        continue-on-error: true
-        run: |
-          python -m pytest -rA --cov=.. --cov-config=tests/.coveragerc tests/unit --color=yes
-
-      - name: Convert to cobertura format
-        run: |
-          coverage xml
-
-      - name: Convert to HTML format
-        run: |
-          coverage html
-          rm htmlcov/.gitignore
-
-      - name: 📊 Publish coverage at CodeCov
-        continue-on-error: true
-        uses: codecov/codecov-action@v1
-        with:
-          file: ./coverage.xml
-          flags: unittests
-          env_vars: PYTHON
-
-      - name: 📉 Publish coverage at Codacy
-        continue-on-error: true
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: ./coverage.xml
-
-      - name: 📤 Upload 'Coverage Report' artifact
-        continue-on-error: true
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT }}
-          path: htmlcov
-          if-no-files-found: error
-          retention-days: 1
+    uses: pyTooling/Actions/.github/workflows/CoverageCollection.yml@dev
+    needs:
+      - Params
+    with:
+      pyver: ${{ fromJson(needs.Params.outputs.params).pyver }}
+      artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.coverage }}
+    secrets:
+      codacy_token: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
   StaticTypeCheck:
     name: 👀 Check Static Typing using Python 3.10
