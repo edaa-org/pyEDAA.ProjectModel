@@ -8,6 +8,11 @@ defaults:
 
 jobs:
 
+  Params:
+    uses: pyTooling/Actions/.github/workflows/Params.yml@dev
+    with:
+      name: pyEDAA.ProjectModel
+
   UnitTesting:
     name: ${{ matrix.icon }} Unit Tests using Python ${{ matrix.python }}
     runs-on: ubuntu-latest
