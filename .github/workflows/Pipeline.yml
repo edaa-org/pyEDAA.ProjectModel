@@ -14,41 +14,7 @@ jobs:
       name: pyEDAA.ProjectModel
 
   UnitTesting:
-    name: ${{ matrix.icon }} Unit Tests using Python ${{ matrix.python }}
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-#          - {python: "3.6", icon: 🔴}  # until 23.12.2021
-          - {python: "3.7", icon: 🟠}  # until 27.06.2023
-          - {python: "3.8", icon: 🟡}  # until Oct. 2024
-          - {python: "3.9", icon: 🟢}  # until Oct. 2025
-          - {python: "3.10", icon: 🟢} # until Oct. 2026
-
-    env:
-      PYTHON: ${{ matrix.python }}
-    outputs:
-      python: ${{ env.PYTHON }}
-
-    steps:
-      - name: ⏬ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 🐍 Setup Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python }}
-
-      - name: 🔧 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r tests/requirements.txt
-
-      - name: ☑ Run unit tests
-        run: |
-          python -m pytest -rA tests/unit --color=yes
+    uses: pyTooling/Actions/.github/workflows/UnitTesting.yml@dev
 
   Coverage:
     name: 📈 Collect Coverage Data using Python 3.10
