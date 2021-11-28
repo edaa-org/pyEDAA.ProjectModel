@@ -4,11 +4,11 @@
    # percent encoding so that the URL is properly parsed.
 
 .. # Sourcecode link to GitHub
-.. |SHIELD:svg:ProjectModel-github| image:: https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131?longCache=true&style=flat-square&logo=github&longCache=true
+.. |SHIELD:svg:ProjectModel-github| image:: https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-github| image:: https://raster.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131?longCache=true&style=flat-square&logo=github&longCache=true
+.. |SHIELD:png:ProjectModel-github| image:: https://raster.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel
@@ -154,17 +154,17 @@
    :alt: Documentation License
    :height: 22
    :target: Doc-License.html
-.. |SHIELD:png:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square
    :alt: Documentation License
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/Doc-License.rst
 
 .. # GHPages - read now
-.. |SHIELD:svg:ProjectModel-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-ghp-doc| image:: https://img.shields.io/website?longCache=true&style=flat-square&label=edaa-org.github.io%2FpyEDAA.ProjectModel&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.ProjectModel%2Findex.html
    :alt: Documentation - Read Now!
    :height: 22
    :target: https://edaa-org.github.io/pyEDAA.ProjectModel/
-.. |SHIELD:png:ProjectModel-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-ghp-doc| image:: https://raster.shields.io/website?longCache=true&style=flat-square&label=edaa-org.github.io%2FpyEDAA.ProjectModel&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.ProjectModel%2Findex.html
    :alt: Documentation - Read Now!
    :height: 22
    :target: https://edaa-org.github.io/pyEDAA.ProjectModel/
