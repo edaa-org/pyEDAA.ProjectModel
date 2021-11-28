@@ -153,11 +153,11 @@
 .. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
-   :target: Doc-License.html
+   :target: License.html
 .. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/Doc-License.rst
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/master/doc/License.rst
 
 .. # GHPages - read now
 .. |SHIELD:svg:ProjectModel-ghp-doc| image:: https://img.shields.io/website?longCache=true&style=flat-square&label=edaa-org.github.io%2FpyEDAA.ProjectModel&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.ProjectModel%2Findex.html
