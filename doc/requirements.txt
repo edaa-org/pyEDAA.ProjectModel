@@ -1,15 +1,8 @@
 -r ../requirements.txt
-# Enforce latest version on ReadTheDocs
 sphinx>=4.2.0
 
 # Sphinx Extenstions
-#sphinx.ext.coverage
-#sphinxcontrib-actdiag>=0.8.5
 sphinxcontrib-mermaid>=0.7.1
-#sphinxcontrib-seqdiag>=0.8.5
-#sphinxcontrib-textstyle>=0.2.1
-#sphinxcontrib-spelling>=2.2.0
 autoapi
 sphinx_fontawesome>=0.0.6
 sphinx_autodoc_typehints>=1.12.0
-# changelog>=0.3.5
