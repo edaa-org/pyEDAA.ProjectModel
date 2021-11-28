@@ -131,6 +131,12 @@ License
 
 
 .. toctree::
+   :hidden:
+
+   Used as a layer of EDA² ➚ <https://edaa-org.github.io/>
+
+
+.. toctree::
    :caption: Introduction
    :hidden:
 
