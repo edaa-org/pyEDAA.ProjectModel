@@ -2,26 +2,26 @@
   <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
 </p>
 
-[![Sourcecode on GitHub](https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131.svg?logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
-[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?logo=Github&label=code%20license)](LICENSE.md)
-[![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
-[![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
-[![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?logo=GitHub&)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)  
-[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22)
-[![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
-[![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
-[![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?logo=Codecov)](https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel)
+[![Sourcecode on GitHub](https://img.shields.io/badge/edaa--org-pyEDAA.ProjectModel-323131.svg?longCache=true&style=flat-square&logo=github&longCache=true)](https://github.com/edaa-org/pyEDAA.ProjectModel)
+[![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Github&label=code%20license)](LICENSE.md)
+[![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/tags)
+[![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest)
+[![GitHub release date](https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/releases)  
+[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?longCache=true&style=flat-square&label=build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22)
+[![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
+[![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
+[![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Codecov)](https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank)  
-[![PyPI](https://img.shields.io/pypi/v/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyEDAA.ProjectModel/)
-![PyPI - Status](https://img.shields.io/pypi/status/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?logo=PyPI&logoColor=FBE072)
-[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)  
-[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green)](LICENSE.md)
-[![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
+[![PyPI](https://img.shields.io/pypi/v/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyEDAA.ProjectModel/)
+![PyPI - Status](https://img.shields.io/pypi/status/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)
+[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)  
+[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square)](LICENSE.md)
+[![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet?longCache=true&style=flat-square)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
 
 <!--
-[![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)
-[![Requires.io](https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel)](https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main)
+[![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub)](https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents)
+[![Requires.io](https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square)](https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main)
 -->
 
 # Main Goals
