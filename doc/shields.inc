@@ -33,16 +33,6 @@
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/tags
 
-.. # GitHub release
-.. |SHIELD:svg:ProjectModel-release| image:: https://img.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases
-   :alt: GitHub release (latest SemVer incl. including pre-releases
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest
-.. |SHIELD:png:ProjectModel-release| image:: https://raster.shields.io/github/v/release/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases
-   :alt: GitHub release (latest SemVer incl. including pre-releases
-   :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/releases/latest
-
 .. # GitHub release date
 .. |SHIELD:svg:ProjectModel-date| image:: https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub
    :alt: GitHub release date
