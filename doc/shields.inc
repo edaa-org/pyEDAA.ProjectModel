@@ -14,11 +14,11 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel
 
 .. # Sourcecode license
-.. |SHIELD:svg:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code%20license
+.. |SHIELD:svg:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code
    :alt: Code license
    :height: 22
    :target: Code-License.html
-.. |SHIELD:png:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code%20license
+.. |SHIELD:png:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code
    :alt: Code license
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/LICENSE.md
@@ -150,11 +150,11 @@
    :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main
 
 .. # Documentation license
-.. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
+.. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
    :target: License.html
-.. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
+.. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/master/doc/License.rst
