@@ -54,11 +54,11 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 
 .. # GHA test and coverage
-.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish/master?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
-.. |SHIELD:png:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:png:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish/master?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
