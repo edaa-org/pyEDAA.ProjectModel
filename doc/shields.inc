@@ -14,11 +14,11 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel
 
 .. # Sourcecode license
-.. |SHIELD:svg:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&label=code%20license
+.. |SHIELD:svg:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code%20license
    :alt: Code license
    :height: 22
    :target: Code-License.html
-.. |SHIELD:png:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&label=code%20license
+.. |SHIELD:png:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code%20license
    :alt: Code license
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/LICENSE.md
@@ -44,11 +44,11 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/releases
 
 .. # GitHub/Libraries dependent projects
-.. |SHIELD:svg:ProjectModel-lib-dep| image:: https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-lib-dep| image:: https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Dependent repos (via libraries.io)
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
-.. |SHIELD:png:ProjectModel-lib-dep| image:: https://raster.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-lib-dep| image:: https://raster.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Dependent repos (via libraries.io)
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
@@ -84,21 +84,21 @@
    :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
 
 .. # Codecov - coverage
-.. |SHIELD:svg:ProjectModel-codecov-coverage| image:: https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-codecov-coverage| image:: https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Codecov
    :alt: Codecov - Branch Coverage
    :height: 22
    :target: https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-codecov-coverage| image:: https://raster.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-codecov-coverage| image:: https://raster.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Codecov
    :alt: Codecov - Branch Coverage
    :height: 22
    :target: https://codecov.io/gh/edaa-org/pyEDAA.ProjectModel
 
 .. # Libraries - source rank
-.. |SHIELD:svg:ProjectModel-lib-rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-lib-rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Libraries.io SourceRank
    :height: 22
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank
-.. |SHIELD:png:ProjectModel-lib-rank| image:: https://raster.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-lib-rank| image:: https://raster.shields.io/librariesio/sourcerank/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Libraries.io SourceRank
    :height: 22
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel/sourcerank
@@ -130,11 +130,11 @@
    :height: 22
 
 .. # Libraries - status
-.. |SHIELD:svg:ProjectModel-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Libraries.io status for latest release
    :height: 22
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-lib-status| image:: https://raster.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-lib-status| image:: https://raster.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Libraries.io status for latest release
    :height: 22
    :target: https://libraries.io/github/edaa-org/pyEDAA.ProjectModel
@@ -150,11 +150,11 @@
    :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main
 
 .. # Documentation license
-.. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square
+.. |SHIELD:svg:ProjectModel-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
    :target: Doc-License.html
-.. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square
+.. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc%20license-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/Doc-License.rst
