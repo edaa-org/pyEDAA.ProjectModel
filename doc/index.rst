@@ -15,21 +15,19 @@
 
 .. only:: html
 
-   |  |SHIELD:svg:ProjectModel-github| |SHIELD:svg:ProjectModel-src-license| |SHIELD:svg:ProjectModel-tag| |SHIELD:svg:ProjectModel-release| |SHIELD:svg:ProjectModel-date|
-   |  |SHIELD:svg:ProjectModel-gha-test| |SHIELD:svg:ProjectModel-codacy-quality| |SHIELD:svg:ProjectModel-codacy-coverage| |SHIELD:svg:ProjectModel-codecov-coverage| |SHIELD:svg:ProjectModel-lib-rank|
-   |  |SHIELD:svg:ProjectModel-pypi-tag| |SHIELD:svg:ProjectModel-pypi-status| |SHIELD:svg:ProjectModel-pypi-python| |SHIELD:svg:ProjectModel-lib-status|
-   |  |SHIELD:svg:ProjectModel-doc-license| |SHIELD:svg:ProjectModel-ghp-doc|
+   |  |SHIELD:svg:ProjectModel-github| |SHIELD:svg:ProjectModel-src-license| |SHIELD:svg:ProjectModel-ghp-doc| |SHIELD:svg:ProjectModel-doc-license| |SHIELD:svg:ProjectModel-gitter|
+   |  |SHIELD:svg:ProjectModel-pypi-tag| |SHIELD:svg:ProjectModel-pypi-status| |SHIELD:svg:ProjectModel-pypi-python|
+   |  |SHIELD:svg:ProjectModel-gha-test| |SHIELD:svg:ProjectModel-lib-status| |SHIELD:svg:ProjectModel-codacy-quality| |SHIELD:svg:ProjectModel-codacy-coverage| |SHIELD:svg:ProjectModel-codecov-coverage|
 
-.. Disabled shields: |SHIELD:svg:ProjectModel-lib-dep| |SHIELD:svg:ProjectModel-req-status|
+.. Disabled shields: |SHIELD:svg:ProjectModel-lib-dep| |SHIELD:svg:ProjectModel-req-status| |SHIELD:svg:ProjectModel-lib-rank|
 
 .. only:: latex
 
-   |SHIELD:png:ProjectModel-github| |SHIELD:png:ProjectModel-src-license| |SHIELD:png:ProjectModel-tag| |SHIELD:png:ProjectModel-release| |SHIELD:png:ProjectModel-date|
-   |SHIELD:png:ProjectModel-gha-test| |SHIELD:png:ProjectModel-codacy-quality| |SHIELD:png:ProjectModel-codacy-coverage| |SHIELD:png:ProjectModel-codecov-coverage| |SHIELD:png:ProjectModel-lib-rank|
-   |SHIELD:png:ProjectModel-pypi-tag| |SHIELD:png:ProjectModel-pypi-status| |SHIELD:png:ProjectModel-pypi-python| |SHIELD:png:ProjectModel-lib-status|
-   |SHIELD:png:ProjectModel-doc-license| |SHIELD:png:ProjectModel-ghp-doc|
+   |SHIELD:png:ProjectModel-github| |SHIELD:png:ProjectModel-src-license| |SHIELD:png:ProjectModel-ghp-doc| |SHIELD:png:ProjectModel-doc-license| |SHIELD:svg:ProjectModel-gitter|
+   |SHIELD:png:ProjectModel-pypi-tag| |SHIELD:png:ProjectModel-pypi-status| |SHIELD:png:ProjectModel-pypi-python|
+   |SHIELD:png:ProjectModel-gha-test| |SHIELD:png:ProjectModel-lib-status| |SHIELD:png:ProjectModel-codacy-quality| |SHIELD:png:ProjectModel-codacy-coverage| |SHIELD:png:ProjectModel-codecov-coverage|
 
-.. Disabled shields: |SHIELD:png:ProjectModel-lib-dep| |SHIELD:png:ProjectModel-req-status|
+.. Disabled shields: |SHIELD:png:ProjectModel-lib-dep| |SHIELD:png:ProjectModel-req-status| |SHIELD:png:ProjectModel-lib-rank|
 
 --------------------------------------------------------------------------------
 
@@ -130,6 +128,12 @@ License
 .. only:: html
 
    This document was generated on |docdate|.
+
+
+.. toctree::
+   :hidden:
+
+   Used as a layer of EDA² ➚ <https://edaa-org.github.io/>
 
 
 .. toctree::

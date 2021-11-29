@@ -10,7 +10,7 @@ Dependency
 .. |img-ProjectModel-req-status| image:: https://img.shields.io/requires/github/edaa-org/pyEDAA.ProjectModel
    :alt: Requires.io
    :height: 22
-   :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=master
+   :target: https://requires.io/github/edaa-org/pyEDAA.ProjectModel/requirements/?branch=main
 
 +------------------------------------------+------------------------------------------+
 | `Libraries.io <https://libraries.io/>`_  | `Requires.io <https://requires.io/>`_    |

@@ -233,10 +233,9 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 # Sphinx.Ext.ExtLinks
 # ==============================================================================
 extlinks = {
-	'issue': ('https://github.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
-	'pull':  ('https://github.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
-	'src':   ('https://github.com/edaa-org/pyEDAA.ProjectModel/blob/master/pyMetaClasses/%s?ts=2', None),
-#	'test':  ('https://github.com/edaa-org/pyEDAA.ProjectModel/blob/master/test/%s?ts=2', None)
+	'ghissue': ('https://github.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
+	'ghpull':  ('https://github.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
+	'ghsrc':   ('https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s?ts=2', None),
 }
 
 
