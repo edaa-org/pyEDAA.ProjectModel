@@ -34,8 +34,8 @@ jobs:
     needs:
       - Params
     with:
-      package: ${{ fromJson(needs.Params.outputs.params).package }}
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
+      mypy_args: -m ${{ fromJson(needs.Params.outputs.params).package }}
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
 
   Release:
