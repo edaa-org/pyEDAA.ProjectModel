@@ -103,6 +103,7 @@ jobs:
     uses: pyTooling/Actions/.github/workflows/ArtifactCleanUp.yml@r0
     needs:
       - Params
+      - UnitTesting
       - Coverage
       - StaticTypeCheck
       - BuildTheDocs
