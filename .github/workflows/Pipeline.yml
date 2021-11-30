@@ -7,13 +7,13 @@ on:
 jobs:
 
   Params:
-    uses: pyTooling/Actions/.github/workflows/Params.yml@dev
+    uses: pyTooling/Actions/.github/workflows/Params.yml@r0
     with:
       name: pyEDAA.ProjectModel
       python_version_list: '3.7 3.8 3.9 3.10'
 
   UnitTesting:
-    uses: pyTooling/Actions/.github/workflows/UnitTesting.yml@dev
+    uses: pyTooling/Actions/.github/workflows/UnitTesting.yml@r0
     needs:
       - Params
     with:
@@ -21,7 +21,7 @@ jobs:
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}
 
   Coverage:
-    uses: pyTooling/Actions/.github/workflows/CoverageCollection.yml@dev
+    uses: pyTooling/Actions/.github/workflows/CoverageCollection.yml@r0
     needs:
       - Params
     with:
@@ -31,7 +31,7 @@ jobs:
       codacy_token: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
   StaticTypeCheck:
-    uses: pyTooling/Actions/.github/workflows/StaticTypeCheck.yml@dev
+    uses: pyTooling/Actions/.github/workflows/StaticTypeCheck.yml@r0
     needs:
       - Params
     with:
@@ -42,7 +42,7 @@ jobs:
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
 
   Release:
-    uses: pyTooling/Actions/.github/workflows/Release.yml@dev
+    uses: pyTooling/Actions/.github/workflows/Release.yml@r0
     if: startsWith(github.ref, 'refs/tags')
     needs:
       - UnitTesting
@@ -50,7 +50,7 @@ jobs:
       - StaticTypeCheck
 
   Package:
-    uses: pyTooling/Actions/.github/workflows/Package.yml@dev
+    uses: pyTooling/Actions/.github/workflows/Package.yml@r0
     if: startsWith(github.ref, 'refs/tags')
     needs:
       - Params
@@ -60,7 +60,7 @@ jobs:
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.package }}
 
   PublishOnPyPI:
-    uses: pyTooling/Actions/.github/workflows/PublishOnPyPI.yml@dev
+    uses: pyTooling/Actions/.github/workflows/PublishOnPyPI.yml@r0
     if: startsWith(github.ref, 'refs/tags')
     needs:
       - Params
@@ -73,14 +73,14 @@ jobs:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
   VerifyDocs:
-    uses: pyTooling/Actions/.github/workflows/VerifyDocs.yml@dev
+    uses: pyTooling/Actions/.github/workflows/VerifyDocs.yml@r0
     needs:
       - Params
     with:
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
 
   BuildTheDocs:
-    uses: pyTooling/Actions/.github/workflows/BuildTheDocs.yml@dev
+    uses: pyTooling/Actions/.github/workflows/BuildTheDocs.yml@r0
     needs:
       - Params
       - VerifyDocs
@@ -88,7 +88,7 @@ jobs:
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.doc }}
 
   PublishToGitHubPages:
-    uses: pyTooling/Actions/.github/workflows/PublishToGitHubPages.yml@dev
+    uses: pyTooling/Actions/.github/workflows/PublishToGitHubPages.yml@r0
     needs:
       - Params
       - BuildTheDocs
@@ -100,7 +100,7 @@ jobs:
       typing: ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
 
   ArtifactCleanUp:
-    uses: pyTooling/Actions/.github/workflows/ArtifactCleanUp.yml@dev
+    uses: pyTooling/Actions/.github/workflows/ArtifactCleanUp.yml@r0
     needs:
       - Params
       - Coverage
