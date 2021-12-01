@@ -54,14 +54,14 @@
    :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 
 .. # GHA test and coverage
-.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
-.. |SHIELD:png:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
+.. |SHIELD:png:ProjectModel-gha-test| image:: https://raster.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22
+   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
 
 .. # Codacy - quality
 .. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
