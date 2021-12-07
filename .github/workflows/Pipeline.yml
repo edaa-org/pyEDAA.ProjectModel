@@ -1,6 +1,6 @@
 name: Pipeline
 
-on: 
+on:
   push:
   workflow_dispatch:
 
@@ -36,10 +36,17 @@ jobs:
       - Params
     with:
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
+      requirements: '-r tests/requirements.txt'
       commands: |
         cd pyEDAA
         mypy --html-report ../htmlmypy -p ProjectModel
+      report: 'htmlmypy'
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
+
+  PublishTestResults:
+    uses: pyTooling/Actions/.github/workflows/PublishTestResults.yml@r0
+    needs:
+      - UnitTesting
 
   Package:
     uses: pyTooling/Actions/.github/workflows/Package.yml@r0
@@ -48,6 +55,7 @@ jobs:
       - Coverage
     with:
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
+      requirements: -r build/requirements.txt
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.package }}
 
   Release:
@@ -68,6 +76,7 @@ jobs:
       - Package
     with:
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
+      requirements: -r dist/requirements.txt
       artifact: ${{ fromJson(needs.Params.outputs.params).artifacts.package }}
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
@@ -111,7 +120,10 @@ jobs:
     with:
       package: ${{ fromJson(needs.Params.outputs.params).artifacts.package }}
       remaining: |
-        ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}-*
+        ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}-3.7
+        ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}-3.8
+        ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}-3.9
+        ${{ fromJson(needs.Params.outputs.params).artifacts.unittesting }}-3.10
         ${{ fromJson(needs.Params.outputs.params).artifacts.coverage }}
         ${{ fromJson(needs.Params.outputs.params).artifacts.typing }}
         ${{ fromJson(needs.Params.outputs.params).artifacts.doc }}
