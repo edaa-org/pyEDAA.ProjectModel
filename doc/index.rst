@@ -3,7 +3,7 @@
 .. image:: _static/logo_on_light.svg
    :height: 90 px
    :align: center
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel
 
 .. raw:: html
 
@@ -63,7 +63,7 @@ Use Cases
   `Verilog to Routing (VTR) <https://hdl.github.io/awesome/items/vtr/>`__,
   `nextpnr <https://hdl.github.io/awesome/items/nextpnr/>`__,
   etc.
-* Managing IP cores and projects with `pyIPCMI <https://github.com/Paebbels/pyIPCMI>`__.
+* Managing IP cores and projects with `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
 
 
 .. _news:
@@ -94,8 +94,8 @@ News
 
    .. rubric:: Extracted ProjectModel from pyIPCMI
 
-* The project model has been extracted from `pyIPCMI <https://github.com/Paebbels/pyIPCMI>`__.
-* ProjectModel became first citizen of `EDA² <https://github.com/edaa-org>`__ and got integrated into the `pyEDAA` namespace at PyPI.
+* The project model has been extracted from `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
+* ProjectModel became first citizen of `EDA² <https://GitHub.com/edaa-org>`__ and got integrated into the `pyEDAA` namespace at PyPI.
 
 
 .. _contributors:
@@ -103,9 +103,9 @@ News
 Contributors
 ************
 
-* `Patrick Lehmann <https://github.com/Paebbels>`__ (Maintainer)
-* `Unai Martinez-Corral <https://github.com/umarcor/>`__ (Maintainer)
-* `and more... <https://github.com/VHDL/pyVHDLModel/graphs/contributors>`__
+* `Patrick Lehmann <https://GitHub.com/Paebbels>`__ (Maintainer)
+* `Unai Martinez-Corral <https://GitHub.com/umarcor/>`__ (Maintainer)
+* `and more... <https://GitHub.com/VHDL/pyVHDLModel/graphs/contributors>`__
 
 
 License

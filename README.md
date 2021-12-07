@@ -2,7 +2,7 @@
   <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
 </p>
 
-[![Sourcecode on GitHub](https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a)](https://github.com/edaa-org/pyEDAA.ProjectModel)
+[![Sourcecode on GitHub](https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a)](https://GitHub.com/edaa-org/pyEDAA.ProjectModel)
 [![Sourcecode License](https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code)](LICENSE.md)
 [![Documentation](https://img.shields.io/website?longCache=true&style=flat-square&label=edaa-org.github.io%2FpyEDAA.ProjectModel&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.ProjectModel%2Findex.html)](https://edaa-org.github.io/pyEDAA.ProjectModel/)
 [![Documentation License](https://img.shields.io/badge/doc-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff)](LICENSE.md)
@@ -10,7 +10,7 @@
 [![PyPI](https://img.shields.io/pypi/v/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyEDAA.ProjectModel/)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=PyPI&logoColor=FBE072)  
-[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml)
+[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20test&logo=GitHub%20Actions&logoColor=FFFFFF)](https://GitHub.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml)
 [![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff)](https://libraries.io/github/edaa-org/pyEDAA.ProjectModel)
 [![Codacy - Quality](https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
 [![Codacy - Coverage](https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=Codacy)](https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel)
@@ -99,22 +99,22 @@ for file in designA.Files(fileType=VHDLSourceFile):
 
 # References
 
-- [Paebbels/pyIPCMI: pyIPCMI/Base/Project.py](https://github.com/Paebbels/pyIPCMI/blob/master/pyIPCMI/Base/Project.py)
-- [VUnit/vunit: vunit/project.py](https://github.com/VUnit/vunit/blob/master/vunit/project.py)
-- [PyFPGA/pyfpga: fpga/project.py](https://github.com/PyFPGA/pyfpga/blob/main/fpga/project.py)
-- [olofk/fusesoc: fusesoc/capi2/core.py](https://github.com/olofk/fusesoc/blob/master/fusesoc/capi2/core.py)
-- [XedaHQ/xeda: xeda/flows/flow.py](https://github.com/XedaHQ/xeda/blob/master/xeda/flows/flow.py)
+- [Paebbels/pyIPCMI: pyIPCMI/Base/Project.py](https://GitHub.com/Paebbels/pyIPCMI/blob/master/pyIPCMI/Base/Project.py)
+- [VUnit/vunit: vunit/project.py](https://GitHub.com/VUnit/vunit/blob/master/vunit/project.py)
+- [PyFPGA/pyfpga: fpga/project.py](https://GitHub.com/PyFPGA/pyfpga/blob/main/fpga/project.py)
+- [olofk/fusesoc: fusesoc/capi2/core.py](https://GitHub.com/olofk/fusesoc/blob/master/fusesoc/capi2/core.py)
+- [XedaHQ/xeda: xeda/flows/flow.py](https://GitHub.com/XedaHQ/xeda/blob/master/xeda/flows/flow.py)
 - [tsfpga/tsfpga: tsfpga/build_project_list.py](https://gitlab.com/tsfpga/tsfpga/-/blob/master/tsfpga/build_project_list.py)
 - [hdl-make: hdlmake/](https://ohwr.org/project/hdl-make/tree/master/hdlmake)
-- [OSVVM/OSVVM-Scripts: OsvvmProjectScripts.tcl](https://github.com/OSVVM/OSVVM-Scripts/blob/master/OsvvmProjectScripts.tcl)
+- [OSVVM/OSVVM-Scripts: OsvvmProjectScripts.tcl](https://GitHub.com/OSVVM/OSVVM-Scripts/blob/master/OsvvmProjectScripts.tcl)
 
 
 
 ## Contributors
-* [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)
-* [Unai Martinez-Corral](https://github.com/umarcor)
-* [Stefan Unrein](https://github.com/stefanunrein)
-* [and more...](https://github.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors)
+* [Patrick Lehmann](https://GitHub.com/Paebbels) (Maintainer)
+* [Unai Martinez-Corral](https://GitHub.com/umarcor)
+* [Stefan Unrein](https://GitHub.com/stefanunrein)
+* [and more...](https://GitHub.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors)
 
 
 ## License

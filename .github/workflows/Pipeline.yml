@@ -7,7 +7,7 @@ on:
 jobs:
 
   Params:
-    uses: pyTooling/Actions/.github/workflows/Params.yml@r0
+    uses: pyTooling/Actions/.github/workflows/Parameters.yml@r0
     with:
       name: pyEDAA.ProjectModel
       python_version_list: '3.7 3.8 3.9 3.10'

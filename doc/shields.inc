@@ -7,11 +7,11 @@
 .. |SHIELD:svg:ProjectModel-github| image:: https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel
 .. |SHIELD:png:ProjectModel-github| image:: https://raster.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel
 
 .. # Sourcecode license
 .. |SHIELD:svg:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code
@@ -21,47 +21,47 @@
 .. |SHIELD:png:ProjectModel-src-license| image:: https://img.shields.io/pypi/l/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Apache&label=code
    :alt: Code license
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/LICENSE.md
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/LICENSE.md
 
 .. # GitHub tag
 .. |SHIELD:svg:ProjectModel-tag| image:: https://img.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases
    :alt: GitHub tag (latest SemVer incl. pre-release
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/tags
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/tags
 .. |SHIELD:png:ProjectModel-tag| image:: https://raster.shields.io/github/v/tag/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub&include_prereleases
    :alt: GitHub tag (latest SemVer incl. pre-release
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/tags
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/tags
 
 .. # GitHub release date
 .. |SHIELD:svg:ProjectModel-date| image:: https://img.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub
    :alt: GitHub release date
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/releases
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/releases
 .. |SHIELD:png:ProjectModel-date| image:: https://raster.shields.io/github/release-date/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=GitHub
    :alt: GitHub release date
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/releases
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/releases
 
 .. # GitHub/Libraries dependent projects
 .. |SHIELD:svg:ProjectModel-lib-dep| image:: https://img.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Dependent repos (via libraries.io)
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 .. |SHIELD:png:ProjectModel-lib-dep| image:: https://raster.shields.io/librariesio/dependent-repos/pypi/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Libraries.io&logoColor=fff
    :alt: Dependent repos (via libraries.io)
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/network/dependents
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 
 .. # GHA test and coverage
 .. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
 .. |SHIELD:png:ProjectModel-gha-test| image:: https://raster.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
 
 .. # Codacy - quality
 .. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
@@ -157,7 +157,7 @@
 .. |SHIELD:png:ProjectModel-doc-license| image:: https://raster.shields.io/badge/doc-CC--BY%204.0-green?longCache=true&style=flat-square&logo=CreativeCommons&logoColor=fff
    :alt: Documentation License
    :height: 22
-   :target: https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/License.rst
+   :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/License.rst
 
 .. # GHPages - read now
 .. |SHIELD:svg:ProjectModel-ghp-doc| image:: https://img.shields.io/website?longCache=true&style=flat-square&label=edaa-org.github.io%2FpyEDAA.ProjectModel&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.ProjectModel%2Findex.html
