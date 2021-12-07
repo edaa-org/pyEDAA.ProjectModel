@@ -31,6 +31,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+__author__ =    "Patrick Lehmann"
+__email__ =     "Paebbels@gmail.com"
+__copyright__ = "2014-2021, Patrick Lehmann, Unai Martinez-Corral"
+__license__ =   "Apache License, Version 2.0"
+__version__ =   "0.4.0"
+
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
@@ -38,9 +44,6 @@ from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator,
 from pySVModel import VerilogVersion, SystemVerilogVersion
 from pyTooling.Decorators import export
 from pyVHDLModel import VHDLVersion
-
-
-__version__ = "0.4.0"
 
 
 @export

@@ -7,6 +7,7 @@ from os.path import abspath
 from pathlib import Path
 from json import loads
 
+from pyTooling.Packaging import extractVersionInformation
 
 ROOT = Path(__file__).resolve().parent
 
@@ -17,40 +18,20 @@ sys_path.insert(0, abspath('../pyEDAA/ProjectModel'))
 
 
 # ==============================================================================
-# Project information
-# ==============================================================================
-project =   "pyEDAA.ProjectModel"
-copyright = "2016-2021 Patrick Lehmann, Unai Martinez-Corral and contributors"
-author =    "Patrick Lehmann"
-
-
-# ==============================================================================
-# Versioning
+# Project information and versioning
 # ==============================================================================
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
-from subprocess import check_output
+project =     "pyEDAA.ProjectModel"
 
-def _IsUnderGitControl():
-	return (check_output(["git", "rev-parse", "--is-inside-work-tree"], universal_newlines=True).strip() == "true")
+packageInformationFile = Path(f"../{project}/__init__.py")
+versionInformation = extractVersionInformation(packageInformationFile)
 
-def _LatestTagName():
-	return check_output(["git", "describe", "--abbrev=0", "--tags"], universal_newlines=True).strip()
-
-# The full version, including alpha/beta/rc tags
-version = "0.4"     # The short X.Y version.
-release = "0.4.0"   # The full version, including alpha/beta/rc tags.
-try:
-	if _IsUnderGitControl:
-		latestTagName = _LatestTagName()[1:]		# remove prefix "v"
-		versionParts =  latestTagName.split("-")[0].split(".")
-
-		version = ".".join(versionParts[:2])
-		release = latestTagName   # ".".join(versionParts[:3])
-except:
-	pass
-
+author =    versionInformation.Author
+copyright = versionInformation.Copyright
+version =   ".".join(versionInformation.Version.split(".")[:2])  # e.g. 2.3    The short X.Y version.
+release =   versionInformation.Version
 
 # ==============================================================================
 # Miscellaneous settings

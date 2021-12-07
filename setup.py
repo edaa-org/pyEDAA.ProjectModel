@@ -31,71 +31,26 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from pathlib    import Path
-from setuptools import (
-	setup as setuptools_setup,
-	find_namespace_packages as setuptools_find_namespace_packages
-)
+from pathlib             import Path
+from pyTooling.Packaging import DescribePythonPackageHostedOnGitHub
 
-gitHubNamespace =       "edaa-org"
-projectName =           "ProjectModel"
-projectNameWithPrefix = "pyEDAA." + projectName
-version =               "0.4.0"
+gitHubNamespace =        "edaa-org"
+packageName =            "pyEDAA.ProjectModel"
+packageDirectory =       packageName.replace(".", "/")
+packageInformationFile = Path(f"{packageDirectory}/__init__.py")
 
-# Read README for upload to PyPI
-readmeFile = Path("README.md")
-with readmeFile.open("r") as file:
-	long_description = file.read()
-
-# Read requirements file and add them to package dependency list
-requirementsFile = Path("requirements.txt")
-with requirementsFile.open("r") as file:
-	requirements = [line for line in file.readlines()]
-
-# Derive URLs
-sourceCodeURL =     f"https://github.com/{gitHubNamespace}/{projectName}"
-documentationURL =  f"https://{gitHubNamespace}.github.io/{projectName}"
-
-# Assemble all package information
-setuptools_setup(
-	name=projectNameWithPrefix,
-	version=version,
-
-	author="Patrick Lehmann",
-	author_email="Paebbels@gmail.com",
-	# maintainer="Patrick Lehmann",
-	# maintainer_email="Paebbels@gmail.com",
-  license='Apache 2.0',
-
+DescribePythonPackageHostedOnGitHub(
+	packageName=packageName,
 	description="An abstract model of EDA tool projects.",
-	long_description=long_description,
-	long_description_content_type="text/markdown",
-
-	url=sourceCodeURL,
-	project_urls={
-		'Documentation': f"{documentationURL}",
-		'Source Code':   f"{sourceCodeURL}",
-		'Issue Tracker': f"{sourceCodeURL}/issues"
-	},
-	# download_url="https://github.com/vhdl/pyVHDLModel/tarball/0.1.0",
-
-	packages=setuptools_find_namespace_packages(exclude=["tests", "tests.*",]),
+	gitHubNamespace=gitHubNamespace,
+	keywords="Python3 EDA Project Model Abstract",
+	sourceFileWithVersion=packageInformationFile,
+	developmentStatus="beta",
 	classifiers=[
-		"License :: OSI Approved :: Apache Software License",
 		"Operating System :: OS Independent",
-		"Programming Language :: Python :: 3 :: Only",
-		"Programming Language :: Python :: 3.7",
-		"Programming Language :: Python :: 3.8",
-		"Programming Language :: Python :: 3.9",
-		"Programming Language :: Python :: 3.10",
-   "Development Status :: 4 - Beta",
-#		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
+		"Topic :: Utilities",
 		"Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
 		"Topic :: Utilities"
-	],
-	keywords="Python3 EDA Project Model Abstract",
-
-	python_requires='>=3.7',
-	install_requires=requirements,
+	]
 )
