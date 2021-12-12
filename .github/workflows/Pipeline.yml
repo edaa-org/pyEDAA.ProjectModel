@@ -4,13 +4,17 @@ on:
   push:
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
 
   Params:
     uses: pyTooling/Actions/.github/workflows/Parameters.yml@r0
     with:
       name: pyEDAA.ProjectModel
-      python_version_list: '3.7 3.8 3.9 3.10'
+      python_version_list: "3.7 3.8 3.9 3.10"
 
   UnitTesting:
     uses: pyTooling/Actions/.github/workflows/UnitTesting.yml@r0
@@ -36,7 +40,6 @@ jobs:
       - Params
     with:
       python_version: ${{ fromJson(needs.Params.outputs.params).python_version }}
-      requirements: '-r tests/requirements.txt'
       commands: |
         cd pyEDAA
         mypy --html-report ../htmlmypy -p ProjectModel
