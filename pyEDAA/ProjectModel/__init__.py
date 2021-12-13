@@ -36,6 +36,7 @@ __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2021, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
 __version__ =   "0.4.0"
+__keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path

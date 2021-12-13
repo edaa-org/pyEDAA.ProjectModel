@@ -43,7 +43,6 @@ DescribePythonPackageHostedOnGitHub(
 	packageName=packageName,
 	description="An abstract model of EDA tool projects.",
 	gitHubNamespace=gitHubNamespace,
-	keywords="Python3 EDA Project Model Abstract",
 	sourceFileWithVersion=packageInformationFile,
 	developmentStatus="beta",
 	classifiers=[
