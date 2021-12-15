@@ -116,9 +116,13 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def _ParseRootElement(self, root):
 		for rootNode in root.childNodes:
 			if rootNode.nodeName == "FileSets":
-				for fileSetsNode in rootNode.childNodes:
-					if fileSetsNode.nodeType == Node.ELEMENT_NODE and fileSetsNode.tagName == "FileSet":
-						self._ParseFileSet(fileSetsNode)
+				self._ParseFileSets(rootNode)
+				break
+
+	def _ParseFileSets(self, filesetsNode):
+		for fileSetsNode in filesetsNode.childNodes:
+			if fileSetsNode.nodeType == Node.ELEMENT_NODE and fileSetsNode.tagName == "FileSet":
+				self._ParseFileSet(fileSetsNode)
 
 	def _ParseFileSet(self, filesetNode):
 		filesetName = filesetNode.getAttribute("Name")
