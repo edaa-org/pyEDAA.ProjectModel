@@ -25,7 +25,7 @@ sys_path.insert(0, abspath('../pyEDAA/ProjectModel'))
 # built documents.
 project =     "pyEDAA.ProjectModel"
 
-packageInformationFile = Path(f"../{project}/__init__.py")
+packageInformationFile = Path(f"../{project.replace('.', '/')}/__init__.py")
 versionInformation = extractVersionInformation(packageInformationFile)
 
 author =    versionInformation.Author
