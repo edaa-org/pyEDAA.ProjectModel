@@ -29,7 +29,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from pydecor import export
+from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformConfigFile, TCLContent
 
