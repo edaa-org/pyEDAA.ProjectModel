@@ -29,10 +29,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # ==============================================================================
 #
+from typing import Dict
+
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, FileSet, File, Project, FileTypes
+from pyEDAA.ProjectModel import Design, FileSet, File, Project, FileTypes, Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -152,3 +154,63 @@ class Validate(TestCase):
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
 
 		file.Validate()
+
+
+class KeyValueAttribute(Attribute):
+	KEY = "ID"
+	VALUE_TYPE = str
+
+	_keyValuePairs: Dict[str, VALUE_TYPE]
+
+	def __init__(self):
+		super().__init__()
+
+		self._keyValuePairs = {}
+
+	def __getitem__(self, item: str) -> VALUE_TYPE:
+		return self._keyValuePairs[item]
+
+	def __setitem__(self, key: str, value: VALUE_TYPE) -> None:
+		self._keyValuePairs[key] = value
+
+
+class Attributes(TestCase):
+
+	def test_AttachedToFile(self):
+		project = Project("project", rootDirectory=Path("tests/project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		file._attributes[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = file[KeyValueAttribute]
+		attribute["id1"] = "5"
+
+		self.assertEqual("5", attribute["id1"])
+		self.assertEqual("5", file[KeyValueAttribute]["id1"])
+
+	def test_AttachedToFileSet(self):
+		project = Project("project", rootDirectory=Path("tests/project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		fileSet._attributes[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = fileSet[KeyValueAttribute]
+		attribute["id1"] = "15"
+		fileSet[KeyValueAttribute]["id2"] = "25"
+
+		self.assertEqual("15", attribute["id1"])
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("15", file[KeyValueAttribute]["id1"])
+
+		self.assertEqual("25", attribute["id2"])
+		self.assertEqual("25", fileSet[KeyValueAttribute]["id2"])
+		self.assertEqual("25", file[KeyValueAttribute]["id2"])
+
+		file[KeyValueAttribute]["id1"] = "-5"
+
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("-5", file[KeyValueAttribute]["id1"])
