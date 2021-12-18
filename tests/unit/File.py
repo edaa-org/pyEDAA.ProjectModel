@@ -196,7 +196,7 @@ class Attributes(TestCase):
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
 
-		fileSet._attributes[KeyValueAttribute] = KeyValueAttribute()
+		fileSet[KeyValueAttribute] = KeyValueAttribute()
 
 		attribute = fileSet[KeyValueAttribute]
 		attribute["id1"] = "15"
@@ -210,6 +210,7 @@ class Attributes(TestCase):
 		self.assertEqual("25", fileSet[KeyValueAttribute]["id2"])
 		self.assertEqual("25", file[KeyValueAttribute]["id2"])
 
+		file[KeyValueAttribute] = KeyValueAttribute()
 		file[KeyValueAttribute]["id1"] = "-5"
 
 		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
