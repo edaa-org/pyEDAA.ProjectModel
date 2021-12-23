@@ -257,6 +257,9 @@ class File(metaclass=FileType):
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		"""Index access for setting attributes on this file."""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		self._attributes[key] = value
 
 
