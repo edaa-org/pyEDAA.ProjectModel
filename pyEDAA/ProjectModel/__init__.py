@@ -19,7 +19,7 @@
 # you may not use this file except in compliance with the License.                                                     #
 # You may obtain a copy of the License at                                                                              #
 #                                                                                                                      #
-#		http://www.apache.org/licenses/LICENSE-2.0                                                                         #
+#   http://www.apache.org/licenses/LICENSE-2.0                                                                         #
 #                                                                                                                      #
 # Unless required by applicable law or agreed to in writing, software                                                  #
 # distributed under the License is distributed on an "AS IS" BASIS,                                                    #
@@ -42,11 +42,11 @@ __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
 from pyTooling.Decorators import export
-from pyVHDLModel import VHDLVersion
+from pySVModel            import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel          import VHDLVersion
 
 
 @export
