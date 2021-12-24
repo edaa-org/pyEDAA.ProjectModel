@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 5'
-    
+
 jobs:
 
   Params:
@@ -113,6 +113,7 @@ jobs:
     needs:
       - Params
       - UnitTesting
+      - PublishTestResults
       - Coverage
       - StaticTypeCheck
       - BuildTheDocs
