@@ -16,12 +16,10 @@ coverage.xml
 !requirements.txt
 
 # Sphinx
-doc/_build/
-doc/pyEDAA.ProjectModel/**/*.*
-!doc/pyEDAA.ProjectModel/index.rst
+/doc/_build/
+/doc/_theme/
+/doc/pyEDAA.ProjectModel/**/*.*
+!/doc/pyEDAA.ProjectModel/index.rst
 
-# BuildTheDocs
-doc/_theme/**/*.*
-
-# IntelliJ project files
+# PyCharm project files
 /.idea/workspace.xml
