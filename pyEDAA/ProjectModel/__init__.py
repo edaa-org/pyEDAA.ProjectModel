@@ -1263,6 +1263,169 @@ class Design:
 
 
 @export
+class TestHarness:
+	"""
+	A :term:`TestHarness` represents the wiring to run a test (see testbench).
+
+	:arg name:            The testharness' name.
+	:arg directory:       Path of this testharness (absolute or relative to the project).
+	"""
+
+	_name:       str
+	_directory:  pathlib_Path
+	_testCases:  Dict[str, 'TestBench']
+	_attributes: Dict[Type[Attribute], typing_Any]
+
+	def __init__(
+		self,
+		name: str,
+		directory: pathlib_Path = pathlib_Path(".")
+	):
+		self._name =       name
+		self._directory =  directory
+		self._testCases =  {}
+		self._attributes = {}
+
+	@property
+	def Name(self) -> str:
+		"""Property setting or returning the testharness' name."""
+		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def Directory(self) -> pathlib_Path:
+		"""Property setting or returning the directory this testharness is located in."""
+		return self._directory
+
+	@Directory.setter
+	def Directory(self, value: pathlib_Path) -> None:
+		self._directory = value
+
+	@property
+	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this fileset."""
+		if self._directory.is_absolute():
+			return self._directory.resolve()
+		elif self._project is not None:
+			path = (self._project.ResolvedPath / self._directory).resolve()
+
+			if path.is_absolute():
+				return path
+			else:
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
+		else:
+			# TODO: message and exception type
+			raise Exception("")
+
+	def __len__(self):
+		return self._testCases.__len__()
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+		self._attributes[key] = value
+
+	@property
+	def TestCases(self) -> Dict[str, 'TestBench']:
+		"""Read-only property returning the dictionary of testbenches for this testharness."""
+		return self._testCases
+
+
+@export
+class TestBench:
+	"""
+	A :term:`TestBench` represents a test environment.
+
+	:arg name:            The testbench's name.
+	:arg directory:       Path of this testbench (absolute or relative to the project).
+	:arg harness:         Testharness needed to run this testbench.
+	"""
+
+	_name:       str
+	_directory:  pathlib_Path
+	_harness:    TestHarness
+	_attributes: Dict[Type[Attribute], typing_Any]
+
+	def __init__(
+		self,
+		name: str,
+		directory: pathlib_Path = pathlib_Path("."),
+		harness: TestHarness = None
+	):
+		self._name =       name
+		self._directory =  directory
+		self._harness =    harness
+		self._attributes = {}
+
+	@property
+	def Name(self) -> str:
+		"""Property setting or returning the testbench's name."""
+		return self._name
+
+	@Name.setter
+	def Name(self, value: str) -> None:
+		self._name = value
+
+	@property
+	def Directory(self) -> pathlib_Path:
+		"""Property setting or returning the directory this testbench is located in."""
+		return self._directory
+
+	@Directory.setter
+	def Directory(self, value: pathlib_Path) -> None:
+		self._directory = value
+
+	@property
+	def ResolvedPath(self) -> pathlib_Path:
+		"""Read-only property returning the resolved path of this fileset."""
+		if self._directory.is_absolute():
+			return self._directory.resolve()
+		elif self._project is not None:
+			path = (self._project.ResolvedPath / self._directory).resolve()
+
+			if path.is_absolute():
+				return path
+			else:
+				# WORKAROUND: https://stackoverflow.com/questions/67452690/pathlib-path-relative-to-vs-os-path-relpath
+				return pathlib_Path(path_relpath(path, pathlib_Path.cwd()))
+		else:
+			# TODO: message and exception type
+			raise Exception("")
+
+	def __getitem__(self, key: Type[Attribute]):
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+		self._attributes[key] = value
+
+	@property
+	def Harness(self) -> TestHarness:
+		"""Property setting or returning the testcases' harness."""
+		return self._harness
+
+	@Harness.setter
+	def Harness(self, value: TestHarness) -> None:
+		self._harness = value
+
+
+@export
 class Project:
 	"""
 	A :term:`Project` represents a group of designs and the source files therein.
