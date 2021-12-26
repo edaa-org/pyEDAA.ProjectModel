@@ -32,7 +32,7 @@
 # ============================================================================
 #
 from pathlib             import Path
-from pyTooling.Packaging import DescribePythonPackageHostedOnGitHub
+from pyTooling.Packaging import DescribePythonPackageHostedOnGitHub, DEFAULT_CLASSIFIERS
 
 gitHubNamespace =        "edaa-org"
 packageName =            "pyEDAA.ProjectModel"
@@ -45,11 +45,5 @@ DescribePythonPackageHostedOnGitHub(
 	gitHubNamespace=gitHubNamespace,
 	sourceFileWithVersion=packageInformationFile,
 	developmentStatus="beta",
-	classifiers=[
-		"Operating System :: OS Independent",
-		"Intended Audience :: Developers",
-		"Topic :: Utilities",
-		"Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
-		"Topic :: Utilities"
-	]
+	classifiers=list(DEFAULT_CLASSIFIERS) + ["Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)"]
 )

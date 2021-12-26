@@ -31,7 +31,7 @@ a concrete project model for their tools.
 Frameworks consuming this model can build higher level features and services on top of
 such a model, while supporting multiple input sources.
 
-## Data Model
+# Data Model
 
 1. The toplevel element is a `Project`, which contains one or multiple designs.
 2. A `Design` is a variant of a project and contains filesets.
@@ -41,7 +41,7 @@ such a model, while supporting multiple input sources.
 
 ![img.png](doc/datamodel.png)
 
-## Features
+# Features
 
 * Construct a project model:  
   * top-down (project &rarr; design &rarr; fileset &rarr; file) or
@@ -54,24 +54,24 @@ such a model, while supporting multiple input sources.
   * User-defined attributes are resolved bottom-up.
 
 
-## Project File Readers
+# Project File Readers
 
-### OSVVM `*.pro` File Reader
+## OSVVM `*.pro` File Reader
 
 ProjectModel can read `*.pro` files and extract source files. Included `*.pro` files
 are represented as sub-filesets.
 
-### Xilinx Vivado `*.xpr` Reader
+## Xilinx Vivado `*.xpr` Reader
 
 ProjectModel can read `*.xpr` files and extract source, constraint and simulation
 files while preserving the fileset structure.
 
-## Use Cases
+# Use Cases
 * Reading OSVVM's `*.pro` files.
 * Reading Xilinx Vivado's `*.xpr` files.
 
 
-## Examples
+# Examples
 
 ```python
 from pathlib import Path
@@ -110,14 +110,15 @@ for file in designA.Files(fileType=VHDLSourceFile):
 
 
 
-## Contributors
+# Contributors
+
 * [Patrick Lehmann](https://GitHub.com/Paebbels) (Maintainer)
 * [Unai Martinez-Corral](https://GitHub.com/umarcor)
 * [Stefan Unrein](https://GitHub.com/stefanunrein)
 * [and more...](https://GitHub.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors)
 
 
-## License
+# License
 
 This Python package (source code) licensed under [Apache License 2.0](LICENSE.md).  
 The accompanying documentation is licensed under [Creative Commons - Attribution 4.0 (CC-BY 4.0)](doc/Doc-License.rst).
