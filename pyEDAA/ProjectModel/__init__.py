@@ -255,7 +255,6 @@ class File(metaclass=FileType):
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any):
 		"""Index access for setting attributes on this file."""
-		x = key.VALUE_TYPE
 		self._attributes[key] = value
 
 
