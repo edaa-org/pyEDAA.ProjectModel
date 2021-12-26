@@ -47,12 +47,14 @@ such a model, while supporting multiple input sources.
   * top-down (project &rarr; design &rarr; fileset &rarr; file) or
   * bottom-up (file &rarr; fileset &rarr; design &rarr; project) or
   * parsing a project file.
+
 * Designs, filesets and files can use absolute or relative paths.
   * `ResolvedPath` returns the resolved absolute path to an object.
+
 * Projects, designs, filesets and files can be validated (e.g. if the path exists).
+
 * Projects, designs, filesets and files can have user-defined attributes.
   * User-defined attributes are resolved bottom-up.
-
 
 # Project File Readers
 
@@ -67,9 +69,9 @@ ProjectModel can read `*.xpr` files and extract source, constraint and simulatio
 files while preserving the fileset structure.
 
 # Use Cases
+
 * Reading OSVVM's `*.pro` files.
 * Reading Xilinx Vivado's `*.xpr` files.
-
 
 # Examples
 
@@ -96,19 +98,16 @@ for file in designA.Files(fileType=VHDLSourceFile):
 	print(f"  {file.Path}")
 ```
 
-
 # References
 
-- [Paebbels/pyIPCMI: pyIPCMI/Base/Project.py](https://GitHub.com/Paebbels/pyIPCMI/blob/master/pyIPCMI/Base/Project.py)
-- [VUnit/vunit: vunit/project.py](https://GitHub.com/VUnit/vunit/blob/master/vunit/project.py)
-- [PyFPGA/pyfpga: fpga/project.py](https://GitHub.com/PyFPGA/pyfpga/blob/main/fpga/project.py)
-- [olofk/fusesoc: fusesoc/capi2/core.py](https://GitHub.com/olofk/fusesoc/blob/master/fusesoc/capi2/core.py)
-- [XedaHQ/xeda: xeda/flows/flow.py](https://GitHub.com/XedaHQ/xeda/blob/master/xeda/flows/flow.py)
-- [tsfpga/tsfpga: tsfpga/build_project_list.py](https://gitlab.com/tsfpga/tsfpga/-/blob/master/tsfpga/build_project_list.py)
-- [hdl-make: hdlmake/](https://ohwr.org/project/hdl-make/tree/master/hdlmake)
-- [OSVVM/OSVVM-Scripts: OsvvmProjectScripts.tcl](https://GitHub.com/OSVVM/OSVVM-Scripts/blob/master/OsvvmProjectScripts.tcl)
-
-
+* [Paebbels/pyIPCMI: pyIPCMI/Base/Project.py](https://GitHub.com/Paebbels/pyIPCMI/blob/master/pyIPCMI/Base/Project.py)
+* [VUnit/vunit: vunit/project.py](https://GitHub.com/VUnit/vunit/blob/master/vunit/project.py)
+* [PyFPGA/pyfpga: fpga/project.py](https://GitHub.com/PyFPGA/pyfpga/blob/main/fpga/project.py)
+* [olofk/fusesoc: fusesoc/capi2/core.py](https://GitHub.com/olofk/fusesoc/blob/master/fusesoc/capi2/core.py)
+* [XedaHQ/xeda: xeda/flows/flow.py](https://GitHub.com/XedaHQ/xeda/blob/master/xeda/flows/flow.py)
+* [tsfpga/tsfpga: tsfpga/build_project_list.py](https://gitlab.com/tsfpga/tsfpga/-/blob/master/tsfpga/build_project_list.py)
+* [hdl-make: hdlmake/](https://ohwr.org/project/hdl-make/tree/master/hdlmake)
+* [OSVVM/OSVVM-Scripts: OsvvmProjectScripts.tcl](https://GitHub.com/OSVVM/OSVVM-Scripts/blob/master/OsvvmProjectScripts.tcl)
 
 # Contributors
 
@@ -116,7 +115,6 @@ for file in designA.Files(fileType=VHDLSourceFile):
 * [Unai Martinez-Corral](https://GitHub.com/umarcor)
 * [Stefan Unrein](https://GitHub.com/stefanunrein)
 * [and more...](https://GitHub.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors)
-
 
 # License
 

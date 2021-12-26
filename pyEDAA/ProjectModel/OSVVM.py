@@ -29,7 +29,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-from enum import Enum, unique
 from pathlib import Path
 
 from pyTooling.Decorators import export
