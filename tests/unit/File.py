@@ -34,7 +34,8 @@ Instantiation tests for the project model.
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel import Design, FileSet, File, Project, FileTypes, Attribute
+from pyEDAA.ProjectModel            import Design, FileSet, File, Project, FileTypes
+from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -156,26 +157,7 @@ class Validate(TestCase):
 		file.Validate()
 
 
-class KeyValueAttribute(Attribute):
-	KEY = "ID"
-	VALUE_TYPE = str
-
-	_keyValuePairs: Dict[str, VALUE_TYPE]
-
-	def __init__(self):
-		super().__init__()
-
-		self._keyValuePairs = {}
-
-	def __getitem__(self, item: str) -> VALUE_TYPE:
-		return self._keyValuePairs[item]
-
-	def __setitem__(self, key: str, value: VALUE_TYPE) -> None:
-		self._keyValuePairs[key] = value
-
-
 class Attributes(TestCase):
-
 	def test_AttachedToFile(self):
 		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
