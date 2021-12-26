@@ -149,7 +149,8 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		else:
 			self._ParseDefaultFile(fileNode, filePath, fileset)
 
-	def _ParseVHDLFile(self, fileNode, path, fileset):
+	@staticmethod
+	def _ParseVHDLFile(fileNode, path, fileset):
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
 		usedInAttr = vhdlFile[UsedInAttribute]
@@ -169,19 +170,24 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 						elif fileAttribute.getAttribute("Val") == "UsedIn":
 							usedInAttr.append(fileAttribute.getAttribute("Val"))
 
-	def _ParseDefaultFile(self, _, path, fileset):
+	@staticmethod
+	def _ParseDefaultFile(_, path, fileset):
 		File(path, fileSet=fileset)
 
-	def _ParseXDCFile(self, _, path, fileset):
+	@staticmethod
+	def _ParseXDCFile(_, path, fileset):
 		XDCConstraintFile(path, fileSet=fileset)
 
-	def _ParseVerilogFile(self, _, path, fileset):
+	@staticmethod
+	def _ParseVerilogFile(_, path, fileset):
 		VerilogSourceFile(path, fileSet=fileset)
 
-	def _ParseXCIFile(self, _, path, fileset):
+	@staticmethod
+	def _ParseXCIFile(_, path, fileset):
 		IPCoreInstantiationFile(path, fileSet=fileset)
 
-	def _ParseFileSetConfig(self, fileNode, fileset):
+	@staticmethod
+	def _ParseFileSetConfig(fileNode, fileset):
 		for option in fileNode.childNodes:
 			if option.nodeType == Node.ELEMENT_NODE and option.tagName == "Option":
 				if option.getAttribute("Name") == "TopModule":
