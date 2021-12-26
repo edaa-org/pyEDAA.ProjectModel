@@ -109,7 +109,8 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_Project(self):
+	@staticmethod
+	def test_Project():
 		project = Project("project", rootDirectory=Path("tests/project"))
 
 		project.Validate()

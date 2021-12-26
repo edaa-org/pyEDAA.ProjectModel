@@ -146,7 +146,8 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_File(self):
+	@staticmethod
+	def test_File():
 		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)

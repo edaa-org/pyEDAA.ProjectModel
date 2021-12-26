@@ -96,7 +96,8 @@ class VHDLFile(TestCase):
 
 		self.assertEqual(vhdlVersion, file.VHDLVersion)
 
-	def test_Validate(self):
+	@staticmethod
+	def test_Validate():
 		project = Project("project", rootDirectory=Path("tests/project"), vhdlVersion=VHDLVersion.VHDL2019)
 		design = Design("design", directory=Path("designA"), project=project)
 		vhdlLibrary = VHDLLibrary("library", design=design)
