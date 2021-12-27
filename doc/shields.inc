@@ -67,21 +67,21 @@
 .. |SHIELD:svg:ProjectModel-codacy-quality| image:: https://img.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
    :alt: Codacy - Quality
    :height: 22
-   :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
+   :target: https://www.codacy.com/gh/edaa-org/pyEDAA.ProjectModel
 .. |SHIELD:png:ProjectModel-codacy-quality| image:: https://raster.shields.io/codacy/grade/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
    :alt: Codacy - Quality
    :height: 22
-   :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
+   :target: https://www.codacy.com/gh/edaa-org/pyEDAA.ProjectModel
 
 .. # Codacy - coverage
 .. |SHIELD:svg:ProjectModel-codacy-coverage| image:: https://img.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
-   :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
+   :target: https://www.codacy.com/gh/edaa-org/pyEDAA.ProjectModel
 .. |SHIELD:png:ProjectModel-codacy-coverage| image:: https://raster.shields.io/codacy/coverage/c2635df20fa840bc85639ca2fa1d9cb4?longCache=true&style=flat-square&logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
-   :target: https://www.codacy.com/manual/edaa-org/pyEDAA.ProjectModel
+   :target: https://www.codacy.com/gh/edaa-org/pyEDAA.ProjectModel
 
 .. # Codecov - coverage
 .. |SHIELD:svg:ProjectModel-codecov-coverage| image:: https://img.shields.io/codecov/c/github/edaa-org/pyEDAA.ProjectModel?longCache=true&style=flat-square&logo=Codecov
@@ -169,7 +169,7 @@
    :height: 22
    :target: https://edaa-org.github.io/pyEDAA.ProjectModel/
 
-.. # Gitter 
+.. # Gitter
 .. |SHIELD:svg:ProjectModel-gitter| image:: https://img.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef
    :alt: Documentation License
    :height: 22

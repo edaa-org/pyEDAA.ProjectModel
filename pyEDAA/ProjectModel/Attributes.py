@@ -28,17 +28,26 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""Specific file types and attributes for Xilinx ISE."""
+"""A set of common attributes to store meta information on ProjectModel entities (project, design, fileset, file, ...)."""
+from typing               import Dict
 from pyTooling.Decorators import export
 
-from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, HumanReadableContent
+from pyEDAA.ProjectModel  import Attribute
 
 
 @export
-class ISEProjectFile(ProjectFile):
-	pass
+class KeyValueAttribute(Attribute):
+	KEY = "ID"
 
+	_keyValuePairs: Dict[str, str]
 
-@export
-class UCFConstraintFile(ConstraintFile, HumanReadableContent):
-	pass
+	def __init__(self):
+		super().__init__()
+
+		self._keyValuePairs = {}
+
+	def __getitem__(self, item: str) -> str:
+		return self._keyValuePairs[item]
+
+	def __setitem__(self, key: str, value: str) -> None:
+		self._keyValuePairs[key] = value
