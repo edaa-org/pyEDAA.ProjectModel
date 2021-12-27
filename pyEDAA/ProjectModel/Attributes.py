@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-A set of common attributes to store meta information on ProjectModel entities (project, design, fileset, file, ...).
-"""
+"""A set of common attributes to store meta information on ProjectModel entities (project, design, fileset, file, ...)."""
 from typing               import Dict
 from pyTooling.Decorators import export
 

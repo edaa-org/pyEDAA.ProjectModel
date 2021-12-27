@@ -28,6 +28,4 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-A vendor specific package for Altera (now Intel FPGA).
-"""
+"""A vendor specific package for Altera (now Intel FPGA)."""

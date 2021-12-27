@@ -28,6 +28,4 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Package containing unit tests.
-"""
+"""Package containing unit tests."""

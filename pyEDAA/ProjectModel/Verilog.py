@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Verilog.
-"""
+"""Specific file types and attributes for Verilog."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import WaveformExchangeFile

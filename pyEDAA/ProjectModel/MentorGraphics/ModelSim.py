@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Mentor Graphics ModelSim.
-"""
+"""Specific file types and attributes for Mentor Graphics ModelSim."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformConfigFile, TCLContent

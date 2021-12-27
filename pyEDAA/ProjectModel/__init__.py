@@ -30,9 +30,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-An abstract model of EDA tool projects.
-"""
+"""An abstract model of EDA tool projects."""
 __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2021, Patrick Lehmann, Unai Martinez-Corral"

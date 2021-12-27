@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Altera Quartus.
-"""
+"""Specific file types and attributes for Altera Quartus."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, SDCContent, TCLContent

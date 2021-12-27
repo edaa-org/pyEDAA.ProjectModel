@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Intel FPGA Quartus Prime.
-"""
+"""Specific file types and attributes for Intel FPGA Quartus Prime."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, SDCContent, TCLContent

@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Xilinx ISE.
-"""
+"""Specific file types and attributes for Xilinx ISE."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ConstraintFile, ProjectFile, HumanReadableContent

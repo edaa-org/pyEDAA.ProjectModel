@@ -29,9 +29,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Package installer for 'An abstract model of EDA tool projects'.
-"""
+"""Package installer for 'An abstract model of EDA tool projects'."""
 from pathlib             import Path
 from pyTooling.Packaging import DescribePythonPackageHostedOnGitHub, DEFAULT_CLASSIFIERS
 

@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Instantiation tests for the project model.
-"""
+"""Instantiation tests for the project model."""
 from unittest import TestCase
 
 from pyVHDLModel import VHDLVersion

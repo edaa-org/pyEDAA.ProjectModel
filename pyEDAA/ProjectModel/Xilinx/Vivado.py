@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Xilinx Vivado.
-"""
+"""Specific file types and attributes for Xilinx Vivado."""
 from pathlib import Path
 from typing import Iterable
 

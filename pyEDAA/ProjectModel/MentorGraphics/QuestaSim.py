@@ -28,9 +28,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
-Specific file types and attributes for Mentor Graphics QuestaSim.
-"""
+"""Specific file types and attributes for Mentor Graphics QuestaSim."""
 from pyTooling.Decorators import export
 
 from pyEDAA.ProjectModel import ProjectFile, SettingFile, INIContent, WaveformConfigFile, TCLContent
