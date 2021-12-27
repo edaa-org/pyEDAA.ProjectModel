@@ -31,10 +31,10 @@
 """\
 A set of common attributes to store meta information on ProjectModel entities (project, design, fileset, file, ...).
 """
-from typing import Dict
+from typing               import Dict
 from pyTooling.Decorators import export
 
-from ProjectModel import Attribute
+from pyEDAA.ProjectModel  import Attribute
 
 
 @export
