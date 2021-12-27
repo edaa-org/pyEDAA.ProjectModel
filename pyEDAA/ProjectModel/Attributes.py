@@ -29,89 +29,27 @@
 # ==================================================================================================================== #
 #
 """\
-Instantiation tests for the project model.
+A set of common attributes to store meta information on ProjectModel entities (project, design, fileset, file, ...).
 """
-from pathlib import Path
-from unittest import TestCase
+from typing               import Dict
+from pyTooling.Decorators import export
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
-from pyVHDLModel import VHDLVersion
-
-from pyEDAA.ProjectModel import Project
+from pyEDAA.ProjectModel  import Attribute
 
 
-if __name__ == "__main__": # pragma: no cover
-	print("ERROR: you called a testcase declaration file as an executable module.")
-	print("Use: 'python -m unitest <testcase module>'")
-	exit(1)
+@export
+class KeyValueAttribute(Attribute):
+	KEY = "ID"
 
+	_keyValuePairs: Dict[str, str]
 
-class Instantiate(TestCase):
-	def test_Project(self):
-		project = Project("project")
+	def __init__(self):
+		super().__init__()
 
-		self.assertIsNotNone(project)
-		self.assertEqual(project.Name, "project")
-		self.assertEqual(Path("."), project.RootDirectory)
-		self.assertEqual(1, len(project.Designs))
-		# todo: test for "default" design
-		self.assertIsNone(project.VHDLVersion)
-		self.assertIsNone(project.VerilogVersion)
-		self.assertIsNone(project.SVVersion)
+		self._keyValuePairs = {}
 
-		# now assign a root directory and check it
-		rootDirectoryPath = Path.cwd() / "project"
-		rootDirectory = rootDirectoryPath.as_posix()
-		project.RootDirectory = rootDirectoryPath
-		self.assertIs(rootDirectoryPath, project.RootDirectory)
-		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
+	def __getitem__(self, item: str) -> str:
+		return self._keyValuePairs[item]
 
-	def test_WithPath(self):
-		rootDirectoryPath = Path.cwd() / "temp/../project"
-		rootDirectory = (Path.cwd() / "project").as_posix()
-		project = Project("project", rootDirectory=rootDirectoryPath)
-		self.assertIs(rootDirectoryPath, project.RootDirectory)
-		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
-
-	def test_WithVersions(self):
-		project = Project(
-			"project",
-			vhdlVersion=VHDLVersion.VHDL2019,
-			verilogVersion=VerilogVersion.Verilog2005,
-			svVersion=SystemVerilogVersion.SystemVerilog2017
-		)
-
-		self.assertEqual(VHDLVersion.VHDL2019, project.VHDLVersion)
-		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
-		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
-
-
-class Properties(TestCase):
-	def test_SetVersionsLater(self):
-		project = Project("project")
-
-		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
-		svVersion = SystemVerilogVersion.SystemVerilog2017
-
-		project.VHDLVersion = vhdlVersion
-		project.VerilogVersion = verilogVersion
-		project.SVVersion = svVersion
-
-		self.assertEqual(vhdlVersion, project.VHDLVersion)
-		self.assertEqual(verilogVersion, project.VerilogVersion)
-		self.assertEqual(svVersion, project.SVVersion)
-
-	def test_ResolveDirectory(self):
-		projectDirectoryPath = Path.cwd() / "project"
-
-		project = Project("project", projectDirectoryPath)
-
-		self.assertEqual(projectDirectoryPath.as_posix(), project.ResolvedPath.as_posix())
-
-
-class Validate(TestCase):
-	def test_Project(self):
-		project = Project("project", rootDirectory=Path("tests/project"))
-
-		project.Validate()
+	def __setitem__(self, key: str, value: str) -> None:
+		self._keyValuePairs[key] = value
