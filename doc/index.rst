@@ -175,8 +175,8 @@ License
    :caption: Appendix
    :hidden:
 
-   Coverage Report ➚ <https://edaa-org.GitHub.io/pyEDAA.ProjectModel/coverage/>
-   Static Type Check Report ➚ <https://edaa-org.GitHub.io/pyEDAA.ProjectModel/typing/>
+   Coverage Report ➚ <coverage/index>
+   Static Type Check Report ➚ <typing/index>
    License
    Doc-License
    Glossary
