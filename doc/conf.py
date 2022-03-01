@@ -32,11 +32,15 @@ copyright = versionInformation.Copyright
 version =   ".".join(versionInformation.Version.split(".")[:2])  # e.g. 2.3    The short X.Y version.
 release =   versionInformation.Version
 
+
 # ==============================================================================
 # Miscellaneous settings
 # ==============================================================================
 # The master toctree document.
 master_doc = 'index'
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -149,7 +153,6 @@ latex_documents = [
 ]
 
 
-
 # ==============================================================================
 # Extensions
 # ==============================================================================
@@ -167,10 +170,11 @@ extensions = [
 # SphinxContrib extensions
 	'sphinxcontrib.mermaid',
 # Other extensions
-	'autoapi.sphinx',
 	'sphinx_fontawesome',
 	'sphinx_autodoc_typehints',
+	'autoapi.sphinx',
 ]
+
 
 # ==============================================================================
 # Sphinx.Ext.InterSphinx
@@ -184,7 +188,16 @@ intersphinx_mapping = {
 # Sphinx.Ext.AutoDoc
 # ==============================================================================
 # see: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#configuration
+autodoc_default_options = {
+	"private-members": True,
+	"special-members": True,
+	"inherited-members": True,
+	"exclude-members": "__weakref__"
+}
+#autodoc_class_signature = "separated"
 autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
+autodoc_typehints = "both"
+#autoclass_content = "both"
 
 
 # ==============================================================================
@@ -193,7 +206,7 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 extlinks = {
 	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
 	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
-	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s?ts=2', None),
+	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s', ''),
 }
 
 
