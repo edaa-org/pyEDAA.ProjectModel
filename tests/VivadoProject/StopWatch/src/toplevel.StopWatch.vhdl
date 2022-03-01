@@ -13,7 +13,7 @@ entity toplevel is
 	port (
 		NexysA7_SystemClock         : in  std_logic;
 		NexysA7_GPIO_Button_Reset_n : in  std_logic;
-		
+
 		NexysA7_GPIO_Button         : in  std_logic_vector(0 downto 0);
 		NexysA7_GPIO_Seg7_Cathode_n : out std_logic_vector(7 downto 0);
 		NexysA7_GPIO_Seg7_Anode_n   : out std_logic_vector(7 downto 0)
@@ -30,20 +30,20 @@ architecture rtl of toplevel is
 		4 => (Modulo => 10, Dot => '0'),
 		5 => (Modulo =>  6, Dot => '0')
 	);
-	
+
 	signal Board_Reset  : std_logic;
-	
+
 	signal Deb_Reset    : std_logic;
 	signal Deb_Start    : std_logic;
 	signal Deb_Start_d  : std_logic := '0';
 	signal Deb_Start_re : std_logic;
-	
+
 	signal Reset        : std_logic;
 	signal Start        : std_logic;
-	
-	
+
+
 	signal Digits  : T_BCD_Vector(STOPWATCH_CONFIGURATION'length - 1 downto 0);
-	
+
 	signal Cathode : std_logic_vector(7 downto 0);
 	signal Anode   : std_logic_vector(Digits'range);
 
@@ -59,7 +59,7 @@ begin
 		)
 		port map (
 			Clock       => NexysA7_SystemClock,
-			
+
 			Input(0)    => Board_Reset,
 			Input(1)    => NexysA7_GPIO_Button(0),
 			Output(0)   => Deb_Reset,
@@ -67,19 +67,19 @@ begin
 		);
 
 	Reset <= Deb_Reset;
-		
+
 	-- Rising edge detection
 	Deb_Start_d  <= Deb_Start when rising_edge(NexysA7_SystemClock);
 	Deb_Start_re <= not Deb_Start_d and Deb_Start;
-	
+
 	-- renaming
 	Start <= Deb_Start_re;
-	
+
 	-- Stopwatch
 	sw: entity work.Stopwatch
 		generic map (
 			CLOCK_FREQ  => CLOCK_FREQ,
-			
+
 			TIMEBASE    => 10 ms,
 			CONFIG      => STOPWATCH_CONFIGURATION
 		)
@@ -91,7 +91,7 @@ begin
 
 			Digits => Digits
 		);
-	
+
 	-- 7-segment display
 	display: entity work.seg7_Display
 		generic map (
@@ -102,7 +102,7 @@ begin
 			Clock         => NexysA7_SystemClock,
 
 			DigitValues   => Digits,
-			
+
 			Seg7_Segments => Cathode,
 			Seg7_Selects  => Anode
 		);
