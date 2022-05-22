@@ -759,7 +759,7 @@ class FileSet:
 				try:
 					fileSet = self._fileSets[fileSetName]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSetName, fileset=self.Name)) from ex
+					raise Exception(f"Fileset {fileSetName} not bound to fileset {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -1151,12 +1151,12 @@ class Design:
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
 			if (value not in self._fileSets.keys()):
-				raise Exception("Fileset '{0}' is not in this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not in this design.")
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
 			if (value not in self.FileSets):
-				raise Exception("Fileset '{0}' is not associated to this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not associated to this design.")
 
 			self._defaultFileSet = value
 		else:
@@ -1184,7 +1184,7 @@ class Design:
 				try:
 					fileSet = self._fileSets[fileSet]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to design {design}.".format(name=fileSet.Name, design=self.Name)) from ex
+					raise Exception(f"Fileset {fileSet.Name} not bound to design {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -1288,7 +1288,7 @@ class Design:
 		elif (fileSet in self.FileSets):
 			raise Exception("Design already contains this fileSet.")
 		elif (fileSet.Name in self._fileSets.keys()):
-			raise Exception("Design already contains a fileset named '{0}'.".format(fileSet.Name))
+			raise Exception(f"Design already contains a fileset named '{fileSet.Name}'.")
 
 		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
@@ -1301,7 +1301,7 @@ class Design:
 		if file.FileSet is None:
 			self._defaultFileSet.AddFile(file)
 		else:
-			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.".format(file=file))
+			raise ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.")
 
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
