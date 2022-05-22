@@ -1,4 +1,4 @@
 anytree>=2.8.0
-pyTooling>=1.9.5
+pyTooling>=2.0.1
 pyVHDLModel>=0.14.3
 pySVModel>=0.3.5
