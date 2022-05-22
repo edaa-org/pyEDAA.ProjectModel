@@ -42,7 +42,7 @@ if __name__ == "__main__": # pragma: no cover
 
 class FileSets(TestCase):
 	def test_Parsing(self):
-		xprPath = Path.cwd() / "tests/VivadoProject/StopWatch/project/StopWatch.xpr"
+		xprPath = Path.cwd() / "VivadoProject/StopWatch/project/StopWatch.xpr"
 		# print()
 		# print(f"{xprPath}")
 		xprFile = VivadoProjectFile(xprPath)

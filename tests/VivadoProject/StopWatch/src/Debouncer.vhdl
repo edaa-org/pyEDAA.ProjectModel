@@ -9,12 +9,12 @@ entity Debouncer is
 	generic (
 		CLOCK_FREQ     : freq := 100 MHz;
 		DEBOUNCE_TIME  : time := 3 ms;
-		
+
 		BITS           : positive
 	);
 	port (
 		Clock  : in  std_logic;
-		
+
 		Input  : in  std_logic_vector(BITS - 1 downto 0);
 		Output : out std_logic_vector(BITS - 1 downto 0) := (others => '0')
 	);
@@ -23,7 +23,7 @@ end entity;
 architecture rtl of Debouncer is
 	constant DEBOUNCE_COUNTER_MAX  : positive := TimingToCycles(ite(IS_SIMULATION, 1 us, DEBOUNCE_TIME), CLOCK_FREQ);
 	constant DEBOUNCE_COUNTER_BITS : positive := log2(DEBOUNCE_COUNTER_MAX);
-	
+
 begin
 	assert false report "CLOCK_FREQ:           " & freq'image(CLOCK_FREQ);
 	assert false report "DEBOUNCE_TIME:        " & time'image(DEBOUNCE_TIME);
@@ -42,7 +42,7 @@ begin
 				else
 					DebounceCounter <= to_signed(DEBOUNCE_COUNTER_MAX - 3, DebounceCounter'length);
 				end if;
-				
+
 				-- latch input bit, if input was stable for DEBOUNCE_TIME_MS
 				if (DebounceCounter(DebounceCounter'high) = '1') then
 					Output(i) <= Input(i);

@@ -34,13 +34,14 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2022, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.4.2"
+__version__ =   "0.4.3"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
+from anytree              import NodeMixin
 from pyTooling.Decorators import export
 from pySVModel            import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel          import VHDLVersion
@@ -367,8 +368,27 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
-		# TODO: handle if vhdlLibrary is a string
-		self._vhdlLibrary = vhdlLibrary
+		if isinstance(vhdlLibrary, str):
+			if design is not None:
+				try:
+					vhdlLibrary = design.VHDLLibraries[vhdlLibrary]
+				except KeyError as ex:
+					raise Exception(f"VHDL library '{vhdlLibrary}' not found in design '{design.Name}'.") from ex
+			elif project is not None:
+				try:
+					vhdlLibrary = project.DefaultDesign.VHDLLibraries[vhdlLibrary]
+				except KeyError as ex:
+					raise Exception(f"VHDL library '{vhdlLibrary}' not found in default design '{project.DefaultDesign.Name}'.") from ex
+			else:
+				raise Exception(f"Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
+		elif isinstance(vhdlLibrary, VHDLLibrary):
+			self._vhdlLibrary = vhdlLibrary
+			vhdlLibrary.AddFile(self)
+		elif vhdlLibrary is None:
+			self._vhdlLibrary = None
+		else:
+			raise TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+
 		self._vhdlVersion = vhdlVersion
 
 	def Validate(self):
@@ -412,6 +432,9 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
+
+	def __repr__(self) -> str:
+		return f"<VHDL file: '{self.ResolvedPath}'; lib: '{self.VHDLLibrary}'; version: {self.VHDLVersion}>"
 
 
 @export
@@ -591,7 +614,8 @@ class FileSet:
 		self._topLevel =  topLevel
 		if project is not None:
 			self._project = project
-			self._design =  design
+			self._design =  design if design is not None else project.DefaultDesign
+
 		elif design is not None:
 			self._project = design._project
 			self._design =  design
@@ -735,7 +759,7 @@ class FileSet:
 				try:
 					fileSet = self._fileSets[fileSetName]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSetName, fileset=self.Name)) from ex
+					raise Exception(f"Fileset {fileSetName} not bound to fileset {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -887,7 +911,7 @@ class FileSet:
 
 
 @export
-class VHDLLibrary:
+class VHDLLibrary(NodeMixin):
 	"""
 	A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
 
@@ -914,12 +938,27 @@ class VHDLLibrary:
 		if project is not None:
 			self._project = project
 			self._design =  design
+
+			if design is None:
+				design = project.DefaultDesign
+
+			if name in design.VHDLLibraries:
+				raise Exception(f"Library '{name}' already in design '{design.Name}'.")
+			else:
+				design.VHDLLibraries[name] = self
+
 		elif design is not None:
 			self._project = design._project
 			self._design =  design
+
+			if name in design.VHDLLibraries:
+				raise Exception(f"Library '{name}' already in design '{design.Name}'.")
+			else:
+				design.VHDLLibraries[name] = self
 		else:
 			self._project = None
 			self._design =  None
+
 		self._files =     []
 		self._vhdlVersion = vhdlVersion
 
@@ -971,6 +1010,22 @@ class VHDLLibrary:
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
+
+	def AddDependency(self, library: 'VHDLLibrary'):
+		library.parent = self
+
+	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
+		if not isinstance(vhdlFile, VHDLSourceFile):
+			raise TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+
+		self._files.append(vhdlFile)
+
+	def AddFiles(self, vhdlFiles: Iterable[VHDLSourceFile]) -> None:
+		for vhdlFile in vhdlFiles:
+			if not isinstance(vhdlFile, VHDLSourceFile):
+				raise TypeError(f"Item '{vhdlFile}' in parameter 'vhdlFiles' is not a 'VHDLSourceFile'.")
+
+			self._files.append(vhdlFile)
 
 	def __str__(self):
 		"""Returns the VHDL library's name."""
@@ -1096,12 +1151,12 @@ class Design:
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
 			if (value not in self._fileSets.keys()):
-				raise Exception("Fileset '{0}' is not in this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not in this design.")
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
 			if (value not in self.FileSets):
-				raise Exception("Fileset '{0}' is not associated to this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not associated to this design.")
 
 			self._defaultFileSet = value
 		else:
@@ -1129,7 +1184,7 @@ class Design:
 				try:
 					fileSet = self._fileSets[fileSet]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to design {design}.".format(name=fileSet.Name, design=self.Name)) from ex
+					raise Exception(f"Fileset {fileSet.Name} not bound to design {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -1181,8 +1236,8 @@ class Design:
 		self._attributes[key] = value
 
 	@property
-	def VHDLLibraries(self) -> List[VHDLLibrary]:
-		return self._vhdlLibraries.values()
+	def VHDLLibraries(self) -> Dict[str, VHDLLibrary]:
+		return self._vhdlLibraries
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
@@ -1233,7 +1288,7 @@ class Design:
 		elif (fileSet in self.FileSets):
 			raise Exception("Design already contains this fileSet.")
 		elif (fileSet.Name in self._fileSets.keys()):
-			raise Exception("Design already contains a fileset named '{0}'.".format(fileSet.Name))
+			raise Exception(f"Design already contains a fileset named '{fileSet.Name}'.")
 
 		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
@@ -1246,7 +1301,7 @@ class Design:
 		if file.FileSet is None:
 			self._defaultFileSet.AddFile(file)
 		else:
-			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.".format(file=file))
+			raise ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.")
 
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:

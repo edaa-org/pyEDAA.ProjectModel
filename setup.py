@@ -44,5 +44,7 @@ DescribePythonPackageHostedOnGitHub(
 	gitHubNamespace=gitHubNamespace,
 	sourceFileWithVersion=packageInformationFile,
 	developmentStatus="beta",
-	classifiers=list(DEFAULT_CLASSIFIERS) + ["Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)"]
+	classifiers=list(DEFAULT_CLASSIFIERS) + [
+		"Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)"
+	]
 )

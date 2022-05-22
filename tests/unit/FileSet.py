@@ -233,7 +233,7 @@ class FileFilter(TestCase):
 
 class Validate(TestCase):
 	def test_FileSet(self):
-		project = Project("project", rootDirectory=Path("tests/project"))
+		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 
