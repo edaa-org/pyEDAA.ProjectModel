@@ -1,0 +1,19 @@
+pyEDAA.ProjectModel.Intel
+=============================
+
+.. automodule:: pyEDAA.ProjectModel.Intel
+
+
+
+.. #-----------------------------------
+
+**Submodules**
+
+.. toctree::
+
+   pyEDAA.ProjectModel.Intel.QuartusPrime
+
+.. currentmodule:: pyEDAA.ProjectModel.Intel
+
+
+.. #-----------------------------------

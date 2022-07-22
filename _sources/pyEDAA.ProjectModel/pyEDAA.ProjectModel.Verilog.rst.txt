@@ -1,0 +1,33 @@
+pyEDAA.ProjectModel.Verilog
+===============================
+
+.. automodule:: pyEDAA.ProjectModel.Verilog
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Verilog
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`ValueChangeDumpFile`:
+  Verilog's waveform file (``*.vcd``) for exchanging value changes as defined by IEEE Std. 1364.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: ValueChangeDumpFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ValueChangeDumpFile
+      :parts: 1
+
+   .. rubric:: Members

@@ -1,0 +1,33 @@
+pyEDAA.ProjectModel.OSVVM
+=============================
+
+.. automodule:: pyEDAA.ProjectModel.OSVVM
+
+
+.. currentmodule:: pyEDAA.ProjectModel.OSVVM
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`OSVVMProjectFile`:
+  An OSVVM project file (``*.pro``).
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: OSVVMProjectFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: OSVVMProjectFile
+      :parts: 1
+
+   .. rubric:: Members

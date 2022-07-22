@@ -1,0 +1,19 @@
+pyEDAA.ProjectModel.Altera
+==============================
+
+.. automodule:: pyEDAA.ProjectModel.Altera
+
+
+
+.. #-----------------------------------
+
+**Submodules**
+
+.. toctree::
+
+   pyEDAA.ProjectModel.Altera.Quartus
+
+.. currentmodule:: pyEDAA.ProjectModel.Altera
+
+
+.. #-----------------------------------

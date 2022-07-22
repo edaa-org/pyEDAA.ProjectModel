@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyEDAA.ProjectModel.Xilinx.Vivado &mdash; pyEDAA.ProjectModel 0.4.2 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.svg"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html">
+            <img src="../../../../_static/logo_on_dark.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ProjectModel/index.html">Project Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../FileTypes/index.html">File Types</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html">pyEDAA.ProjectModel</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../coverage/index.html">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../typing/index.html">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">pyEDAA.ProjectModel</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../ProjectModel.html">pyEDAA.ProjectModel</a> &raquo;</li>
+      <li>pyEDAA.ProjectModel.Xilinx.Vivado</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyEDAA.ProjectModel.Xilinx.Vivado</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ==================================================================================================================== #</span>
+<span class="c1">#               _____ ____    _        _      ____            _           _   __  __           _      _                #</span>
+<span class="c1">#   _ __  _   _| ____|  _ \  / \      / \    |  _ \ _ __ ___ (_) ___  ___| |_|  \/  | ___   __| | ___| |               #</span>
+<span class="c1">#  | &#39;_ \| | | |  _| | | | |/ _ \    / _ \   | |_) | &#39;__/ _ \| |/ _ \/ __| __| |\/| |/ _ \ / _` |/ _ \ |               #</span>
+<span class="c1">#  | |_) | |_| | |___| |_| / ___ \  / ___ \ _|  __/| | | (_) | |  __/ (__| |_| |  | | (_) | (_| |  __/ |               #</span>
+<span class="c1">#  | .__/ \__, |_____|____/_/   \_\/_/   \_(_)_|   |_|  \___// |\___|\___|\__|_|  |_|\___/ \__,_|\___|_|               #</span>
+<span class="c1">#  |_|    |___/                                            |__/                                                        #</span>
+<span class="c1"># ==================================================================================================================== #</span>
+<span class="c1"># Authors:                                                                                                             #</span>
+<span class="c1">#   Patrick Lehmann                                                                                                    #</span>
+<span class="c1">#                                                                                                                      #</span>
+<span class="c1"># License:                                                                                                             #</span>
+<span class="c1"># ==================================================================================================================== #</span>
+<span class="c1"># Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #</span>
+<span class="c1">#                                                                                                                      #</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);                                                      #</span>
+<span class="c1"># you may not use this file except in compliance with the License.                                                     #</span>
+<span class="c1"># You may obtain a copy of the License at                                                                              #</span>
+<span class="c1">#                                                                                                                      #</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0                                                                         #</span>
+<span class="c1">#                                                                                                                      #</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software                                                  #</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,                                                    #</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.                                             #</span>
+<span class="c1"># See the License for the specific language governing permissions and                                                  #</span>
+<span class="c1"># limitations under the License.                                                                                       #</span>
+<span class="c1">#                                                                                                                      #</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0                                                                                  #</span>
+<span class="c1"># ==================================================================================================================== #</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;Specific file types and attributes for Xilinx Vivado.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
+
+<span class="kn">from</span> <span class="nn">xml.dom</span> <span class="kn">import</span> <span class="n">minidom</span><span class="p">,</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">pyVHDLModel</span> <span class="kn">import</span> <span class="n">VHDLVersion</span>
+<span class="kn">from</span> <span class="nn">pyTooling.Decorators</span> <span class="kn">import</span> <span class="n">export</span>
+
+<span class="kn">from</span> <span class="nn">pyEDAA.ProjectModel</span> <span class="kn">import</span> <span class="n">ProjectFile</span><span class="p">,</span> <span class="n">XMLFile</span><span class="p">,</span> <span class="n">XMLContent</span><span class="p">,</span> <span class="n">SDCContent</span><span class="p">,</span> <span class="n">Project</span><span class="p">,</span> <span class="n">FileSet</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">Design</span>
+<span class="kn">from</span> <span class="nn">pyEDAA.ProjectModel</span> <span class="kn">import</span> <span class="n">File</span> <span class="k">as</span> <span class="n">Model_File</span>
+<span class="kn">from</span> <span class="nn">pyEDAA.ProjectModel</span> <span class="kn">import</span> <span class="n">ConstraintFile</span> <span class="k">as</span> <span class="n">Model_ConstraintFile</span>
+<span class="kn">from</span> <span class="nn">pyEDAA.ProjectModel</span> <span class="kn">import</span> <span class="n">VerilogSourceFile</span> <span class="k">as</span> <span class="n">Model_VerilogSourceFile</span>
+<span class="kn">from</span> <span class="nn">pyEDAA.ProjectModel</span> <span class="kn">import</span> <span class="n">VHDLSourceFile</span> <span class="k">as</span> <span class="n">Model_VHDLSourceFile</span>
+
+
+<div class="viewcode-block" id="UsedInAttribute"><a class="viewcode-back" href="../../../../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Xilinx.Vivado.html#pyEDAA.ProjectModel.Xilinx.Vivado.UsedInAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">UsedInAttribute</span><span class="p">(</span><span class="n">Attribute</span><span class="p">):</span>
+	<span class="n">KEY</span> <span class="o">=</span> <span class="s2">&quot;UsedIn&quot;</span>
+	<span class="n">VALUE_TYPE</span> <span class="o">=</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">File</span><span class="p">(</span><span class="n">Model_File</span><span class="p">):</span>
+	<span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">VivadoFileMixIn</span><span class="p">:</span>
+	<span class="k">def</span> <span class="nf">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="n">UsedInAttribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">ConstraintFile</span><span class="p">(</span><span class="n">Model_ConstraintFile</span><span class="p">,</span> <span class="n">VivadoFileMixIn</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">()</span>
+		<span class="n">VivadoFileMixIn</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">VerilogSourceFile</span><span class="p">(</span><span class="n">Model_VerilogSourceFile</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">()</span>
+		<span class="n">VivadoFileMixIn</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">VHDLSourceFile</span><span class="p">(</span><span class="n">Model_VHDLSourceFile</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">()</span>
+		<span class="n">VivadoFileMixIn</span><span class="o">.</span><span class="n">_registerAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">VivadoProjectFile</span><span class="p">(</span><span class="n">ProjectFile</span><span class="p">,</span> <span class="n">XMLContent</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;A Vivado project file (``*.xpr``).&quot;&quot;&quot;</span>
+
+	<span class="n">_xprProject</span><span class="p">:</span> <span class="n">Project</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+		<span class="bp">self</span><span class="p">,</span>
+		<span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+		<span class="n">project</span><span class="p">:</span> <span class="n">Project</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+		<span class="n">design</span><span class="p">:</span> <span class="n">Design</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+		<span class="n">fileSet</span><span class="p">:</span> <span class="n">FileSet</span> <span class="o">=</span> <span class="kc">None</span>
+	<span class="p">):</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">fileSet</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_xprProject</span> <span class="o">=</span> <span class="kc">None</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">ProjectModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Project</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xprProject</span>
+
+	<span class="k">def</span> <span class="nf">Parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+			<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vivado project file &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="si">!s}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="si">!s}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">root</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">))</span><span class="o">.</span><span class="n">documentElement</span>
+		<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t open &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="si">!s}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_xprProject</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span> <span class="n">rootDirectory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_ParseRootElement</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseRootElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">rootNode</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">rootNode</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s2">&quot;FileSets&quot;</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_ParseFileSets</span><span class="p">(</span><span class="n">rootNode</span><span class="p">)</span>
+				<span class="k">break</span>
+
+	<span class="k">def</span> <span class="nf">_ParseFileSets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filesetsNode</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">fileSetsNode</span> <span class="ow">in</span> <span class="n">filesetsNode</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">fileSetsNode</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span> <span class="ow">and</span> <span class="n">fileSetsNode</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;FileSet&quot;</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_ParseFileSet</span><span class="p">(</span><span class="n">fileSetsNode</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseFileSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filesetNode</span><span class="p">):</span>
+		<span class="n">filesetName</span> <span class="o">=</span> <span class="n">filesetNode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+		<span class="n">fileset</span> <span class="o">=</span> <span class="n">FileSet</span><span class="p">(</span><span class="n">filesetName</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_xprProject</span><span class="o">.</span><span class="n">DefaultDesign</span><span class="p">)</span>
+
+		<span class="k">for</span> <span class="n">fileNode</span> <span class="ow">in</span> <span class="n">filesetNode</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;File&quot;</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">_ParseFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+				<span class="k">elif</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span> <span class="ow">and</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;Config&quot;</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">_ParseFileSetConfig</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileNode</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">croppedPath</span> <span class="o">=</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Path&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;$PPRDIR/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+		<span class="n">filePath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">croppedPath</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">filePath</span><span class="o">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.vhd&quot;</span><span class="p">,</span> <span class="s2">&quot;.vhdl&quot;</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_ParseVHDLFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">filePath</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.xdc&quot;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_ParseXDCFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">filePath</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.v&quot;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_ParseVerilogFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">filePath</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.xci&quot;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_ParseXCIFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_ParseDefaultFile</span><span class="p">(</span><span class="n">fileNode</span><span class="p">,</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseVHDLFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileNode</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">vhdlFile</span> <span class="o">=</span> <span class="n">VHDLSourceFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+		<span class="n">fileset</span><span class="o">.</span><span class="n">AddFile</span><span class="p">(</span><span class="n">vhdlFile</span><span class="p">)</span>
+		<span class="n">usedInAttr</span> <span class="o">=</span> <span class="n">vhdlFile</span><span class="p">[</span><span class="n">UsedInAttribute</span><span class="p">]</span>
+
+		<span class="k">for</span> <span class="n">childNode</span> <span class="ow">in</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">childNode</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span> <span class="ow">and</span> <span class="n">childNode</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;FileInfo&quot;</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">childNode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;SFType&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;VHDL2008&quot;</span><span class="p">:</span>
+					<span class="n">vhdlFile</span><span class="o">.</span><span class="n">VHDLVersion</span> <span class="o">=</span> <span class="n">VHDLVersion</span><span class="o">.</span><span class="n">VHDL2008</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">vhdlFile</span><span class="o">.</span><span class="n">VHDLVersion</span> <span class="o">=</span> <span class="n">VHDLVersion</span><span class="o">.</span><span class="n">VHDL93</span>
+
+				<span class="k">for</span> <span class="n">fileAttribute</span> <span class="ow">in</span> <span class="n">childNode</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+					<span class="k">if</span> <span class="n">fileAttribute</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span> <span class="ow">and</span> <span class="n">fileAttribute</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;Attr&quot;</span><span class="p">:</span>
+						<span class="k">if</span> <span class="n">fileAttribute</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Library&quot;</span><span class="p">:</span>
+							<span class="n">libraryName</span> <span class="o">=</span> <span class="n">fileAttribute</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Val&quot;</span><span class="p">)</span>
+							<span class="n">vhdlFile</span><span class="o">.</span><span class="n">VHDLLibrary</span> <span class="o">=</span> <span class="n">fileset</span><span class="o">.</span><span class="n">GetOrCreateVHDLLibrary</span><span class="p">(</span><span class="n">libraryName</span><span class="p">)</span>
+						<span class="k">elif</span> <span class="n">fileAttribute</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Val&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;UsedIn&quot;</span><span class="p">:</span>
+							<span class="n">usedInAttr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fileAttribute</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Val&quot;</span><span class="p">))</span>
+
+	<span class="k">def</span> <span class="nf">_ParseDefaultFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fileSet</span><span class="o">=</span><span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseXDCFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">XDCConstraintFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fileSet</span><span class="o">=</span><span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseVerilogFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">VerilogSourceFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fileSet</span><span class="o">=</span><span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseXCIFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="n">IPCoreInstantiationFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fileSet</span><span class="o">=</span><span class="n">fileset</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_ParseFileSetConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileNode</span><span class="p">,</span> <span class="n">fileset</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">fileNode</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="n">ELEMENT_NODE</span> <span class="ow">and</span> <span class="n">option</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;Option&quot;</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;TopModule&quot;</span><span class="p">:</span>
+					<span class="n">fileset</span><span class="o">.</span><span class="n">TopLevel</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;Val&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">XDCConstraintFile</span><span class="p">(</span><span class="n">ConstraintFile</span><span class="p">,</span> <span class="n">SDCContent</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``).&quot;&quot;&quot;</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">IPCoreDescriptionFile</span><span class="p">(</span><span class="n">XMLFile</span><span class="p">):</span>
+	<span class="k">pass</span>
+
+
+<span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">IPCoreInstantiationFile</span><span class="p">(</span><span class="n">XMLFile</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``).&quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Patrick Lehmann, Unai Martinez-Corral.
+      <span class="lastupdated">Last updated on 22.07.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

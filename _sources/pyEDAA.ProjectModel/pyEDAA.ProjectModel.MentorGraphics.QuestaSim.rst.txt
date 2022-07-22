@@ -1,0 +1,63 @@
+pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+================================================
+
+.. automodule:: pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+
+.. currentmodule:: pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`ModelSimProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`ModelSimINIFile`:
+  Base-class of all tool-specific setting files.
+
+- :py:class:`WaveDoFile`:
+  Base-class of all tool-specific waveform configuration files.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: ModelSimProjectFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ModelSimProjectFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: ModelSimINIFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ModelSimINIFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: WaveDoFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveDoFile
+      :parts: 1
+
+   .. rubric:: Members

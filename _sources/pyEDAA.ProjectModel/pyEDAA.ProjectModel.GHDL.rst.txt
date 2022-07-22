@@ -1,0 +1,33 @@
+pyEDAA.ProjectModel.GHDL
+============================
+
+.. automodule:: pyEDAA.ProjectModel.GHDL
+
+
+.. currentmodule:: pyEDAA.ProjectModel.GHDL
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`GHDLWaveformFile`:
+  GHDL's waveform file (``*.ghw``) supporting VHDL and Verilog simulation results.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: GHDLWaveformFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: GHDLWaveformFile
+      :parts: 1
+
+   .. rubric:: Members

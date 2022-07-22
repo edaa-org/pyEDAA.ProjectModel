@@ -1,0 +1,649 @@
+pyEDAA.ProjectModel
+=======================
+
+.. automodule:: pyEDAA.ProjectModel
+
+
+
+.. #-----------------------------------
+
+**Submodules**
+
+.. toctree::
+
+   pyEDAA.ProjectModel.Altera
+   pyEDAA.ProjectModel.Attributes
+   pyEDAA.ProjectModel.GHDL
+   pyEDAA.ProjectModel.Intel
+   pyEDAA.ProjectModel.MentorGraphics
+   pyEDAA.ProjectModel.OSVVM
+   pyEDAA.ProjectModel.Verilog
+   pyEDAA.ProjectModel.Xilinx
+
+.. currentmodule:: pyEDAA.ProjectModel
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`Attribute`:
+  Undocumented.
+
+- :py:class:`FileType`:
+  A :term:`meta-class` to construct *FileType* classes.
+
+- :py:class:`File`:
+  A :term:`File` represents a file in a design. This :term:`base-class` is used
+
+- :py:class:`HumanReadableContent`:
+  A file type representing human-readable contents.
+
+- :py:class:`XMLContent`:
+  A file type representing XML contents.
+
+- :py:class:`YAMLContent`:
+  A file type representing YAML contents.
+
+- :py:class:`JSONContent`:
+  A file type representing JSON contents.
+
+- :py:class:`INIContent`:
+  A file type representing INI contents.
+
+- :py:class:`TOMLContent`:
+  A file type representing TOML contents.
+
+- :py:class:`TCLContent`:
+  A file type representing content in TCL code.
+
+- :py:class:`SDCContent`:
+  A file type representing contents as Synopsys Design Constraints (SDC).
+
+- :py:class:`PythonContent`:
+  A file type representing contents as Python source code.
+
+- :py:class:`TextFile`:
+  A text file (``*.txt``).
+
+- :py:class:`LogFile`:
+  A log file (``*.log``).
+
+- :py:class:`XMLFile`:
+  An XML file (``*.xml``).
+
+- :py:class:`SourceFile`:
+  Base-class of all source files.
+
+- :py:class:`HDLSourceFile`:
+  Base-class of all HDL source files.
+
+- :py:class:`NetlistFile`:
+  Base-class of all netlist source files.
+
+- :py:class:`EDIFNetlistFile`:
+  Netlist file in EDIF (Electronic Design Interchange Format).
+
+- :py:class:`TCLSourceFile`:
+  A TCL source file.
+
+- :py:class:`VHDLSourceFile`:
+  A VHDL source file (of any language version).
+
+- :py:class:`VerilogSourceFile`:
+  A Verilog source file (of any language version).
+
+- :py:class:`SystemVerilogSourceFile`:
+  A SystemVerilog source file (of any language version).
+
+- :py:class:`PythonSourceFile`:
+  A Python source file.
+
+- :py:class:`CocotbPythonFile`:
+  A Python source file used by Cocotb.
+
+- :py:class:`ConstraintFile`:
+  Base-class of all constraint files.
+
+- :py:class:`ProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`CSourceFile`:
+  Base-class of all ANSI-C source files.
+
+- :py:class:`CppSourceFile`:
+  Base-class of all ANSI-C++ source files.
+
+- :py:class:`SettingFile`:
+  Base-class of all tool-specific setting files.
+
+- :py:class:`SimulationAnalysisFile`:
+  Base-class of all tool-specific analysis files.
+
+- :py:class:`SimulationElaborationFile`:
+  Base-class of all tool-specific elaboration files.
+
+- :py:class:`SimulationStartFile`:
+  Base-class of all tool-specific simulation start-up files.
+
+- :py:class:`SimulationRunFile`:
+  Base-class of all tool-specific simulation run (execution) files.
+
+- :py:class:`WaveformConfigFile`:
+  Base-class of all tool-specific waveform configuration files.
+
+- :py:class:`WaveformDatabaseFile`:
+  Base-class of all tool-specific waveform database files.
+
+- :py:class:`WaveformExchangeFile`:
+  Base-class of all tool-independent waveform exchange files.
+
+- :py:class:`FileSet`:
+  A :term:`FileSet` represents a group of files. Filesets can have sub-filesets.
+
+- :py:class:`VHDLLibrary`:
+  A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
+
+- :py:class:`Design`:
+  A :term:`Design` represents a group of filesets and the source files therein.
+
+- :py:class:`Project`:
+  A :term:`Project` represents a group of designs and the source files therein.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: Attribute
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Attribute
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: FileType
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: FileType
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: File
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: File
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: HumanReadableContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: HumanReadableContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: XMLContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XMLContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: YAMLContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: YAMLContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: JSONContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: JSONContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: INIContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: INIContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: TOMLContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TOMLContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: TCLContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TCLContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SDCContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SDCContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: PythonContent
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: PythonContent
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: TextFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TextFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: LogFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: LogFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: XMLFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XMLFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: HDLSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: HDLSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: NetlistFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: NetlistFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: EDIFNetlistFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: EDIFNetlistFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: TCLSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TCLSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: VHDLSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: VerilogSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SystemVerilogSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SystemVerilogSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: PythonSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: PythonSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: CocotbPythonFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CocotbPythonFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: ConstraintFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ConstraintFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: ProjectFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ProjectFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: CSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: CppSourceFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CppSourceFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SettingFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SettingFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SimulationAnalysisFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationAnalysisFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SimulationElaborationFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationElaborationFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SimulationStartFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationStartFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SimulationRunFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationRunFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: WaveformConfigFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformConfigFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: WaveformDatabaseFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformDatabaseFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: WaveformExchangeFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformExchangeFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: FileSet
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: FileSet
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: VHDLLibrary
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLLibrary
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: Design
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Design
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: Project
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Project
+      :parts: 1
+
+   .. rubric:: Members

@@ -1,0 +1,20 @@
+pyEDAA.ProjectModel.Xilinx
+==============================
+
+.. automodule:: pyEDAA.ProjectModel.Xilinx
+
+
+
+.. #-----------------------------------
+
+**Submodules**
+
+.. toctree::
+
+   pyEDAA.ProjectModel.Xilinx.ISE
+   pyEDAA.ProjectModel.Xilinx.Vivado
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx
+
+
+.. #-----------------------------------

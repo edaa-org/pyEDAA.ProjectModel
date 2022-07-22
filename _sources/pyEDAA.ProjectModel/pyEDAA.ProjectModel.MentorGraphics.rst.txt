@@ -1,0 +1,20 @@
+pyEDAA.ProjectModel.MentorGraphics
+======================================
+
+.. automodule:: pyEDAA.ProjectModel.MentorGraphics
+
+
+
+.. #-----------------------------------
+
+**Submodules**
+
+.. toctree::
+
+   pyEDAA.ProjectModel.MentorGraphics.ModelSim
+   pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+.. currentmodule:: pyEDAA.ProjectModel.MentorGraphics
+
+
+.. #-----------------------------------

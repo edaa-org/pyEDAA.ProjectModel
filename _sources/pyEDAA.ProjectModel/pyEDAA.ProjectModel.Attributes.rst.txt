@@ -1,0 +1,33 @@
+pyEDAA.ProjectModel.Attributes
+==================================
+
+.. automodule:: pyEDAA.ProjectModel.Attributes
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Attributes
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`KeyValueAttribute`:
+  Undocumented.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: KeyValueAttribute
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: KeyValueAttribute
+      :parts: 1
+
+   .. rubric:: Members

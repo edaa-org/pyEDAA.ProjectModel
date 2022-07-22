@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyEDAA.ProjectModel &mdash; pyEDAA.ProjectModel 0.4.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyEDAA.ProjectModel.Altera" href="pyEDAA.ProjectModel.Altera.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo_on_dark.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ProjectModel/index.html">Project Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FileTypes/index.html">File Types</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyEDAA.ProjectModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Altera.html">pyEDAA.ProjectModel.Altera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Attributes.html">pyEDAA.ProjectModel.Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.GHDL.html">pyEDAA.ProjectModel.GHDL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Intel.html">pyEDAA.ProjectModel.Intel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.html">pyEDAA.ProjectModel.MentorGraphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.OSVVM.html">pyEDAA.ProjectModel.OSVVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Verilog.html">pyEDAA.ProjectModel.Verilog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.html">pyEDAA.ProjectModel.Xilinx</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coverage/index.html">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing/index.html">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyEDAA.ProjectModel</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">&lt;no title&gt;</a> &raquo;</li>
+      <li>pyEDAA.ProjectModel</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/edaa-org/pyEDAA.ProjectModel/blob/main/doc/pyEDAA.ProjectModel/pyEDAA.ProjectModel.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.xlarge {font-size: x-large; }
+</style><section id="module-pyEDAA.ProjectModel">
+<span id="pyedaa-projectmodel"></span><h1>pyEDAA.ProjectModel<a class="headerlink" href="#module-pyEDAA.ProjectModel" title="Permalink to this heading">¶</a></h1>
+<p>An abstract model of EDA tool projects.</p>
+<p><strong>Submodules</strong></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.Altera.html">pyEDAA.ProjectModel.Altera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Altera.Quartus.html">pyEDAA.ProjectModel.Altera.Quartus</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.Attributes.html">pyEDAA.ProjectModel.Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.GHDL.html">pyEDAA.ProjectModel.GHDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.Intel.html">pyEDAA.ProjectModel.Intel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Intel.QuartusPrime.html">pyEDAA.ProjectModel.Intel.QuartusPrime</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.html">pyEDAA.ProjectModel.MentorGraphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.ModelSim.html">pyEDAA.ProjectModel.MentorGraphics.ModelSim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.QuestaSim.html">pyEDAA.ProjectModel.MentorGraphics.QuestaSim</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.OSVVM.html">pyEDAA.ProjectModel.OSVVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.Verilog.html">pyEDAA.ProjectModel.Verilog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.html">pyEDAA.ProjectModel.Xilinx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.ISE.html">pyEDAA.ProjectModel.Xilinx.ISE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.Vivado.html">pyEDAA.ProjectModel.Xilinx.Vivado</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>Classes</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a>:
+Undocumented.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a>:
+A <span class="xref std std-term">meta-class</span> to construct <em>FileType</em> classes.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>:
+A <a class="reference internal" href="../Glossary.html#term-File"><span class="xref std std-term">File</span></a> represents a file in a design. This <a class="reference internal" href="../Glossary.html#term-base-class"><span class="xref std std-term">base-class</span></a> is used</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.HumanReadableContent" title="pyEDAA.ProjectModel.HumanReadableContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">HumanReadableContent</span></code></a>:
+A file type representing human-readable contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.XMLContent" title="pyEDAA.ProjectModel.XMLContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">XMLContent</span></code></a>:
+A file type representing XML contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.YAMLContent" title="pyEDAA.ProjectModel.YAMLContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">YAMLContent</span></code></a>:
+A file type representing YAML contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.JSONContent" title="pyEDAA.ProjectModel.JSONContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONContent</span></code></a>:
+A file type representing JSON contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.INIContent" title="pyEDAA.ProjectModel.INIContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">INIContent</span></code></a>:
+A file type representing INI contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.TOMLContent" title="pyEDAA.ProjectModel.TOMLContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TOMLContent</span></code></a>:
+A file type representing TOML contents.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.TCLContent" title="pyEDAA.ProjectModel.TCLContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCLContent</span></code></a>:
+A file type representing content in TCL code.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.SDCContent" title="pyEDAA.ProjectModel.SDCContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">SDCContent</span></code></a>:
+A file type representing contents as Synopsys Design Constraints (SDC).</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.PythonContent" title="pyEDAA.ProjectModel.PythonContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonContent</span></code></a>:
+A file type representing contents as Python source code.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TextFile</span></code>:
+A text file (<code class="docutils literal notranslate"><span class="pre">*.txt</span></code>).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LogFile</span></code>:
+A log file (<code class="docutils literal notranslate"><span class="pre">*.log</span></code>).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">XMLFile</span></code>:
+An XML file (<code class="docutils literal notranslate"><span class="pre">*.xml</span></code>).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SourceFile</span></code>:
+Base-class of all source files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">HDLSourceFile</span></code>:
+Base-class of all HDL source files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NetlistFile</span></code>:
+Base-class of all netlist source files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">EDIFNetlistFile</span></code>:
+Netlist file in EDIF (Electronic Design Interchange Format).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TCLSourceFile</span></code>:
+A TCL source file.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLSourceFile</span></code>:
+A VHDL source file (of any language version).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogSourceFile</span></code>:
+A Verilog source file (of any language version).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogSourceFile</span></code>:
+A SystemVerilog source file (of any language version).</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonSourceFile</span></code>:
+A Python source file.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CocotbPythonFile</span></code>:
+A Python source file used by Cocotb.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstraintFile</span></code>:
+Base-class of all constraint files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ProjectFile</span></code>:
+Base-class of all tool-specific project files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CSourceFile</span></code>:
+Base-class of all ANSI-C source files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CppSourceFile</span></code>:
+Base-class of all ANSI-C++ source files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SettingFile</span></code>:
+Base-class of all tool-specific setting files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationAnalysisFile</span></code>:
+Base-class of all tool-specific analysis files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationElaborationFile</span></code>:
+Base-class of all tool-specific elaboration files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationStartFile</span></code>:
+Base-class of all tool-specific simulation start-up files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationRunFile</span></code>:
+Base-class of all tool-specific simulation run (execution) files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveformConfigFile</span></code>:
+Base-class of all tool-specific waveform configuration files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveformDatabaseFile</span></code>:
+Base-class of all tool-specific waveform database files.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveformExchangeFile</span></code>:
+Base-class of all tool-independent waveform exchange files.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>:
+A <a class="reference internal" href="../Glossary.html#term-FileSet"><span class="xref std std-term">FileSet</span></a> represents a group of files. Filesets can have sub-filesets.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a>:
+A <a class="reference internal" href="../Glossary.html#term-VHDLLibrary"><span class="xref std std-term">VHDLLibrary</span></a> represents a group of VHDL source files compiled into the same VHDL library.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>:
+A <a class="reference internal" href="../Glossary.html#term-Design"><span class="xref std std-term">Design</span></a> represents a group of filesets and the source files therein.</p></li>
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>:
+A <a class="reference internal" href="../Glossary.html#term-Project"><span class="xref std std-term">Project</span></a> represents a group of designs and the source files therein.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Attribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">Attribute</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-0b5f75c7d3f15f0de0baf327250a148d894675d8.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of Attribute</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Attribute.KEY">
+<span class="sig-name descname"><span class="pre">KEY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Attribute.KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Attribute.VALUE_TYPE">
+<span class="sig-name descname"><span class="pre">VALUE_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Attribute.VALUE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Attribute.resolve">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Attribute.resolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Attribute.resolve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">FileType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileType" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <span class="xref std std-term">meta-class</span> to construct <em>FileType</em> classes.</p>
+<p>Modifications done by this meta-class:
+* Register all classes of type <a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> or derived variants in a class field <a class="reference internal" href="#pyEDAA.ProjectModel.FileType.FileTypes" title="pyEDAA.ProjectModel.FileType.FileTypes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">FileType.FileTypes</span></code></a> in this meta-class.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-232ae6de712cb12005bf01a8d045f229a7dbeca7.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of FileType</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileType.FileTypes">
+<span class="sig-name descname"><span class="pre">FileTypes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><span class="pre">FileType</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'CSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.CSourceFile'&gt;,</span> <span class="pre">'CocotbPythonFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.CocotbPythonFile'&gt;,</span> <span class="pre">'ConstraintFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.ConstraintFile'&gt;,</span> <span class="pre">'CppSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.CppSourceFile'&gt;,</span> <span class="pre">'EDIFNetlistFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.EDIFNetlistFile'&gt;,</span> <span class="pre">'File':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.File'&gt;,</span> <span class="pre">'GHDLWaveformFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.GHDL.GHDLWaveformFile'&gt;,</span> <span class="pre">'HDLSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.HDLSourceFile'&gt;,</span> <span class="pre">'IPCoreDescriptionFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.IPCoreDescriptionFile'&gt;,</span> <span class="pre">'IPCoreInstantiationFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.IPCoreInstantiationFile'&gt;,</span> <span class="pre">'ISEProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.ISE.ISEProjectFile'&gt;,</span> <span class="pre">'LogFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.LogFile'&gt;,</span> <span class="pre">'ModelSimINIFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.MentorGraphics.QuestaSim.ModelSimINIFile'&gt;,</span> <span class="pre">'ModelSimProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.MentorGraphics.QuestaSim.ModelSimProjectFile'&gt;,</span> <span class="pre">'NetlistFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.NetlistFile'&gt;,</span> <span class="pre">'OSVVMProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.OSVVM.OSVVMProjectFile'&gt;,</span> <span class="pre">'ProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.ProjectFile'&gt;,</span> <span class="pre">'PythonSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.PythonSourceFile'&gt;,</span> <span class="pre">'QuartusProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Intel.QuartusPrime.QuartusProjectFile'&gt;,</span> <span class="pre">'SDCConstraintFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Intel.QuartusPrime.SDCConstraintFile'&gt;,</span> <span class="pre">'SettingFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SettingFile'&gt;,</span> <span class="pre">'SimulationAnalysisFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SimulationAnalysisFile'&gt;,</span> <span class="pre">'SimulationElaborationFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SimulationElaborationFile'&gt;,</span> <span class="pre">'SimulationRunFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SimulationRunFile'&gt;,</span> <span class="pre">'SimulationStartFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SimulationStartFile'&gt;,</span> <span class="pre">'SourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SourceFile'&gt;,</span> <span class="pre">'SystemVerilogSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.SystemVerilogSourceFile'&gt;,</span> <span class="pre">'TCLSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.TCLSourceFile'&gt;,</span> <span class="pre">'TextFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.TextFile'&gt;,</span> <span class="pre">'UCFConstraintFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.ISE.UCFConstraintFile'&gt;,</span> <span class="pre">'VHDLSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.VHDLSourceFile'&gt;,</span> <span class="pre">'ValueChangeDumpFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Verilog.ValueChangeDumpFile'&gt;,</span> <span class="pre">'VerilogSourceFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.VerilogSourceFile'&gt;,</span> <span class="pre">'VivadoProjectFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.VivadoProjectFile'&gt;,</span> <span class="pre">'WaveDoFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.MentorGraphics.QuestaSim.WaveDoFile'&gt;,</span> <span class="pre">'WaveformConfigFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.WaveformConfigFile'&gt;,</span> <span class="pre">'WaveformDatabaseFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.WaveformDatabaseFile'&gt;,</span> <span class="pre">'WaveformExchangeFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.WaveformExchangeFile'&gt;,</span> <span class="pre">'XDCConstraintFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.Xilinx.Vivado.XDCConstraintFile'&gt;,</span> <span class="pre">'XMLFile':</span> <span class="pre">&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.XMLFile'&gt;}</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileType.FileTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of all classes of type <a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> or derived variants</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileType.Any">
+<span class="sig-name descname"><span class="pre">Any</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><span class="pre">FileType</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileType.Any" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileType.mro">
+<span class="sig-name descname"><span class="pre">mro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.FileType.mro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a type’s method resolution order.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.HumanReadableContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">HumanReadableContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#HumanReadableContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.HumanReadableContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing human-readable contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-15dc17e4d2ff892aac1af318f889b9278d80dcb9.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of HumanReadableContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.XMLContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">XMLContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#XMLContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.XMLContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing XML contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-c4f2de4a6471c10552781ac6e74573f79b869567.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of XMLContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.YAMLContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">YAMLContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#YAMLContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.YAMLContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing YAML contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-fcbc1cda7422fdc54fe3a7241dda913f14cddb95.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of YAMLContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.JSONContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">JSONContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#JSONContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.JSONContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing JSON contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-9ce17d629195c4d00e16d94eb168a5552cef9424.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of JSONContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.INIContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">INIContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#INIContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.INIContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing INI contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-dc6eab0c1bc475d0e7c9d2827bbb6bbce215cc8c.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of INIContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.TOMLContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">TOMLContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#TOMLContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.TOMLContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing TOML contents.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-2efe4a6a7ab3f8d62fdab6dda4b28b9104c69878.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of TOMLContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.TCLContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">TCLContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#TCLContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.TCLContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing content in TCL code.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-713f7f563e27d32bc0b99f654b46265c6bb3ea36.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of TCLContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.SDCContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">SDCContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#SDCContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.SDCContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing contents as Synopsys Design Constraints (SDC).</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-0edba1c5dd32f2de85aee08da8174c37044a8229.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of SDCContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.PythonContent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">PythonContent</span></span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#PythonContent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.PythonContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file type representing contents as Python source code.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-0a3201a7c65312e1e352c1fd870f8939d0884f67.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of PythonContent</p></object></div>
+<p class="rubric">Members</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">FileSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('.')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">design</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vhdlLibrary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vhdlVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verilogVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="../Glossary.html#term-FileSet"><span class="xref std std-term">FileSet</span></a> represents a group of files. Filesets can have sub-filesets.</p>
+<p>The order of insertion is preserved. A fileset can be created standalone and
+later associated to another fileset, design and/or project. Or a fileset,
+design and/or project can be associated immediately while creating the
+fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this fileset.</p></li>
+<li><p><strong>topLevel</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Name of the fileset’s toplevel.</p></li>
+<li><p><strong>directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path of this fileset (absolute or relative to a parent fileset or design).</p></li>
+<li><p><strong>project</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]) – Project the file is associated with.</p></li>
+<li><p><strong>design</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>]) – Design the file is associated with.</p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>]) – Parent fileset if this fileset is nested.</p></li>
+<li><p><strong>vhdlLibrary</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Default VHDL library for files in this fileset, if not specified for the file itself.</p></li>
+<li><p><strong>vhdlVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code>]) – Default VHDL version for files in this fileset, if not specified for the file itself.</p></li>
+<li><p><strong>verilogVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code>]) – Default Verilog version for files in this fileset, if not specified for the file itself.</p></li>
+<li><p><strong>svVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code>]) – Default SystemVerilog version for files in this fileset, if not specified for the file itself.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-173b6f5041274d321c0cf5de5247581d2e1a4521.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of FileSet</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._topLevel">
+<span class="sig-name descname"><span class="pre">_topLevel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._topLevel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._project">
+<span class="sig-name descname"><span class="pre">_project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._design">
+<span class="sig-name descname"><span class="pre">_design</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._design" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._directory">
+<span class="sig-name descname"><span class="pre">_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._parent">
+<span class="sig-name descname"><span class="pre">_parent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._fileSets">
+<span class="sig-name descname"><span class="pre">_fileSets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._fileSets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._files">
+<span class="sig-name descname"><span class="pre">_files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._attributes">
+<span class="sig-name descname"><span class="pre">_attributes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><span class="pre">Attribute</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._vhdlLibraries">
+<span class="sig-name descname"><span class="pre">_vhdlLibraries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><span class="pre">VHDLLibrary</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._vhdlLibraries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._vhdlLibrary">
+<span class="sig-name descname"><span class="pre">_vhdlLibrary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><span class="pre">VHDLLibrary</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._vhdlLibrary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._vhdlVersion">
+<span class="sig-name descname"><span class="pre">_vhdlVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._vhdlVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._verilogVersion">
+<span class="sig-name descname"><span class="pre">_verilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._verilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet._svVersion">
+<span class="sig-name descname"><span class="pre">_svVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet._svVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the fileset’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.TopLevel">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TopLevel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.TopLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the fileset’s toplevel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Project">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the project this fileset is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Design">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Design</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the design this fileset is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Directory">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the directory this fileset is located in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.ResolvedPath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResolvedPath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.ResolvedPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property returning the resolved path of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Parent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the parent fileset this fileset is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.FileSets">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileSets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.FileSets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property returning the dictionary of sub-filesets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Files">
+<span class="sig-name descname"><span class="pre">Files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileType=&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.File'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileSet=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet.Files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method returning the files of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileType</strong> (<a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a>) – A filter for file types. Default: <code class="docutils literal notranslate"><span class="pre">Any</span></code>.</p></li>
+<li><p><strong>fileSet</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Specifies how to handle sub-filesets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.AddFile">
+<span class="sig-name descname"><span class="pre">AddFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet.AddFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.AddFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add a single file to this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>) – A file to add to this fileset.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.AddFiles">
+<span class="sig-name descname"><span class="pre">AddFiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet.AddFiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.AddFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add a multiple files to this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>files</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>]) – An iterable of files to add to the fileset.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.Validate">
+<span class="sig-name descname"><span class="pre">Validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet.Validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.Validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate this fileset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.GetOrCreateVHDLLibrary">
+<span class="sig-name descname"><span class="pre">GetOrCreateVHDLLibrary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#FileSet.GetOrCreateVHDLLibrary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.GetOrCreateVHDLLibrary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.VHDLLibrary">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLLibrary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><span class="pre">VHDLLibrary</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.VHDLLibrary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the VHDL library of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.VHDLVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.VHDLVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the VHDL version of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.VerilogVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VerilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.VerilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the Verilog version of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.FileSet.SVVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SVVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.FileSet.SVVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the SystemVerilog version of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">VHDLLibrary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">design</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vhdlVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#VHDLLibrary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="../Glossary.html#term-VHDLLibrary"><span class="xref std std-term">VHDLLibrary</span></a> represents a group of VHDL source files compiled into the same VHDL library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The VHDL libraries’ name.</p></li>
+<li><p><strong>project</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]) – Project the VHDL library is associated with.</p></li>
+<li><p><strong>design</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>]) – Design the VHDL library is associated with.</p></li>
+<li><p><strong>vhdlVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code>]) – Default VHDL version for files in this VHDL library, if not specified for the file itself.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-4d8d7e79cd38b90240abc464da184b29f285cd89.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of VHDLLibrary</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary._name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary._project">
+<span class="sig-name descname"><span class="pre">_project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary._project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary._design">
+<span class="sig-name descname"><span class="pre">_design</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary._design" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary._files">
+<span class="sig-name descname"><span class="pre">_files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary._files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary._vhdlVersion">
+<span class="sig-name descname"><span class="pre">_vhdlVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary._vhdlVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary.Name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary.Name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary.Project">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the project this VHDL library is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary.Design">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Design</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary.Design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the design this VHDL library is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary.Files">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.10)"><span class="pre">Generator</span></a><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary.Files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property to return all files in this VHDL library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.VHDLLibrary.VHDLVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.VHDLLibrary.VHDLVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the VHDL version of this VHDL library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">Design</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('.')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vhdlVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verilogVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="../Glossary.html#term-Design"><span class="xref std std-term">Design</span></a> represents a group of filesets and the source files therein.</p>
+<p>Each design contains at least one fileset - the <a class="reference internal" href="../Glossary.html#term-Default-fileset"><span class="xref std std-term">default fileset</span></a>. For
+designs with VHDL source files, a independent <cite>VHDLLibraries</cite> overlay structure
+exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The design’s name.</p></li>
+<li><p><strong>topLevel</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Name of the design’s toplevel.</p></li>
+<li><p><strong>directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path of this design (absolute or relative to the project).</p></li>
+<li><p><strong>project</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]) – Project the design is associated with.</p></li>
+<li><p><strong>vhdlVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code>]) – Default VHDL version for files in this design, if not specified for the file itself.</p></li>
+<li><p><strong>verilogVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code>]) – Default Verilog version for files in this design, if not specified for the file itself.</p></li>
+<li><p><strong>svVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code>]) – Default SystemVerilog version for files in this design, if not specified for the file itself.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-ef651c64ba0db50fe95495654a8d7023b47f2ec4.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of Design</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._topLevel">
+<span class="sig-name descname"><span class="pre">_topLevel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._topLevel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._project">
+<span class="sig-name descname"><span class="pre">_project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._directory">
+<span class="sig-name descname"><span class="pre">_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._fileSets">
+<span class="sig-name descname"><span class="pre">_fileSets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._fileSets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._defaultFileSet">
+<span class="sig-name descname"><span class="pre">_defaultFileSet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._defaultFileSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._attributes">
+<span class="sig-name descname"><span class="pre">_attributes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><span class="pre">Attribute</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._vhdlLibraries">
+<span class="sig-name descname"><span class="pre">_vhdlLibraries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><span class="pre">VHDLLibrary</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._vhdlLibraries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._vhdlVersion">
+<span class="sig-name descname"><span class="pre">_vhdlVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._vhdlVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._verilogVersion">
+<span class="sig-name descname"><span class="pre">_verilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._verilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._svVersion">
+<span class="sig-name descname"><span class="pre">_svVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._svVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design._externalVHDLLibraries">
+<span class="sig-name descname"><span class="pre">_externalVHDLLibraries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design._externalVHDLLibraries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.Name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.Name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the design’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.TopLevel">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TopLevel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.TopLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the fileset’s toplevel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.Project">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the project this design is used in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.Directory">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.Directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the directory this design is located in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.ResolvedPath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResolvedPath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.ResolvedPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property returning the resolved path of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.DefaultFileSet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DefaultFileSet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.DefaultFileSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the default fileset of this design.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.FileSets">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileSets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.FileSets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property returning the dictionary of filesets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.Files">
+<span class="sig-name descname"><span class="pre">Files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileType=&lt;class</span> <span class="pre">'pyEDAA.ProjectModel.File'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileSet=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.Files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.Files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method returning the files of this design.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileType</strong> (<a class="reference internal" href="#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a>) – A filter for file types. Default: <code class="docutils literal notranslate"><span class="pre">Any</span></code>.</p></li>
+<li><p><strong>fileSet</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSet</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Specifies if all files from all filesets (<code class="docutils literal notranslate"><span class="pre">fileSet=None</span></code>) are files from a single fileset are returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.Validate">
+<span class="sig-name descname"><span class="pre">Validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.Validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.Validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate this design.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.VHDLLibraries">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLLibraries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><span class="pre">VHDLLibrary</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.VHDLLibraries" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#pyEDAA.ProjectModel.VHDLLibrary" title="pyEDAA.ProjectModel.VHDLLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.VHDLVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.VHDLVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.VerilogVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VerilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.VerilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.SVVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SVVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.SVVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.ExternalVHDLLibraries">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExternalVHDLLibraries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Design.ExternalVHDLLibraries" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.AddFileSet">
+<span class="sig-name descname"><span class="pre">AddFileSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileSet</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.AddFileSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.AddFileSet" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.AddFileSets">
+<span class="sig-name descname"><span class="pre">AddFileSets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileSets</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.AddFileSets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.AddFileSets" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.AddFile">
+<span class="sig-name descname"><span class="pre">AddFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.AddFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.AddFile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.AddFiles">
+<span class="sig-name descname"><span class="pre">AddFiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.AddFiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.AddFiles" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Design.AddVHDLLibrary">
+<span class="sig-name descname"><span class="pre">AddVHDLLibrary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vhdlLibrary</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Design.AddVHDLLibrary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Design.AddVHDLLibrary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rootDirectory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('.')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vhdlVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verilogVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svVersion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="../Glossary.html#term-Project"><span class="xref std std-term">Project</span></a> represents a group of designs and the source files therein.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The project’s name.</p></li>
+<li><p><strong>rootDirectory</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Base-path to the project.</p></li>
+<li><p><strong>vhdlVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code>]) – Default VHDL version for files in this project, if not specified for the file itself.</p></li>
+<li><p><strong>verilogVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code>]) – Default Verilog version for files in this project, if not specified for the file itself.</p></li>
+<li><p><strong>svVersion</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code>]) – Default SystemVerilog version for files in this project, if not specified for the file itself.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-549214831a683bb8ad7e124cb20efb00e1ee23c8.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of Project</p></object></div>
+<p class="rubric">Members</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._name">
+<span class="sig-name descname"><span class="pre">_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._rootDirectory">
+<span class="sig-name descname"><span class="pre">_rootDirectory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._rootDirectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._designs">
+<span class="sig-name descname"><span class="pre">_designs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._designs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._defaultDesign">
+<span class="sig-name descname"><span class="pre">_defaultDesign</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._defaultDesign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._attributes">
+<span class="sig-name descname"><span class="pre">_attributes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><span class="pre">Attribute</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._vhdlVersion">
+<span class="sig-name descname"><span class="pre">_vhdlVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._vhdlVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._verilogVersion">
+<span class="sig-name descname"><span class="pre">_verilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._verilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project._svVersion">
+<span class="sig-name descname"><span class="pre">_svVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project._svVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.Name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.Name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the project’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.RootDirectory">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RootDirectory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.RootDirectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property setting or returning the root directory this project is located in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.ResolvedPath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResolvedPath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.ResolvedPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only property returning the resolved path of this fileset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.Designs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Designs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.Designs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.DefaultDesign">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DefaultDesign</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.DefaultDesign" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><code class="xref py py-class docutils literal notranslate"><span class="pre">Design</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.Validate">
+<span class="sig-name descname"><span class="pre">Validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel.html#Project.Validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.Project.Validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate this project.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.VHDLVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VHDLVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VHDLVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.VHDLVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VHDLVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.VerilogVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VerilogVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">VerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.VerilogVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.Project.SVVersion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SVVersion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">SystemVerilogVersion</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.Project.SVVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemVerilogVersion</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyEDAA.ProjectModel.Altera.html" class="btn btn-neutral float-right" title="pyEDAA.ProjectModel.Altera" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Patrick Lehmann, Unai Martinez-Corral.
+      <span class="lastupdated">Last updated on 22.07.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

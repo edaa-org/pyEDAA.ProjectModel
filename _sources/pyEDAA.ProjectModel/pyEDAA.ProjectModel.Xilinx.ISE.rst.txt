@@ -1,0 +1,48 @@
+pyEDAA.ProjectModel.Xilinx.ISE
+==================================
+
+.. automodule:: pyEDAA.ProjectModel.Xilinx.ISE
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx.ISE
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`ISEProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`UCFConstraintFile`:
+  Base-class of all constraint files.
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: ISEProjectFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ISEProjectFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: UCFConstraintFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: UCFConstraintFile
+      :parts: 1
+
+   .. rubric:: Members

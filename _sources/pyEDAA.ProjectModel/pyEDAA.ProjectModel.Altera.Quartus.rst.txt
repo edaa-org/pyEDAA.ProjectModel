@@ -1,0 +1,48 @@
+pyEDAA.ProjectModel.Altera.Quartus
+======================================
+
+.. automodule:: pyEDAA.ProjectModel.Altera.Quartus
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Altera.Quartus
+
+
+.. #-----------------------------------
+
+
+**Classes**
+
+- :py:class:`QuartusProjectFile`:
+  A Quartus project file (``*.qpf``).
+
+- :py:class:`SDCConstraintFile`:
+  A Quartus constraint file (Synopsys Design Constraints; ``*.sdc``).
+
+
+
+.. #-----------------------------------
+
+
+.. autoclass:: QuartusProjectFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: QuartusProjectFile
+      :parts: 1
+
+   .. rubric:: Members
+
+.. autoclass:: SDCConstraintFile
+   :members:
+   :private-members:
+   :undoc-members:
+   :inherited-members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SDCConstraintFile
+      :parts: 1
+
+   .. rubric:: Members
