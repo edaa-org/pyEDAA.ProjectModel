@@ -835,6 +835,10 @@ class FileSet:
 	def GetOrCreateVHDLLibrary(self, name):
 		if name in self._vhdlLibraries:
 			return self._vhdlLibraries[name]
+		elif name in self._design._vhdlLibraries:
+			library = self._design._vhdlLibraries[name]
+			self._vhdlLibraries[name] = library
+			return library
 		else:
 			library = VHDLLibrary(name, design=self._design, vhdlVersion=self._vhdlVersion)
 			self._vhdlLibraries[name] = library
@@ -936,7 +940,7 @@ class VHDLLibrary:
 		self._name =    name
 		if project is not None:
 			self._project = project
-			self._design =  design
+			self._design = design
 
 			if design is None:
 				design = project.DefaultDesign
@@ -948,7 +952,7 @@ class VHDLLibrary:
 
 		elif design is not None:
 			self._project = design._project
-			self._design =  design
+			self._design = design
 
 			if name in design.VHDLLibraries:
 				raise Exception(f"Library '{name}' already in design '{design.Name}'.")
