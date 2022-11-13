@@ -41,7 +41,6 @@ from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
-from anytree              import NodeMixin
 from pyTooling.Decorators import export
 from pySVModel            import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel          import VHDLVersion
@@ -911,7 +910,7 @@ class FileSet:
 
 
 @export
-class VHDLLibrary(NodeMixin):
+class VHDLLibrary:
 	"""
 	A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
 
