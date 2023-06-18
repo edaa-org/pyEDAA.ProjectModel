@@ -47,6 +47,8 @@ from pyTooling.Graph       import Graph, Vertex
 from pySVModel             import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel           import VHDLVersion
 
+from .pySRDLModel         import SystemRDLVersion
+
 
 @export
 class Attribute:
@@ -336,6 +338,11 @@ class HDLSourceFile(SourceFile):
 
 
 @export
+class RDLSourceFile(SourceFile):
+	"""Base-class of all RDL source files."""
+
+
+@export
 class NetlistFile(SourceFile):
 	"""Base-class of all netlist source files."""
 
@@ -487,6 +494,30 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
+		self._svVersion = value
+
+
+@export
+class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
+	"""A SystemRDL source file (of any language version)."""
+
+	_srdlVersion: SystemRDLVersion
+
+	def __init__(self, path: pathlib_Path, srdlVersion: SystemRDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, design, fileSet)
+
+	@property
+	def SRDLVersion(self) -> SystemVerilogVersion:
+		"""Property setting or returning the SystemRDL version this SystemRDL source file is used in."""
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._fileSet is not None:
+			return self._fileSet.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
 
