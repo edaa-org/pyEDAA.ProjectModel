@@ -516,7 +516,7 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 		else:
 			raise Exception("SRDLVersion was neither set locally nor globally.")
 
-	@SRDLVersion.setter
+	@SystemRDLVersion.setter
 	def SRDLVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
