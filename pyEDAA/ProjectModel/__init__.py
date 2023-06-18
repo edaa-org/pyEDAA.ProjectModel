@@ -507,7 +507,7 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 		super().__init__(path, project, design, fileSet)
 
 	@property
-	def SRDLVersion(self) -> SystemVerilogVersion:
+	def SystemRDLVersion(self) -> SystemRDLVersion:
 		"""Property setting or returning the SystemRDL version this SystemRDL source file is used in."""
 		if self._srdlVersion is not None:
 			return self._srdlVersion
