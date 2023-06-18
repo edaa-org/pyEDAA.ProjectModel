@@ -46,8 +46,7 @@ from pyTooling.MetaClasses import ExtendedType
 from pyTooling.Graph       import Graph, Vertex
 from pySVModel             import VerilogVersion, SystemVerilogVersion
 from pyVHDLModel           import VHDLVersion
-
-from .pySRDLModel         import SystemRDLVersion
+from pySystemRDLModel      import SystemRDLVersion
 
 
 @export
@@ -612,6 +611,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	:arg vhdlVersion:     Default VHDL version for files in this fileset, if not specified for the file itself.
 	:arg verilogVersion:  Default Verilog version for files in this fileset, if not specified for the file itself.
 	:arg svVersion:       Default SystemVerilog version for files in this fileset, if not specified for the file itself.
+	:arg srdlVersion:     Default SystemRDL version for files in this fileset, if not specified for the file itself.
 	"""
 
 	_name:            str
@@ -628,6 +628,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  VerilogVersion
 	_svVersion:       SystemVerilogVersion
+	_srdlVersion:     SystemRDLVersion
 
 	def __init__(
 		self,
@@ -640,7 +641,8 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,
 		vhdlVersion: VHDLVersion = None,
 		verilogVersion: VerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		svVersion: SystemVerilogVersion = None,
+		srdlVersion: SystemRDLVersion = None
 	):
 		self._name =      name
 		self._topLevel =  topLevel
@@ -670,6 +672,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion =     vhdlVersion
 		self._verilogVersion =  verilogVersion
 		self._svVersion =       svVersion
+		self._srdlVersion =     srdlVersion
 
 	@property
 	def Name(self) -> str:
@@ -941,6 +944,19 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
+	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._project is not None:
+			return self._project.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
+
 	def __str__(self):
 		"""Returns the fileset's name."""
 		return self._name
@@ -1109,6 +1125,7 @@ class Design(metaclass=ExtendedType, slots=True):
 	:arg vhdlVersion:     Default VHDL version for files in this design, if not specified for the file itself.
 	:arg verilogVersion:  Default Verilog version for files in this design, if not specified for the file itself.
 	:arg svVersion:       Default SystemVerilog version for files in this design, if not specified for the file itself.
+	:arg srdlVersion:     Default SystemRDL version for files in this fileset, if not specified for the file itself.
 	"""
 
 	_name:                  str
@@ -1123,6 +1140,7 @@ class Design(metaclass=ExtendedType, slots=True):
 	_vhdlVersion:           VHDLVersion
 	_verilogVersion:        VerilogVersion
 	_svVersion:             SystemVerilogVersion
+	_srdlVersion:           SystemRDLVersion
 	_externalVHDLLibraries: List
 
 	_vhdlLibraryDependencyGraph: Graph
@@ -1136,7 +1154,8 @@ class Design(metaclass=ExtendedType, slots=True):
 		project: 'Project' = None,
 		vhdlVersion: VHDLVersion = None,
 		verilogVersion: VerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		svVersion: SystemVerilogVersion = None,
+		srdlVersion: SystemRDLVersion = None
 	):
 		self._name =                  name
 		self._topLevel =              topLevel
@@ -1151,6 +1170,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion =           vhdlVersion
 		self._verilogVersion =        verilogVersion
 		self._svVersion =             svVersion
+		self._srdlVersion =           srdlVersion
 		self._externalVHDLLibraries = []
 
 		self._vhdlLibraryDependencyGraph = Graph()
@@ -1344,6 +1364,19 @@ class Design(metaclass=ExtendedType, slots=True):
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
+
+	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._project is not None:
+			return self._project.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
 
 	@property
 	def ExternalVHDLLibraries(self) -> List:
