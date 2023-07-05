@@ -41,11 +41,11 @@ from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
-from pyTooling.Decorators import export
-from pyTooling.Graph      import Graph, Vertex
-from pySVModel            import VerilogVersion, SystemVerilogVersion
+from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
-from pyVHDLModel          import VHDLVersion
+from pyTooling.Graph       import Graph, Vertex
+from pySVModel             import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel           import VHDLVersion
 
 
 @export
@@ -266,7 +266,7 @@ FileTypes = File
 
 
 @export
-class HumanReadableContent:
+class HumanReadableContent(metaclass=ExtendedType, mixin=True):
 	"""A file type representing human-readable contents."""
 
 
