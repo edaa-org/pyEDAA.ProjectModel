@@ -945,7 +945,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		if project is not None:
 			self._project = project
 			self._design = project._defaultDesign if design is None else design
-			self._dependencyNode = Vertex(data=self, graph=self._design._vhdlLibraryDependencyGraph)
+			self._dependencyNode = Vertex(value=self, graph=self._design._vhdlLibraryDependencyGraph)
 
 			if name in self._design._vhdlLibraries:
 				raise Exception(f"Library '{name}' already in design '{self._design.Name}'.")
@@ -955,7 +955,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		elif design is not None:
 			self._project = design._project
 			self._design = design
-			self._dependencyNode = Vertex(data=self, graph=design._vhdlLibraryDependencyGraph)
+			self._dependencyNode = Vertex(value=self, graph=design._vhdlLibraryDependencyGraph)
 
 			if name in design._vhdlLibraries:
 				raise Exception(f"Library '{name}' already in design '{design.Name}'.")
@@ -1008,7 +1008,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		else:
 			if self._design is None:
 				self._design = value
-				self._dependencyNode = Vertex(data=self, graph=self._design._vhdlLibraryDependencyGraph)
+				self._dependencyNode = Vertex(value=self, graph=self._design._vhdlLibraryDependencyGraph)
 			elif self._design is not value:
 				# TODO: move VHDLLibrary to other design
 				# TODO: create new vertex in dependency graph and remove vertex from old graph
