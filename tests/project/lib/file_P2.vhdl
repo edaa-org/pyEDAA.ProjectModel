@@ -1,8 +1,10 @@
 
-package P1 is
+use work.P1.all;
+
+package P2 is
 
 end package;
 
-package body P1 is
+package body P2 is
 
 end package body;
