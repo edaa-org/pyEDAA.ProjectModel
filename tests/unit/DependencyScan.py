@@ -32,18 +32,18 @@
 from pathlib     import Path
 from unittest    import TestCase
 
-from pyGHDL.dom import DOMException
-from pyGHDL.libghdl import LibGHDLException
 from pytest      import mark
 from pyVHDLModel import VHDLVersion
 
 from pyEDAA.ProjectModel      import Design, VHDLLibrary, Project, VHDLSourceFile, VerilogSourceFile, FileSet
 
 try:
+	from pyGHDL.libghdl         import LibGHDLException
+	from pyGHDL.dom             import DOMException
 	from pyGHDL.dom.NonStandard import Design as DOMDesign, Document
 
 	withGHDL = True
-except ImportError:
+except (ImportError, ModuleNotFoundError) as ex:  # pragma: no cover
 	withGHDL = False
 
 
@@ -101,4 +101,4 @@ class VHDL(TestCase):
 		print()
 		print(f"Toplevel: {design.TopLevel}")
 		hierarchy = design.TopLevel.HierarchyVertex.ConvertToTree()
-		# print(hierarchy.Render())
+		print(hierarchy.Render())
