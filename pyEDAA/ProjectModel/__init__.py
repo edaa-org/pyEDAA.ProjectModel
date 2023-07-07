@@ -34,16 +34,18 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2022, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.4.2"
+__version__ =   "0.4.3"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
 
-from pyTooling.Decorators import export
-from pySVModel            import VerilogVersion, SystemVerilogVersion
-from pyVHDLModel          import VHDLVersion
+from pyTooling.Decorators  import export
+from pyTooling.MetaClasses import ExtendedType
+from pyTooling.Graph       import Graph, Vertex
+from pySVModel             import VerilogVersion, SystemVerilogVersion
+from pyVHDLModel           import VHDLVersion
 
 
 @export
@@ -64,7 +66,7 @@ class Attribute:
 
 
 @export
-class FileType(type):
+class FileType(ExtendedType):
 	"""
 	A :term:`meta-class` to construct *FileType* classes.
 
@@ -79,8 +81,8 @@ class FileType(type):
 		super().__init__(name, bases, dictionary, **kwargs)
 		cls.Any = cls
 
-	def __new__(cls, className, baseClasses, classMembers: Dict):
-		fileType = super().__new__(cls, className, baseClasses, classMembers)
+	def __new__(cls, className, baseClasses, classMembers: Dict, *args, **kwargs):
+		fileType = super().__new__(cls, className, baseClasses, classMembers, *args, **kwargs)
 		cls.FileTypes[className] = fileType
 		return fileType
 
@@ -95,7 +97,7 @@ class FileType(type):
 
 
 @export
-class File(metaclass=FileType):
+class File(metaclass=FileType, slots=True):
 	"""
 	A :term:`File` represents a file in a design. This :term:`base-class` is used
 	for all derived file classes.
@@ -264,7 +266,7 @@ FileTypes = File
 
 
 @export
-class HumanReadableContent:
+class HumanReadableContent(metaclass=ExtendedType, mixin=True):
 	"""A file type representing human-readable contents."""
 
 
@@ -367,8 +369,27 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
-		# TODO: handle if vhdlLibrary is a string
-		self._vhdlLibrary = vhdlLibrary
+		if isinstance(vhdlLibrary, str):
+			if design is not None:
+				try:
+					vhdlLibrary = design.VHDLLibraries[vhdlLibrary]
+				except KeyError as ex:
+					raise Exception(f"VHDL library '{vhdlLibrary}' not found in design '{design.Name}'.") from ex
+			elif project is not None:
+				try:
+					vhdlLibrary = project.DefaultDesign.VHDLLibraries[vhdlLibrary]
+				except KeyError as ex:
+					raise Exception(f"VHDL library '{vhdlLibrary}' not found in default design '{project.DefaultDesign.Name}'.") from ex
+			else:
+				raise Exception(f"Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
+		elif isinstance(vhdlLibrary, VHDLLibrary):
+			self._vhdlLibrary = vhdlLibrary
+			vhdlLibrary.AddFile(self)
+		elif vhdlLibrary is None:
+			self._vhdlLibrary = None
+		else:
+			raise TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+
 		self._vhdlVersion = vhdlVersion
 
 	def Validate(self):
@@ -412,6 +433,9 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	@VHDLVersion.setter
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
+
+	def __repr__(self) -> str:
+		return f"<VHDL file: '{self.ResolvedPath}'; lib: '{self.VHDLLibrary}'; version: {self.VHDLVersion}>"
 
 
 @export
@@ -538,7 +562,7 @@ class WaveformExchangeFile(File):
 
 
 @export
-class FileSet:
+class FileSet(metaclass=ExtendedType, slots=True):
 	"""
 	A :term:`FileSet` represents a group of files. Filesets can have sub-filesets.
 
@@ -591,7 +615,8 @@ class FileSet:
 		self._topLevel =  topLevel
 		if project is not None:
 			self._project = project
-			self._design =  design
+			self._design =  design if design is not None else project.DefaultDesign
+
 		elif design is not None:
 			self._project = design._project
 			self._design =  design
@@ -735,7 +760,7 @@ class FileSet:
 				try:
 					fileSet = self._fileSets[fileSetName]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to fileset {fileset}.".format(name=fileSetName, fileset=self.Name)) from ex
+					raise Exception(f"Fileset {fileSetName} not bound to fileset {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -812,6 +837,10 @@ class FileSet:
 	def GetOrCreateVHDLLibrary(self, name):
 		if name in self._vhdlLibraries:
 			return self._vhdlLibraries[name]
+		elif name in self._design._vhdlLibraries:
+			library = self._design._vhdlLibraries[name]
+			self._vhdlLibraries[name] = library
+			return library
 		else:
 			library = VHDLLibrary(name, design=self._design, vhdlVersion=self._vhdlVersion)
 			self._vhdlLibraries[name] = library
@@ -887,7 +916,7 @@ class FileSet:
 
 
 @export
-class VHDLLibrary:
+class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	"""
 	A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
 
@@ -903,6 +932,8 @@ class VHDLLibrary:
 	_files:       List[File]
 	_vhdlVersion: VHDLVersion
 
+	_dependencyNode: Vertex
+
 	def __init__(
 		self,
 		name: str,
@@ -913,13 +944,29 @@ class VHDLLibrary:
 		self._name =    name
 		if project is not None:
 			self._project = project
-			self._design =  design
+			self._design = project._defaultDesign if design is None else design
+			self._dependencyNode = Vertex(value=self, graph=self._design._vhdlLibraryDependencyGraph)
+
+			if name in self._design._vhdlLibraries:
+				raise Exception(f"Library '{name}' already in design '{self._design.Name}'.")
+			else:
+				self._design._vhdlLibraries[name] = self
+
 		elif design is not None:
 			self._project = design._project
-			self._design =  design
+			self._design = design
+			self._dependencyNode = Vertex(value=self, graph=design._vhdlLibraryDependencyGraph)
+
+			if name in design._vhdlLibraries:
+				raise Exception(f"Library '{name}' already in design '{design.Name}'.")
+			else:
+				design._vhdlLibraries[name] = self
+
 		else:
 			self._project = None
 			self._design =  None
+			self._dependencyNode = None
+
 		self._files =     []
 		self._vhdlVersion = vhdlVersion
 
@@ -934,7 +981,16 @@ class VHDLLibrary:
 
 	@Project.setter
 	def Project(self, value: 'Project'):
-		self._project = value
+		if not isinstance(value, Project):
+			raise TypeError("Parameter 'value' is not of type 'Project'.")
+
+		if value is None:
+			# TODO: unlink VHDLLibrary from project
+			self._project = None
+		else:
+			self._project = value
+			if self._design is None:
+				self._design = value._defaultDesign
 
 	@property
 	def Design(self) -> Nullable['Design']:
@@ -944,13 +1000,26 @@ class VHDLLibrary:
 	@Design.setter
 	def Design(self, value: 'Design'):
 		if not isinstance(value, Design):
-			raise TypeError("Parameter 'value' is not of type 'DesignModel.Design'.")
+			raise TypeError("Parameter 'value' is not of type 'Design'.")
 
-		self._design = value
-		if self._project is None:
-			self._project = value._project
-		elif self._project is not value._project:
-			raise Exception("The design's project is not identical to the already assigned project.")
+		if value is None:
+			# TODO: unlink VHDLLibrary from design
+			self._design = None
+		else:
+			if self._design is None:
+				self._design = value
+				self._dependencyNode = Vertex(value=self, graph=self._design._vhdlLibraryDependencyGraph)
+			elif self._design is not value:
+				# TODO: move VHDLLibrary to other design
+				# TODO: create new vertex in dependency graph and remove vertex from old graph
+				self._design = value
+			else:
+				pass
+
+			if self._project is None:
+				self._project = value._project
+			elif self._project is not value._project:
+				raise Exception("The design's project is not identical to the already assigned project.")
 
 	@property
 	def Files(self) -> Generator[File, None, None]:
@@ -972,13 +1041,29 @@ class VHDLLibrary:
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
 
+	def AddDependency(self, library: 'VHDLLibrary'):
+		library.parent = self
+
+	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
+		if not isinstance(vhdlFile, VHDLSourceFile):
+			raise TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+
+		self._files.append(vhdlFile)
+
+	def AddFiles(self, vhdlFiles: Iterable[VHDLSourceFile]) -> None:
+		for vhdlFile in vhdlFiles:
+			if not isinstance(vhdlFile, VHDLSourceFile):
+				raise TypeError(f"Item '{vhdlFile}' in parameter 'vhdlFiles' is not a 'VHDLSourceFile'.")
+
+			self._files.append(vhdlFile)
+
 	def __str__(self):
 		"""Returns the VHDL library's name."""
 		return self._name
 
 
 @export
-class Design:
+class Design(metaclass=ExtendedType, slots=True):
 	"""
 	A :term:`Design` represents a group of filesets and the source files therein.
 
@@ -1009,6 +1094,9 @@ class Design:
 	_svVersion:             SystemVerilogVersion
 	_externalVHDLLibraries: List
 
+	_vhdlLibraryDependencyGraph: Graph
+	_fileDependencyGraph:        Graph
+
 	def __init__(
 		self,
 		name: str,
@@ -1033,6 +1121,9 @@ class Design:
 		self._verilogVersion =        verilogVersion
 		self._svVersion =             svVersion
 		self._externalVHDLLibraries = []
+
+		self._vhdlLibraryDependencyGraph = Graph()
+		self._fileDependencyGraph = Graph()
 
 	@property
 	def Name(self) -> str:
@@ -1096,12 +1187,12 @@ class Design:
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
 			if (value not in self._fileSets.keys()):
-				raise Exception("Fileset '{0}' is not in this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not in this design.")
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
 			if (value not in self.FileSets):
-				raise Exception("Fileset '{0}' is not associated to this design.".format(value))
+				raise Exception(f"Fileset '{value}' is not associated to this design.")
 
 			self._defaultFileSet = value
 		else:
@@ -1129,7 +1220,7 @@ class Design:
 				try:
 					fileSet = self._fileSets[fileSet]
 				except KeyError as ex:
-					raise Exception("Fileset {name} not bound to design {design}.".format(name=fileSet.Name, design=self.Name)) from ex
+					raise Exception(f"Fileset {fileSet.Name} not bound to design {self.Name}.") from ex
 			elif not isinstance(fileSet, FileSet):
 				raise TypeError("Parameter 'fileSet' is not of type 'str' or 'FileSet' nor value 'None'.")
 
@@ -1181,8 +1272,8 @@ class Design:
 		self._attributes[key] = value
 
 	@property
-	def VHDLLibraries(self) -> List[VHDLLibrary]:
-		return self._vhdlLibraries.values()
+	def VHDLLibraries(self) -> Dict[str, VHDLLibrary]:
+		return self._vhdlLibraries
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
@@ -1233,7 +1324,7 @@ class Design:
 		elif (fileSet in self.FileSets):
 			raise Exception("Design already contains this fileSet.")
 		elif (fileSet.Name in self._fileSets.keys()):
-			raise Exception("Design already contains a fileset named '{0}'.".format(fileSet.Name))
+			raise Exception(f"Design already contains a fileset named '{fileSet.Name}'.")
 
 		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
@@ -1246,7 +1337,7 @@ class Design:
 		if file.FileSet is None:
 			self._defaultFileSet.AddFile(file)
 		else:
-			raise ValueError("File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.".format(file=file))
+			raise ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned via Design to a default fileset.")
 
 	def AddFiles(self, files: Iterable[File]) -> None:
 		for file in files:
@@ -1264,7 +1355,7 @@ class Design:
 
 
 @export
-class Project:
+class Project(metaclass=ExtendedType, slots=True):
 	"""
 	A :term:`Project` represents a group of designs and the source files therein.
 

@@ -33,6 +33,8 @@ from pathlib import Path
 from typing import Iterable
 
 from xml.dom import minidom, Node
+
+from pyTooling.MetaClasses import ExtendedType
 from pyVHDLModel import VHDLVersion
 from pyTooling.Decorators import export
 
@@ -54,7 +56,7 @@ class File(Model_File):
 	pass
 
 
-class VivadoFileMixIn:
+class VivadoFileMixIn(metaclass=ExtendedType, mixin=True):
 	def _registerAttributes(self):
 		self._attributes[UsedInAttribute] = []
 

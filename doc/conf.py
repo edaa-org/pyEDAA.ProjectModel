@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parent
 sys_path.insert(0, abspath('.'))
 sys_path.insert(0, abspath('..'))
 sys_path.insert(0, abspath('../pyEDAA/ProjectModel'))
-#sys_path.insert(0, abspath('_extensions'))
 
 
 # ==============================================================================
@@ -32,6 +31,7 @@ author =    versionInformation.Author
 copyright = versionInformation.Copyright
 version =   ".".join(versionInformation.Version.split(".")[:2])  # e.g. 2.3    The short X.Y version.
 release =   versionInformation.Version
+
 
 # ==============================================================================
 # Miscellaneous settings
@@ -59,12 +59,12 @@ pygments_style = 'stata-dark'
 # ==============================================================================
 # Restructured Text settings
 # ==============================================================================
-prologPath = "prolog.inc"
+prologPath = Path("prolog.inc")
 try:
-	with open(prologPath, "r") as prologFile:
-		rst_prolog = prologFile.read()
+	with prologPath.open("r") as fileHandle:
+		rst_prolog = fileHandle.read()
 except Exception as ex:
-	print("[ERROR:] While reading '{0!s}'.".format(prologPath))
+	print(f"[ERROR:] While reading '{prologPath}'.")
 	print(ex)
 	rst_prolog = ""
 
@@ -153,7 +153,6 @@ latex_documents = [
 ]
 
 
-
 # ==============================================================================
 # Extensions
 # ==============================================================================
@@ -168,32 +167,14 @@ extensions = [
 	'sphinx.ext.mathjax',
 	'sphinx.ext.ifconfig',
 	'sphinx.ext.viewcode',
-#	'sphinx.ext.duration',
-
 # SphinxContrib extensions
-# 'sphinxcontrib.actdiag',
 	'sphinxcontrib.mermaid',
-# 'sphinxcontrib.seqdiag',
-# 'sphinxcontrib.textstyle',
-# 'sphinxcontrib.spelling',
-# 'changelog',
-
-# BuildTheDocs extensions
-#	'btd.sphinx.autoprogram',
-#	'btd.sphinx.graphviz',
-#	'btd.sphinx.inheritance_diagram',
-
 # Other extensions
-#	'DocumentMember',
 	'sphinx_fontawesome',
 	'sphinx_autodoc_typehints',
-
-# local extensions (patched)
 	'autoapi.sphinx',
-
-# local extensions
-#	'DocumentMember'
 ]
+
 
 # ==============================================================================
 # Sphinx.Ext.InterSphinx
@@ -207,7 +188,16 @@ intersphinx_mapping = {
 # Sphinx.Ext.AutoDoc
 # ==============================================================================
 # see: https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#configuration
+autodoc_default_options = {
+	"private-members": True,
+	"special-members": True,
+	"inherited-members": True,
+	"exclude-members": "__weakref__"
+}
+#autodoc_class_signature = "separated"
 autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
+autodoc_typehints = "both"
+#autoclass_content = "both"
 
 
 # ==============================================================================
@@ -216,7 +206,7 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 extlinks = {
 	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
 	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
-	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s?ts=2', None),
+	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s', ''),
 }
 
 

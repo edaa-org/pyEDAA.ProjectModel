@@ -147,7 +147,7 @@ class Properties(TestCase):
 
 class Validate(TestCase):
 	def test_File(self):
-		project = Project("project", rootDirectory=Path("tests/project"))
+		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
@@ -157,7 +157,7 @@ class Validate(TestCase):
 
 class Attributes(TestCase):
 	def test_AttachedToFile(self):
-		project = Project("project", rootDirectory=Path("tests/project"))
+		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
@@ -171,7 +171,7 @@ class Attributes(TestCase):
 		self.assertEqual("5", file[KeyValueAttribute]["id1"])
 
 	def test_AttachedToFileSet(self):
-		project = Project("project", rootDirectory=Path("tests/project"))
+		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)

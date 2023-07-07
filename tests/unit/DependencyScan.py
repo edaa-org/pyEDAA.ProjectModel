@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,11 +29,22 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from unittest import TestCase
+from pathlib     import Path
+from unittest    import TestCase
 
+from pytest      import mark
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, VHDLLibrary, Project
+from pyEDAA.ProjectModel      import Design, VHDLLibrary, Project, VHDLSourceFile, VerilogSourceFile, FileSet
+
+try:
+	from pyGHDL.libghdl         import LibGHDLException
+	from pyGHDL.dom             import DOMException
+	from pyGHDL.dom.NonStandard import Design as DOMDesign, Document
+
+	withGHDL = True
+except (ImportError, ModuleNotFoundError) as ex:  # pragma: no cover
+	withGHDL = False
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -42,64 +53,52 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class VHDL(TestCase):
+	@mark.skipif(withGHDL is False, reason="No 'pyGHDL' package found.")
 	def test_VHDLLibrary(self):
-		library = VHDLLibrary("library")
+		project = Project("project", rootDirectory=Path("project"), vhdlVersion=VHDLVersion.VHDL2019)
+		designA = Design("designA", directory=Path("designA"), project=project)
+		fileSetA = FileSet("fileSetA", directory=Path("."), design=designA)
+		fileSetC = FileSet("fileSetC", directory=Path("../lib"), design=designA)
+		libraryA = VHDLLibrary("libA", design=designA)
+		libraryC = VHDLLibrary("libCommon", design=designA)
 
-		self.assertIsNotNone(library)
-		self.assertEqual(library.Name, "library")
-		self.assertIsNone(library.Project)
-		self.assertIsNone(library.Design)
-		self.assertEqual(0, len(library._files))
+		fileA1 = VHDLSourceFile(Path("file_A1.vhdl"), fileSet=fileSetA, vhdlLibrary=libraryA)
+		fileA2 = VHDLSourceFile(Path("file_A2.vhdl"), fileSet=fileSetA, vhdlLibrary=libraryA)
+		fileA3 = VerilogSourceFile(Path("file_A3.v"), fileSet=fileSetA)
 
-	def test_VHDLLibraryFromDesign(self):
-		design =  Design("design")
-		library = VHDLLibrary("library", design=design)
+		fileP1 = VHDLSourceFile(Path("file_P1.vhdl"), fileSet=fileSetC, vhdlLibrary=libraryC)
+		fileP2 = VHDLSourceFile(Path("file_P2.vhdl"), fileSet=fileSetC, vhdlLibrary=libraryC)
 
-		self.assertIsNone(library.Project)
-		self.assertIs(design, library.Design)
+		print()
+		print(f"Loading design '{designA.Name}':")
+		design = DOMDesign(name=designA.Name)
 
-	def test_VHDLLibraryFromProject(self):
-		project = Project("project")
-		library = VHDLLibrary("library", project=project)
+		print(f"  Loading default libraries (Std, Ieee, ...)")
+		design.LoadDefaultLibraries()
 
-		self.assertIs(project, library.Project)
-		self.assertIs(project.DefaultDesign, library.Design)
+		for libraryName, vhdlLibrary in designA.VHDLLibraries.items():
+			print(f"  Loading library '{libraryName}' ...")
+			lib = design.GetLibrary(libraryName)
 
-	def test_VHDLLibraryFromProjectAndDesign(self):
-		project = Project("project")
-		design =  Design("design", project=project)
-		library = VHDLLibrary("library", design=design)
+			for file in vhdlLibrary.Files:
+				print(f"    Parsing '{file.ResolvedPath}' ...")
+				try:
+					vhdlDocument = Document(file.ResolvedPath)
+				except DOMException as ex:
+					if isinstance(ex.__cause__, LibGHDLException):
+						print(ex.__cause__)
+						for message in ex.__cause__.InternalErrors:
+							print(f"  {message}")
+					else:
+						print(ex)
 
-		self.assertIs(library.Project, project)
-		self.assertIs(library.Design, design)
+				design.AddDocument(vhdlDocument, lib)
 
-	def test_VHDLLibraryWithVersion(self):
-		library = VHDLLibrary("library", vhdlVersion=VHDLVersion.VHDL2019)
+		print(f"  Analyzing design ...")
+		design.Analyze()
 
-		self.assertEqual(VHDLVersion.VHDL2019, library.VHDLVersion)
-
-	def test_VHDLLibrarySetProjectLater(self):
-		project = Project("project")
-		library = VHDLLibrary("library")
-
-		library.Project = project
-
-		self.assertIs(project, library.Project)
-
-	def test_VHDLLibrarySetVersionLater(self):
-		library = VHDLLibrary("library")
-
-		vhdlVersion = VHDLVersion.VHDL2019
-
-		library.VHDLVersion = vhdlVersion
-
-		self.assertEqual(vhdlVersion, library.VHDLVersion)
-
-	def test_VHDLLibraryGetVersionFromDesign(self):
-		vhdlVersion = VHDLVersion.VHDL2019
-
-		design = Design("design", vhdlVersion=vhdlVersion)
-		library = VHDLLibrary("library", design=design)
-
-		self.assertEqual(vhdlVersion, library.VHDLVersion)
+		print()
+		print(f"Toplevel: {design.TopLevel}")
+		hierarchy = design.TopLevel.HierarchyVertex.ConvertToTree()
+		print(hierarchy.Render())
