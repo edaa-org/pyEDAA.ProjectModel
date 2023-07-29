@@ -34,7 +34,7 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2023, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.4.4"
+__version__ =   "0.5.0"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
@@ -49,7 +49,7 @@ from pyVHDLModel           import VHDLVersion
 
 
 @export
-class Attribute:
+class Attribute(metaclass=ExtendedType):
 	KEY: str
 	VALUE_TYPE: typing_Any
 
