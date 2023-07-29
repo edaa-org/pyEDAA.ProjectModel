@@ -780,7 +780,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		"""
 		Method to add a multiple files to this fileset.
 
-		:arg files: An iterable of files to add to the fileset.
+		:arg files: An iterable of files to add each to the fileset.
 		"""
 		for file in files:
 			self._files.append(file)

@@ -89,7 +89,43 @@ class Instantiate(TestCase):
 		self.assertEqual(svVersion, fileset.SVVersion)
 
 
+class Operations(TestCase):
+	def test_AddFile(self):
+		file = File(Path("file_A.txt"))
+		fileset = FileSet("fileset")
+		fileset.AddFile(file)
+
+	def test_AddFiles(self):
+		file = File(Path("file_A.txt"))
+		files = (file, )
+		fileset = FileSet("fileset")
+		fileset.AddFiles(files)
+
+	def test_AddFileSet(self):
+		subFileSet = FileSet("subfileset")
+		fileset = FileSet("fileset")
+		fileset.AddFileSet(subFileSet)
+
+	def test_AddFileSets(self):
+		subFileSet = FileSet("subfileset")
+		subFileSets = (subFileSet, )
+		fileset = FileSet("fileset")
+		fileset.AddFileSets(subFileSets)
+
+
 class Properties(TestCase):
+	def test_SetParentToFileSet(self):
+		fileSet = FileSet("fileset")
+		subFileSet = FileSet("subfileset")
+
+		subFileSet.Parent = fileSet
+
+	def test_SetParentToDesign(self):
+		design = Design("design")
+		fileSet = FileSet("fileset")
+
+		fileSet.Parent = design
+
 	def test_SetDirectoryLater(self):
 		path = Path("fileset")
 		fileset = FileSet("fileset")
