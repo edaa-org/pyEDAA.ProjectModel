@@ -786,6 +786,23 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			self._files.append(file)
 			file._fileSet = self
 
+	def AddFileSet(self, fileSet: "FileSet"):
+		"""
+		Method to add a single sub-fileset to this fileset.
+
+		:arg fileSet: A fileset to add to this fileset as sub-fileset.
+		"""
+		fileSet.Parent = self
+
+	def AddFileSets(self, fileSets: Iterable["FileSet"]):
+		"""
+		Method to add a multiple sub-filesets to this fileset.
+
+		:arg fileSets: An iterable of filesets to add each to the fileset.
+		"""
+		for fileSet in fileSets:
+			fileSet.Parent = self
+
 	def Validate(self):
 		"""Validate this fileset."""
 		if self._name is None or self._name == "":
