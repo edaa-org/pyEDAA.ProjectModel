@@ -92,25 +92,37 @@ class Instantiate(TestCase):
 class Operations(TestCase):
 	def test_AddFile(self):
 		file = File(Path("file_A.txt"))
-		fileset = FileSet("fileset")
-		fileset.AddFile(file)
+		fileSet = FileSet("fileset")
+		fileSet.AddFile(file)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
 
 	def test_AddFiles(self):
 		file = File(Path("file_A.txt"))
 		files = (file, )
-		fileset = FileSet("fileset")
-		fileset.AddFiles(files)
+		fileSet = FileSet("fileset")
+		fileSet.AddFiles(files)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
 
 	def test_AddFileSet(self):
 		subFileSet = FileSet("subfileset")
 		fileset = FileSet("fileset")
 		fileset.AddFileSet(subFileSet)
 
+		self.assertEqual(1, len(fileset.FileSets))
+		self.assertIn("subfileset", fileset.FileSets)
+		self.assertEqual(subFileSet, fileset.FileSets["subfileset"])
+
 	def test_AddFileSets(self):
 		subFileSet = FileSet("subfileset")
 		subFileSets = (subFileSet, )
 		fileset = FileSet("fileset")
 		fileset.AddFileSets(subFileSets)
+
+		self.assertEqual(1, len(fileset.FileSets))
+		self.assertIn("subfileset", fileset.FileSets)
+		self.assertEqual(subFileSet, fileset.FileSets["subfileset"])
 
 
 class Properties(TestCase):
@@ -120,11 +132,17 @@ class Properties(TestCase):
 
 		subFileSet.Parent = fileSet
 
+		self.assertIn("subfileset", fileSet.FileSets)
+		self.assertIs(subFileSet, fileSet.FileSets["subfileset"])
+
 	def test_SetParentToDesign(self):
 		design = Design("design")
 		fileSet = FileSet("fileset")
 
 		fileSet.Parent = design
+
+		self.assertIn("fileset", design.FileSets)
+		self.assertIs(fileSet, design.FileSets["fileset"])
 
 	def test_SetDirectoryLater(self):
 		path = Path("fileset")
