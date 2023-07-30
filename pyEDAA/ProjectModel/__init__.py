@@ -745,14 +745,14 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		"""
 		if fileSet is False:
 			for file in self._files:
-				if (file.FileType in fileType):
+				if file.FileType in fileType:
 					yield file
 		elif fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
 					yield file
 			for file in self._files:
-				if (file.FileType in fileType):
+				if file.FileType in fileType:
 					yield file
 		else:
 			if isinstance(fileSet, str):
@@ -767,12 +767,40 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
+	def AddFileSet(self, fileSet: "FileSet"):
+		"""
+		Method to add a single sub-fileset to this fileset.
+
+		:arg fileSet: A fileset to add to this fileset as sub-fileset.
+		"""
+		if not isinstance(fileSet, FileSet):
+			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
+		elif fileSet in self._fileSets:
+			raise Exception("Sub-fileset already contains this fileset.")
+		elif fileSet.Name in self._fileSets.keys():
+			raise Exception(f"Fileset already contains a sub-fileset named '{fileSet.Name}'.")
+
+		self._fileSets[fileSet.Name] = fileSet
+		fileSet._parent = self
+
+	def AddFileSets(self, fileSets: Iterable["FileSet"]):
+		"""
+		Method to add a multiple sub-filesets to this fileset.
+
+		:arg fileSets: An iterable of filesets to add each to the fileset.
+		"""
+		for fileSet in fileSets:
+			self.AddFileSet(fileSet)
+
 	def AddFile(self, file: File) -> None:
 		"""
 		Method to add a single file to this fileset.
 
 		:arg file: A file to add to this fileset.
 		"""
+		if file.FileSet is not None:
+			raise ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned to an other fileset.")
+
 		self._files.append(file)
 		file._fileSet = self
 
@@ -783,25 +811,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		:arg files: An iterable of files to add each to the fileset.
 		"""
 		for file in files:
-			self._files.append(file)
-			file._fileSet = self
-
-	def AddFileSet(self, fileSet: "FileSet"):
-		"""
-		Method to add a single sub-fileset to this fileset.
-
-		:arg fileSet: A fileset to add to this fileset as sub-fileset.
-		"""
-		fileSet.Parent = self
-
-	def AddFileSets(self, fileSets: Iterable["FileSet"]):
-		"""
-		Method to add a multiple sub-filesets to this fileset.
-
-		:arg fileSets: An iterable of filesets to add each to the fileset.
-		"""
-		for fileSet in fileSets:
-			fileSet.Parent = self
+			self.AddFile(file)
 
 	def Validate(self):
 		"""Validate this fileset."""
@@ -1203,12 +1213,12 @@ class Design(metaclass=ExtendedType, slots=True):
 	@DefaultFileSet.setter
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
-			if (value not in self._fileSets.keys()):
+			if value not in self._fileSets.keys():
 				raise Exception(f"Fileset '{value}' is not in this design.")
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
-			if (value not in self.FileSets):
+			if value not in self.FileSets:
 				raise Exception(f"Fileset '{value}' is not associated to this design.")
 
 			self._defaultFileSet = value
@@ -1336,15 +1346,16 @@ class Design(metaclass=ExtendedType, slots=True):
 		return self._externalVHDLLibraries
 
 	def AddFileSet(self, fileSet: FileSet) -> None:
-		if (not isinstance(fileSet, FileSet)):
+		if not isinstance(fileSet, FileSet):
 			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
-		elif (fileSet in self.FileSets):
-			raise Exception("Design already contains this fileSet.")
-		elif (fileSet.Name in self._fileSets.keys()):
+		elif fileSet in self._fileSets:
+			raise Exception("Design already contains this fileset.")
+		elif fileSet.Name in self._fileSets.keys():
 			raise Exception(f"Design already contains a fileset named '{fileSet.Name}'.")
 
-		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
+		fileSet.Design = self
+		fileSet._parent = self
 
 	def AddFileSets(self, fileSets: Iterable[FileSet]) -> None:
 		for fileSet in fileSets:
