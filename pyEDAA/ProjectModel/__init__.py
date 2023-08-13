@@ -273,42 +273,42 @@ class HumanReadableContent(metaclass=ExtendedType, mixin=True):
 
 
 @export
-class XMLContent(HumanReadableContent):
+class XMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing XML contents."""
 
 
 @export
-class YAMLContent(HumanReadableContent):
+class YAMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing YAML contents."""
 
 
 @export
-class JSONContent(HumanReadableContent):
+class JSONContent(HumanReadableContent, mixin=True):
 	"""A file type representing JSON contents."""
 
 
 @export
-class INIContent(HumanReadableContent):
+class INIContent(HumanReadableContent, mixin=True):
 	"""A file type representing INI contents."""
 
 
 @export
-class TOMLContent(HumanReadableContent):
+class TOMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing TOML contents."""
 
 
 @export
-class TCLContent(HumanReadableContent):
+class TCLContent(HumanReadableContent, mixin=True):
 	"""A file type representing content in TCL code."""
 
 
 @export
-class SDCContent(TCLContent):
+class SDCContent(TCLContent, mixin=True):
 	"""A file type representing contents as Synopsys Design Constraints (SDC)."""
 
 
 @export
-class PythonContent(HumanReadableContent):
+class PythonContent(HumanReadableContent, mixin=True):
 	"""A file type representing contents as Python source code."""
 
 
