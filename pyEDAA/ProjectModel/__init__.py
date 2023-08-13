@@ -660,6 +660,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._parent =    parent
 		self._fileSets =  {}
 		self._files =     []
+		self._set =     set()
 
 		if design is not None:
 			design._fileSets[name] = self
@@ -832,10 +833,19 @@ class FileSet(metaclass=ExtendedType, slots=True):
 
 		:arg file: A file to add to this fileset.
 		"""
-		if file.FileSet is not None:
-			raise ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}' and can't be assigned to an other fileset.")
+		if not isinstance(file, File):
+			raise TypeError("Parameter 'file' is not of type ProjectModel.File.")
+		elif file._fileSet is not None:
+			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
+			ex.add_note(f"A file can't be assigned to another fileset.")
+			raise ex
+		elif file in self._set:
+			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
+			ex.add_note(f"A file can't be added twice to a fileset.")
+			raise ex
 
 		self._files.append(file)
+		self._set.add(file)
 		file._fileSet = self
 
 	def AddFiles(self, files: Iterable[File]) -> None:
