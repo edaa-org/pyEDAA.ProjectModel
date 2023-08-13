@@ -524,6 +524,8 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 	def __init__(self, path: pathlib_Path, srdlVersion: SystemRDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
 		super().__init__(path, project, design, fileSet)
 
+		self._srdlVersion = srdlVersion
+
 	@property
 	def SystemRDLVersion(self) -> SystemRDLVersion:
 		"""Property setting or returning the SystemRDL version this SystemRDL source file is used in."""
@@ -536,7 +538,7 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 
 	@SystemRDLVersion.setter
 	def SystemRDLVersion(self, value: SystemRDLVersion) -> None:
-		self._srdlVersion= value
+		self._srdlVersion = value
 
 
 @export
@@ -1028,8 +1030,10 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	def SRDLVersion(self) -> SystemRDLVersion:
 		if self._srdlVersion is not None:
 			return self._srdlVersion
-		elif self._project is not None:
-			return self._project.SRDLVersion
+		elif self._parent is not None:
+			return self._parent.SRDLVersion
+		elif self._design is not None:
+			return self._design.SRDLVersion
 		else:
 			raise Exception("SRDLVersion was neither set locally nor globally.")
 
@@ -1542,6 +1546,7 @@ class Project(metaclass=ExtendedType, slots=True):
 	_vhdlVersion:     VHDLVersion
 	_verilogVersion:  SystemVerilogVersion
 	_svVersion:       SystemVerilogVersion
+	_srdlVersion:     SystemRDLVersion
 
 	def __init__(
 		self,
@@ -1667,6 +1672,15 @@ class Project(metaclass=ExtendedType, slots=True):
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
+
+	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		# TODO: check for None and return exception
+		return self._srdlVersion
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
 
 	def __str__(self) -> str:
 		return self._name
