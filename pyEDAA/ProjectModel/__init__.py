@@ -643,6 +643,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
+	_set:             Set
 	_attributes:      Dict[Type[Attribute], typing_Any]
 	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
