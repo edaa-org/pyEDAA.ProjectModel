@@ -29,10 +29,10 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
 from pyEDAA.ProjectModel import Project
@@ -75,12 +75,12 @@ class Instantiate(TestCase):
 		project = Project(
 			"project",
 			vhdlVersion=VHDLVersion.VHDL2019,
-			verilogVersion=VerilogVersion.Verilog2005,
+			verilogVersion=SystemVerilogVersion.Verilog2005,
 			svVersion=SystemVerilogVersion.SystemVerilog2017
 		)
 
 		self.assertEqual(VHDLVersion.VHDL2019, project.VHDLVersion)
-		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
+		self.assertEqual(SystemVerilogVersion.Verilog2005, project.VerilogVersion)
 		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
 
 
@@ -89,7 +89,7 @@ class Properties(TestCase):
 		project = Project("project")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		project.VHDLVersion = vhdlVersion

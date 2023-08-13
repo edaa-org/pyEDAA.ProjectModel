@@ -29,10 +29,10 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
 from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary
@@ -79,7 +79,7 @@ class Instantiate(TestCase):
 
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		fileset = FileSet("fileset", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -208,7 +208,7 @@ class Properties(TestCase):
 		fileset = FileSet("fileset")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		fileset.VHDLVersion = vhdlVersion
@@ -221,7 +221,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromParentFileSet(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		parent = FileSet("parent", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -233,7 +233,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromDesign(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)

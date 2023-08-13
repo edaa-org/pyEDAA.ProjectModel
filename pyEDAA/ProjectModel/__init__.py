@@ -448,48 +448,28 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		return f"<VHDL file: '{self.ResolvedPath}'; lib: '{self.VHDLLibrary}'; version: {self.VHDLVersion}>"
 
 
-@export
-class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
-	"""A Verilog source file (of any language version)."""
-
-	_verilogVersion: VerilogVersion
-
-	def __init__(self, path: pathlib_Path, verilogVersion: VerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, design, fileSet)
-
-		self._verilogVersion = verilogVersion
-
+class VerilogMixIn(metaclass=ExtendedType, mixin=True):
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the Verilog version this Verilog source file is used in."""
-		if self._verilogVersion is not None:
-			return self._verilogVersion
+		if self._version is not None:
+			return self._version
 		elif self._fileSet is not None:
 			return self._fileSet.VerilogVersion
 		else:
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
-		self._verilogVersion = value
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
+		self._version = value
 
 
-@export
-class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
-	"""A SystemVerilog source file (of any language version)."""
-
-	_svVersion: SystemVerilogVersion
-
-	def __init__(self, path: pathlib_Path, svVersion: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, design, fileSet)
-
-		self._svVersion = svVersion
-
+class SystemVerilogMixIn(metaclass=ExtendedType, mixin=True):
 	@property
 	def SVVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the SystemVerilog version this SystemVerilog source file is used in."""
-		if self._svVersion is not None:
-			return self._svVersion
+		if self._version is not None:
+			return self._version
 		elif self._fileSet is not None:
 			return self._fileSet.SVVersion
 		else:
@@ -497,7 +477,42 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
-		self._svVersion = value
+		self._version = value
+
+
+@export
+class VerilogBaseFile(HDLSourceFile, HumanReadableContent):
+	_version: SystemVerilogVersion
+
+	def __init__(self, path: pathlib_Path, version: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+		super().__init__(path, project, design, fileSet)
+
+		self._version = version
+
+
+@export
+class VerilogSourceFile(VerilogBaseFile, VerilogMixIn):
+	"""A Verilog source file (of any language version)."""
+
+
+@export
+class VerilogHeaderFile(VerilogBaseFile, VerilogMixIn):
+	"""A Verilog header file (of any language version)."""
+
+
+@export
+class SystemVerilogBaseFile(VerilogBaseFile):
+	...
+
+
+@export
+class SystemVerilogSourceFile(SystemVerilogBaseFile, SystemVerilogMixIn):
+	"""A SystemVerilog source file (of any language version)."""
+
+
+@export
+class SystemVerilogHeaderFile(SystemVerilogBaseFile, SystemVerilogMixIn):
+	"""A SystemVerilog header file (of any language version)."""
 
 
 @export
@@ -630,7 +645,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
-	_verilogVersion:  VerilogVersion
+	_verilogVersion:  SystemVerilogVersion
 	_svVersion:       SystemVerilogVersion
 	_srdlVersion:     SystemRDLVersion
 
@@ -644,7 +659,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		parent: Nullable['FileSet'] = None,
 		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,
 		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
+		verilogVersion: SystemVerilogVersion = None,
 		svVersion: SystemVerilogVersion = None,
 		srdlVersion: SystemRDLVersion = None
 	):
@@ -978,7 +993,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the Verilog version of this fileset."""
 		if self._verilogVersion is not None:
 			return self._verilogVersion
@@ -990,7 +1005,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property
@@ -1208,7 +1223,7 @@ class Design(metaclass=ExtendedType, slots=True):
 
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
-	_verilogVersion:        VerilogVersion
+	_verilogVersion:        SystemVerilogVersion
 	_svVersion:             SystemVerilogVersion
 	_srdlVersion:           SystemRDLVersion
 	_externalVHDLLibraries: List
@@ -1223,7 +1238,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		directory: pathlib_Path = pathlib_Path("."),
 		project: 'Project' = None,
 		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
+		verilogVersion: SystemVerilogVersion = None,
 		svVersion: SystemVerilogVersion = None,
 		srdlVersion: SystemRDLVersion = None
 	):
@@ -1413,7 +1428,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
 		elif self._project is not None:
@@ -1422,7 +1437,7 @@ class Design(metaclass=ExtendedType, slots=True):
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property
@@ -1525,7 +1540,7 @@ class Project(metaclass=ExtendedType, slots=True):
 	_attributes:      Dict[Type[Attribute], typing_Any]
 
 	_vhdlVersion:     VHDLVersion
-	_verilogVersion:  VerilogVersion
+	_verilogVersion:  SystemVerilogVersion
 	_svVersion:       SystemVerilogVersion
 
 	def __init__(
@@ -1533,7 +1548,7 @@ class Project(metaclass=ExtendedType, slots=True):
 		name: str,
 		rootDirectory: pathlib_Path = pathlib_Path("."),
 		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
+		verilogVersion: SystemVerilogVersion = None,
 		svVersion: SystemVerilogVersion = None
 	):
 		self._name =            name
@@ -1636,12 +1651,12 @@ class Project(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		# TODO: check for None and return exception
 		return self._verilogVersion
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property

@@ -29,11 +29,11 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
-from pySVModel import VerilogVersion, SystemVerilogVersion
 
 from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes, Project, Design
 
@@ -118,14 +118,14 @@ class VerilogFile(TestCase):
 
 	def test_WithVerilogVersion(self):
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
-		file = VerilogSourceFile(path, verilogVersion=verilogVersion)
+		verilogVersion = SystemVerilogVersion.Verilog2005
+		file = VerilogSourceFile(path, version=verilogVersion)
 
 		self.assertEqual(verilogVersion, file.VerilogVersion)
 
 	def test_SetVerilogVersionLater(self):
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		file = VerilogSourceFile(path)
 
 		file.VerilogVersion = verilogVersion
@@ -134,7 +134,7 @@ class VerilogFile(TestCase):
 
 	def test_GetVersionFromFileSet(self):
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		fileset = FileSet("fileset", verilogVersion=verilogVersion)
 		file = VerilogSourceFile(path, fileSet=fileset)
 
@@ -154,7 +154,7 @@ class SystemVerilogFile(TestCase):
 	def test_WithVerilogVersion(self):
 		path = Path("example.sv")
 		svVersion = SystemVerilogVersion.SystemVerilog2017
-		file = SystemVerilogSourceFile(path, svVersion=svVersion)
+		file = SystemVerilogSourceFile(path, version=svVersion)
 
 		self.assertEqual(svVersion, file.SVVersion)
 

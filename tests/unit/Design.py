@@ -29,10 +29,10 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
 from pyEDAA.ProjectModel import Design, File, Project
@@ -67,7 +67,7 @@ class Instantiate(TestCase):
 
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -107,7 +107,7 @@ class Properties(TestCase):
 		design = Design("design")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design.VHDLVersion = vhdlVersion
@@ -120,7 +120,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromProject(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		project = Project("project", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
