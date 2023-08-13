@@ -246,6 +246,9 @@ class File(metaclass=FileType, slots=True):
 		if self._project is None:
 			raise Exception(f"Validation: File '{self._path}' has no project.")
 
+	def __len__(self) -> int:
+		return len(self._attributes)
+
 	def __getitem__(self, key: Type[Attribute]) -> Any:
 		"""Index access for returning attributes on this file."""
 		if not issubclass(key, Attribute):
@@ -828,6 +831,20 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		for fileSet in fileSets:
 			self.AddFileSet(fileSet)
 
+	@property
+	def FileSetCount(self) -> int:
+		"""Returns number of file sets excl. sub-filesets."""
+		return len(self._fileSets)
+
+	@property
+	def TotalFileSetCount(self) -> int:
+		"""Returns number of file sets incl. sub-filesets."""
+		fileSetCount = len(self._fileSets)
+		for fileSet in self._fileSets.values():
+			fileSetCount += fileSet.TotalFileSetCount
+
+		return fileSetCount
+
 	def AddFile(self, file: File) -> None:
 		"""
 		Method to add a single file to this fileset.
@@ -858,6 +875,20 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		for file in files:
 			self.AddFile(file)
 
+	@property
+	def FileCount(self) -> int:
+		"""Returns number of files excl. sub-filesets."""
+		return len(self._files)
+
+	@property
+	def TotalFileCount(self) -> int:
+		"""Returns number of files incl. the files in sub-filesets."""
+		fileCount = len(self._files)
+		for fileSet in self._fileSets.values():
+			fileCount += fileSet.FileCount
+
+		return fileCount
+
 	def Validate(self) -> None:
 		"""Validate this fileset."""
 		if self._name is None or self._name == "":
@@ -885,12 +916,8 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			file.Validate()
 
 	def __len__(self) -> int:
-		"""Returns number of files incl. the files in the sub-filesets."""
-		fileCount = self._files.__len__()
-		for fileSet in self._fileSets:
-			fileCount += fileSet.__len__()
-
-		return fileCount
+		"""Returns number of attributes set on the file set."""
+		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
 		"""Index access for returning attributes on this file."""
@@ -1142,6 +1169,11 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 			self._files.append(vhdlFile)
 
+	@property
+	def FileCount(self) -> int:
+		"""Returns number of files."""
+		return len(self._files)
+
 	def __str__(self) -> str:
 		"""Returns the VHDL library's name."""
 		return self._name
@@ -1347,8 +1379,9 @@ class Design(metaclass=ExtendedType, slots=True):
 		for fileSet in self._fileSets.values():
 			fileSet.Validate()
 
-	def __len__(self):
-		return self._fileSets.__len__()
+	def __len__(self) -> int:
+		"""Returns number of attributes set on the file set."""
+		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
 		if not issubclass(key, Attribute):
@@ -1437,6 +1470,20 @@ class Design(metaclass=ExtendedType, slots=True):
 	def AddFileSets(self, fileSets: Iterable[FileSet]) -> None:
 		for fileSet in fileSets:
 			self.AddFileSet(fileSet)
+
+	@property
+	def FileSetCount(self) -> int:
+		"""Returns number of file sets excl. sub-filesets."""
+		return len(self._fileSets)
+
+	@property
+	def TotalFileSetCount(self) -> int:
+		"""Returns number of file sets incl. sub-filesets."""
+		fileSetCount = len(self._fileSets)
+		for fileSet in self._fileSets.values():
+			fileSetCount += fileSet.TotalFileSetCount
+
+		return fileSetCount
 
 	def AddFile(self, file: File) -> None:
 		if file.FileSet is None:
@@ -1558,8 +1605,14 @@ class Project(metaclass=ExtendedType, slots=True):
 		for design in self._designs.values():
 			design.Validate()
 
-	def __len__(self):
-		return self._designs.__len__()
+	@property
+	def DesignCount(self) -> int:
+		"""Returns number of designs."""
+		return len(self._designs)
+
+	def __len__(self) -> int:
+		"""Returns number of attributes set on the file set."""
+		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
 		if not issubclass(key, Attribute):
