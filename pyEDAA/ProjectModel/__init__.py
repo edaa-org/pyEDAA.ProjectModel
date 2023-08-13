@@ -39,12 +39,13 @@ __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, \
+	Any
 
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
 from pyTooling.Graph       import Graph, Vertex
-from pySVModel             import VerilogVersion, SystemVerilogVersion
+from pySVModel             import SystemVerilogVersion
 from pyVHDLModel           import VHDLVersion
 from pySystemRDLModel      import SystemRDLVersion
 
@@ -245,7 +246,7 @@ class File(metaclass=FileType, slots=True):
 		if self._project is None:
 			raise Exception(f"Validation: File '{self._path}' has no project.")
 
-	def __getitem__(self, key: Type[Attribute]):
+	def __getitem__(self, key: Type[Attribute]) -> Any:
 		"""Index access for returning attributes on this file."""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
@@ -255,7 +256,7 @@ class File(metaclass=FileType, slots=True):
 		except KeyError:
 			return key.resolve(self, key)
 
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		"""Index access for setting attributes on this file."""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
@@ -398,7 +399,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 
 		self._vhdlVersion = vhdlVersion
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this VHDL source file."""
 		super().Validate()
 
@@ -802,7 +803,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
-	def AddFileSet(self, fileSet: "FileSet"):
+	def AddFileSet(self, fileSet: "FileSet") -> None:
 		"""
 		Method to add a single sub-fileset to this fileset.
 
@@ -818,7 +819,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._fileSets[fileSet.Name] = fileSet
 		fileSet._parent = self
 
-	def AddFileSets(self, fileSets: Iterable["FileSet"]):
+	def AddFileSets(self, fileSets: Iterable["FileSet"]) -> None:
 		"""
 		Method to add a multiple sub-filesets to this fileset.
 
@@ -857,7 +858,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		for file in files:
 			self.AddFile(file)
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this fileset."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: FileSet has no name.")
@@ -883,7 +884,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		for file in self._files:
 			file.Validate()
 
-	def __len__(self):
+	def __len__(self) -> int:
 		"""Returns number of files incl. the files in the sub-filesets."""
 		fileCount = self._files.__len__()
 		for fileSet in self._fileSets:
@@ -891,7 +892,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 
 		return fileCount
 
-	def __getitem__(self, key: Type[Attribute]):
+	def __getitem__(self, key: Type[Attribute]) -> Any:
 		"""Index access for returning attributes on this file."""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
@@ -901,11 +902,11 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		except KeyError:
 			return key.resolve(self, key)
 
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		"""Index access for setting attributes on this file."""
 		self._attributes[key] = value
 
-	def GetOrCreateVHDLLibrary(self, name):
+	def GetOrCreateVHDLLibrary(self, name) -> None:
 		if name in self._vhdlLibraries:
 			return self._vhdlLibraries[name]
 		elif name in self._design._vhdlLibraries:
@@ -994,7 +995,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	def SRDLVersion(self, value: SystemRDLVersion) -> None:
 		self._srdlVersion = value
 
-	def __str__(self):
+	def __str__(self) -> str:
 		"""Returns the fileset's name."""
 		return self._name
 
@@ -1064,7 +1065,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		return self._project
 
 	@Project.setter
-	def Project(self, value: 'Project'):
+	def Project(self, value: 'Project') -> None:
 		if not isinstance(value, Project):
 			raise TypeError("Parameter 'value' is not of type 'Project'.")
 
@@ -1082,7 +1083,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		return self._design
 
 	@Design.setter
-	def Design(self, value: 'Design'):
+	def Design(self, value: 'Design') -> None:
 		if not isinstance(value, Design):
 			raise TypeError("Parameter 'value' is not of type 'Design'.")
 
@@ -1125,7 +1126,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
 
-	def AddDependency(self, library: 'VHDLLibrary'):
+	def AddDependency(self, library: 'VHDLLibrary') -> None:
 		library.parent = self
 
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
@@ -1141,7 +1142,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 			self._files.append(vhdlFile)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		"""Returns the VHDL library's name."""
 		return self._name
 
@@ -1315,7 +1316,9 @@ class Design(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
-	def Validate(self):
+
+
+	def Validate(self) -> None:
 		"""Validate this design."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Design has no name.")
@@ -1347,7 +1350,7 @@ class Design(metaclass=ExtendedType, slots=True):
 	def __len__(self):
 		return self._fileSets.__len__()
 
-	def __getitem__(self, key: Type[Attribute]):
+	def __getitem__(self, key: Type[Attribute]) -> Any:
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -1356,7 +1359,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		except KeyError:
 			return key.resolve(self, key)
 
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		self._attributes[key] = value
 
 	@property
@@ -1445,14 +1448,14 @@ class Design(metaclass=ExtendedType, slots=True):
 		for file in files:
 			self.AddFile(file)
 
-	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary):
+	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary) -> None:
 		if vhdlLibrary.Name in self._vhdlLibraries:
 			if self._vhdlLibraries[vhdlLibrary.Name] is vhdlLibrary:
 				raise Exception(f"The VHDLLibrary '{vhdlLibrary.Name}' was already added to the design.")
 			else:
 				raise Exception(f"A VHDLLibrary with same name ('{vhdlLibrary.Name}') already exists for this design.")
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self._name
 
 
@@ -1528,7 +1531,7 @@ class Project(metaclass=ExtendedType, slots=True):
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this project."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Project has no name.")
@@ -1558,7 +1561,7 @@ class Project(metaclass=ExtendedType, slots=True):
 	def __len__(self):
 		return self._designs.__len__()
 
-	def __getitem__(self, key: Type[Attribute]):
+	def __getitem__(self, key: Type[Attribute]) -> Any:
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -1567,7 +1570,7 @@ class Project(metaclass=ExtendedType, slots=True):
 		except KeyError:
 			return key.resolve(self, key)
 
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		self._attributes[key] = value
 
 	@property
@@ -1597,5 +1600,5 @@ class Project(metaclass=ExtendedType, slots=True):
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self._name
