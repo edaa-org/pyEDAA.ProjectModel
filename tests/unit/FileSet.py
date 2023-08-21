@@ -35,8 +35,7 @@ from unittest import TestCase
 from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary
-
+from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary, Attribute
 
 if __name__ == "__main__": # pragma: no cover
 	print("ERROR: you called a testcase declaration file as an executable module.")
@@ -317,3 +316,19 @@ class Validate(TestCase):
 		fileSet = FileSet("fileset", design=design)
 
 		fileSet.Validate()
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+
+		with self.assertRaises(TypeError):
+			fileSet["attr"] = 5
+
+	def test_AddAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+
+		class Attr(Attribute):
+			pass
+
+		fileSet[Attr] = 5
