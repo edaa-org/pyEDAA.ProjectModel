@@ -934,11 +934,20 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			file.Validate()
 
 	def __len__(self) -> int:
-		"""Returns number of attributes set on the file set."""
+		"""
+		Returns number of attributes set on the file set.
+
+		:returns: The number if attributes set on that fileset.
+		"""
 		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
-		"""Index access for returning attributes on this file."""
+		"""Index access for returning attributes on this file.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -948,7 +957,16 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			return key.resolve(self, key)
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
-		"""Index access for setting attributes on this file."""
+		"""
+		Index access for setting attributes on this file.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
 		self._attributes[key] = value
 
 	def GetOrCreateVHDLLibrary(self, name) -> None:
