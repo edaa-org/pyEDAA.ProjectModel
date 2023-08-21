@@ -935,14 +935,14 @@ class FileSet(metaclass=ExtendedType, slots=True):
 
 	def __len__(self) -> int:
 		"""
-		Returns number of attributes set on the file set.
+		Returns number of attributes set on the fileset.
 
 		:returns: The number if attributes set on that fileset.
 		"""
 		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
-		"""Index access for returning attributes on this file.
+		"""Index access for returning attributes on this fileset.
 
 		:param key:        The attribute type.
 		:returns:          The attribute's value.
@@ -958,7 +958,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		"""
-		Index access for setting attributes on this file.
+		Index access for adding or setting attributes on this fileset.
 
 		:param key:        The attribute type.
 		:param value:      The attributes value.
@@ -968,6 +968,17 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
 		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for delting attributes on this fileset.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
 
 	def GetOrCreateVHDLLibrary(self, name) -> None:
 		if name in self._vhdlLibraries:
