@@ -90,12 +90,37 @@ class Instantiate(TestCase):
 
 
 class Operations(TestCase):
-	def test_AddFile(self):
+	def test_AddFile_WrongType(self):
+		fileSet = FileSet("fileset")
+
+		with self.assertRaises(TypeError):
+			fileSet.AddFile("file_A.txt")
+
+	def test_AddFile_Normal(self):
 		file = File(Path("file_A.txt"))
 		fileSet = FileSet("fileset")
 		fileSet.AddFile(file)
 
 		self.assertIn(file, [f for f in fileSet.Files()])
+
+	def test_AddFile_Again(self):
+		file = File(Path("file_A.txt"))
+		fileSet = FileSet("fileset")
+		fileSet.AddFile(file)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
+
+		with self.assertRaises(ValueError):
+			fileSet.AddFile(file)
+
+	def test_AddFile_Used(self):
+		file = File(Path("file_A.txt"))
+		fileSet_1 = FileSet("fileset_1")
+		fileSet_2 = FileSet("fileset_2")
+		fileSet_1.AddFile(file)
+
+		with self.assertRaises(ValueError):
+			fileSet_2.AddFile(file)
 
 	def test_AddFiles(self):
 		file = File(Path("file_A.txt"))
