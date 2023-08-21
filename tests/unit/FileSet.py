@@ -318,6 +318,10 @@ class Validate(TestCase):
 		fileSet.Validate()
 
 
+class Attr(Attribute):
+	pass
+
+
 class Attributes(TestCase):
 	def test_AddAttribute_WrongType(self):
 		fileSet = FileSet("fileset")
@@ -328,7 +332,30 @@ class Attributes(TestCase):
 	def test_AddAttribute_Normal(self):
 		fileSet = FileSet("fileset")
 
-		class Attr(Attribute):
-			pass
-
 		fileSet[Attr] = 5
+
+	def test_GetAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = fileSet["attr"]
+
+	def test_GetAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		_ = fileSet[Attr]
+
+	def test_DelAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del fileSet["attr"]
+
+	def test_DelAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		del fileSet[Attr]
