@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="1pt" height="864pt" viewBox="0.00 0.00 1.50 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.00463587 0.00463587) rotate(0) translate(4 186368.6)">
+<ns0:title>inheritance874f3aac8d</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="166,-93191.55 0,-93191.55 0,-93173.05 166,-93173.05 166,-93191.55" />
+<ns0:text text-anchor="middle" x="83" y="-93178.05" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>PythonContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonContent" ns1:title="A file type representing contents as Python source code." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="315.5,-186364.6 202,-186364.6 202,0 315.5,0 315.5,-186364.6" />
+<ns0:text text-anchor="middle" x="258.75" y="-186351.1" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">PythonContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;PythonContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M166.3,-93182.3C176.17,-93182.3 186.13,-93182.3 195.66,-93182.3" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="196.53,-93184.05 201.53,-93182.3 196.53,-93180.55 196.53,-93184.05" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

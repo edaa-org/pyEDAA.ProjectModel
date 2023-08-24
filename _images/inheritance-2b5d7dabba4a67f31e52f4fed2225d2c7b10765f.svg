@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="1pt" height="864pt" viewBox="0.00 0.00 1.12 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.00361458 0.00361458) rotate(0) translate(4 239027.6)">
+<ns0:title>inheritanceadcfb8a705</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="166,-119521.05 0,-119521.05 0,-119502.55 166,-119502.55 166,-119521.05" />
+<ns0:text text-anchor="middle" x="83" y="-119507.55" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>YAMLContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.YAMLContent" ns1:title="A file type representing YAML contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="300.5,-239023.6 202,-239023.6 202,0 300.5,0 300.5,-239023.6" />
+<ns0:text text-anchor="middle" x="251.25" y="-239010.1" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">YAMLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;YAMLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M166.15,-119511.8C176.18,-119511.8 186.22,-119511.8 195.7,-119511.8" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="196.53,-119513.55 201.53,-119511.8 196.53,-119510.05 196.53,-119513.55" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

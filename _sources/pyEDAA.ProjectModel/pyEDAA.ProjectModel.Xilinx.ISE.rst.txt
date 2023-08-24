@@ -1,0 +1,36 @@
+.. # Template modified  by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+==================================
+``pyEDAA.ProjectModel.Xilinx.ISE``
+==================================
+
+.. py:module:: pyEDAA.ProjectModel.Xilinx.ISE
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx.ISE
+
+
+**Classes**
+
+- :py:class:`ISEProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`UCFConstraintFile`:
+  Base-class of all constraint files.
+
+
+.. autoclass:: ISEProjectFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ISEProjectFile
+      :parts: 1
+
+.. autoclass:: UCFConstraintFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: UCFConstraintFile
+      :parts: 1

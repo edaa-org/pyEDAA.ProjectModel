@@ -1,0 +1,44 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="428pt" height="27pt" viewBox="0.00 0.00 428.00 26.50">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 22.5)">
+<ns0:title>inheritancef5edb30dd4</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="166,-18.5 0,-18.5 0,0 166,0 166,-18.5" />
+<ns0:text text-anchor="middle" x="83" y="-5" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>TCLContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent" ns1:title="A file type representing content in TCL code." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="293,-18.5 202,-18.5 202,0 293,0 293,-18.5" />
+<ns0:text text-anchor="middle" x="247.5" y="-5" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">TCLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>HumanReadableContent-&gt;TCLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M166.2,-9.25C176.37,-9.25 186.52,-9.25 196.01,-9.25" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="196.83,-11 201.83,-9.25 196.83,-7.5 196.83,-11" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>SDCContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SDCContent" ns1:title="A file type representing contents as Synopsys Design Constraints (SDC)." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="420,-18.5 329,-18.5 329,0 420,0 420,-18.5" />
+<ns0:text text-anchor="middle" x="374.5" y="-5" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SDCContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>TCLContent-&gt;SDCContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M293.27,-9.25C302.79,-9.25 312.9,-9.25 322.62,-9.25" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="323.62,-11 328.62,-9.25 323.62,-7.5 323.62,-11" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

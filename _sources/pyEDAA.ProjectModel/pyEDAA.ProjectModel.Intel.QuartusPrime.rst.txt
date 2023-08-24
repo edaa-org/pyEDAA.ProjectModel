@@ -1,0 +1,36 @@
+.. # Template modified  by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+==========================================
+``pyEDAA.ProjectModel.Intel.QuartusPrime``
+==========================================
+
+.. py:module:: pyEDAA.ProjectModel.Intel.QuartusPrime
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Intel.QuartusPrime
+
+
+**Classes**
+
+- :py:class:`QuartusProjectFile`:
+  A Quartus project file (``*.qpf``).
+
+- :py:class:`SDCConstraintFile`:
+  A Quartus constraint file (Synopsys Design Constraints; ``*.sdc``).
+
+
+.. autoclass:: QuartusProjectFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: QuartusProjectFile
+      :parts: 1
+
+.. autoclass:: SDCConstraintFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SDCConstraintFile
+      :parts: 1

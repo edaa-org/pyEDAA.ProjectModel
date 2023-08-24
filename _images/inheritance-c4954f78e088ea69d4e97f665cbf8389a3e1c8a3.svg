@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="0pt" height="864pt" viewBox="0.00 0.00 0.21 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.000667038 0.000667038) rotate(0) translate(4 1295275.37)">
+<ns0:title>inheritancecfec5b17ae</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="166,-1295271.37 0,-1295271.37 0,0 166,0 166,-1295271.37" />
+<ns0:text text-anchor="middle" x="83" y="-1295257.87" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>JSONContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.JSONContent" ns1:title="A file type representing JSON contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="300.5,-812247.63 202,-812247.63 202,-483023.73 300.5,-483023.73 300.5,-812247.63" />
+<ns0:text text-anchor="middle" x="251.25" y="-812234.13" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">JSONContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;JSONContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M166.15,-647635.68C176.18,-647635.68 186.22,-647635.68 195.7,-647635.68" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="196.53,-647637.43 201.53,-647635.68 196.53,-647633.93 196.53,-647637.43" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

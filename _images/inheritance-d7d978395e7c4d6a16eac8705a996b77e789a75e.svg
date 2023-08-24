@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="0pt" height="864pt" viewBox="0.00 0.00 0.14 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.00055956 0.00055956) rotate(0) translate(4 1544065.12)">
+<ns0:title>inheritance4df4ad03ac</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>Attribute</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute" ns1:title="Attribute" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="83.5,-772039.81 0,-772039.81 0,-772021.31 83.5,-772021.31 83.5,-772039.81" />
+<ns0:text text-anchor="middle" x="41.75" y="-772026.31" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">Attribute</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>UsedInAttribute</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.Xilinx.Vivado.html#pyEDAA.ProjectModel.Xilinx.Vivado.UsedInAttribute" ns1:title="UsedInAttribute" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="248,-1544061.12 119.5,-1544061.12 119.5,0 248,0 248,-1544061.12" />
+<ns0:text text-anchor="middle" x="183.75" y="-1544047.62" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">UsedInAttribute</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>Attribute-&gt;UsedInAttribute</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M84,-772030.56C93.23,-772030.56 103.28,-772030.56 113.31,-772030.56" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="114.21,-772032.31 119.21,-772030.56 114.21,-772028.81 114.21,-772032.31" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

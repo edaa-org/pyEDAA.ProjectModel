@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="0pt" height="864pt" viewBox="0.00 0.00 0.14 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.000598978 0.000598978) rotate(0) translate(4 1442453.14)">
+<ns0:title>inheritance6b912cd543</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>ExtendedType</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:title="An updates meta-class to construct new classes with an extended feature set.">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="106,-721233.82 0,-721233.82 0,-721215.32 106,-721215.32 106,-721233.82" />
+<ns0:text text-anchor="middle" x="53" y="-721220.32" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ExtendedType</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>FileType</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileType" ns1:title="A :term:`meta-class` to construct *FileType* classes." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="218,-1442449.14 142,-1442449.14 142,0 218,0 218,-1442449.14" />
+<ns0:text text-anchor="middle" x="180" y="-1442435.64" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">FileType</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>ExtendedType-&gt;FileType</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M106.29,-721224.57C116.15,-721224.57 126.36,-721224.57 135.9,-721224.57" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="136.74,-721226.32 141.74,-721224.57 136.74,-721222.82 136.74,-721226.32" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

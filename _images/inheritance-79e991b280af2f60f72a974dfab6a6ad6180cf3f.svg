@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="0pt" height="864pt" viewBox="0.00 0.00 0.41 864.00">
+<ns0:g id="graph0" class="graph" transform="scale(0.00134258 0.00134258) rotate(0) translate(4 643532.6)">
+<ns0:title>inheritancec6bf2d3a2b</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="166,-321773.55 0,-321773.55 0,-321755.05 166,-321755.05 166,-321773.55" />
+<ns0:text text-anchor="middle" x="83" y="-321760.05" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>TOMLContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../html/pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TOMLContent" ns1:title="A file type representing TOML contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="300.5,-643528.6 202,-643528.6 202,0 300.5,0 300.5,-643528.6" />
+<ns0:text text-anchor="middle" x="251.25" y="-643515.1" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">TOMLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;TOMLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M166.15,-321764.3C176.18,-321764.3 186.22,-321764.3 195.7,-321764.3" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="196.53,-321766.05 201.53,-321764.3 196.53,-321762.55 196.53,-321766.05" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

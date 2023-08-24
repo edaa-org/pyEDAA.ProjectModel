@@ -1,0 +1,21 @@
+.. # Template modified  by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+==============================
+``pyEDAA.ProjectModel.Xilinx``
+==============================
+
+.. py:module:: pyEDAA.ProjectModel.Xilinx
+
+
+
+**Submodules**
+
+
+.. toctree::
+
+   pyEDAA.ProjectModel.Xilinx.ISE
+   pyEDAA.ProjectModel.Xilinx.Vivado
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx
