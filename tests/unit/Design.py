@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,13 +29,13 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, File, Project
+from pyEDAA.ProjectModel import Design, File, Project, Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -67,7 +67,7 @@ class Instantiate(TestCase):
 
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -107,7 +107,7 @@ class Properties(TestCase):
 		design = Design("design")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design.VHDLVersion = vhdlVersion
@@ -120,7 +120,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromProject(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		project = Project("project", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -145,3 +145,46 @@ class Validate(TestCase):
 		design = Design("design", directory=Path("designA"), project=project)
 
 		design.Validate()
+
+
+class Attr(Attribute):
+	pass
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self):
+		design = Design("design")
+
+		with self.assertRaises(TypeError):
+			design["attr"] = 5
+
+	def test_AddAttribute_Normal(self):
+		design = Design("design")
+
+		design[Attr] = 5
+
+	def test_GetAttribute_WrongType(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = design["attr"]
+
+	def test_GetAttribute_Normal(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		_ = design[Attr]
+
+	def test_DelAttribute_WrongType(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del design["attr"]
+
+	def test_DelAttribute_Normal(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		del design[Attr]

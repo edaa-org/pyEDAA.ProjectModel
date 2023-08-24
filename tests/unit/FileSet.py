@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,13 +29,14 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary
+from pyEDAA.ProjectModel            import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary, Attribute
+from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -79,7 +80,7 @@ class Instantiate(TestCase):
 
 	def test_WithVersions(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		fileset = FileSet("fileset", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -89,7 +90,86 @@ class Instantiate(TestCase):
 		self.assertEqual(svVersion, fileset.SVVersion)
 
 
+class Operations(TestCase):
+	def test_AddFile_WrongType(self):
+		fileSet = FileSet("fileset")
+
+		with self.assertRaises(TypeError):
+			fileSet.AddFile("file_A.txt")
+
+	def test_AddFile_Normal(self):
+		file = File(Path("file_A.txt"))
+		fileSet = FileSet("fileset")
+		fileSet.AddFile(file)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
+
+	def test_AddFile_Again(self):
+		file = File(Path("file_A.txt"))
+		fileSet = FileSet("fileset")
+		fileSet.AddFile(file)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
+
+		with self.assertRaises(ValueError):
+			fileSet.AddFile(file)
+
+	def test_AddFile_Used(self):
+		file = File(Path("file_A.txt"))
+		fileSet_1 = FileSet("fileset_1")
+		fileSet_2 = FileSet("fileset_2")
+		fileSet_1.AddFile(file)
+
+		with self.assertRaises(ValueError):
+			fileSet_2.AddFile(file)
+
+	def test_AddFiles(self):
+		file = File(Path("file_A.txt"))
+		files = (file, )
+		fileSet = FileSet("fileset")
+		fileSet.AddFiles(files)
+
+		self.assertIn(file, [f for f in fileSet.Files()])
+
+	def test_AddFileSet(self):
+		subFileSet = FileSet("subfileset")
+		fileset = FileSet("fileset")
+		fileset.AddFileSet(subFileSet)
+
+		self.assertEqual(1, len(fileset.FileSets))
+		self.assertIn("subfileset", fileset.FileSets)
+		self.assertEqual(subFileSet, fileset.FileSets["subfileset"])
+
+	def test_AddFileSets(self):
+		subFileSet = FileSet("subfileset")
+		subFileSets = (subFileSet, )
+		fileset = FileSet("fileset")
+		fileset.AddFileSets(subFileSets)
+
+		self.assertEqual(1, len(fileset.FileSets))
+		self.assertIn("subfileset", fileset.FileSets)
+		self.assertEqual(subFileSet, fileset.FileSets["subfileset"])
+
+
 class Properties(TestCase):
+	def test_SetParentToFileSet(self):
+		fileSet = FileSet("fileset")
+		subFileSet = FileSet("subfileset")
+
+		subFileSet.Parent = fileSet
+
+		self.assertIn("subfileset", fileSet.FileSets)
+		self.assertIs(subFileSet, fileSet.FileSets["subfileset"])
+
+	def test_SetParentToDesign(self):
+		design = Design("design")
+		fileSet = FileSet("fileset")
+
+		fileSet.Parent = design
+
+		self.assertIn("fileset", design.FileSets)
+		self.assertIs(fileSet, design.FileSets["fileset"])
+
 	def test_SetDirectoryLater(self):
 		path = Path("fileset")
 		fileset = FileSet("fileset")
@@ -154,7 +234,7 @@ class Properties(TestCase):
 		fileset = FileSet("fileset")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		fileset.VHDLVersion = vhdlVersion
@@ -167,7 +247,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromParentFileSet(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		parent = FileSet("parent", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -179,7 +259,7 @@ class Properties(TestCase):
 
 	def test_GetVersionsFromDesign(self):
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -238,3 +318,46 @@ class Validate(TestCase):
 		fileSet = FileSet("fileset", design=design)
 
 		fileSet.Validate()
+
+
+class Attr(Attribute):
+	pass
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+
+		with self.assertRaises(TypeError):
+			fileSet["attr"] = 5
+
+	def test_AddAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+
+		fileSet[Attr] = 5
+
+	def test_GetAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = fileSet["attr"]
+
+	def test_GetAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		_ = fileSet[Attr]
+
+	def test_DelAttribute_WrongType(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del fileSet["attr"]
+
+	def test_DelAttribute_Normal(self):
+		fileSet = FileSet("fileset")
+		fileSet[Attr] = 5
+
+		del fileSet[Attr]
