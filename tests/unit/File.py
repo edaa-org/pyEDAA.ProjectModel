@@ -32,7 +32,7 @@
 from pathlib import Path
 from unittest import TestCase
 
-from pyEDAA.ProjectModel            import Design, FileSet, File, Project, FileTypes
+from pyEDAA.ProjectModel            import Design, FileSet, File, Project, FileTypes, Attribute
 from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
 
 
@@ -155,14 +155,57 @@ class Validate(TestCase):
 		file.Validate()
 
 
+class Attr(Attribute):
+	pass
+
+
 class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self):
+		file = File(Path("file.txt"))
+
+		with self.assertRaises(TypeError):
+			file["attr"] = 5
+
+	def test_AddAttribute_Normal(self):
+		file = File(Path("file.txt"))
+
+		file[Attr] = 5
+
+	def test_GetAttribute_WrongType(self):
+		file = File(Path("file.txt"))
+		file[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = file["attr"]
+
+	def test_GetAttribute_Normal(self):
+		file = File(Path("file.txt"))
+		file[Attr] = 5
+
+		_ = file[Attr]
+
+	def test_DelAttribute_WrongType(self):
+		file = File(Path("file.txt"))
+		file[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del file["attr"]
+
+	def test_DelAttribute_Normal(self):
+		file = File(Path("file.txt"))
+		file[Attr] = 5
+
+		del file[Attr]
+
+
+class AttributeResolution(TestCase):
 	def test_AttachedToFile(self):
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
 
-		file._attributes[KeyValueAttribute] = KeyValueAttribute()
+		file[KeyValueAttribute] = KeyValueAttribute()
 
 		attribute = file[KeyValueAttribute]
 		attribute["id1"] = "5"

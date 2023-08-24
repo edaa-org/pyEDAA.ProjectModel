@@ -35,7 +35,7 @@ from unittest import TestCase
 from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, File, Project
+from pyEDAA.ProjectModel import Design, File, Project, Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -145,3 +145,46 @@ class Validate(TestCase):
 		design = Design("design", directory=Path("designA"), project=project)
 
 		design.Validate()
+
+
+class Attr(Attribute):
+	pass
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self):
+		design = Design("design")
+
+		with self.assertRaises(TypeError):
+			design["attr"] = 5
+
+	def test_AddAttribute_Normal(self):
+		design = Design("design")
+
+		design[Attr] = 5
+
+	def test_GetAttribute_WrongType(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = design["attr"]
+
+	def test_GetAttribute_Normal(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		_ = design[Attr]
+
+	def test_DelAttribute_WrongType(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del design["attr"]
+
+	def test_DelAttribute_Normal(self):
+		design = Design("design")
+		design[Attr] = 5
+
+		del design[Attr]

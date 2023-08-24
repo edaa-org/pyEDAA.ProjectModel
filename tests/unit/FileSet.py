@@ -35,7 +35,9 @@ from unittest import TestCase
 from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary, Attribute
+from pyEDAA.ProjectModel            import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary, Attribute
+from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
+
 
 if __name__ == "__main__": # pragma: no cover
 	print("ERROR: you called a testcase declaration file as an executable module.")
