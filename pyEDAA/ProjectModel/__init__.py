@@ -39,8 +39,7 @@ __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, \
-	Any
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Any
 
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
@@ -247,10 +246,20 @@ class File(metaclass=FileType, slots=True):
 			raise Exception(f"Validation: File '{self._path}' has no project.")
 
 	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this file.
+
+		:returns: The number if attributes set on this file.
+		"""
 		return len(self._attributes)
 
 	def __getitem__(self, key: Type[Attribute]) -> Any:
-		"""Index access for returning attributes on this file."""
+		"""Index access for returning attributes on this file.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
@@ -260,11 +269,31 @@ class File(metaclass=FileType, slots=True):
 			return key.resolve(self, key)
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
-		"""Index access for setting attributes on this file."""
+		"""
+		Index access for adding or setting attributes on this file.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
 		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this file.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
+		return f"{self._path}"
 
 
 FileTypes = File
@@ -373,7 +402,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	:arg fileSet:     Fileset the file is associated with.
 	"""
 
-	_vhdlLibrary: 'VHDLLibrary'
+	_vhdlLibrary: Nullable['VHDLLibrary']
 	_vhdlVersion: VHDLVersion
 
 	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
@@ -924,63 +953,16 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' is not a directory.")
 
 		if self._design is None:
-			raise Exception(f"Validation: FileSet '{self._path}' has no design.")
+			raise Exception(f"Validation: FileSet '{self._directory}' has no design.")
 		if self._project is None:
-			raise Exception(f"Validation: FileSet '{self._path}' has no project.")
+			raise Exception(f"Validation: FileSet '{self._directory}' has no project.")
 
 		for fileSet in self._fileSets.values():
 			fileSet.Validate()
 		for file in self._files:
 			file.Validate()
 
-	def __len__(self) -> int:
-		"""
-		Returns number of attributes set on the fileset.
-
-		:returns: The number if attributes set on that fileset.
-		"""
-		return len(self._attributes)
-
-	def __getitem__(self, key: Type[Attribute]) -> Any:
-		"""Index access for returning attributes on this fileset.
-
-		:param key:        The attribute type.
-		:returns:          The attribute's value.
-		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
-		"""
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
-		"""
-		Index access for adding or setting attributes on this fileset.
-
-		:param key:        The attribute type.
-		:param value:      The attributes value.
-		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
-		"""
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		self._attributes[key] = value
-
-	def __delitem__(self, key: Type[Attribute]) -> None:
-		"""
-		Index access for delting attributes on this fileset.
-
-		:param key: The attribute type.
-		"""
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		del self._attributes[key]
-
-	def GetOrCreateVHDLLibrary(self, name) -> None:
+	def GetOrCreateVHDLLibrary(self, name) -> 'VHDLLibrary':
 		if name in self._vhdlLibraries:
 			return self._vhdlLibraries[name]
 		elif name in self._design._vhdlLibraries:
@@ -1070,6 +1052,53 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	@SRDLVersion.setter
 	def SRDLVersion(self, value: SystemRDLVersion) -> None:
 		self._srdlVersion = value
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this fileset.
+
+		:returns: The number if attributes set on this fileset.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this fileset.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this fileset.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this fileset.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
 
 	def __str__(self) -> str:
 		"""Returns the fileset's name."""
@@ -1222,6 +1251,53 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def FileCount(self) -> int:
 		"""Returns number of files."""
 		return len(self._files)
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this VHDL library.
+
+		:returns: The number if attributes set on this VHDL library.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this VHDL library.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this VHDL library.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this VHDL library.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
 
 	def __str__(self) -> str:
 		"""Returns the VHDL library's name."""
@@ -1397,8 +1473,6 @@ class Design(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
-
-
 	def Validate(self) -> None:
 		"""Validate this design."""
 		if self._name is None or self._name == "":
@@ -1427,22 +1501,6 @@ class Design(metaclass=ExtendedType, slots=True):
 
 		for fileSet in self._fileSets.values():
 			fileSet.Validate()
-
-	def __len__(self) -> int:
-		"""Returns number of attributes set on the file set."""
-		return len(self._attributes)
-
-	def __getitem__(self, key: Type[Attribute]) -> Any:
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
-		self._attributes[key] = value
 
 	@property
 	def VHDLLibraries(self) -> Dict[str, VHDLLibrary]:
@@ -1550,6 +1608,54 @@ class Design(metaclass=ExtendedType, slots=True):
 				raise Exception(f"The VHDLLibrary '{vhdlLibrary.Name}' was already added to the design.")
 			else:
 				raise Exception(f"A VHDLLibrary with same name ('{vhdlLibrary.Name}') already exists for this design.")
+
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this design.
+
+		:returns: The number if attributes set on this design.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this design.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this design.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this design.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
 
 	def __str__(self) -> str:
 		return self._name
@@ -1660,22 +1766,6 @@ class Project(metaclass=ExtendedType, slots=True):
 		"""Returns number of designs."""
 		return len(self._designs)
 
-	def __len__(self) -> int:
-		"""Returns number of attributes set on the file set."""
-		return len(self._attributes)
-
-	def __getitem__(self, key: Type[Attribute]) -> Any:
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
-		self._attributes[key] = value
-
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
 		# TODO: check for None and return exception
@@ -1711,6 +1801,53 @@ class Project(metaclass=ExtendedType, slots=True):
 	@SRDLVersion.setter
 	def SRDLVersion(self, value: SystemRDLVersion) -> None:
 		self._srdlVersion = value
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this project.
+
+		:returns: The number if attributes set on this project.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this project.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this project.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this project.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
 
 	def __str__(self) -> str:
 		return self._name
