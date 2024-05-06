@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -43,7 +43,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_VHDLLibrary(self):
+	def test_VHDLLibrary(self) -> None:
 		library = VHDLLibrary("library")
 
 		self.assertIsNotNone(library)
@@ -52,21 +52,21 @@ class Instantiate(TestCase):
 		self.assertIsNone(library.Design)
 		self.assertEqual(0, len(library._files))
 
-	def test_VHDLLibraryFromDesign(self):
+	def test_VHDLLibraryFromDesign(self) -> None:
 		design =  Design("design")
 		library = VHDLLibrary("library", design=design)
 
 		self.assertIsNone(library.Project)
 		self.assertIs(design, library.Design)
 
-	def test_VHDLLibraryFromProject(self):
+	def test_VHDLLibraryFromProject(self) -> None:
 		project = Project("project")
 		library = VHDLLibrary("library", project=project)
 
 		self.assertIs(project, library.Project)
 		self.assertIs(project.DefaultDesign, library.Design)
 
-	def test_VHDLLibraryFromProjectAndDesign(self):
+	def test_VHDLLibraryFromProjectAndDesign(self) -> None:
 		project = Project("project")
 		design =  Design("design", project=project)
 		library = VHDLLibrary("library", design=design)
@@ -74,12 +74,12 @@ class Instantiate(TestCase):
 		self.assertIs(library.Project, project)
 		self.assertIs(library.Design, design)
 
-	def test_VHDLLibraryWithVersion(self):
+	def test_VHDLLibraryWithVersion(self) -> None:
 		library = VHDLLibrary("library", vhdlVersion=VHDLVersion.VHDL2019)
 
 		self.assertEqual(VHDLVersion.VHDL2019, library.VHDLVersion)
 
-	def test_VHDLLibrarySetProjectLater(self):
+	def test_VHDLLibrarySetProjectLater(self) -> None:
 		project = Project("project")
 		library = VHDLLibrary("library")
 
@@ -87,7 +87,7 @@ class Instantiate(TestCase):
 
 		self.assertIs(project, library.Project)
 
-	def test_VHDLLibrarySetVersionLater(self):
+	def test_VHDLLibrarySetVersionLater(self) -> None:
 		library = VHDLLibrary("library")
 
 		vhdlVersion = VHDLVersion.VHDL2019
@@ -96,7 +96,7 @@ class Instantiate(TestCase):
 
 		self.assertEqual(vhdlVersion, library.VHDLVersion)
 
-	def test_VHDLLibraryGetVersionFromDesign(self):
+	def test_VHDLLibraryGetVersionFromDesign(self) -> None:
 		vhdlVersion = VHDLVersion.VHDL2019
 
 		design = Design("design", vhdlVersion=vhdlVersion)

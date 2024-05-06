@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -43,7 +43,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_File(self):
+	def test_File(self) -> None:
 		path = Path("example.vhdl")
 		file = File(path)
 
@@ -54,21 +54,21 @@ class Instantiate(TestCase):
 		self.assertIsNone(file.FileSet)
 		self.assertEqual(FileTypes.File, file.FileType)
 
-	def test_WithProject(self):
+	def test_WithProject(self) -> None:
 		path = Path("example.vhdl")
 		project = Project("project")
 		file = File(path, project=project)
 
 		self.assertIs(project, file.Project)
 
-	def test_WithDesign(self):
+	def test_WithDesign(self) -> None:
 		path = Path("example.vhdl")
 		design = Design("design")
 		file = File(path, design=design)
 
 		self.assertIs(design, file.Design)
 
-	def test_WithFileSet(self):
+	def test_WithFileSet(self) -> None:
 		path = Path("example.vhdl")
 		fileset = FileSet("fileset")
 		file = File(path, fileSet=fileset)
@@ -76,7 +76,7 @@ class Instantiate(TestCase):
 		self.assertIsNone(file.Design)
 		self.assertIs(fileset, file.FileSet)
 
-	def test_WithFileSetAndProject(self):
+	def test_WithFileSetAndProject(self) -> None:
 		path = Path("example.vhdl")
 		design = Design("design")
 		fileset = FileSet("fileset", design=design)
@@ -87,7 +87,7 @@ class Instantiate(TestCase):
 
 
 class Properties(TestCase):
-	def test_SetProjectLater(self):
+	def test_SetProjectLater(self) -> None:
 		path = Path("example.vhdl")
 		project = Project("project")
 		file = File(path)
@@ -96,7 +96,7 @@ class Properties(TestCase):
 
 		self.assertIs(project, file.Project)
 
-	def test_SetDesignLater(self):
+	def test_SetDesignLater(self) -> None:
 		path = Path("example.vhdl")
 		design = Design("design")
 		file = File(path)
@@ -105,7 +105,7 @@ class Properties(TestCase):
 
 		self.assertIs(design, file.Design)
 
-	def test_SetDesignWithProjectLater(self):
+	def test_SetDesignWithProjectLater(self) -> None:
 		path = Path("example.vhdl")
 		project = Project("project")
 		design = Design("design", project=project)
@@ -120,7 +120,7 @@ class Properties(TestCase):
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 
-	def test_SetFileSetLater(self):
+	def test_SetFileSetLater(self) -> None:
 		path = Path("example.vhdl")
 		fileset = FileSet("fileset")
 		file = File(path)
@@ -133,7 +133,7 @@ class Properties(TestCase):
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 
-	def test_ResolveDirectory(self):
+	def test_ResolveDirectory(self) -> None:
 		projectDirectoryPath = Path.cwd() / "project"
 		designDirectory = "designA"
 		filePath = "file_A1.vhdl"
@@ -146,7 +146,7 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_File(self):
+	def test_File(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
@@ -160,38 +160,38 @@ class Attr(Attribute):
 
 
 class Attributes(TestCase):
-	def test_AddAttribute_WrongType(self):
+	def test_AddAttribute_WrongType(self) -> None:
 		file = File(Path("file.txt"))
 
 		with self.assertRaises(TypeError):
 			file["attr"] = 5
 
-	def test_AddAttribute_Normal(self):
+	def test_AddAttribute_Normal(self) -> None:
 		file = File(Path("file.txt"))
 
 		file[Attr] = 5
 
-	def test_GetAttribute_WrongType(self):
+	def test_GetAttribute_WrongType(self) -> None:
 		file = File(Path("file.txt"))
 		file[Attr] = 5
 
 		with self.assertRaises(TypeError):
 			_ = file["attr"]
 
-	def test_GetAttribute_Normal(self):
+	def test_GetAttribute_Normal(self) -> None:
 		file = File(Path("file.txt"))
 		file[Attr] = 5
 
 		_ = file[Attr]
 
-	def test_DelAttribute_WrongType(self):
+	def test_DelAttribute_WrongType(self) -> None:
 		file = File(Path("file.txt"))
 		file[Attr] = 5
 
 		with self.assertRaises(TypeError):
 			del file["attr"]
 
-	def test_DelAttribute_Normal(self):
+	def test_DelAttribute_Normal(self) -> None:
 		file = File(Path("file.txt"))
 		file[Attr] = 5
 
@@ -199,10 +199,10 @@ class Attributes(TestCase):
 
 
 class AttributeResolution(TestCase):
-	def test_AttachedToFile(self):
+	def test_AttachedToFile(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
-		fileSet = FileSet("fileset", design=design)
+		fileSet = FileSet("fileset", directory=Path("src"), design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
 
 		file[KeyValueAttribute] = KeyValueAttribute()
@@ -213,7 +213,7 @@ class AttributeResolution(TestCase):
 		self.assertEqual("5", attribute["id1"])
 		self.assertEqual("5", file[KeyValueAttribute]["id1"])
 
-	def test_AttachedToFileSet(self):
+	def test_AttachedToFileSet(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)

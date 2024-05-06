@@ -204,8 +204,8 @@ autodoc_typehints = "both"
 # Sphinx.Ext.ExtLinks
 # ==============================================================================
 extlinks = {
-	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
-	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
+	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #%s'),
+	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #%s'),
 	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s', None),
 }
 

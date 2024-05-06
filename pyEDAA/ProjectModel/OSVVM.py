@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -133,7 +133,7 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 				elif not isinstance(instruction, (OSVVMProjectFile.Empty, OSVVMProjectFile.Comment)):
 					raise Exception(f"Unknown instruction '{instruction.__class__.__name__}' in OSVVM project file '{self._osvvmProjectFile.ResolvedPath}'")
 
-	def Parse(self):
+	def Parse(self) -> None:
 		projectName = self._path.name
 		self._osvvmProject = Project(projectName, rootDirectory=self._path.parent)
 
@@ -147,7 +147,7 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 			elif not isinstance(instruction, (OSVVMProjectFile.Empty, OSVVMProjectFile.Comment)):
 				raise Exception(f"Unknown instruction '{instruction.__class__.__name__}' in OSVVM project file '{self.ResolvedPath}'")
 
-	def _Parse(self):
+	def _Parse(self) -> List:
 		path = self.ResolvedPath
 		if not path.exists():
 			raise Exception(f"OSVVM project file '{path}' not found.") from FileNotFoundError(f"File '{path}' not found.")

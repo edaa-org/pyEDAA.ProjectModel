@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -45,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_Project(self):
+	def test_Project(self) -> None:
 		project = Project("project")
 
 		self.assertIsNotNone(project)
@@ -64,14 +64,14 @@ class Instantiate(TestCase):
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_WithPath(self):
+	def test_WithPath(self) -> None:
 		rootDirectoryPath = Path.cwd() / "temp/../project"
 		rootDirectory = (Path.cwd() / "project").as_posix()
 		project = Project("project", rootDirectory=rootDirectoryPath)
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_WithVersions(self):
+	def test_WithVersions(self) -> None:
 		project = Project(
 			"project",
 			vhdlVersion=VHDLVersion.VHDL2019,
@@ -85,7 +85,7 @@ class Instantiate(TestCase):
 
 
 class Properties(TestCase):
-	def test_SetVersionsLater(self):
+	def test_SetVersionsLater(self) -> None:
 		project = Project("project")
 
 		vhdlVersion = VHDLVersion.VHDL2019
@@ -100,7 +100,7 @@ class Properties(TestCase):
 		self.assertEqual(verilogVersion, project.VerilogVersion)
 		self.assertEqual(svVersion, project.SVVersion)
 
-	def test_ResolveDirectory(self):
+	def test_ResolveDirectory(self) -> None:
 		projectDirectoryPath = Path.cwd() / "project"
 
 		project = Project("project", projectDirectoryPath)
@@ -109,7 +109,7 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_Project(self):
+	def test_Project(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 
 		project.Validate()
@@ -120,38 +120,38 @@ class Attr(Attribute):
 
 
 class Attributes(TestCase):
-	def test_AddAttribute_WrongType(self):
+	def test_AddAttribute_WrongType(self) -> None:
 		project = Project("project")
 
 		with self.assertRaises(TypeError):
 			project["attr"] = 5
 
-	def test_AddAttribute_Normal(self):
+	def test_AddAttribute_Normal(self) -> None:
 		project = Project("project")
 
 		project[Attr] = 5
 
-	def test_GetAttribute_WrongType(self):
+	def test_GetAttribute_WrongType(self) -> None:
 		project = Project("project")
 		project[Attr] = 5
 
 		with self.assertRaises(TypeError):
 			_ = project["attr"]
 
-	def test_GetAttribute_Normal(self):
+	def test_GetAttribute_Normal(self) -> None:
 		project = Project("project")
 		project[Attr] = 5
 
 		_ = project[Attr]
 
-	def test_DelAttribute_WrongType(self):
+	def test_DelAttribute_WrongType(self) -> None:
 		project = Project("project")
 		project[Attr] = 5
 
 		with self.assertRaises(TypeError):
 			del project["attr"]
 
-	def test_DelAttribute_Normal(self):
+	def test_DelAttribute_Normal(self) -> None:
 		project = Project("project")
 		project[Attr] = 5
 

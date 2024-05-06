@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 # Copyright 2014-2016 Technische Universität Dresden - Germany, Chair of VLSI-Design, Diagnostics and Architecture     #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
@@ -32,7 +32,7 @@
 """An abstract model of EDA tool projects."""
 __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
-__copyright__ = "2014-2023, Patrick Lehmann, Unai Martinez-Corral"
+__copyright__ = "2014-2024, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
 __version__ =   "0.5.0"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
@@ -154,7 +154,7 @@ class File(metaclass=FileType, slots=True):
 		self._attributes = {}
 		self._registerAttributes()
 
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		pass
 
 	@property
@@ -225,7 +225,7 @@ class File(metaclass=FileType, slots=True):
 		self._fileSet = value
 		value._files.append(self)
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this file."""
 		if self._path is None:
 			raise Exception("Validation: File has no path.")
