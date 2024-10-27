@@ -61,7 +61,7 @@ pygments_style = 'stata-dark'
 # ==============================================================================
 prologPath = Path("prolog.inc")
 try:
-	with prologPath.open("r") as fileHandle:
+	with prologPath.open("r", encoding="utf-8") as fileHandle:
 		rst_prolog = fileHandle.read()
 except Exception as ex:
 	print(f"[ERROR:] While reading '{prologPath}'.")

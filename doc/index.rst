@@ -98,7 +98,7 @@ News
 * ProjectModel became first citizen of `EDA² <https://GitHub.com/edaa-org>`__ and got integrated into the `pyEDAA` namespace at PyPI.
 
 
-.. _contributors:
+.. _CONTRIBUTORS:
 
 Contributors
 ************
@@ -107,6 +107,8 @@ Contributors
 * `Unai Martinez-Corral <https://GitHub.com/umarcor/>`__ (Maintainer)
 * `and more... <https://GitHub.com/VHDL/pyVHDLModel/graphs/contributors>`__
 
+
+.. _LICENSE:
 
 License
 *******

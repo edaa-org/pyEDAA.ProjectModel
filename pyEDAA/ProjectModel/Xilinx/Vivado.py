@@ -90,9 +90,9 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def __init__(
 		self,
 		path: Path,
-		project: Project = None,
-		design: Design = None,
-		fileSet: FileSet = None
+		project: Nullable[Project] = None,
+		design:  Nullable[Design] =  None,
+		fileSet: Nullable[FileSet] = None
 	) -> None:
 		super().__init__(path, project, design, fileSet)
 

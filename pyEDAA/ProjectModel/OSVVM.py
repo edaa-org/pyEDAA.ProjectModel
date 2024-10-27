@@ -46,9 +46,9 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 	def __init__(
 		self,
 		path: Path,
-		project: Project = None,
-		design: Design = None,
-		fileSet: FileSet = None
+		project: Nullable[Project] = None,
+		design: Nullable[Design] = None,
+		fileSet: Nullable[FileSet] = None
 	):
 		super().__init__(path, project, design, fileSet)
 
@@ -154,7 +154,7 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 
 		instructions: List = []
 		print()
-		with path.open("r") as file:
+		with path.open("r", encoding="utf-8") as file:
 			i = 1
 			for line in file:
 				line = line.lstrip()

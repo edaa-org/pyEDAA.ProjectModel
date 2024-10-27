@@ -46,6 +46,8 @@ jobs:
     uses: pyTooling/Actions/.github/workflows/PublishTestResults.yml@dev
     needs:
       - UnitTesting
+    with:
+      additional_merge_args: '"--pytest=rewrite-dunder-init;reduce-depth:pytest.tests.unit"'
 
   Package:
     uses: pyTooling/Actions/.github/workflows/Package.yml@dev

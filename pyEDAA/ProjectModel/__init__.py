@@ -39,8 +39,10 @@ __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
+from sys     import version_info
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Any
 
+from pyTooling.Common      import getFullyQualifiedName
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
 from pyTooling.Graph       import Graph, Vertex
@@ -123,9 +125,9 @@ class File(metaclass=FileType, slots=True):
 	def __init__(
 		self,
 		path: pathlib_Path,
-		project: 'Project' = None,
-		design: 'Design' = None,
-		fileSet: 'FileSet' = None
+		project: Nullable["Project"] = None,
+		design:  Nullable["Design"] =  None,
+		fileSet: Nullable["FileSet"] = None
 	):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
@@ -266,7 +268,12 @@ class File(metaclass=FileType, slots=True):
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return key.resolve(self, key)
+			try:
+				return key.resolve(self, key)
+			except KeyError:
+				attribute = key()
+				self._attributes[key] = attribute
+				return attribute
 
 	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
 		"""
@@ -405,7 +412,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	_vhdlLibrary: Nullable['VHDLLibrary']
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: Nullable[VHDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
 		super().__init__(path, project, design, fileSet)
 
 		if isinstance(vhdlLibrary, str):
@@ -427,7 +434,10 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		elif vhdlLibrary is None:
 			self._vhdlLibrary = None
 		else:
-			raise TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			ex = TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
+			raise ex
 
 		self._vhdlVersion = vhdlVersion
 
@@ -513,7 +523,7 @@ class SystemVerilogMixIn(metaclass=ExtendedType, mixin=True):
 class VerilogBaseFile(HDLSourceFile, HumanReadableContent):
 	_version: SystemVerilogVersion
 
-	def __init__(self, path: pathlib_Path, version: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, version: Nullable[SystemVerilogVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
 		super().__init__(path, project, design, fileSet)
 
 		self._version = version
@@ -550,7 +560,7 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 
 	_srdlVersion: SystemRDLVersion
 
-	def __init__(self, path: pathlib_Path, srdlVersion: SystemRDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, srdlVersion: Nullable[SystemRDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
 		super().__init__(path, project, design, fileSet)
 
 		self._srdlVersion = srdlVersion
@@ -684,16 +694,16 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		topLevel: str = None,
-		directory: pathlib_Path = pathlib_Path("."),
-		project: 'Project' = None,
-		design: 'Design' = None,
-		parent: Nullable['FileSet'] = None,
-		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: SystemVerilogVersion = None,
-		svVersion: SystemVerilogVersion = None,
-		srdlVersion: SystemRDLVersion = None
+		topLevel:       Nullable[str] =                  None,
+		directory:      pathlib_Path =                   pathlib_Path("."),
+		project:        Nullable["Project"] =            None,
+		design:         Nullable["Design"] =             None,
+		parent:         Nullable['FileSet'] =            None,
+		vhdlLibrary:    Union[str, 'VHDLLibrary'] =      None,
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None,
+		srdlVersion:    Nullable[SystemRDLVersion] =     None
 	):
 		self._name =      name
 		self._topLevel =  topLevel
@@ -902,11 +912,13 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise TypeError("Parameter 'file' is not of type ProjectModel.File.")
 		elif file._fileSet is not None:
 			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
-			ex.add_note(f"A file can't be assigned to another fileset.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"A file can't be assigned to another fileset.")
 			raise ex
 		elif file in self._set:
 			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
-			ex.add_note(f"A file can't be added twice to a fileset.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"A file can't be added twice to a fileset.")
 			raise ex
 
 		self._files.append(file)
@@ -1127,9 +1139,9 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		project: 'Project' = None,
-		design: 'Design' = None,
-		vhdlVersion: VHDLVersion = None
+		project:     Nullable["Project"] =   None,
+		design:      Nullable["Design"] =    None,
+		vhdlVersion: Nullable[VHDLVersion] = None
 	):
 		self._name =    name
 		if project is not None:
@@ -1236,7 +1248,10 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
 		if not isinstance(vhdlFile, VHDLSourceFile):
-			raise TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			ex = TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
+			raise ex
 
 		self._files.append(vhdlFile)
 
@@ -1344,13 +1359,13 @@ class Design(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		topLevel: str = None,
-		directory: pathlib_Path = pathlib_Path("."),
-		project: 'Project' = None,
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: SystemVerilogVersion = None,
-		svVersion: SystemVerilogVersion = None,
-		srdlVersion: SystemRDLVersion = None
+		topLevel:       Nullable[str] =                  None,
+		directory:      pathlib_Path =                   pathlib_Path("."),
+		project:        Nullable["Project"] =            None,
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None,
+		srdlVersion:    Nullable[SystemRDLVersion] =     None
 	):
 		self._name =                  name
 		self._topLevel =              topLevel
@@ -1687,10 +1702,10 @@ class Project(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		rootDirectory: pathlib_Path = pathlib_Path("."),
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: SystemVerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		rootDirectory:  pathlib_Path =                   pathlib_Path("."),
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None
 	):
 		self._name =            name
 		self._rootDirectory =   rootDirectory
