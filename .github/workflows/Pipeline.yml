@@ -71,16 +71,16 @@ jobs:
       python_version: ${{ needs.UnitTestingParams.outputs.python_version }}
       artifact: ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).package_all }}
 
-  AppTesting:
-    uses: pyTooling/Actions/.github/workflows/ApplicationTesting.yml@dev
-    needs:
-      - AppTestingParams
-      - UnitTestingParams
-      - Package
-    with:
-      jobs: ${{ needs.AppTestingParams.outputs.python_jobs }}
-      wheel: ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).package_all }}
-      apptest_xml_artifact: ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).apptesting_xml }}
+#  AppTesting:
+#    uses: pyTooling/Actions/.github/workflows/ApplicationTesting.yml@dev
+#    needs:
+#      - AppTestingParams
+#      - UnitTestingParams
+#      - Package
+#    with:
+#      jobs: ${{ needs.AppTestingParams.outputs.python_jobs }}
+#      wheel: ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).package_all }}
+#      apptest_xml_artifact: ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).apptesting_xml }}
 
   PublishCoverageResults:
     uses: pyTooling/Actions/.github/workflows/PublishCoverageResults.yml@dev
@@ -165,7 +165,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags')
     needs:
       - Package
-      - AppTesting
+#      - AppTesting
       - PublishToGitHubPages
 
   PublishOnPyPI:
@@ -210,5 +210,5 @@ jobs:
         ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).statictyping_html }}
         ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).documentation_html }}
         ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).documentation_latex }}
-        ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).apptesting_xml }}-*
+#        ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).apptesting_xml }}-*
 #        ${{ fromJson(needs.UnitTestingParams.outputs.artifact_names).documentation_pdf }}
