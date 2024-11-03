@@ -30,7 +30,7 @@
 #
 """Specific file types and attributes for Xilinx Vivado."""
 from pathlib import Path
-from typing  import Iterable
+from typing  import Iterable, Optional as Nullable
 from xml.dom import minidom, Node
 
 from pyTooling.Decorators  import export

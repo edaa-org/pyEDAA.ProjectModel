@@ -141,7 +141,7 @@ class Properties(TestCase):
 
 class Validate(TestCase):
 	def test_Design(self) -> None:
-		project = Project("project", rootDirectory=Path("project"))
+		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
 
 		design.Validate()

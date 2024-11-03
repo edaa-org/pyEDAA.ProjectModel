@@ -110,7 +110,7 @@ class Properties(TestCase):
 
 class Validate(TestCase):
 	def test_Project(self) -> None:
-		project = Project("project", rootDirectory=Path("project"))
+		project = Project("project", rootDirectory=Path("tests/project"))
 
 		project.Validate()
 

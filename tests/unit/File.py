@@ -147,7 +147,7 @@ class Properties(TestCase):
 
 class Validate(TestCase):
 	def test_File(self) -> None:
-		project = Project("project", rootDirectory=Path("project"))
+		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 		file = File(Path("file_A1.vhdl"), fileSet=fileSet)

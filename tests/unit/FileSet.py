@@ -313,7 +313,7 @@ class FileFilter(TestCase):
 
 class Validate(TestCase):
 	def test_FileSet(self) -> None:
-		project = Project("project", rootDirectory=Path("project"))
+		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
 		fileSet = FileSet("fileset", design=design)
 
