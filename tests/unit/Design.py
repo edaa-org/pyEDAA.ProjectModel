@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,13 +29,13 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Design, File, Project
+from pyEDAA.ProjectModel import Design, File, Project, Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -45,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_Design(self):
+	def test_Design(self) -> None:
 		design = Design("design")
 
 		self.assertIsNotNone(design)
@@ -57,7 +57,7 @@ class Instantiate(TestCase):
 		self.assertIs(design.FileSets[design.DefaultFileSet.Name], design.DefaultFileSet)
 		self.assertEqual(0, len(design.VHDLLibraries))
 
-	def test_WithProject(self):
+	def test_WithProject(self) -> None:
 		project = Project("project")
 		designName = "design"
 		design = Design(designName, project=project)
@@ -65,9 +65,9 @@ class Instantiate(TestCase):
 		self.assertIs(project, design.Project)
 #		self.assertIs(design, project[designName])
 
-	def test_WithVersions(self):
+	def test_WithVersions(self) -> None:
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design = Design("design", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -78,7 +78,7 @@ class Instantiate(TestCase):
 
 
 class Properties(TestCase):
-	def test_SetProjectLater(self):
+	def test_SetProjectLater(self) -> None:
 		project = Project("project")
 		design = Design("design")
 
@@ -86,7 +86,7 @@ class Properties(TestCase):
 
 		self.assertIs(project, design.Project)
 
-	def test_SetDirectoryLater(self):
+	def test_SetDirectoryLater(self) -> None:
 		directory = Path("design")
 		design = Design("design")
 
@@ -94,7 +94,7 @@ class Properties(TestCase):
 
 		self.assertIs(directory, design.Directory)
 
-	def test_ResolveDirectory(self):
+	def test_ResolveDirectory(self) -> None:
 		projectDirectoryPath = Path.cwd() / "project"
 		designDirectory = "designA"
 
@@ -103,11 +103,11 @@ class Properties(TestCase):
 
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}", design.ResolvedPath.as_posix())
 
-	def test_SetVersionsLater(self):
+	def test_SetVersionsLater(self) -> None:
 		design = Design("design")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		design.VHDLVersion = vhdlVersion
@@ -118,9 +118,9 @@ class Properties(TestCase):
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
 
-	def test_GetVersionsFromProject(self):
+	def test_GetVersionsFromProject(self) -> None:
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		project = Project("project", vhdlVersion=vhdlVersion, verilogVersion=verilogVersion, svVersion=svVersion)
@@ -130,7 +130,7 @@ class Properties(TestCase):
 		self.assertEqual(verilogVersion, design.VerilogVersion)
 		self.assertEqual(svVersion, design.SVVersion)
 
-	def test_Files(self):
+	def test_Files(self) -> None:
 		project = Design("project")
 
 		file = File(Path("example.vhdl"))
@@ -140,8 +140,51 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_Design(self):
-		project = Project("project", rootDirectory=Path("project"))
+	def test_Design(self) -> None:
+		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
 
 		design.Validate()
+
+
+class Attr(Attribute):
+	pass
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self) -> None:
+		design = Design("design")
+
+		with self.assertRaises(TypeError):
+			design["attr"] = 5
+
+	def test_AddAttribute_Normal(self) -> None:
+		design = Design("design")
+
+		design[Attr] = 5
+
+	def test_GetAttribute_WrongType(self) -> None:
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = design["attr"]
+
+	def test_GetAttribute_Normal(self) -> None:
+		design = Design("design")
+		design[Attr] = 5
+
+		_ = design[Attr]
+
+	def test_DelAttribute_WrongType(self) -> None:
+		design = Design("design")
+		design[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del design["attr"]
+
+	def test_DelAttribute_Normal(self) -> None:
+		design = Design("design")
+		design[Attr] = 5
+
+		del design[Attr]

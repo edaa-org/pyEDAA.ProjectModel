@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2023 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -55,7 +55,7 @@ if __name__ == "__main__": # pragma: no cover
 
 class VHDL(TestCase):
 	@mark.skipif(withGHDL is False, reason="No 'pyGHDL' package found.")
-	def test_VHDLLibrary(self):
+	def test_VHDLLibrary(self) -> None:
 		project = Project("project", rootDirectory=Path("project"), vhdlVersion=VHDLVersion.VHDL2019)
 		designA = Design("designA", directory=Path("designA"), project=project)
 		fileSetA = FileSet("fileSetA", directory=Path("."), design=designA)

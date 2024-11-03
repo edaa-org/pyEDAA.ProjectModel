@@ -61,7 +61,7 @@ pygments_style = 'stata-dark'
 # ==============================================================================
 prologPath = Path("prolog.inc")
 try:
-	with prologPath.open("r") as fileHandle:
+	with prologPath.open("r", encoding="utf-8") as fileHandle:
 		rst_prolog = fileHandle.read()
 except Exception as ex:
 	print(f"[ERROR:] While reading '{prologPath}'.")
@@ -204,9 +204,9 @@ autodoc_typehints = "both"
 # Sphinx.Ext.ExtLinks
 # ==============================================================================
 extlinks = {
-	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #'),
-	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #'),
-	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s', ''),
+	"ghissue": ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues/%s', 'issue #%s'),
+	"ghpull":  ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/pull/%s', 'pull request #%s'),
+	"ghsrc":   ('https://GitHub.com/edaa-org/pyEDAA.ProjectModel/blob/main/%s', None),
 }
 
 

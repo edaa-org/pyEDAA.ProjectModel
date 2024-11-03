@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -30,13 +30,12 @@
 #
 """Specific file types and attributes for Xilinx Vivado."""
 from pathlib import Path
-from typing import Iterable
-
+from typing  import Iterable, Optional as Nullable
 from xml.dom import minidom, Node
 
+from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
-from pyVHDLModel import VHDLVersion
-from pyTooling.Decorators import export
+from pyVHDLModel           import VHDLVersion
 
 from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design
 from pyEDAA.ProjectModel import File as Model_File
@@ -57,27 +56,27 @@ class File(Model_File):
 
 
 class VivadoFileMixIn(metaclass=ExtendedType, mixin=True):
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		self._attributes[UsedInAttribute] = []
 
 
 @export
 class ConstraintFile(Model_ConstraintFile, VivadoFileMixIn):
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		super()._registerAttributes()
 		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VerilogSourceFile(Model_VerilogSourceFile):
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		super()._registerAttributes()
 		VivadoFileMixIn._registerAttributes(self)
 
 
 @export
 class VHDLSourceFile(Model_VHDLSourceFile):
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		super()._registerAttributes()
 		VivadoFileMixIn._registerAttributes(self)
 
@@ -91,10 +90,10 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def __init__(
 		self,
 		path: Path,
-		project: Project = None,
-		design: Design = None,
-		fileSet: FileSet = None
-	):
+		project: Nullable[Project] = None,
+		design:  Nullable[Design] =  None,
+		fileSet: Nullable[FileSet] = None
+	) -> None:
 		super().__init__(path, project, design, fileSet)
 
 		self._xprProject = None
@@ -103,7 +102,7 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 	def ProjectModel(self) -> Project:
 		return self._xprProject
 
-	def Parse(self):
+	def Parse(self) -> None:
 		if not self._path.exists():
 			raise Exception(f"Vivado project file '{self._path!s}' not found.") from FileNotFoundError(f"File '{self._path!s}' not found.")
 
@@ -115,18 +114,18 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		self._xprProject = Project(self._path.stem, rootDirectory=self._path.parent)
 		self._ParseRootElement(root)
 
-	def _ParseRootElement(self, root):
+	def _ParseRootElement(self, root) -> None:
 		for rootNode in root.childNodes:
 			if rootNode.nodeName == "FileSets":
 				self._ParseFileSets(rootNode)
 				break
 
-	def _ParseFileSets(self, filesetsNode):
+	def _ParseFileSets(self, filesetsNode) -> None:
 		for fileSetsNode in filesetsNode.childNodes:
 			if fileSetsNode.nodeType == Node.ELEMENT_NODE and fileSetsNode.tagName == "FileSet":
 				self._ParseFileSet(fileSetsNode)
 
-	def _ParseFileSet(self, filesetNode):
+	def _ParseFileSet(self, filesetNode) -> None:
 		filesetName = filesetNode.getAttribute("Name")
 		fileset = FileSet(filesetName, design=self._xprProject.DefaultDesign)
 
@@ -137,7 +136,7 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 				elif fileNode.nodeType == Node.ELEMENT_NODE and fileNode.tagName == "Config":
 					self._ParseFileSetConfig(fileNode, fileset)
 
-	def _ParseFile(self, fileNode, fileset):
+	def _ParseFile(self, fileNode, fileset) -> None:
 		croppedPath = fileNode.getAttribute("Path").replace("$PPRDIR/", "")
 		filePath = Path(croppedPath)
 		if filePath.suffix in (".vhd", ".vhdl"):
@@ -151,7 +150,7 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 		else:
 			self._ParseDefaultFile(fileNode, filePath, fileset)
 
-	def _ParseVHDLFile(self, fileNode, path, fileset):
+	def _ParseVHDLFile(self, fileNode, path, fileset) -> None:
 		vhdlFile = VHDLSourceFile(path)
 		fileset.AddFile(vhdlFile)
 		usedInAttr = vhdlFile[UsedInAttribute]
@@ -171,19 +170,19 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 						elif fileAttribute.getAttribute("Val") == "UsedIn":
 							usedInAttr.append(fileAttribute.getAttribute("Val"))
 
-	def _ParseDefaultFile(self, _, path, fileset):
+	def _ParseDefaultFile(self, _, path, fileset) -> None:
 		File(path, fileSet=fileset)
 
-	def _ParseXDCFile(self, _, path, fileset):
+	def _ParseXDCFile(self, _, path, fileset) -> None:
 		XDCConstraintFile(path, fileSet=fileset)
 
-	def _ParseVerilogFile(self, _, path, fileset):
+	def _ParseVerilogFile(self, _, path, fileset) -> None:
 		VerilogSourceFile(path, fileSet=fileset)
 
-	def _ParseXCIFile(self, _, path, fileset):
+	def _ParseXCIFile(self, _, path, fileset) -> None:
 		IPCoreInstantiationFile(path, fileSet=fileset)
 
-	def _ParseFileSetConfig(self, fileNode, fileset):
+	def _ParseFileSetConfig(self, fileNode, fileset) -> None:
 		for option in fileNode.childNodes:
 			if option.nodeType == Node.ELEMENT_NODE and option.tagName == "Option":
 				if option.getAttribute("Name") == "TopModule":

@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,11 +29,11 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
-from pySVModel import VerilogVersion, SystemVerilogVersion
 
 from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes, Project, Design
 
@@ -45,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class VHDLFile(TestCase):
-	def test_Instantiation(self):
+	def test_Instantiation(self) -> None:
 		path = Path("example.vhdl")
 		file = VHDLSourceFile(path)
 
@@ -56,21 +56,21 @@ class VHDLFile(TestCase):
 		with self.assertRaises(Exception):
 			_ = file.VHDLVersion
 
-	def test_WithVHDLLibrary(self):
+	def test_WithVHDLLibrary(self) -> None:
 		path = Path("example.vhdl")
 		library = VHDLLibrary("library")
 		file = VHDLSourceFile(path, vhdlLibrary=library)
 
 		self.assertIs(library, file.VHDLLibrary)
 
-	def test_WithVHDLVersion(self):
+	def test_WithVHDLVersion(self) -> None:
 		path = Path("example.vhdl")
 		vhdlVersion = VHDLVersion.VHDL2019
 		file = VHDLSourceFile(path, vhdlVersion=vhdlVersion)
 
 		self.assertEqual(vhdlVersion, file.VHDLVersion)
 
-	def test_SetVHDLVersionLater(self):
+	def test_SetVHDLVersionLater(self) -> None:
 		path = Path("example.vhdl")
 		vhdlVersion = VHDLVersion.VHDL2019
 		file = VHDLSourceFile(path)
@@ -79,7 +79,7 @@ class VHDLFile(TestCase):
 
 		self.assertEqual(vhdlVersion, file.VHDLVersion)
 
-	def test_SetVHDLLibraryLater(self):
+	def test_SetVHDLLibraryLater(self) -> None:
 		path = Path("example.vhdl")
 		vhdlLibrary = VHDLLibrary("library")
 		file = VHDLSourceFile(path)
@@ -88,7 +88,7 @@ class VHDLFile(TestCase):
 
 		self.assertEqual(vhdlLibrary, file.VHDLLibrary)
 
-	def test_GetVersionFromFileSet(self):
+	def test_GetVersionFromFileSet(self) -> None:
 		path = Path("example.vhdl")
 		vhdlVersion = VHDLVersion.VHDL2019
 		fileset = FileSet("fileset", vhdlVersion=vhdlVersion)
@@ -96,8 +96,8 @@ class VHDLFile(TestCase):
 
 		self.assertEqual(vhdlVersion, file.VHDLVersion)
 
-	def test_Validate(self):
-		project = Project("project", rootDirectory=Path("project"), vhdlVersion=VHDLVersion.VHDL2019)
+	def test_Validate(self) -> None:
+		project = Project("project", rootDirectory=Path("tests/project"), vhdlVersion=VHDLVersion.VHDL2019)
 		design = Design("design", directory=Path("designA"), project=project)
 		vhdlLibrary = VHDLLibrary("library", design=design)
 		fileSet = FileSet("fileset", vhdlLibrary=vhdlLibrary, design=design)
@@ -107,7 +107,7 @@ class VHDLFile(TestCase):
 
 
 class VerilogFile(TestCase):
-	def test_Instantiation(self):
+	def test_Instantiation(self) -> None:
 		path = Path("example.v")
 		file = VerilogSourceFile(path)
 
@@ -116,25 +116,25 @@ class VerilogFile(TestCase):
 		with self.assertRaises(Exception):
 			_ = file.VerilogVersion
 
-	def test_WithVerilogVersion(self):
+	def test_WithVerilogVersion(self) -> None:
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
-		file = VerilogSourceFile(path, verilogVersion=verilogVersion)
+		verilogVersion = SystemVerilogVersion.Verilog2005
+		file = VerilogSourceFile(path, version=verilogVersion)
 
 		self.assertEqual(verilogVersion, file.VerilogVersion)
 
-	def test_SetVerilogVersionLater(self):
+	def test_SetVerilogVersionLater(self) -> None:
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		file = VerilogSourceFile(path)
 
 		file.VerilogVersion = verilogVersion
 
 		self.assertEqual(verilogVersion, file.VerilogVersion)
 
-	def test_GetVersionFromFileSet(self):
+	def test_GetVersionFromFileSet(self) -> None:
 		path = Path("example.v")
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		fileset = FileSet("fileset", verilogVersion=verilogVersion)
 		file = VerilogSourceFile(path, fileSet=fileset)
 
@@ -142,7 +142,7 @@ class VerilogFile(TestCase):
 
 
 class SystemVerilogFile(TestCase):
-	def test_Instantiation(self):
+	def test_Instantiation(self) -> None:
 		path = Path("example.sv")
 		file = SystemVerilogSourceFile(path)
 
@@ -151,14 +151,14 @@ class SystemVerilogFile(TestCase):
 		with self.assertRaises(Exception):
 			_ = file.SVVersion
 
-	def test_WithVerilogVersion(self):
+	def test_WithVerilogVersion(self) -> None:
 		path = Path("example.sv")
 		svVersion = SystemVerilogVersion.SystemVerilog2017
-		file = SystemVerilogSourceFile(path, svVersion=svVersion)
+		file = SystemVerilogSourceFile(path, version=svVersion)
 
 		self.assertEqual(svVersion, file.SVVersion)
 
-	def test_SetVerilogVersionLater(self):
+	def test_SetVerilogVersionLater(self) -> None:
 		path = Path("example.sv")
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 		file = SystemVerilogSourceFile(path)
@@ -167,7 +167,7 @@ class SystemVerilogFile(TestCase):
 
 		self.assertEqual(svVersion, file.SVVersion)
 
-	def test_GetVersionFromFileSet(self):
+	def test_GetVersionFromFileSet(self) -> None:
 		path = Path("example.sv")
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 		fileset = FileSet("fileset", svVersion=svVersion)

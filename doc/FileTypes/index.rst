@@ -3,7 +3,7 @@
 File Types
 ##########
 
-.. rubric:: Design Goal
+.. rubric:: Design Goals
 
 TBD
 

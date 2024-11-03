@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 # Copyright 2014-2016 Technische Universität Dresden - Germany, Chair of VLSI-Design, Diagnostics and Architecture     #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
@@ -32,24 +32,27 @@
 """An abstract model of EDA tool projects."""
 __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
-__copyright__ = "2014-2022, Patrick Lehmann, Unai Martinez-Corral"
+__copyright__ = "2014-2024, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.4.3"
+__version__ =   "0.5.0"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type
+from sys     import version_info
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Any
 
+from pyTooling.Common      import getFullyQualifiedName
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
 from pyTooling.Graph       import Graph, Vertex
-from pySVModel             import VerilogVersion, SystemVerilogVersion
+from pySVModel             import SystemVerilogVersion
 from pyVHDLModel           import VHDLVersion
+from pySystemRDLModel      import SystemRDLVersion
 
 
 @export
-class Attribute:
+class Attribute(metaclass=ExtendedType):
 	KEY: str
 	VALUE_TYPE: typing_Any
 
@@ -122,9 +125,9 @@ class File(metaclass=FileType, slots=True):
 	def __init__(
 		self,
 		path: pathlib_Path,
-		project: 'Project' = None,
-		design: 'Design' = None,
-		fileSet: 'FileSet' = None
+		project: Nullable["Project"] = None,
+		design:  Nullable["Design"] =  None,
+		fileSet: Nullable["FileSet"] = None
 	):
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
@@ -153,7 +156,7 @@ class File(metaclass=FileType, slots=True):
 		self._attributes = {}
 		self._registerAttributes()
 
-	def _registerAttributes(self):
+	def _registerAttributes(self) -> None:
 		pass
 
 	@property
@@ -224,7 +227,7 @@ class File(metaclass=FileType, slots=True):
 		self._fileSet = value
 		value._files.append(self)
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this file."""
 		if self._path is None:
 			raise Exception("Validation: File has no path.")
@@ -244,22 +247,60 @@ class File(metaclass=FileType, slots=True):
 		if self._project is None:
 			raise Exception(f"Validation: File '{self._path}' has no project.")
 
-	def __getitem__(self, key: Type[Attribute]):
-		"""Index access for returning attributes on this file."""
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this file.
+
+		:returns: The number if attributes set on this file.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this file.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
 		try:
 			return self._attributes[key]
 		except KeyError:
-			return key.resolve(self, key)
+			try:
+				return key.resolve(self, key)
+			except KeyError:
+				attribute = key()
+				self._attributes[key] = attribute
+				return attribute
 
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
-		"""Index access for setting attributes on this file."""
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this file.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
 		if not issubclass(key, Attribute):
 			raise TypeError("Parameter 'key' is not an 'Attribute'.")
 
 		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this file.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
+		return f"{self._path}"
 
 
 FileTypes = File
@@ -271,42 +312,42 @@ class HumanReadableContent(metaclass=ExtendedType, mixin=True):
 
 
 @export
-class XMLContent(HumanReadableContent):
+class XMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing XML contents."""
 
 
 @export
-class YAMLContent(HumanReadableContent):
+class YAMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing YAML contents."""
 
 
 @export
-class JSONContent(HumanReadableContent):
+class JSONContent(HumanReadableContent, mixin=True):
 	"""A file type representing JSON contents."""
 
 
 @export
-class INIContent(HumanReadableContent):
+class INIContent(HumanReadableContent, mixin=True):
 	"""A file type representing INI contents."""
 
 
 @export
-class TOMLContent(HumanReadableContent):
+class TOMLContent(HumanReadableContent, mixin=True):
 	"""A file type representing TOML contents."""
 
 
 @export
-class TCLContent(HumanReadableContent):
+class TCLContent(HumanReadableContent, mixin=True):
 	"""A file type representing content in TCL code."""
 
 
 @export
-class SDCContent(TCLContent):
+class SDCContent(TCLContent, mixin=True):
 	"""A file type representing contents as Synopsys Design Constraints (SDC)."""
 
 
 @export
-class PythonContent(HumanReadableContent):
+class PythonContent(HumanReadableContent, mixin=True):
 	"""A file type representing contents as Python source code."""
 
 
@@ -333,6 +374,11 @@ class SourceFile(File):
 @export
 class HDLSourceFile(SourceFile):
 	"""Base-class of all HDL source files."""
+
+
+@export
+class RDLSourceFile(SourceFile):
+	"""Base-class of all RDL source files."""
 
 
 @export
@@ -363,10 +409,10 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	:arg fileSet:     Fileset the file is associated with.
 	"""
 
-	_vhdlLibrary: 'VHDLLibrary'
+	_vhdlLibrary: Nullable['VHDLLibrary']
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: VHDLVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
+	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: Nullable[VHDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
 		super().__init__(path, project, design, fileSet)
 
 		if isinstance(vhdlLibrary, str):
@@ -388,11 +434,14 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		elif vhdlLibrary is None:
 			self._vhdlLibrary = None
 		else:
-			raise TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			ex = TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
+			raise ex
 
 		self._vhdlVersion = vhdlVersion
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this VHDL source file."""
 		super().Validate()
 
@@ -438,48 +487,28 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 		return f"<VHDL file: '{self.ResolvedPath}'; lib: '{self.VHDLLibrary}'; version: {self.VHDLVersion}>"
 
 
-@export
-class VerilogSourceFile(HDLSourceFile, HumanReadableContent):
-	"""A Verilog source file (of any language version)."""
-
-	_verilogVersion: VerilogVersion
-
-	def __init__(self, path: pathlib_Path, verilogVersion: VerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, design, fileSet)
-
-		self._verilogVersion = verilogVersion
-
+class VerilogMixIn(metaclass=ExtendedType, mixin=True):
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the Verilog version this Verilog source file is used in."""
-		if self._verilogVersion is not None:
-			return self._verilogVersion
+		if self._version is not None:
+			return self._version
 		elif self._fileSet is not None:
 			return self._fileSet.VerilogVersion
 		else:
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
-		self._verilogVersion = value
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
+		self._version = value
 
 
-@export
-class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
-	"""A SystemVerilog source file (of any language version)."""
-
-	_svVersion: SystemVerilogVersion
-
-	def __init__(self, path: pathlib_Path, svVersion: SystemVerilogVersion = None, project: 'Project' = None, design: 'Design' = None, fileSet: 'FileSet' = None):
-		super().__init__(path, project, design, fileSet)
-
-		self._svVersion = svVersion
-
+class SystemVerilogMixIn(metaclass=ExtendedType, mixin=True):
 	@property
 	def SVVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the SystemVerilog version this SystemVerilog source file is used in."""
-		if self._svVersion is not None:
-			return self._svVersion
+		if self._version is not None:
+			return self._version
 		elif self._fileSet is not None:
 			return self._fileSet.SVVersion
 		else:
@@ -487,7 +516,68 @@ class SystemVerilogSourceFile(HDLSourceFile, HumanReadableContent):
 
 	@SVVersion.setter
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
-		self._svVersion = value
+		self._version = value
+
+
+@export
+class VerilogBaseFile(HDLSourceFile, HumanReadableContent):
+	_version: SystemVerilogVersion
+
+	def __init__(self, path: pathlib_Path, version: Nullable[SystemVerilogVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
+		super().__init__(path, project, design, fileSet)
+
+		self._version = version
+
+
+@export
+class VerilogSourceFile(VerilogBaseFile, VerilogMixIn):
+	"""A Verilog source file (of any language version)."""
+
+
+@export
+class VerilogHeaderFile(VerilogBaseFile, VerilogMixIn):
+	"""A Verilog header file (of any language version)."""
+
+
+@export
+class SystemVerilogBaseFile(VerilogBaseFile):
+	...
+
+
+@export
+class SystemVerilogSourceFile(SystemVerilogBaseFile, SystemVerilogMixIn):
+	"""A SystemVerilog source file (of any language version)."""
+
+
+@export
+class SystemVerilogHeaderFile(SystemVerilogBaseFile, SystemVerilogMixIn):
+	"""A SystemVerilog header file (of any language version)."""
+
+
+@export
+class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
+	"""A SystemRDL source file (of any language version)."""
+
+	_srdlVersion: SystemRDLVersion
+
+	def __init__(self, path: pathlib_Path, srdlVersion: Nullable[SystemRDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
+		super().__init__(path, project, design, fileSet)
+
+		self._srdlVersion = srdlVersion
+
+	@property
+	def SystemRDLVersion(self) -> SystemRDLVersion:
+		"""Property setting or returning the SystemRDL version this SystemRDL source file is used in."""
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._fileSet is not None:
+			return self._fileSet.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SystemRDLVersion.setter
+	def SystemRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
 
 
 @export
@@ -581,6 +671,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	:arg vhdlVersion:     Default VHDL version for files in this fileset, if not specified for the file itself.
 	:arg verilogVersion:  Default Verilog version for files in this fileset, if not specified for the file itself.
 	:arg svVersion:       Default SystemVerilog version for files in this fileset, if not specified for the file itself.
+	:arg srdlVersion:     Default SystemRDL version for files in this fileset, if not specified for the file itself.
 	"""
 
 	_name:            str
@@ -591,25 +682,28 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	_parent:          Nullable['FileSet']
 	_fileSets:        Dict[str, 'FileSet']
 	_files:           List[File]
+	_set:             Set
 	_attributes:      Dict[Type[Attribute], typing_Any]
 	_vhdlLibraries:   Dict[str, 'VHDLLibrary']
 	_vhdlLibrary:     'VHDLLibrary'
 	_vhdlVersion:     VHDLVersion
-	_verilogVersion:  VerilogVersion
+	_verilogVersion:  SystemVerilogVersion
 	_svVersion:       SystemVerilogVersion
+	_srdlVersion:     SystemRDLVersion
 
 	def __init__(
 		self,
 		name: str,
-		topLevel: str = None,
-		directory: pathlib_Path = pathlib_Path("."),
-		project: 'Project' = None,
-		design: 'Design' = None,
-		parent: Nullable['FileSet'] = None,
-		vhdlLibrary: Union[str, 'VHDLLibrary'] = None,
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		topLevel:       Nullable[str] =                  None,
+		directory:      pathlib_Path =                   pathlib_Path("."),
+		project:        Nullable["Project"] =            None,
+		design:         Nullable["Design"] =             None,
+		parent:         Nullable['FileSet'] =            None,
+		vhdlLibrary:    Union[str, 'VHDLLibrary'] =      None,
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None,
+		srdlVersion:    Nullable[SystemRDLVersion] =     None
 	):
 		self._name =      name
 		self._topLevel =  topLevel
@@ -627,6 +721,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._parent =    parent
 		self._fileSets =  {}
 		self._files =     []
+		self._set =     set()
 
 		if design is not None:
 			design._fileSets[name] = self
@@ -639,6 +734,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion =     vhdlVersion
 		self._verilogVersion =  verilogVersion
 		self._svVersion =       svVersion
+		self._srdlVersion =     srdlVersion
 
 	@property
 	def Name(self) -> str:
@@ -745,14 +841,14 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		"""
 		if fileSet is False:
 			for file in self._files:
-				if (file.FileType in fileType):
+				if file.FileType in fileType:
 					yield file
 		elif fileSet is None:
 			for fileSet in self._fileSets.values():
 				for file in fileSet.Files(fileType):
 					yield file
 			for file in self._files:
-				if (file.FileType in fileType):
+				if file.FileType in fileType:
 					yield file
 		else:
 			if isinstance(fileSet, str):
@@ -767,26 +863,92 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
+	def AddFileSet(self, fileSet: "FileSet") -> None:
+		"""
+		Method to add a single sub-fileset to this fileset.
+
+		:arg fileSet: A fileset to add to this fileset as sub-fileset.
+		"""
+		if not isinstance(fileSet, FileSet):
+			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
+		elif fileSet in self._fileSets:
+			raise Exception("Sub-fileset already contains this fileset.")
+		elif fileSet.Name in self._fileSets.keys():
+			raise Exception(f"Fileset already contains a sub-fileset named '{fileSet.Name}'.")
+
+		self._fileSets[fileSet.Name] = fileSet
+		fileSet._parent = self
+
+	def AddFileSets(self, fileSets: Iterable["FileSet"]) -> None:
+		"""
+		Method to add a multiple sub-filesets to this fileset.
+
+		:arg fileSets: An iterable of filesets to add each to the fileset.
+		"""
+		for fileSet in fileSets:
+			self.AddFileSet(fileSet)
+
+	@property
+	def FileSetCount(self) -> int:
+		"""Returns number of file sets excl. sub-filesets."""
+		return len(self._fileSets)
+
+	@property
+	def TotalFileSetCount(self) -> int:
+		"""Returns number of file sets incl. sub-filesets."""
+		fileSetCount = len(self._fileSets)
+		for fileSet in self._fileSets.values():
+			fileSetCount += fileSet.TotalFileSetCount
+
+		return fileSetCount
+
 	def AddFile(self, file: File) -> None:
 		"""
 		Method to add a single file to this fileset.
 
 		:arg file: A file to add to this fileset.
 		"""
+		if not isinstance(file, File):
+			raise TypeError("Parameter 'file' is not of type ProjectModel.File.")
+		elif file._fileSet is not None:
+			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"A file can't be assigned to another fileset.")
+			raise ex
+		elif file in self._set:
+			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"A file can't be added twice to a fileset.")
+			raise ex
+
 		self._files.append(file)
+		self._set.add(file)
 		file._fileSet = self
 
 	def AddFiles(self, files: Iterable[File]) -> None:
 		"""
 		Method to add a multiple files to this fileset.
 
-		:arg files: An iterable of files to add to the fileset.
+		:arg files: An iterable of files to add each to the fileset.
 		"""
 		for file in files:
-			self._files.append(file)
-			file._fileSet = self
+			self.AddFile(file)
 
-	def Validate(self):
+	@property
+	def FileCount(self) -> int:
+		"""Returns number of files excl. sub-filesets."""
+		return len(self._files)
+
+	@property
+	def TotalFileCount(self) -> int:
+		"""Returns number of files incl. the files in sub-filesets."""
+		fileCount = len(self._files)
+		for fileSet in self._fileSets.values():
+			fileCount += fileSet.FileCount
+
+		return fileCount
+
+	def Validate(self) -> None:
 		"""Validate this fileset."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: FileSet has no name.")
@@ -803,38 +965,16 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise Exception(f"Validation: FileSet '{self._name}'s directory '{path}' is not a directory.")
 
 		if self._design is None:
-			raise Exception(f"Validation: FileSet '{self._path}' has no design.")
+			raise Exception(f"Validation: FileSet '{self._directory}' has no design.")
 		if self._project is None:
-			raise Exception(f"Validation: FileSet '{self._path}' has no project.")
+			raise Exception(f"Validation: FileSet '{self._directory}' has no project.")
 
 		for fileSet in self._fileSets.values():
 			fileSet.Validate()
 		for file in self._files:
 			file.Validate()
 
-	def __len__(self):
-		"""Returns number of files incl. the files in the sub-filesets."""
-		fileCount = self._files.__len__()
-		for fileSet in self._fileSets:
-			fileCount += fileSet.__len__()
-
-		return fileCount
-
-	def __getitem__(self, key: Type[Attribute]):
-		"""Index access for returning attributes on this file."""
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
-		"""Index access for setting attributes on this file."""
-		self._attributes[key] = value
-
-	def GetOrCreateVHDLLibrary(self, name):
+	def GetOrCreateVHDLLibrary(self, name) -> 'VHDLLibrary':
 		if name in self._vhdlLibraries:
 			return self._vhdlLibraries[name]
 		elif name in self._design._vhdlLibraries:
@@ -879,7 +1019,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		"""Property setting or returning the Verilog version of this fileset."""
 		if self._verilogVersion is not None:
 			return self._verilogVersion
@@ -891,7 +1031,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property
@@ -910,7 +1050,69 @@ class FileSet(metaclass=ExtendedType, slots=True):
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
-	def __str__(self):
+	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._parent is not None:
+			return self._parent.SRDLVersion
+		elif self._design is not None:
+			return self._design.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this fileset.
+
+		:returns: The number if attributes set on this fileset.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this fileset.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this fileset.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this fileset.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
 		"""Returns the fileset's name."""
 		return self._name
 
@@ -937,9 +1139,9 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		project: 'Project' = None,
-		design: 'Design' = None,
-		vhdlVersion: VHDLVersion = None
+		project:     Nullable["Project"] =   None,
+		design:      Nullable["Design"] =    None,
+		vhdlVersion: Nullable[VHDLVersion] = None
 	):
 		self._name =    name
 		if project is not None:
@@ -980,7 +1182,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		return self._project
 
 	@Project.setter
-	def Project(self, value: 'Project'):
+	def Project(self, value: 'Project') -> None:
 		if not isinstance(value, Project):
 			raise TypeError("Parameter 'value' is not of type 'Project'.")
 
@@ -998,7 +1200,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		return self._design
 
 	@Design.setter
-	def Design(self, value: 'Design'):
+	def Design(self, value: 'Design') -> None:
 		if not isinstance(value, Design):
 			raise TypeError("Parameter 'value' is not of type 'Design'.")
 
@@ -1041,12 +1243,15 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def VHDLVersion(self, value: VHDLVersion) -> None:
 		self._vhdlVersion = value
 
-	def AddDependency(self, library: 'VHDLLibrary'):
+	def AddDependency(self, library: 'VHDLLibrary') -> None:
 		library.parent = self
 
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
 		if not isinstance(vhdlFile, VHDLSourceFile):
-			raise TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			ex = TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			if version_info >= (3, 11):  # pragma: no cover
+				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
+			raise ex
 
 		self._files.append(vhdlFile)
 
@@ -1057,7 +1262,59 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 			self._files.append(vhdlFile)
 
-	def __str__(self):
+	@property
+	def FileCount(self) -> int:
+		"""Returns number of files."""
+		return len(self._files)
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this VHDL library.
+
+		:returns: The number if attributes set on this VHDL library.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this VHDL library.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this VHDL library.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this VHDL library.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
 		"""Returns the VHDL library's name."""
 		return self._name
 
@@ -1078,6 +1335,7 @@ class Design(metaclass=ExtendedType, slots=True):
 	:arg vhdlVersion:     Default VHDL version for files in this design, if not specified for the file itself.
 	:arg verilogVersion:  Default Verilog version for files in this design, if not specified for the file itself.
 	:arg svVersion:       Default SystemVerilog version for files in this design, if not specified for the file itself.
+	:arg srdlVersion:     Default SystemRDL version for files in this fileset, if not specified for the file itself.
 	"""
 
 	_name:                  str
@@ -1090,8 +1348,9 @@ class Design(metaclass=ExtendedType, slots=True):
 
 	_vhdlLibraries:         Dict[str, VHDLLibrary]
 	_vhdlVersion:           VHDLVersion
-	_verilogVersion:        VerilogVersion
+	_verilogVersion:        SystemVerilogVersion
 	_svVersion:             SystemVerilogVersion
+	_srdlVersion:           SystemRDLVersion
 	_externalVHDLLibraries: List
 
 	_vhdlLibraryDependencyGraph: Graph
@@ -1100,12 +1359,13 @@ class Design(metaclass=ExtendedType, slots=True):
 	def __init__(
 		self,
 		name: str,
-		topLevel: str = None,
-		directory: pathlib_Path = pathlib_Path("."),
-		project: 'Project' = None,
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		topLevel:       Nullable[str] =                  None,
+		directory:      pathlib_Path =                   pathlib_Path("."),
+		project:        Nullable["Project"] =            None,
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None,
+		srdlVersion:    Nullable[SystemRDLVersion] =     None
 	):
 		self._name =                  name
 		self._topLevel =              topLevel
@@ -1120,6 +1380,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion =           vhdlVersion
 		self._verilogVersion =        verilogVersion
 		self._svVersion =             svVersion
+		self._srdlVersion =           srdlVersion
 		self._externalVHDLLibraries = []
 
 		self._vhdlLibraryDependencyGraph = Graph()
@@ -1186,12 +1447,12 @@ class Design(metaclass=ExtendedType, slots=True):
 	@DefaultFileSet.setter
 	def DefaultFileSet(self, value: Union[str, FileSet]) -> None:
 		if isinstance(value, str):
-			if (value not in self._fileSets.keys()):
+			if value not in self._fileSets.keys():
 				raise Exception(f"Fileset '{value}' is not in this design.")
 
 			self._defaultFileSet = self._fileSets[value]
 		elif isinstance(value, FileSet):
-			if (value not in self.FileSets):
+			if value not in self.FileSets:
 				raise Exception(f"Fileset '{value}' is not associated to this design.")
 
 			self._defaultFileSet = value
@@ -1227,7 +1488,7 @@ class Design(metaclass=ExtendedType, slots=True):
 			for file in fileSet.Files(fileType):
 				yield file
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this design."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Design has no name.")
@@ -1256,21 +1517,6 @@ class Design(metaclass=ExtendedType, slots=True):
 		for fileSet in self._fileSets.values():
 			fileSet.Validate()
 
-	def __len__(self):
-		return self._fileSets.__len__()
-
-	def __getitem__(self, key: Type[Attribute]):
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
-		self._attributes[key] = value
-
 	@property
 	def VHDLLibraries(self) -> Dict[str, VHDLLibrary]:
 		return self._vhdlLibraries
@@ -1289,7 +1535,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		if self._verilogVersion is not None:
 			return self._verilogVersion
 		elif self._project is not None:
@@ -1298,7 +1544,7 @@ class Design(metaclass=ExtendedType, slots=True):
 			raise Exception("VerilogVersion was neither set locally nor globally.")
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property
@@ -1315,23 +1561,51 @@ class Design(metaclass=ExtendedType, slots=True):
 		self._svVersion = value
 
 	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		if self._srdlVersion is not None:
+			return self._srdlVersion
+		elif self._project is not None:
+			return self._project.SRDLVersion
+		else:
+			raise Exception("SRDLVersion was neither set locally nor globally.")
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
+
+	@property
 	def ExternalVHDLLibraries(self) -> List:
 		return self._externalVHDLLibraries
 
 	def AddFileSet(self, fileSet: FileSet) -> None:
-		if (not isinstance(fileSet, FileSet)):
+		if not isinstance(fileSet, FileSet):
 			raise ValueError("Parameter 'fileSet' is not of type ProjectModel.FileSet.")
-		elif (fileSet in self.FileSets):
-			raise Exception("Design already contains this fileSet.")
-		elif (fileSet.Name in self._fileSets.keys()):
+		elif fileSet in self._fileSets:
+			raise Exception("Design already contains this fileset.")
+		elif fileSet.Name in self._fileSets.keys():
 			raise Exception(f"Design already contains a fileset named '{fileSet.Name}'.")
 
-		fileSet.Design = self
 		self._fileSets[fileSet.Name] = fileSet
+		fileSet.Design = self
+		fileSet._parent = self
 
 	def AddFileSets(self, fileSets: Iterable[FileSet]) -> None:
 		for fileSet in fileSets:
 			self.AddFileSet(fileSet)
+
+	@property
+	def FileSetCount(self) -> int:
+		"""Returns number of file sets excl. sub-filesets."""
+		return len(self._fileSets)
+
+	@property
+	def TotalFileSetCount(self) -> int:
+		"""Returns number of file sets incl. sub-filesets."""
+		fileSetCount = len(self._fileSets)
+		for fileSet in self._fileSets.values():
+			fileSetCount += fileSet.TotalFileSetCount
+
+		return fileSetCount
 
 	def AddFile(self, file: File) -> None:
 		if file.FileSet is None:
@@ -1343,14 +1617,62 @@ class Design(metaclass=ExtendedType, slots=True):
 		for file in files:
 			self.AddFile(file)
 
-	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary):
+	def AddVHDLLibrary(self, vhdlLibrary: VHDLLibrary) -> None:
 		if vhdlLibrary.Name in self._vhdlLibraries:
 			if self._vhdlLibraries[vhdlLibrary.Name] is vhdlLibrary:
 				raise Exception(f"The VHDLLibrary '{vhdlLibrary.Name}' was already added to the design.")
 			else:
 				raise Exception(f"A VHDLLibrary with same name ('{vhdlLibrary.Name}') already exists for this design.")
 
-	def __str__(self):
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this design.
+
+		:returns: The number if attributes set on this design.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this design.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this design.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this design.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
 		return self._name
 
 
@@ -1373,16 +1695,17 @@ class Project(metaclass=ExtendedType, slots=True):
 	_attributes:      Dict[Type[Attribute], typing_Any]
 
 	_vhdlVersion:     VHDLVersion
-	_verilogVersion:  VerilogVersion
+	_verilogVersion:  SystemVerilogVersion
 	_svVersion:       SystemVerilogVersion
+	_srdlVersion:     SystemRDLVersion
 
 	def __init__(
 		self,
 		name: str,
-		rootDirectory: pathlib_Path = pathlib_Path("."),
-		vhdlVersion: VHDLVersion = None,
-		verilogVersion: VerilogVersion = None,
-		svVersion: SystemVerilogVersion = None
+		rootDirectory:  pathlib_Path =                   pathlib_Path("."),
+		vhdlVersion:    Nullable[VHDLVersion] =          None,
+		verilogVersion: Nullable[SystemVerilogVersion] = None,
+		svVersion:      Nullable[SystemVerilogVersion] = None
 	):
 		self._name =            name
 		self._rootDirectory =   rootDirectory
@@ -1426,7 +1749,7 @@ class Project(metaclass=ExtendedType, slots=True):
 	def DefaultDesign(self) -> Design:
 		return self._defaultDesign
 
-	def Validate(self):
+	def Validate(self) -> None:
 		"""Validate this project."""
 		if self._name is None or self._name == "":
 			raise Exception("Validation: Project has no name.")
@@ -1453,20 +1776,10 @@ class Project(metaclass=ExtendedType, slots=True):
 		for design in self._designs.values():
 			design.Validate()
 
-	def __len__(self):
-		return self._designs.__len__()
-
-	def __getitem__(self, key: Type[Attribute]):
-		if not issubclass(key, Attribute):
-			raise TypeError("Parameter 'key' is not an 'Attribute'.")
-
-		try:
-			return self._attributes[key]
-		except KeyError:
-			return key.resolve(self, key)
-
-	def __setitem__(self, key: Type[Attribute], value: typing_Any):
-		self._attributes[key] = value
+	@property
+	def DesignCount(self) -> int:
+		"""Returns number of designs."""
+		return len(self._designs)
 
 	@property
 	def VHDLVersion(self) -> VHDLVersion:
@@ -1478,12 +1791,12 @@ class Project(metaclass=ExtendedType, slots=True):
 		self._vhdlVersion = value
 
 	@property
-	def VerilogVersion(self) -> VerilogVersion:
+	def VerilogVersion(self) -> SystemVerilogVersion:
 		# TODO: check for None and return exception
 		return self._verilogVersion
 
 	@VerilogVersion.setter
-	def VerilogVersion(self, value: VerilogVersion) -> None:
+	def VerilogVersion(self, value: SystemVerilogVersion) -> None:
 		self._verilogVersion = value
 
 	@property
@@ -1495,5 +1808,61 @@ class Project(metaclass=ExtendedType, slots=True):
 	def SVVersion(self, value: SystemVerilogVersion) -> None:
 		self._svVersion = value
 
-	def __str__(self):
+	@property
+	def SRDLVersion(self) -> SystemRDLVersion:
+		# TODO: check for None and return exception
+		return self._srdlVersion
+
+	@SRDLVersion.setter
+	def SRDLVersion(self, value: SystemRDLVersion) -> None:
+		self._srdlVersion = value
+
+	def __len__(self) -> int:
+		"""
+		Returns number of attributes set on this project.
+
+		:returns: The number if attributes set on this project.
+		"""
+		return len(self._attributes)
+
+	def __getitem__(self, key: Type[Attribute]) -> Any:
+		"""Index access for returning attributes on this project.
+
+		:param key:        The attribute type.
+		:returns:          The attribute's value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		try:
+			return self._attributes[key]
+		except KeyError:
+			return key.resolve(self, key)
+
+	def __setitem__(self, key: Type[Attribute], value: typing_Any) -> None:
+		"""
+		Index access for adding or setting attributes on this project.
+
+		:param key:        The attribute type.
+		:param value:      The attributes value.
+		:raises TypeError: When parameter 'key' is not a subclass of Attribute.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		self._attributes[key] = value
+
+	def __delitem__(self, key: Type[Attribute]) -> None:
+		"""
+		Index access for deleting attributes on this project.
+
+		:param key: The attribute type.
+		"""
+		if not issubclass(key, Attribute):
+			raise TypeError("Parameter 'key' is not an 'Attribute'.")
+
+		del self._attributes[key]
+
+	def __str__(self) -> str:
 		return self._name

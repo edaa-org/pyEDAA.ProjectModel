@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2022 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,13 +29,13 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
+from pathlib  import Path
 from unittest import TestCase
 
-from pySVModel import VerilogVersion, SystemVerilogVersion
+from pySVModel   import SystemVerilogVersion
 from pyVHDLModel import VHDLVersion
 
-from pyEDAA.ProjectModel import Project
+from pyEDAA.ProjectModel import Project, Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -45,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class Instantiate(TestCase):
-	def test_Project(self):
+	def test_Project(self) -> None:
 		project = Project("project")
 
 		self.assertIsNotNone(project)
@@ -64,32 +64,32 @@ class Instantiate(TestCase):
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_WithPath(self):
+	def test_WithPath(self) -> None:
 		rootDirectoryPath = Path.cwd() / "temp/../project"
 		rootDirectory = (Path.cwd() / "project").as_posix()
 		project = Project("project", rootDirectory=rootDirectoryPath)
 		self.assertIs(rootDirectoryPath, project.RootDirectory)
 		self.assertEqual(rootDirectory, project.ResolvedPath.as_posix())
 
-	def test_WithVersions(self):
+	def test_WithVersions(self) -> None:
 		project = Project(
 			"project",
 			vhdlVersion=VHDLVersion.VHDL2019,
-			verilogVersion=VerilogVersion.Verilog2005,
+			verilogVersion=SystemVerilogVersion.Verilog2005,
 			svVersion=SystemVerilogVersion.SystemVerilog2017
 		)
 
 		self.assertEqual(VHDLVersion.VHDL2019, project.VHDLVersion)
-		self.assertEqual(VerilogVersion.Verilog2005, project.VerilogVersion)
+		self.assertEqual(SystemVerilogVersion.Verilog2005, project.VerilogVersion)
 		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
 
 
 class Properties(TestCase):
-	def test_SetVersionsLater(self):
+	def test_SetVersionsLater(self) -> None:
 		project = Project("project")
 
 		vhdlVersion = VHDLVersion.VHDL2019
-		verilogVersion = VerilogVersion.Verilog2005
+		verilogVersion = SystemVerilogVersion.Verilog2005
 		svVersion = SystemVerilogVersion.SystemVerilog2017
 
 		project.VHDLVersion = vhdlVersion
@@ -100,7 +100,7 @@ class Properties(TestCase):
 		self.assertEqual(verilogVersion, project.VerilogVersion)
 		self.assertEqual(svVersion, project.SVVersion)
 
-	def test_ResolveDirectory(self):
+	def test_ResolveDirectory(self) -> None:
 		projectDirectoryPath = Path.cwd() / "project"
 
 		project = Project("project", projectDirectoryPath)
@@ -109,7 +109,50 @@ class Properties(TestCase):
 
 
 class Validate(TestCase):
-	def test_Project(self):
-		project = Project("project", rootDirectory=Path("project"))
+	def test_Project(self) -> None:
+		project = Project("project", rootDirectory=Path("tests/project"))
 
 		project.Validate()
+
+
+class Attr(Attribute):
+	pass
+
+
+class Attributes(TestCase):
+	def test_AddAttribute_WrongType(self) -> None:
+		project = Project("project")
+
+		with self.assertRaises(TypeError):
+			project["attr"] = 5
+
+	def test_AddAttribute_Normal(self) -> None:
+		project = Project("project")
+
+		project[Attr] = 5
+
+	def test_GetAttribute_WrongType(self) -> None:
+		project = Project("project")
+		project[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			_ = project["attr"]
+
+	def test_GetAttribute_Normal(self) -> None:
+		project = Project("project")
+		project[Attr] = 5
+
+		_ = project[Attr]
+
+	def test_DelAttribute_WrongType(self) -> None:
+		project = Project("project")
+		project[Attr] = 5
+
+		with self.assertRaises(TypeError):
+			del project["attr"]
+
+	def test_DelAttribute_Normal(self) -> None:
+		project = Project("project")
+		project[Attr] = 5
+
+		del project[Attr]
