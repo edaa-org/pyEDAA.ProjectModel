@@ -30,6 +30,8 @@
 # ==================================================================================================================== #
 #
 """Package installer for 'An abstract model of EDA tool projects'."""
+from setuptools          import setup
+
 from pathlib             import Path
 from pyTooling.Packaging import DescribePythonPackageHostedOnGitHub, DEFAULT_CLASSIFIERS
 
@@ -38,7 +40,7 @@ packageName =            "pyEDAA.ProjectModel"
 packageDirectory =       packageName.replace(".", "/")
 packageInformationFile = Path(f"{packageDirectory}/__init__.py")
 
-DescribePythonPackageHostedOnGitHub(
+setup(**DescribePythonPackageHostedOnGitHub(
 	packageName=packageName,
 	description="An abstract model of EDA tool projects.",
 	gitHubNamespace=gitHubNamespace,
@@ -46,5 +48,8 @@ DescribePythonPackageHostedOnGitHub(
 	developmentStatus="beta",
 	classifiers=list(DEFAULT_CLASSIFIERS) + [
 		"Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)"
-	]
-)
+	],
+	dataFiles={
+		packageName: ["py.typed"]
+	}
+))
