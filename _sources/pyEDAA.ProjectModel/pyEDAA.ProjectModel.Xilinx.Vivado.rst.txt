@@ -1,0 +1,106 @@
+.. # Template modified  by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+=====================================
+``pyEDAA.ProjectModel.Xilinx.Vivado``
+=====================================
+
+.. py:module:: pyEDAA.ProjectModel.Xilinx.Vivado
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx.Vivado
+
+
+**Classes**
+
+- :py:class:`UsedInAttribute`:
+  Undocumented.
+
+- :py:class:`File`:
+  A :term:`File` represents a file in a design. This :term:`base-class` is used
+
+- :py:class:`ConstraintFile`:
+  Base-class of all constraint files.
+
+- :py:class:`VerilogSourceFile`:
+  A Verilog source file (of any language version).
+
+- :py:class:`VHDLSourceFile`:
+  A VHDL source file (of any language version).
+
+- :py:class:`VivadoProjectFile`:
+  A Vivado project file (``*.xpr``).
+
+- :py:class:`XDCConstraintFile`:
+  A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``).
+
+- :py:class:`IPCoreDescriptionFile`:
+  An XML file (``*.xml``).
+
+- :py:class:`IPCoreInstantiationFile`:
+  A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``).
+
+
+.. autoclass:: UsedInAttribute
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: UsedInAttribute
+      :parts: 1
+
+.. autoclass:: File
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: File
+      :parts: 1
+
+.. autoclass:: ConstraintFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ConstraintFile
+      :parts: 1
+
+.. autoclass:: VerilogSourceFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogSourceFile
+      :parts: 1
+
+.. autoclass:: VHDLSourceFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLSourceFile
+      :parts: 1
+
+.. autoclass:: VivadoProjectFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VivadoProjectFile
+      :parts: 1
+
+.. autoclass:: XDCConstraintFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XDCConstraintFile
+      :parts: 1
+
+.. autoclass:: IPCoreDescriptionFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: IPCoreDescriptionFile
+      :parts: 1
+
+.. autoclass:: IPCoreInstantiationFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: IPCoreInstantiationFile
+      :parts: 1

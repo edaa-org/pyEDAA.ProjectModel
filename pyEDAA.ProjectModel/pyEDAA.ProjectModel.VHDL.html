@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyEDAA.ProjectModel.VHDL &#8212; pyEDAA.ProjectModel 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=9ecc9bae" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <script src="../_static/documentation_options.js?v=1dd76d02"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyEDAA.ProjectModel.Verilog" href="pyEDAA.ProjectModel.Verilog.html" />
+    <link rel="prev" title="pyEDAA.ProjectModel.OSVVM" href="pyEDAA.ProjectModel.OSVVM.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-pyEDAA.ProjectModel.VHDL">
+<span id="pyedaa-projectmodel-vhdl"></span><h1><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.VHDL</span></code><a class="headerlink" href="#module-pyEDAA.ProjectModel.VHDL" title="Link to this heading">¶</a></h1>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_on_dark.svg" alt="Logo of pyEDAA.ProjectModel"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">pyEDAA.ProjectModel</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ProjectModel/index.html">Project Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FileTypes/index.html">File Types</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Class Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pyEDAA.ProjectModel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Altera.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Altera</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Attributes.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Attributes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.GHDL.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.GHDL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Intel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Intel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.MentorGraphics</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.OSVVM.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.OSVVM</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.VHDL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Verilog.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Verilog</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Xilinx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute"><code class="docutils literal notranslate"><span class="pre">Attribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileType"><code class="docutils literal notranslate"><span class="pre">FileType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent"><code class="docutils literal notranslate"><span class="pre">HumanReadableContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLContent"><code class="docutils literal notranslate"><span class="pre">XMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.YAMLContent"><code class="docutils literal notranslate"><span class="pre">YAMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.JSONContent"><code class="docutils literal notranslate"><span class="pre">JSONContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.INIContent"><code class="docutils literal notranslate"><span class="pre">INIContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TOMLContent"><code class="docutils literal notranslate"><span class="pre">TOMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent"><code class="docutils literal notranslate"><span class="pre">TCLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SDCContent"><code class="docutils literal notranslate"><span class="pre">SDCContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonContent"><code class="docutils literal notranslate"><span class="pre">PythonContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TextFile"><code class="docutils literal notranslate"><span class="pre">TextFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.LogFile"><code class="docutils literal notranslate"><span class="pre">LogFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLFile"><code class="docutils literal notranslate"><span class="pre">XMLFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile"><code class="docutils literal notranslate"><span class="pre">SourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HDLSourceFile"><code class="docutils literal notranslate"><span class="pre">HDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.RDLSourceFile"><code class="docutils literal notranslate"><span class="pre">RDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.NetlistFile"><code class="docutils literal notranslate"><span class="pre">NetlistFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.EDIFNetlistFile"><code class="docutils literal notranslate"><span class="pre">EDIFNetlistFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLSourceFile"><code class="docutils literal notranslate"><span class="pre">TCLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VHDLSourceFile"><code class="docutils literal notranslate"><span class="pre">VHDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogBaseFile"><code class="docutils literal notranslate"><span class="pre">VerilogBaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogSourceFile"><code class="docutils literal notranslate"><span class="pre">VerilogSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogHeaderFile"><code class="docutils literal notranslate"><span class="pre">VerilogHeaderFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogBaseFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogBaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogSourceFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogHeaderFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogHeaderFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemRDLSourceFile"><code class="docutils literal notranslate"><span class="pre">SystemRDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonSourceFile"><code class="docutils literal notranslate"><span class="pre">PythonSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CocotbPythonFile"><code class="docutils literal notranslate"><span class="pre">CocotbPythonFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ConstraintFile"><code class="docutils literal notranslate"><span class="pre">ConstraintFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ProjectFile"><code class="docutils literal notranslate"><span class="pre">ProjectFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CSourceFile"><code class="docutils literal notranslate"><span class="pre">CSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CppSourceFile"><code class="docutils literal notranslate"><span class="pre">CppSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SettingFile"><code class="docutils literal notranslate"><span class="pre">SettingFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationAnalysisFile"><code class="docutils literal notranslate"><span class="pre">SimulationAnalysisFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationElaborationFile"><code class="docutils literal notranslate"><span class="pre">SimulationElaborationFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationStartFile"><code class="docutils literal notranslate"><span class="pre">SimulationStartFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationRunFile"><code class="docutils literal notranslate"><span class="pre">SimulationRunFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformConfigFile"><code class="docutils literal notranslate"><span class="pre">WaveformConfigFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformDatabaseFile"><code class="docutils literal notranslate"><span class="pre">WaveformDatabaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformExchangeFile"><code class="docutils literal notranslate"><span class="pre">WaveformExchangeFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileSet"><code class="docutils literal notranslate"><span class="pre">FileSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VHDLLibrary"><code class="docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Design"><code class="docutils literal notranslate"><span class="pre">Design</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coverage/index.html">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing/index.html">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Index</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Python Class Reference</a><ul>
+  <li><a href="pyEDAA.ProjectModel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel</span></code></a><ul>
+      <li>Previous: <a href="pyEDAA.ProjectModel.OSVVM.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.OSVVM</span></code></a></li>
+      <li>Next: <a href="pyEDAA.ProjectModel.Verilog.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Verilog</span></code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2014-2024, Patrick Lehmann, Unai Martinez-Corral.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/pyEDAA.ProjectModel/pyEDAA.ProjectModel.VHDL.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

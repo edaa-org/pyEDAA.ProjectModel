@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="406pt" height="64pt" viewBox="0.00 0.00 406.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance8623fb0b60</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>SourceFile</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile" ns1:title="Base-class of all source files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="250,-56 183,-56 183,-37 250,-37 250,-56" />
+<ns0:text text-anchor="middle" x="216.5" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>File-&gt;SourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.19,-46.5C118.18,-46.5 151.91,-46.5 177.8,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="177.87,-48.25 182.87,-46.5 177.87,-44.75 177.87,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>PythonContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonContent" ns1:title="A file type representing contents as Python source code." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="261,-19 172,-19 172,0 261,0 261,-19" />
+<ns0:text text-anchor="middle" x="216.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">PythonContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;PythonContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.25,-9.5C146.5,-9.5 156.9,-9.5 166.66,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.69,-11.25 171.69,-9.5 166.69,-7.75 166.69,-11.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>PythonSourceFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonSourceFile" ns1:title="A Python source file." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="398,-37 297,-37 297,-18 398,-18 398,-37" />
+<ns0:text text-anchor="middle" x="347.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">PythonSourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>PythonContent-&gt;PythonSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M261.17,-15.59C270.97,-16.96 281.49,-18.43 291.68,-19.85" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="291.45,-21.59 296.65,-20.54 291.94,-18.12 291.45,-21.59" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>SourceFile-&gt;PythonSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M250.05,-41.71C262.68,-39.85 277.5,-37.66 291.68,-35.57" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="292.18,-37.27 296.87,-34.81 291.67,-33.81 292.18,-37.27" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

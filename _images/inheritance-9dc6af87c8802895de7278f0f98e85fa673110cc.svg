@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="380pt" height="64pt" viewBox="0.00 0.00 380.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritancedd44e13911</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>SettingFile</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SettingFile" ns1:title="Base-class of all tool-specific setting files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="240,-56 172,-56 172,-37 240,-37 240,-56" />
+<ns0:text text-anchor="middle" x="206" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SettingFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>File-&gt;SettingFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.22,-46.5C115.46,-46.5 143.75,-46.5 166.55,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.62,-48.25 171.62,-46.5 166.62,-44.75 166.62,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>INIContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.INIContent" ns1:title="A file type representing INI contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="240,-19 172,-19 172,0 240,0 240,-19" />
+<ns0:text text-anchor="middle" x="206" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">INIContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;INIContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.2,-9.5C146.71,-9.5 157.23,-9.5 166.78,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.98,-11.25 171.98,-9.5 166.98,-7.75 166.98,-11.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>ModelSimINIFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.MentorGraphics.ModelSim.html#pyEDAA.ProjectModel.MentorGraphics.ModelSim.ModelSimINIFile" ns1:title="ModelSimINIFile" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="372,-37 276,-37 276,-18 372,-18 372,-37" />
+<ns0:text text-anchor="middle" x="324" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ModelSimINIFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>INIContent-&gt;ModelSimINIFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M240.24,-14.66C249.79,-16.14 260.44,-17.79 270.84,-19.41" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="270.71,-21.16 275.92,-20.2 271.25,-17.7 270.71,-21.16" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>SettingFile-&gt;ModelSimINIFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M240.24,-41.06C249.79,-39.49 260.44,-37.75 270.84,-36.04" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="271.27,-37.75 275.92,-35.21 270.71,-34.29 271.27,-37.75" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

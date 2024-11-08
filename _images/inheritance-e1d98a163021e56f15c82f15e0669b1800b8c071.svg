@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="393pt" height="64pt" viewBox="0.00 0.00 393.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance2c8c1aae6f</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>ProjectFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ProjectFile" ns1:title="Base-class of all tool-specific project files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="244,-56 176,-56 176,-37 244,-37 244,-56" />
+<ns0:text text-anchor="middle" x="210" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ProjectFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>File-&gt;ProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95,-46.5C116.34,-46.5 146.85,-46.5 170.93,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="170.97,-48.25 175.97,-46.5 170.97,-44.75 170.97,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>XMLContent</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLContent" ns1:title="A file type representing XML contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="248,-19 172,-19 172,0 248,0 248,-19" />
+<ns0:text text-anchor="middle" x="210" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">XMLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>HumanReadableContent-&gt;XMLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.13,-9.5C146.65,-9.5 157.25,-9.5 166.99,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="167,-11.25 172,-9.5 167,-7.75 167,-11.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>VivadoProjectFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Xilinx.Vivado.html#pyEDAA.ProjectModel.Xilinx.Vivado.VivadoProjectFile" ns1:title="A Vivado project file (``*.xpr``)." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="385,-37 284,-37 284,-18 385,-18 385,-37" />
+<ns0:text text-anchor="middle" x="334.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">VivadoProjectFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>ProjectFile-&gt;VivadoProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M244.15,-41.36C254.81,-39.7 266.93,-37.83 278.72,-36" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="279.08,-37.71 283.75,-35.22 278.54,-34.25 279.08,-37.71" />
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>XMLContent-&gt;VivadoProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M248.09,-14.95C257.77,-16.37 268.41,-17.94 278.8,-19.46" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="278.67,-21.21 283.87,-20.21 279.18,-17.75 278.67,-21.21" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

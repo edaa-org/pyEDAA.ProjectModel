@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="392pt" height="64pt" viewBox="0.00 0.00 392.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance395c582a70</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>ProjectFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ProjectFile" ns1:title="Base-class of all tool-specific project files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="242,-56 174,-56 174,-37 242,-37 242,-56" />
+<ns0:text text-anchor="middle" x="208" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ProjectFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>File-&gt;ProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.28,-46.5C116.07,-46.5 145.4,-46.5 168.79,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="168.99,-48.25 173.99,-46.5 168.99,-44.75 168.99,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>TCLContent</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent" ns1:title="A file type representing content in TCL code." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="244,-19 172,-19 172,0 244,0 244,-19" />
+<ns0:text text-anchor="middle" x="208" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">TCLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>HumanReadableContent-&gt;TCLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.38,-9.5C146.77,-9.5 157.21,-9.5 166.76,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.96,-11.25 171.96,-9.5 166.96,-7.75 166.96,-11.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>OSVVMProjectFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.OSVVM.html#pyEDAA.ProjectModel.OSVVM.OSVVMProjectFile" ns1:title="An OSVVM project file (``*.pro``)." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="384,-37 280,-37 280,-18 384,-18 384,-37" />
+<ns0:text text-anchor="middle" x="332" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">OSVVMProjectFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>ProjectFile-&gt;OSVVMProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M242.01,-41.36C252.05,-39.8 263.38,-38.03 274.5,-36.3" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="274.92,-38 279.6,-35.51 274.39,-34.55 274.92,-38" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>TCLContent-&gt;OSVVMProjectFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M244.29,-14.71C253.84,-16.12 264.43,-17.68 274.83,-19.21" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="274.71,-20.96 279.91,-19.96 275.22,-17.5 274.71,-20.96" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

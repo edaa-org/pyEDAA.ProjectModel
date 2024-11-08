@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyEDAA.ProjectModel.GHDL &#8212; pyEDAA.ProjectModel 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=9ecc9bae" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <script src="../_static/documentation_options.js?v=1dd76d02"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyEDAA.ProjectModel.Intel" href="pyEDAA.ProjectModel.Intel.html" />
+    <link rel="prev" title="pyEDAA.ProjectModel.Attributes" href="pyEDAA.ProjectModel.Attributes.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-pyEDAA.ProjectModel.GHDL">
+<span id="pyedaa-projectmodel-ghdl"></span><h1><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.GHDL</span></code><a class="headerlink" href="#module-pyEDAA.ProjectModel.GHDL" title="Link to this heading">¶</a></h1>
+<p><strong>Classes</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile" title="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">GHDLWaveformFile</span></code></a>:
+GHDL’s waveform file (<code class="docutils literal notranslate"><span class="pre">*.ghw</span></code>) supporting VHDL and Verilog simulation results.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyEDAA.ProjectModel.GHDL.</span></span><span class="sig-name descname"><span class="pre">GHDLWaveformFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">design</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileSet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyEDAA/ProjectModel/GHDL.html#GHDLWaveformFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile" title="Link to this definition">¶</a></dt>
+<dd><p>GHDL’s waveform file (<code class="docutils literal notranslate"><span class="pre">*.ghw</span></code>) supporting VHDL and Verilog simulation results.</p>
+<p class="rubric">Inheritance</p>
+<div class="graphviz"><object data="../_images/inheritance-f525469c0f06651de3dd05d9094b4cebde2676e7.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of GHDLWaveformFile</p></object></div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>Path</em>)</p></li>
+<li><p><strong>project</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><em>Project</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>design</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><em>Design</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>fileSet</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><em>FileSet</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Any">
+<span class="sig-name descname"><span class="pre">Any</span></span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Any" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile" title="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">GHDLWaveformFile</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Design">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Design</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><span class="pre">Design</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Design" title="Link to this definition">¶</a></dt>
+<dd><p>Property setting or returning the design this file is used in.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileSet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileSet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><span class="pre">FileSet</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileSet" title="Link to this definition">¶</a></dt>
+<dd><p>Property setting or returning the fileset this file is used in.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileType">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileType" title="pyEDAA.ProjectModel.FileType"><span class="pre">FileType</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileType" title="Link to this definition">¶</a></dt>
+<dd><p>Read-only property to return the file type of this file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Path" title="Link to this definition">¶</a></dt>
+<dd><p>Read-only property returning the path of this file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Project">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Project</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><span class="pre">Project</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Project" title="Link to this definition">¶</a></dt>
+<dd><p>Property setting or returning the project this file is used in.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.ResolvedPath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResolvedPath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.ResolvedPath" title="Link to this definition">¶</a></dt>
+<dd><p>Read-only property returning the resolved path of this file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Validate">
+<span class="sig-name descname"><span class="pre">Validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Validate" title="Link to this definition">¶</a></dt>
+<dd><p>Validate this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__delitem__">
+<span class="sig-name descname"><span class="pre">__delitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__delitem__" title="Link to this definition">¶</a></dt>
+<dd><p>Index access for deleting attributes on this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a>]</span>) – The attribute type.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__getitem__" title="Link to this definition">¶</a></dt>
+<dd><p>Index access for returning attributes on this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a>]</span>) – The attribute type.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The attribute’s value.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – When parameter ‘key’ is not a subclass of Attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">design</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileSet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>Path</em>)</p></li>
+<li><p><strong>project</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><em>Project</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>design</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Design" title="pyEDAA.ProjectModel.Design"><em>Design</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>fileSet</strong> (<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileSet" title="pyEDAA.ProjectModel.FileSet"><em>FileSet</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__len__" title="Link to this definition">¶</a></dt>
+<dd><p>Returns number of attributes set on this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number if attributes set on this file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__setitem__" title="Link to this definition">¶</a></dt>
+<dd><p>Index access for adding or setting attributes on this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute" title="pyEDAA.ProjectModel.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a>]</span>) – The attribute type.</p></li>
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – The attributes value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – When parameter ‘key’ is not a subclass of Attribute.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__str__" title="Link to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_on_dark.svg" alt="Logo of pyEDAA.ProjectModel"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">pyEDAA.ProjectModel</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ProjectModel/index.html">Project Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FileTypes/index.html">File Types</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python Class Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pyEDAA.ProjectModel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Altera.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Altera</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Attributes.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Attributes</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.GHDL</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Any"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.Any</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Design"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.Design</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileSet"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.FileSet</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.FileType"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.FileType</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Path"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.Path</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Project"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.Project</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.ResolvedPath"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.ResolvedPath</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.Validate"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.Validate()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__delitem__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__delitem__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__getitem__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__getitem__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__init__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__len__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__len__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__setitem__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__setitem__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyEDAA.ProjectModel.GHDL.GHDLWaveformFile.__str__"><code class="docutils literal notranslate"><span class="pre">GHDLWaveformFile.__str__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Intel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Intel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.MentorGraphics.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.MentorGraphics</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.OSVVM.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.OSVVM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.VHDL.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.VHDL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Verilog.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Verilog</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.Xilinx.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Xilinx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Attribute"><code class="docutils literal notranslate"><span class="pre">Attribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileType"><code class="docutils literal notranslate"><span class="pre">FileType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent"><code class="docutils literal notranslate"><span class="pre">HumanReadableContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLContent"><code class="docutils literal notranslate"><span class="pre">XMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.YAMLContent"><code class="docutils literal notranslate"><span class="pre">YAMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.JSONContent"><code class="docutils literal notranslate"><span class="pre">JSONContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.INIContent"><code class="docutils literal notranslate"><span class="pre">INIContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TOMLContent"><code class="docutils literal notranslate"><span class="pre">TOMLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent"><code class="docutils literal notranslate"><span class="pre">TCLContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SDCContent"><code class="docutils literal notranslate"><span class="pre">SDCContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonContent"><code class="docutils literal notranslate"><span class="pre">PythonContent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TextFile"><code class="docutils literal notranslate"><span class="pre">TextFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.LogFile"><code class="docutils literal notranslate"><span class="pre">LogFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLFile"><code class="docutils literal notranslate"><span class="pre">XMLFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile"><code class="docutils literal notranslate"><span class="pre">SourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HDLSourceFile"><code class="docutils literal notranslate"><span class="pre">HDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.RDLSourceFile"><code class="docutils literal notranslate"><span class="pre">RDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.NetlistFile"><code class="docutils literal notranslate"><span class="pre">NetlistFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.EDIFNetlistFile"><code class="docutils literal notranslate"><span class="pre">EDIFNetlistFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLSourceFile"><code class="docutils literal notranslate"><span class="pre">TCLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VHDLSourceFile"><code class="docutils literal notranslate"><span class="pre">VHDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogBaseFile"><code class="docutils literal notranslate"><span class="pre">VerilogBaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogSourceFile"><code class="docutils literal notranslate"><span class="pre">VerilogSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogHeaderFile"><code class="docutils literal notranslate"><span class="pre">VerilogHeaderFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogBaseFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogBaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogSourceFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemVerilogHeaderFile"><code class="docutils literal notranslate"><span class="pre">SystemVerilogHeaderFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SystemRDLSourceFile"><code class="docutils literal notranslate"><span class="pre">SystemRDLSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonSourceFile"><code class="docutils literal notranslate"><span class="pre">PythonSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CocotbPythonFile"><code class="docutils literal notranslate"><span class="pre">CocotbPythonFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ConstraintFile"><code class="docutils literal notranslate"><span class="pre">ConstraintFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ProjectFile"><code class="docutils literal notranslate"><span class="pre">ProjectFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CSourceFile"><code class="docutils literal notranslate"><span class="pre">CSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CppSourceFile"><code class="docutils literal notranslate"><span class="pre">CppSourceFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SettingFile"><code class="docutils literal notranslate"><span class="pre">SettingFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationAnalysisFile"><code class="docutils literal notranslate"><span class="pre">SimulationAnalysisFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationElaborationFile"><code class="docutils literal notranslate"><span class="pre">SimulationElaborationFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationStartFile"><code class="docutils literal notranslate"><span class="pre">SimulationStartFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SimulationRunFile"><code class="docutils literal notranslate"><span class="pre">SimulationRunFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformConfigFile"><code class="docutils literal notranslate"><span class="pre">WaveformConfigFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformDatabaseFile"><code class="docutils literal notranslate"><span class="pre">WaveformDatabaseFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformExchangeFile"><code class="docutils literal notranslate"><span class="pre">WaveformExchangeFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileSet"><code class="docutils literal notranslate"><span class="pre">FileSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VHDLLibrary"><code class="docutils literal notranslate"><span class="pre">VHDLLibrary</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Design"><code class="docutils literal notranslate"><span class="pre">Design</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coverage/index.html">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing/index.html">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Index</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Python Class Reference</a><ul>
+  <li><a href="pyEDAA.ProjectModel.html"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel</span></code></a><ul>
+      <li>Previous: <a href="pyEDAA.ProjectModel.Attributes.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Attributes</span></code></a></li>
+      <li>Next: <a href="pyEDAA.ProjectModel.Intel.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">pyEDAA.ProjectModel.Intel</span></code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2014-2024, Patrick Lehmann, Unai Martinez-Corral.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/pyEDAA.ProjectModel/pyEDAA.ProjectModel.GHDL.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

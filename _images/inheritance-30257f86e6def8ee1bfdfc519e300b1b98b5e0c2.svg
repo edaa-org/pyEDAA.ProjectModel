@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="467pt" height="64pt" viewBox="0.00 0.00 467.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance41f7f21b1e</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="54,-56 0,-56 0,-37 54,-37 54,-56" />
+<ns0:text text-anchor="middle" x="27" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>SourceFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile" ns1:title="Base-class of all source files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="157,-56 90,-56 90,-37 157,-37 157,-56" />
+<ns0:text text-anchor="middle" x="123.5" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>File-&gt;SourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M54.07,-46.5C63.47,-46.5 74.28,-46.5 84.49,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="84.76,-48.25 89.76,-46.5 84.76,-44.75 84.76,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HDLSourceFile</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HDLSourceFile" ns1:title="Base-class of all HDL source files." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="304.5,-56 217.5,-56 217.5,-37 304.5,-37 304.5,-56" />
+<ns0:text text-anchor="middle" x="261" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HDLSourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>VHDLSourceFile</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VHDLSourceFile" ns1:title="A VHDL source file (of any language version)." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="459,-37 365,-37 365,-18 459,-18 459,-37" />
+<ns0:text text-anchor="middle" x="412" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">VHDLSourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>HDLSourceFile-&gt;VHDLSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M304.7,-41.06C321.91,-38.86 341.91,-36.31 359.89,-34.02" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="360.17,-35.75 364.91,-33.38 359.73,-32.27 360.17,-35.75" />
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>SourceFile-&gt;HDLSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M157.3,-46.5C173.77,-46.5 194.03,-46.5 212.19,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="212.25,-48.25 217.25,-46.5 212.25,-44.75 212.25,-48.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="black" stroke-width="0.5" points="329,-19 193,-19 193,0 329,0 329,-19" />
+<ns0:text text-anchor="middle" x="261" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>HumanReadableContent-&gt;VHDLSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M329.09,-17.6C339.35,-18.84 349.8,-20.11 359.65,-21.3" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="359.57,-23.05 364.75,-21.91 359.99,-19.58 359.57,-23.05" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

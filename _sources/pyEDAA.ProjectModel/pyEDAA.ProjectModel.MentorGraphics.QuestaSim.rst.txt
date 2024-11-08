@@ -1,0 +1,46 @@
+.. # Template modified  by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+================================================
+``pyEDAA.ProjectModel.MentorGraphics.QuestaSim``
+================================================
+
+.. py:module:: pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+
+.. currentmodule:: pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+
+**Classes**
+
+- :py:class:`ModelSimProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`ModelSimINIFile`:
+  Base-class of all tool-specific setting files.
+
+- :py:class:`WaveDoFile`:
+  Base-class of all tool-specific waveform configuration files.
+
+
+.. autoclass:: ModelSimProjectFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ModelSimProjectFile
+      :parts: 1
+
+.. autoclass:: ModelSimINIFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ModelSimINIFile
+      :parts: 1
+
+.. autoclass:: WaveDoFile
+   :members:
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveDoFile
+      :parts: 1

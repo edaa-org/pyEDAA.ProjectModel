@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project &#8212; pyEDAA.ProjectModel 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=9ecc9bae" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <script src="../_static/documentation_options.js?v=1dd76d02"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    <link rel="icon" href="../_static/favicon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Design" href="Design.html" />
+    <link rel="prev" title="Project Model" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="project">
+<span id="projectmodel-project"></span><h1>Project<a class="headerlink" href="#project" title="Link to this heading">¶</a></h1>
+<p>Generic description of an EDA project.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Write documentation.</p>
+</div>
+<p class="rubric">Class Relationship</p>
+<pre  class="mermaid">
+        graph TD;
+  Project --&gt; Design;
+  Design  --&gt; VHDLLibrary;
+  Design  --&gt; FileSet;
+  VHDLLibrary --&gt; File;
+  FileSet --&gt; File
+
+  style Project fill:#ee9b00
+    </pre><section id="condensed-definition-of-class-project">
+<h2>Condensed definition of class <a class="reference internal" href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.Project" title="pyEDAA.ProjectModel.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a><a class="headerlink" href="#condensed-definition-of-class-project" title="Link to this heading">¶</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">Project</span><span class="p">:</span>
+  <span class="n">_name</span><span class="p">:</span>                  <span class="nb">str</span>
+  <span class="n">_rootDirectory</span><span class="p">:</span>         <span class="n">Nullable</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span>
+  <span class="n">_designs</span><span class="p">:</span>               <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Design</span><span class="p">]</span>
+  <span class="n">_vhdlVersion</span><span class="p">:</span>           <span class="n">VHDLVersion</span>
+  <span class="n">_verilogVersion</span><span class="p">:</span>        <span class="n">VerilogVersion</span>
+  <span class="n">_svVersion</span><span class="p">:</span>             <span class="n">SystemVerilogVersion</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">rootDirectory</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span>
+    <span class="n">vhdlVersion</span><span class="p">:</span> <span class="n">VHDLVersion</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">verilogVersion</span><span class="p">:</span> <span class="n">VerilogVersion</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">svVersion</span><span class="p">:</span> <span class="n">SystemVerilogVersion</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="p">):</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">RootDirectory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+  <span class="nd">@RootDirectory</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">RootDirectory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">ResolvedPath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">Designs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Design</span><span class="p">]:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">VHDLVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VHDLVersion</span><span class="p">:</span>
+  <span class="nd">@VHDLVersion</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">VHDLVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">VHDLVersion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">VerilogVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerilogVersion</span><span class="p">:</span>
+  <span class="nd">@VerilogVersion</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">VerilogVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">VerilogVersion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">SVVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SystemVerilogVersion</span><span class="p">:</span>
+  <span class="nd">@SVVersion</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">SVVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">SystemVerilogVersion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_on_dark.svg" alt="Logo of pyEDAA.ProjectModel"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">pyEDAA.ProjectModel</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Project Model</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#condensed-definition-of-class-project">Condensed definition of class <code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Design.html">Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VHDLLibrary.html">VHDL Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileSet.html">FileSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="File.html">File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FileTypes/index.html">File Types</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pyEDAA.ProjectModel/index.html">Python Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coverage/index.html">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../typing/index.html">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Index</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Project Model</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Project Model</a></li>
+      <li>Next: <a href="Design.html" title="next chapter">Design</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2014-2024, Patrick Lehmann, Unai Martinez-Corral.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/ProjectModel/Project.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
