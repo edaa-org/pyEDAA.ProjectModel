@@ -1,4 +1,4 @@
-pyTooling ~= 7.0
+pyTooling ~= 8.0
 pyVHDLModel ~= 0.29.1
 pySVModel ~= 0.5
 pySystemRDLModel ~= 0.3
