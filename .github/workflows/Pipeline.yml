@@ -9,7 +9,7 @@ on:
 
 jobs:
   Pipeline:
-    uses: pyTooling/Actions/.github/workflows/Pipeline-NamespacePackage.yml@dev
+    uses: pyTooling/Actions/.github/workflows/CompletePipeline.yml@r2
     with:
       package_namespace: pyEDAA
       package_name: ProjectModel
@@ -25,3 +25,6 @@ jobs:
 #      apptest_include_list:
 #      apptest_exclude_list:
 #      apptest_disable_list:
+    secrets:
+      PYPI_TOKEN:           ${{ secrets.PYPI_TOKEN }}
+      CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
