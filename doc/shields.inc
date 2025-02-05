@@ -54,11 +54,11 @@
    :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/network/dependents
 
 .. # GHA test and coverage
-.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:svg:ProjectModel-gha-test| image:: https://img.shields.io/github/actions/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline.yml?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
    :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
-.. |SHIELD:png:ProjectModel-gha-test| image:: https://raster.shields.io/github/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline/main?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
+.. |SHIELD:png:ProjectModel-gha-test| image:: https://raster.shields.io/github/actions/workflow/status/edaa-org/pyEDAA.ProjectModel/Pipeline.yml?longCache=true&style=flat-square&label=Build%20and%20Test&logo=GitHub%20Actions&logoColor=FFFFFF
    :alt: GitHub Workflow - Build and Test Status
    :height: 22
    :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel/actions/workflows/Pipeline.yml
