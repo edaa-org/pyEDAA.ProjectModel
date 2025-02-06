@@ -238,3 +238,55 @@ class AttributeResolution(TestCase):
 
 		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
 		self.assertEqual("-5", file[KeyValueAttribute]["id1"])
+
+	def test_AttachedToDesign(self) -> None:
+		project = Project("project", rootDirectory=Path("project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		design[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = fileSet[KeyValueAttribute]
+		attribute["id1"] = "15"
+		design[KeyValueAttribute]["id2"] = "25"
+
+		self.assertEqual("15", attribute["id1"])
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("15", file[KeyValueAttribute]["id1"])
+
+		self.assertEqual("25", attribute["id2"])
+		self.assertEqual("25", fileSet[KeyValueAttribute]["id2"])
+		self.assertEqual("25", file[KeyValueAttribute]["id2"])
+
+		file[KeyValueAttribute] = KeyValueAttribute()
+		file[KeyValueAttribute]["id1"] = "-5"
+
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("-5", file[KeyValueAttribute]["id1"])
+
+	def test_AttachedToProject(self) -> None:
+		project = Project("project", rootDirectory=Path("project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+		file = File(Path("file_A1.vhdl"), fileSet=fileSet)
+
+		project[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = fileSet[KeyValueAttribute]
+		attribute["id1"] = "15"
+		project[KeyValueAttribute]["id2"] = "25"
+
+		self.assertEqual("15", attribute["id1"])
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("15", file[KeyValueAttribute]["id1"])
+
+		self.assertEqual("25", attribute["id2"])
+		self.assertEqual("25", fileSet[KeyValueAttribute]["id2"])
+		self.assertEqual("25", file[KeyValueAttribute]["id2"])
+
+		file[KeyValueAttribute] = KeyValueAttribute()
+		file[KeyValueAttribute]["id1"] = "-5"
+
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+		self.assertEqual("-5", file[KeyValueAttribute]["id1"])
