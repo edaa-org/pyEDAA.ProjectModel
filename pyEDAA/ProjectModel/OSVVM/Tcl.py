@@ -33,6 +33,8 @@ from textwrap import dedent
 from tkinter import Tk, Tcl, TclError
 from typing import Any, Dict, Callable, Optional as Nullable
 
+from pyTooling.Decorators import readonly
+
 from pyEDAA.ProjectModel.OSVVM.Environment import Context, osvvmContext
 from pyEDAA.ProjectModel.OSVVM.Procedures import noop
 from pyEDAA.ProjectModel.OSVVM.Procedures import FileExists, DirectoryExists, FindOsvvmSettingsDirectory
@@ -53,6 +55,18 @@ class TclEnvironment:
 
 		self._tcl = Tcl()
 		self._procedures = {}
+
+	@readonly
+	def TCL(self) -> Tk:
+		return self._tcl
+
+	@readonly
+	def Procedures(self) -> Dict[str, Callable]:
+		return self._procedures
+
+	@readonly
+	def Context(self) -> Context:
+		return self._context
 
 	def RegisterPythonFunctionAsTclProcedure(self, pythonFunction: Callable, tclProcedureName: Nullable[str] = None):
 		if tclProcedureName is None:

@@ -31,6 +31,9 @@
 from pathlib import Path
 from typing import Optional as Nullable, List, Dict
 
+from pyTooling.Decorators import readonly
+from pyVHDLModel import VHDLVersion
+
 
 class SourceFile:
 	_path: Path
@@ -38,9 +41,22 @@ class SourceFile:
 	def __init__(self, path: Path) -> None:
 		self._path = path
 
+	@readonly
+	def Path(self) -> Path:
+		return self._path
+
 
 class VHDLSourceFile(SourceFile):
-	pass
+	_vhdlVersion: VHDLVersion
+
+	def __init__(self, path: Path, vhdlVersion: Nullable[VHDLVersion] = None):
+		super().__init__(path)
+
+		self._vhdlVersion = vhdlVersion
+
+	@readonly
+	def VHDLVersion(self) -> VHDLVersion:
+		return self._vhdlVersion
 
 
 class Library:
@@ -51,8 +67,19 @@ class Library:
 		self._name = name
 		self._files = []
 
+	@readonly
+	def Name(self) -> str:
+		return self._name
+
+	@readonly
+	def Files(self) -> List[SourceFile]:
+		return self._files
+
 	def AddFile(self, file: VHDLSourceFile) -> None:
 		self._files.append(file)
+
+	def __repr__(self) -> str:
+		return f"VHDLLibrary: {self._name}"
 
 
 class GenericValue:
@@ -62,6 +89,14 @@ class GenericValue:
 	def __init__(self, name: str, value: str) -> None:
 		self._name = name
 		self._value = value
+
+	@readonly
+	def Name(self) -> str:
+		return self._name
+
+	@readonly
+	def Value(self) -> str:
+		return self._value
 
 	def __repr__(self) -> str:
 		return f"{self._name} = {self._value}"
@@ -77,6 +112,18 @@ class TestCase:
 		self._toplevelName = None
 		self._generics = {}
 
+	@readonly
+	def Name(self) -> str:
+		return self._name
+
+	@readonly
+	def ToplevelName(self) -> str:
+		return self._toplevelName
+
+	@readonly
+	def Generics(self) -> Dict[str, str]:
+		return self._generics
+
 	def SetToplevel(self, toplevelName: str) -> None:
 		self._toplevelName = toplevelName
 
@@ -86,6 +133,7 @@ class TestCase:
 	def __repr__(self) -> str:
 		return f"Testcase: {self._name} - [{', '.join([f'{n}={v}' for n,v in self._generics.items()])}]"
 
+
 class TestSuite:
 	_name:      str
 	_testcases: Dict[str, TestCase]
@@ -93,6 +141,14 @@ class TestSuite:
 	def __init__(self, name: str) -> None:
 		self._name = name
 		self._testcases = {}
+
+	@readonly
+	def Name(self) -> str:
+		return self._name
+
+	@readonly
+	def Testcases(self) -> Dict[str, TestCase]:
+		return self._testcases
 
 	def AddTestcase(self, testcase: TestCase) -> None:
 		self._testcases[testcase._name] = testcase
@@ -130,6 +186,42 @@ class Context:
 		self._testsuite =  None
 		self._testsuites = {}
 		self._options = {}
+
+	@readonly
+	def TCL(self):  # -> "Tk":
+		return self._tcl
+
+	@readonly
+	def WorkingDirectory(self) -> Path:
+		return self._workingDirectory
+
+	@readonly
+	def CurrentDirectory(self) -> Path:
+		return self._currentDirectory
+
+	@readonly
+	def IncludedFiles(self) -> List[Path]:
+		return self._includedFiles
+
+	@readonly
+	def Library(self) -> Library:
+		return self._library
+
+	@readonly
+	def Libraries(self) -> Dict[str, Library]:
+		return self._libraries
+
+	@readonly
+	def TestCase(self) -> TestCase:
+		return self._testcase
+
+	@readonly
+	def Testsuite(self) -> TestSuite:
+		return self._testsuite
+
+	@readonly
+	def Testsuites(self) -> Dict[str, TestSuite]:
+		return self._testsuites
 
 	def IncludeFile(self, proFileOrBuildDirectory: Path) -> Path:
 		if proFileOrBuildDirectory.is_absolute():
