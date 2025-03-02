@@ -248,7 +248,7 @@ class Context:
 		return proFile
 
 	def EvaluateFile(self, proFile: Path) -> None:
-		self._tcl.EvaluateFile(proFile)
+		self._tcl.EvaluateProFile(proFile)
 
 	def SetLibrary(self, name: str):
 		try:

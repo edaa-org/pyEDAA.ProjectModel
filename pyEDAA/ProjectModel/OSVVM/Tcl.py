@@ -78,9 +78,9 @@ class TclEnvironment:
 	def LoadProFile(self, path: Path) -> None:
 		includeFile = self._context.IncludeFile(path)
 
-		self.EvaluateFile(includeFile)
+		self.EvaluateProFile(includeFile)
 
-	def EvaluateFile(self, path: Path) -> None:
+	def EvaluateProFile(self, path: Path) -> None:
 		try:
 			self._tcl.evalfile(str(path))
 		except TclError as ex:
@@ -108,29 +108,36 @@ class OsvvmVariables:
 	) -> None:
 		self._toolName = toolName if toolName is not None else "pyEDAA.ProjectModel"
 
+	@readonly
+	def ToolName(self) -> str:
+		return self._toolName
+
 
 class OsvvmProFileProcessor(TclEnvironment):
 	def __init__(
 		self,
 		# defaultsFile: Path,
 		context: Nullable[Context] = None,
-		variables: Nullable[OsvvmVariables] = None
+		osvvmVariables: Nullable[OsvvmVariables] = None
 	) -> None:
 		if context is None:
 			context = osvvmContext
 
 		super().__init__(context)
 
-		self.LoadOsvvmDefaults()  # defaultsFile)
+		if osvvmVariables is None:
+			osvvmVariables = OsvvmVariables()
+
+		self.LoadOsvvmDefaults(osvvmVariables)
 		self.OverwriteTclProcedures()
 		self.RegisterTclProcedures()
 
-	def LoadOsvvmDefaults(self) -> None:  #, defaultsFile: Path) -> None:
+	def LoadOsvvmDefaults(self, osvvmVariables: OsvvmVariables) -> None:
 		code = dedent(f"""\
 			namespace eval ::osvvm {{
 			  variable VhdlVersion     2019
 			  variable ToolVendor      "???"
-			  variable ToolName        "???"
+			  variable ToolName        "{osvvmVariables.ToolName}"
 			  variable ToolNameVersion "???"
 			  variable ToolSupportsDeferredConstants           1
 			  variable ToolSupportsGenericPackages             1
