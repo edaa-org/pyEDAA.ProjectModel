@@ -141,18 +141,10 @@ class OsvvmProFileProcessor(TclEnvironment):
 			}}
 			""")
 
-		# self.RegisterPythonFunctionAsTclProcedure(vendor_SetCoverageAnalyzeDefaults)
-		# self.RegisterPythonFunctionAsTclProcedure(vendor_SetCoverageSimulateDefaults)
-
 		try:
 			self._tcl.eval(code)
 		except TclError as ex:
 			raise Exception() from ex
-
-		# try:
-		# 	self._tcl.evalfile(str(defaultsFile))
-		# except TclError as ex:
-		# 	raise Exception() from ex
 
 	def OverwriteTclProcedures(self) -> None:
 		self.RegisterPythonFunctionAsTclProcedure(noop, "puts")

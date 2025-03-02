@@ -40,8 +40,8 @@ def build(file: str) -> None:
 
 def include(file: str) -> None:
 	currentDirectory = osvvmContext._currentDirectory
-	includeFile = osvvmContext.IncludeFile(Path(file))
 
+	includeFile = osvvmContext.IncludeFile(Path(file))
 	osvvmContext.EvaluateFile(includeFile)
 
 	osvvmContext._currentDirectory = currentDirectory
@@ -148,14 +148,6 @@ def FindOsvvmSettingsDirectory(*args):
 
 
 def CreateOsvvmScriptSettingsPkg(*args):
-	pass
-
-
-def vendor_SetCoverageAnalyzeDefaults(*args):
-	pass
-
-
-def vendor_SetCoverageSimulateDefaults(*args):
 	pass
 
 
