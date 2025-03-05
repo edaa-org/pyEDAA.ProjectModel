@@ -1,5 +1,5 @@
 <p align="center">
-  <a title="edaa-org.github.io/pySVModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
+  <a title="edaa-org.github.io/pyEDAA.ProjectModel" href="https://edaa-org.github.io/pyEDAA.ProjectModel"><img height="80px" src="doc/_static/logo_on_dark.svg"/></a>
 </p>
 
 [![Sourcecode on GitHub](https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a)](https://GitHub.com/edaa-org/pyEDAA.ProjectModel)

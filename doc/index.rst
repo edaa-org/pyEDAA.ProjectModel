@@ -104,8 +104,8 @@ Contributors
 ************
 
 * :gh:`Patrick Lehmann <Paebbels>` (Maintainer)
-* :gh:`Unai Martinez-Corral <umarcor>` (Maintainer)
-* `and more... <https://GitHub.com/VHDL/pyVHDLModel/graphs/contributors>`__
+* :gh:`Unai Martinez-Corral <umarcor>`
+* `and more... <https://GitHub.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors>`__
 
 
 .. _LICENSE:
