@@ -37,7 +37,7 @@ The pyEDAA.ProjectModel Documentation
 An abstract model of HDL design projects and EDA tooling.
 
 
-.. _goals:
+.. _GOALS:
 
 Main Goals
 **********
@@ -50,7 +50,7 @@ Frameworks consuming this model can build higher level features and services on 
 multiple input sources.
 
 
-.. _usecase:
+.. _USECASES:
 
 Use Cases
 *********
@@ -66,7 +66,7 @@ Use Cases
 * Managing IP cores and projects with `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
 
 
-.. _news:
+.. _NEWS:
 
 News
 ****
