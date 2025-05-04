@@ -37,7 +37,7 @@ The pyEDAA.ProjectModel Documentation
 An abstract model of HDL design projects and EDA tooling.
 
 
-.. _goals:
+.. _GOALS:
 
 Main Goals
 **********
@@ -50,7 +50,7 @@ Frameworks consuming this model can build higher level features and services on 
 multiple input sources.
 
 
-.. _usecase:
+.. _USECASES:
 
 Use Cases
 *********
@@ -66,7 +66,7 @@ Use Cases
 * Managing IP cores and projects with `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
 
 
-.. _news:
+.. _NEWS:
 
 News
 ****
@@ -103,9 +103,9 @@ News
 Contributors
 ************
 
-* `Patrick Lehmann <https://GitHub.com/Paebbels>`__ (Maintainer)
-* `Unai Martinez-Corral <https://GitHub.com/umarcor/>`__ (Maintainer)
-* `and more... <https://GitHub.com/VHDL/pyVHDLModel/graphs/contributors>`__
+* :gh:`Patrick Lehmann <Paebbels>` (Maintainer)
+* :gh:`Unai Martinez-Corral <umarcor>`
+* `and more... <https://GitHub.com/edaa-org/pyEDAA.ProjectModel/graphs/contributors>`__
 
 
 .. _LICENSE:
@@ -122,14 +122,6 @@ License
 
    This Python package (source code) is licensed under **Apache License 2.0**. |br|
    The accompanying documentation is licensed under **Creative Commons - Attribution 4.0 (CC-BY 4.0)**.
-
-------------------------------------
-
-.. |docdate| date:: %d.%b %Y - %H:%M
-
-.. only:: html
-
-   This document was generated on |docdate|.
 
 
 .. toctree::
@@ -160,14 +152,20 @@ License
 
 .. raw:: latex
 
-   \part{References}
+   \part{References and Reports}
 
 .. toctree::
-   :caption: References
+   :caption: References and Reports
    :hidden:
 
-   pyEDAA.ProjectModel/index
+   Python Class Reference <pyEDAA.ProjectModel/pyEDAA.ProjectModel>
+   unittests/index
+   coverage/index
+   CodeCoverage
+   Doc. Coverage Report <DocCoverage>
+   Static Type Check Report ➚ <typing/index>
 
+.. Coverage Report ➚ <coverage/index>
 
 .. raw:: latex
 
@@ -177,10 +175,9 @@ License
    :caption: Appendix
    :hidden:
 
-   Coverage Report ➚ <coverage/index>
-   Static Type Check Report ➚ <typing/index>
    License
    Doc-License
    Glossary
    genindex
-   py-modindex
+   Python Module Index <modindex>
+   TODO

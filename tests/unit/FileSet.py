@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2024 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2025 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -361,3 +361,43 @@ class Attributes(TestCase):
 		fileSet[Attr] = 5
 
 		del fileSet[Attr]
+
+
+class AttributeResolution(TestCase):
+	def test_AttachedToFileSet(self) -> None:
+		project = Project("project", rootDirectory=Path("project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+
+		fileSet[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = fileSet[KeyValueAttribute]
+		attribute["id1"] = "5"
+
+		self.assertEqual("5", attribute["id1"])
+		self.assertEqual("5", fileSet[KeyValueAttribute]["id1"])
+
+	def test_AttachedToDesign(self) -> None:
+		project = Project("project", rootDirectory=Path("project"))
+		design = Design("design", directory=Path("designA"), project=project)
+		fileSet = FileSet("fileset", design=design)
+
+		design[KeyValueAttribute] = KeyValueAttribute()
+
+		attribute = design[KeyValueAttribute]
+		attribute["id1"] = "15"
+		design[KeyValueAttribute]["id2"] = "25"
+
+		self.assertEqual("15", attribute["id1"])
+		self.assertEqual("15", design[KeyValueAttribute]["id1"])
+		self.assertEqual("15", fileSet[KeyValueAttribute]["id1"])
+
+		self.assertEqual("25", attribute["id2"])
+		self.assertEqual("25", design[KeyValueAttribute]["id2"])
+		self.assertEqual("25", fileSet[KeyValueAttribute]["id2"])
+
+		fileSet[KeyValueAttribute] = KeyValueAttribute()
+		fileSet[KeyValueAttribute]["id1"] = "-5"
+
+		self.assertEqual("15", design[KeyValueAttribute]["id1"])
+		self.assertEqual("-5", fileSet[KeyValueAttribute]["id1"])
