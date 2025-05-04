@@ -9,22 +9,18 @@ on:
 
 jobs:
   Pipeline:
-    uses: pyTooling/Actions/.github/workflows/CompletePipeline.yml@r4
+    uses: pyTooling/Actions/.github/workflows/CompletePipeline.yml@dev
     with:
       package_namespace: pyEDAA
       package_name: ProjectModel
-#      unittest_python_version:
-#      unittest_python_version_list:
-#      unittest_system_list:
-#      unittest_include_list:
-#      unittest_exclude_list:
       unittest_disable_list: "mingw64:* ucrt64:*"
-#      apptest_python_version:
       apptest_python_version_list: ""   # use latest Python version
       apptest_system_list: "ubuntu macos macos-arm"
-#      apptest_include_list:
-#      apptest_exclude_list:
-#      apptest_disable_list:
+      codecov:       true
+      codacy:        true
+      dorny:         true
     secrets:
-      PYPI_TOKEN:           ${{ secrets.PYPI_TOKEN }}
-      CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      PYPI_TOKEN:    ${{ secrets.PYPI_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      CODACY_TOKEN:  ${{ secrets.CODACY_TOKEN }}
+

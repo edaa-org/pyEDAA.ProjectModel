@@ -161,6 +161,7 @@ License
    Python Class Reference <pyEDAA.ProjectModel/pyEDAA.ProjectModel>
    unittests/index
    coverage/index
+   CodeCoverage
    Doc. Coverage Report <DocCoverage>
    Static Type Check Report ➚ <typing/index>
 
