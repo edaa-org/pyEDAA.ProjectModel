@@ -51,6 +51,18 @@ class UsedInAttribute(Attribute):
 
 
 @export
+class ScopeToRefAttribute(Attribute):
+	KEY = "ScopeToRef"
+	VALUE_TYPE = Nullable[str]
+
+
+@export
+class ScopeToCellAttribute(Attribute):
+	KEY = "ScopeToCell"
+	VALUE_TYPE = Nullable[str]
+
+
+@export
 class File(Model_File):
 	pass
 
@@ -193,6 +205,11 @@ class VivadoProjectFile(ProjectFile, XMLContent):
 @export
 class XDCConstraintFile(ConstraintFile, SDCContent):
 	"""A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``)."""
+
+	def _registerAttributes(self) -> None:
+		super()._registerAttributes()
+		self._attributes[ScopeToRefAttribute] =  None
+		self._attributes[ScopeToCellAttribute] = None
 
 
 @export
