@@ -55,6 +55,7 @@ class File(Model_File):
 	pass
 
 
+@export
 class VivadoFileMixIn(metaclass=ExtendedType, mixin=True):
 	def _registerAttributes(self) -> None:
 		self._attributes[UsedInAttribute] = []
