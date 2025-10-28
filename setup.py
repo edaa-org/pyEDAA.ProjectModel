@@ -45,6 +45,9 @@ setup(
 		packageName=packageName,
 		description="An abstract model of EDA tool projects.",
 		gitHubNamespace=gitHubNamespace,
+		additionalRequirements={
+			"osvvm": ["pyEDAA.OSVVM ~= 0.6"],
+		},
 		sourceFileWithVersion=packageInformationFile,
 		developmentStatus="beta",
 		classifiers=list(DEFAULT_CLASSIFIERS) + [
