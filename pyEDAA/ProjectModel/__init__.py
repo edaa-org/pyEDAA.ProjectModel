@@ -34,7 +34,7 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2025, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.5.1"
+__version__ =   "0.6.0"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
@@ -166,7 +166,11 @@ class File(metaclass=FileType, slots=True):
 
 	@property
 	def Path(self) -> pathlib_Path:
-		"""Read-only property returning the path of this file."""
+		"""
+		Read-only property to access the path to the file.
+
+		:returns: The file's path.
+		"""
 		return self._path
 
 	# TODO: setter?
@@ -251,7 +255,7 @@ class File(metaclass=FileType, slots=True):
 		"""
 		Returns number of attributes set on this file.
 
-		:returns: The number if attributes set on this file.
+		:returns: The number of attributes set on this file.
 		"""
 		return len(self._attributes)
 
@@ -1069,7 +1073,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		"""
 		Returns number of attributes set on this fileset.
 
-		:returns: The number if attributes set on this fileset.
+		:returns: The number of attributes set on this fileset.
 		"""
 		return len(self._attributes)
 
@@ -1271,7 +1275,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		"""
 		Returns number of attributes set on this VHDL library.
 
-		:returns: The number if attributes set on this VHDL library.
+		:returns: The number of attributes set on this VHDL library.
 		"""
 		return len(self._attributes)
 
@@ -1629,7 +1633,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		"""
 		Returns number of attributes set on this design.
 
-		:returns: The number if attributes set on this design.
+		:returns: The number of attributes set on this design.
 		"""
 		return len(self._attributes)
 
@@ -1821,7 +1825,7 @@ class Project(metaclass=ExtendedType, slots=True):
 		"""
 		Returns number of attributes set on this project.
 
-		:returns: The number if attributes set on this project.
+		:returns: The number of attributes set on this project.
 		"""
 		return len(self._attributes)
 
