@@ -49,10 +49,11 @@ setup(
 			"osvvm": ["pyEDAA.OSVVM ~= 0.6"],
 		},
 		sourceFileWithVersion=packageInformationFile,
-		developmentStatus="beta",
 		classifiers=list(DEFAULT_CLASSIFIERS) + [
 			"Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)"
 		],
+		developmentStatus="beta",
+		pythonVersions=("3.11", "3.12", "3.13", "3.14"),
 		dataFiles={
 			packageName: ["py.typed"]
 		}
