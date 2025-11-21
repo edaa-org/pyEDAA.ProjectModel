@@ -1,0 +1,29 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="185pt" height="27pt" viewBox="0.00 0.00 185.00 27.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
+<ns0:title>inheritance6b912cd543</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>ExtendedType</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="https://pytooling.github.io/pyTooling/pyTooling/pyTooling.MetaClasses.html#pyTooling.MetaClasses.ExtendedType" ns1:title="An updates meta-class to construct new classes with an extended feature set." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="85,-19 0,-19 0,0 85,0 85,-19" />
+<ns0:text text-anchor="middle" x="42.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ExtendedType</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>FileType</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.FileType" ns1:title="A :term:`meta-class` to construct *FileType* classes." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="177,-19 121,-19 121,0 177,0 177,-19" />
+<ns0:text text-anchor="middle" x="149" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">FileType</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>ExtendedType-&gt;FileType</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M85.1,-9.5C95.28,-9.5 106.03,-9.5 115.7,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="115.95,-11.25 120.95,-9.5 115.95,-7.75 115.95,-11.25" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

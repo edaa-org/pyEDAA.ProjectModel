@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="405pt" height="64pt" viewBox="0.00 0.00 405.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritancee3f3389572</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>WaveformConfigFile</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformConfigFile" ns1:title="Base-class of all tool-specific waveform configuration files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="287,-56 172,-56 172,-37 287,-37 287,-56" />
+<ns0:text text-anchor="middle" x="229.5" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">WaveformConfigFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>File-&gt;WaveformConfigFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.34,-46.5C114.67,-46.5 141.75,-46.5 166.44,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.67,-48.25 171.67,-46.5 166.67,-44.75 166.67,-48.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>TCLContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent" ns1:title="A file type representing content in TCL code." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="265.5,-19 193.5,-19 193.5,0 265.5,0 265.5,-19" />
+<ns0:text text-anchor="middle" x="229.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">TCLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>HumanReadableContent-&gt;TCLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.18,-9.5C153.77,-9.5 172.2,-9.5 187.93,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="188.15,-11.25 193.15,-9.5 188.15,-7.75 188.15,-11.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>WaveDoFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.MentorGraphics.QuestaSim.html#pyEDAA.ProjectModel.MentorGraphics.QuestaSim.WaveDoFile" ns1:title="WaveDoFile" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="397,-37 323,-37 323,-18 397,-18 397,-37" />
+<ns0:text text-anchor="middle" x="360" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">WaveDoFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>TCLContent-&gt;WaveDoFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M265.61,-14.42C281.64,-16.66 300.74,-19.34 317.47,-21.68" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="317.39,-23.44 322.59,-22.4 317.88,-19.97 317.39,-23.44" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>WaveformConfigFile-&gt;WaveDoFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M287.24,-38.11C297.54,-36.59 308.11,-35.02 317.86,-33.58" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="318.18,-35.3 322.87,-32.84 317.67,-31.84 318.18,-35.3" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

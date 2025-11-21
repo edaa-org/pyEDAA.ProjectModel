@@ -1,0 +1,95 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="515pt" height="64pt" viewBox="0.00 0.00 515.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance848a6cff49</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>ConstraintFile</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ConstraintFile" ns1:title="Base-class of all constraint files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="256,-56 172,-56 172,-37 256,-37 256,-56" />
+<ns0:text text-anchor="middle" x="214" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ConstraintFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>SDCConstraintFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Intel.QuartusPrime.html#pyEDAA.ProjectModel.Intel.QuartusPrime.SDCConstraintFile" ns1:title="A Quartus constraint file (Synopsys Design Constraints; ``*.sdc``)." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="507,-38 403,-38 403,-19 507,-19 507,-38" />
+<ns0:text text-anchor="middle" x="455" y="-26" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SDCConstraintFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>ConstraintFile-&gt;SDCConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M256.09,-43.41C295.07,-40.47 354,-36.03 397.42,-32.76" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="397.78,-34.49 402.64,-32.37 397.52,-31 397.78,-34.49" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>File-&gt;ConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.08,-46.5C114.97,-46.5 142.89,-46.5 166.57,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.86,-48.25 171.86,-46.5 166.86,-44.75 166.86,-48.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>HumanReadableContent-&gt;ConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M106.08,-19.03C125.83,-24.1 150.21,-30.37 170.69,-35.63" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="170.26,-37.33 175.54,-36.88 171.13,-33.94 170.26,-37.33" />
+</ns0:g>
+
+<ns0:g id="node6" class="node">
+<ns0:title>TCLContent</ns0:title>
+<ns0:g id="a_node6"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.TCLContent" ns1:title="A file type representing content in TCL code." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="250,-19 178,-19 178,0 250,0 250,-19" />
+<ns0:text text-anchor="middle" x="214" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">TCLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge6" class="edge">
+<ns0:title>HumanReadableContent-&gt;TCLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.36,-9.5C148.8,-9.5 161.43,-9.5 172.75,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="172.85,-11.25 177.85,-9.5 172.85,-7.75 172.85,-11.25" />
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>SDCContent</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SDCContent" ns1:title="A file type representing contents as Synopsys Design Constraints (SDC)." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="367,-19 292,-19 292,0 367,0 367,-19" />
+<ns0:text text-anchor="middle" x="329.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SDCContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>SDCContent-&gt;SDCConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M367.22,-15.15C376.75,-16.62 387.24,-18.23 397.53,-19.81" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="397.36,-21.56 402.57,-20.59 397.89,-18.1 397.36,-21.56" />
+</ns0:g>
+
+<ns0:g id="edge5" class="edge">
+<ns0:title>TCLContent-&gt;SDCContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M250.29,-9.5C261.79,-9.5 274.67,-9.5 286.61,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="286.66,-11.25 291.66,-9.5 286.66,-7.75 286.66,-11.25" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

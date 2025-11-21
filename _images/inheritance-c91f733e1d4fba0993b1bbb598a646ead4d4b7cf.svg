@@ -1,0 +1,44 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="392pt" height="27pt" viewBox="0.00 0.00 392.00 27.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
+<ns0:title>inheritance787d52f91d</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="54,-19 0,-19 0,0 54,0 54,-19" />
+<ns0:text text-anchor="middle" x="27" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>WaveformExchangeFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.WaveformExchangeFile" ns1:title="Base-class of all tool-independent waveform exchange files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="221,-19 90,-19 90,0 221,0 221,-19" />
+<ns0:text text-anchor="middle" x="155.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">WaveformExchangeFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>File-&gt;WaveformExchangeFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M54.21,-9.5C63.31,-9.5 73.99,-9.5 84.92,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="84.96,-11.25 89.96,-9.5 84.96,-7.75 84.96,-11.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>ValueChangeDumpFile</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Verilog.html#pyEDAA.ProjectModel.Verilog.ValueChangeDumpFile" ns1:title="Verilog's waveform file (``*.vcd``) for exchanging value changes as defined by IEEE Std. 1364." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="384,-19 257,-19 257,0 384,0 384,-19" />
+<ns0:text text-anchor="middle" x="320.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ValueChangeDumpFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>WaveformExchangeFile-&gt;ValueChangeDumpFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M221.39,-9.5C231.37,-9.5 241.7,-9.5 251.74,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="251.96,-11.25 256.96,-9.5 251.96,-7.75 251.96,-11.25" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

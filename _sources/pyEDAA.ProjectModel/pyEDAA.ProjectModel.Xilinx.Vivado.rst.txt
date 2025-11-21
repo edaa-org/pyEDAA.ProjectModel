@@ -1,0 +1,192 @@
+.. # Template modified by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+=================================
+pyEDAA.ProjectModel.Xilinx.Vivado
+=================================
+
+.. automodule:: pyEDAA.ProjectModel.Xilinx.Vivado
+
+
+.. currentmodule:: pyEDAA.ProjectModel.Xilinx.Vivado
+
+
+**Classes**
+
+- :py:class:`UsedInAttribute`:
+  Undocumented.
+
+- :py:class:`ScopeToRefAttribute`:
+  Undocumented.
+
+- :py:class:`ScopeToCellAttribute`:
+  Undocumented.
+
+- :py:class:`File`:
+  A :term:`File` represents a file in a design. This :term:`base-class` is used
+
+- :py:class:`VivadoFileMixIn`:
+  Undocumented.
+
+- :py:class:`ConstraintFile`:
+  Base-class of all constraint files.
+
+- :py:class:`VerilogSourceFile`:
+  A Verilog source file (of any language version).
+
+- :py:class:`VHDLSourceFile`:
+  A VHDL source file (of any language version).
+
+- :py:class:`VivadoProjectFile`:
+  A Vivado project file (``*.xpr``).
+
+- :py:class:`XDCConstraintFile`:
+  A Vivado constraint file (Xilinx Design Constraints; ``*.xdc``).
+
+- :py:class:`IPCoreDescriptionFile`:
+  An XML file (``*.xml``).
+
+- :py:class:`IPCoreInstantiationFile`:
+  A Vivado IP core instantiation file (Xilinx IPCore Instance; ``*.xci``).
+
+
+
+---------------------
+
+**Classes**
+
+
+
+
+.. autoclass:: UsedInAttribute
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: UsedInAttribute
+      :parts: 1
+
+.. autoclass:: ScopeToRefAttribute
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ScopeToRefAttribute
+      :parts: 1
+
+.. autoclass:: ScopeToCellAttribute
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ScopeToCellAttribute
+      :parts: 1
+
+.. autoclass:: File
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: File
+      :parts: 1
+
+.. autoclass:: VivadoFileMixIn
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VivadoFileMixIn
+      :parts: 1
+
+.. autoclass:: ConstraintFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ConstraintFile
+      :parts: 1
+
+.. autoclass:: VerilogSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogSourceFile
+      :parts: 1
+
+.. autoclass:: VHDLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLSourceFile
+      :parts: 1
+
+.. autoclass:: VivadoProjectFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VivadoProjectFile
+      :parts: 1
+
+.. autoclass:: XDCConstraintFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XDCConstraintFile
+      :parts: 1
+
+.. autoclass:: IPCoreDescriptionFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: IPCoreDescriptionFile
+      :parts: 1
+
+.. autoclass:: IPCoreInstantiationFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: IPCoreInstantiationFile
+      :parts: 1

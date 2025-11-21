@@ -1,0 +1,101 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="576pt" height="78pt" viewBox="0.00 0.00 576.00 78.20">
+<ns0:g id="graph0" class="graph" transform="scale(0.95 0.95) rotate(0) translate(4 78)">
+<ns0:title>inheritance79e52f7147</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="54,-74 0,-74 0,-55 54,-55 54,-74" />
+<ns0:text text-anchor="middle" x="27" y="-62" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>SourceFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile" ns1:title="Base-class of all source files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="157,-74 90,-74 90,-55 157,-55 157,-74" />
+<ns0:text text-anchor="middle" x="123.5" y="-62" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>File-&gt;SourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M54.07,-64.5C63.47,-64.5 74.28,-64.5 84.49,-64.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="84.76,-66.25 89.76,-64.5 84.76,-62.75 84.76,-66.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HDLSourceFile</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HDLSourceFile" ns1:title="Base-class of all HDL source files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="304.5,-74 217.5,-74 217.5,-55 304.5,-55 304.5,-74" />
+<ns0:text text-anchor="middle" x="261" y="-62" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HDLSourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>VerilogBaseFile</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogBaseFile" ns1:title="VerilogBaseFile" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="457,-56 365,-56 365,-37 457,-37 457,-56" />
+<ns0:text text-anchor="middle" x="411" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">VerilogBaseFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>HDLSourceFile-&gt;VerilogBaseFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M304.81,-59.29C322.05,-57.2 342.07,-54.76 359.98,-52.58" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="360.22,-54.32 364.97,-51.98 359.79,-50.84 360.22,-54.32" />
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>SourceFile-&gt;HDLSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M157.3,-64.5C173.77,-64.5 194.03,-64.5 212.19,-64.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="212.25,-66.25 217.25,-64.5 212.25,-62.75 212.25,-66.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="329,-37 193,-37 193,-18 329,-18 329,-37" />
+<ns0:text text-anchor="middle" x="261" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>HumanReadableContent-&gt;VerilogBaseFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M329.07,-36.11C339.36,-37.43 349.83,-38.78 359.68,-40.04" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="359.58,-41.79 364.77,-40.69 360.03,-38.32 359.58,-41.79" />
+</ns0:g>
+
+<ns0:g id="node6" class="node">
+<ns0:title>VerilogHeaderFile</ns0:title>
+<ns0:g id="a_node6"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.VerilogHeaderFile" ns1:title="A Verilog header file (of any language version)." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="596,-37 493,-37 493,-18 596,-18 596,-37" />
+<ns0:text text-anchor="middle" x="544.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">VerilogHeaderFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge5" class="edge">
+<ns0:title>VerilogBaseFile-&gt;VerilogHeaderFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M457.25,-39.96C467.09,-38.54 477.6,-37.02 487.78,-35.55" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="488.05,-37.28 492.75,-34.83 487.55,-33.82 488.05,-37.28" />
+</ns0:g>
+
+<ns0:g id="node7" class="node">
+<ns0:title>VerilogMixIn</ns0:title>
+<ns0:polygon fill="white" stroke="#1e90ff" points="449.5,-19 372.5,-19 372.5,0 449.5,0 449.5,-19" />
+<ns0:text text-anchor="middle" x="411" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">VerilogMixIn</ns0:text>
+</ns0:g>
+
+<ns0:g id="edge6" class="edge">
+<ns0:title>VerilogMixIn-&gt;VerilogHeaderFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M449.68,-14.66C461.47,-16.27 474.75,-18.09 487.52,-19.84" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="487.39,-21.59 492.58,-20.53 487.86,-18.12 487.39,-21.59" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

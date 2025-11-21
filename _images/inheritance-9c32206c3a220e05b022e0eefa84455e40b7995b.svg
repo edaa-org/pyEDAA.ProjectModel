@@ -1,0 +1,65 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="404pt" height="64pt" viewBox="0.00 0.00 404.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritancef75ad2c3da</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>ConstraintFile</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.ConstraintFile" ns1:title="Base-class of all constraint files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="256,-56 172,-56 172,-37 256,-37 256,-56" />
+<ns0:text text-anchor="middle" x="214" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">ConstraintFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>UCFConstraintFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Xilinx.ISE.html#pyEDAA.ProjectModel.Xilinx.ISE.UCFConstraintFile" ns1:title="UCFConstraintFile" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="396,-37 292,-37 292,-18 396,-18 396,-37" />
+<ns0:text text-anchor="middle" x="344" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">UCFConstraintFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>ConstraintFile-&gt;UCFConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M256.2,-40.38C265.88,-38.95 276.35,-37.39 286.56,-35.88" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="286.86,-37.6 291.55,-35.14 286.34,-34.14 286.86,-37.6" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="95,-56 41,-56 41,-37 95,-37 95,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>File-&gt;ConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.08,-46.5C114.97,-46.5 142.89,-46.5 166.57,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.86,-48.25 171.86,-46.5 166.86,-44.75 166.86,-48.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>HumanReadableContent-&gt;ConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M106.08,-19.03C125.83,-24.1 150.21,-30.37 170.69,-35.63" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="170.26,-37.33 175.54,-36.88 171.13,-33.94 170.26,-37.33" />
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>HumanReadableContent-&gt;UCFConstraintFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.03,-13.9C182.16,-16.93 242.76,-20.91 286.45,-23.78" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="286.59,-25.55 291.69,-24.13 286.82,-22.06 286.59,-25.55" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

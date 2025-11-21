@@ -1,0 +1,59 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="392pt" height="27pt" viewBox="0.00 0.00 392.00 27.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
+<ns0:title>inheritance92148f3f42</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>EDIFNetlistFile</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.EDIFNetlistFile" ns1:title="Netlist file in EDIF (Electronic Design Interchange Format)." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="384,-19 295,-19 295,0 384,0 384,-19" />
+<ns0:text text-anchor="middle" x="339.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">EDIFNetlistFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>NetlistFile</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.NetlistFile" ns1:title="Base-class of all netlist source files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="259,-19 193,-19 193,0 259,0 259,-19" />
+<ns0:text text-anchor="middle" x="226" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">NetlistFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>NetlistFile-&gt;EDIFNetlistFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M259.25,-9.5C268.76,-9.5 279.38,-9.5 289.68,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="289.71,-11.25 294.71,-9.5 289.71,-7.75 289.71,-11.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="54,-19 0,-19 0,0 54,0 54,-19" />
+<ns0:text text-anchor="middle" x="27" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>SourceFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile" ns1:title="Base-class of all source files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="157,-19 90,-19 90,0 157,0 157,-19" />
+<ns0:text text-anchor="middle" x="123.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>File-&gt;SourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M54.07,-9.5C63.47,-9.5 74.28,-9.5 84.49,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="84.76,-11.25 89.76,-9.5 84.76,-7.75 84.76,-11.25" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>SourceFile-&gt;NetlistFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M157.13,-9.5C166.89,-9.5 177.67,-9.5 187.71,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="187.88,-11.25 192.88,-9.5 187.88,-7.75 187.88,-11.25" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

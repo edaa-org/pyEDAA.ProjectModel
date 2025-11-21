@@ -1,0 +1,698 @@
+.. # Template modified by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+===================
+pyEDAA.ProjectModel
+===================
+
+.. automodule:: pyEDAA.ProjectModel
+
+
+
+**Submodules**
+
+.. toctree::
+   :maxdepth: 1
+
+   pyEDAA.ProjectModel.Altera
+   pyEDAA.ProjectModel.Attributes
+   pyEDAA.ProjectModel.GHDL
+   pyEDAA.ProjectModel.Intel
+   pyEDAA.ProjectModel.MentorGraphics
+   pyEDAA.ProjectModel.OSVVM
+   pyEDAA.ProjectModel.VHDL
+   pyEDAA.ProjectModel.Verilog
+   pyEDAA.ProjectModel.Xilinx
+
+.. currentmodule:: pyEDAA.ProjectModel
+
+
+**Classes**
+
+- :py:class:`Attribute`:
+  Undocumented.
+
+- :py:class:`FileType`:
+  A :term:`meta-class` to construct *FileType* classes.
+
+- :py:class:`File`:
+  A :term:`File` represents a file in a design. This :term:`base-class` is used
+
+- :py:class:`HumanReadableContent`:
+  A file type representing human-readable contents.
+
+- :py:class:`XMLContent`:
+  A file type representing XML contents.
+
+- :py:class:`YAMLContent`:
+  A file type representing YAML contents.
+
+- :py:class:`JSONContent`:
+  A file type representing JSON contents.
+
+- :py:class:`INIContent`:
+  A file type representing INI contents.
+
+- :py:class:`TOMLContent`:
+  A file type representing TOML contents.
+
+- :py:class:`TCLContent`:
+  A file type representing content in TCL code.
+
+- :py:class:`SDCContent`:
+  A file type representing contents as Synopsys Design Constraints (SDC).
+
+- :py:class:`PythonContent`:
+  A file type representing contents as Python source code.
+
+- :py:class:`TextFile`:
+  A text file (``*.txt``).
+
+- :py:class:`LogFile`:
+  A log file (``*.log``).
+
+- :py:class:`XMLFile`:
+  An XML file (``*.xml``).
+
+- :py:class:`SourceFile`:
+  Base-class of all source files.
+
+- :py:class:`HDLSourceFile`:
+  Base-class of all HDL source files.
+
+- :py:class:`RDLSourceFile`:
+  Base-class of all RDL source files.
+
+- :py:class:`NetlistFile`:
+  Base-class of all netlist source files.
+
+- :py:class:`EDIFNetlistFile`:
+  Netlist file in EDIF (Electronic Design Interchange Format).
+
+- :py:class:`TCLSourceFile`:
+  A TCL source file.
+
+- :py:class:`VHDLSourceFile`:
+  A VHDL source file (of any language version).
+
+- :py:class:`VerilogBaseFile`:
+  Base-class of all HDL source files.
+
+- :py:class:`VerilogSourceFile`:
+  A Verilog source file (of any language version).
+
+- :py:class:`VerilogHeaderFile`:
+  A Verilog header file (of any language version).
+
+- :py:class:`SystemVerilogBaseFile`:
+  Base-class of all HDL source files.
+
+- :py:class:`SystemVerilogSourceFile`:
+  A SystemVerilog source file (of any language version).
+
+- :py:class:`SystemVerilogHeaderFile`:
+  A SystemVerilog header file (of any language version).
+
+- :py:class:`SystemRDLSourceFile`:
+  A SystemRDL source file (of any language version).
+
+- :py:class:`PythonSourceFile`:
+  A Python source file.
+
+- :py:class:`CocotbPythonFile`:
+  A Python source file used by Cocotb.
+
+- :py:class:`ConstraintFile`:
+  Base-class of all constraint files.
+
+- :py:class:`ProjectFile`:
+  Base-class of all tool-specific project files.
+
+- :py:class:`CSourceFile`:
+  Base-class of all ANSI-C source files.
+
+- :py:class:`CppSourceFile`:
+  Base-class of all ANSI-C++ source files.
+
+- :py:class:`SettingFile`:
+  Base-class of all tool-specific setting files.
+
+- :py:class:`SimulationAnalysisFile`:
+  Base-class of all tool-specific analysis files.
+
+- :py:class:`SimulationElaborationFile`:
+  Base-class of all tool-specific elaboration files.
+
+- :py:class:`SimulationStartFile`:
+  Base-class of all tool-specific simulation start-up files.
+
+- :py:class:`SimulationRunFile`:
+  Base-class of all tool-specific simulation run (execution) files.
+
+- :py:class:`WaveformConfigFile`:
+  Base-class of all tool-specific waveform configuration files.
+
+- :py:class:`WaveformDatabaseFile`:
+  Base-class of all tool-specific waveform database files.
+
+- :py:class:`WaveformExchangeFile`:
+  Base-class of all tool-independent waveform exchange files.
+
+- :py:class:`FileSet`:
+  A :term:`FileSet` represents a group of files. Filesets can have sub-filesets.
+
+- :py:class:`VHDLLibrary`:
+  A :term:`VHDLLibrary` represents a group of VHDL source files compiled into the same VHDL library.
+
+- :py:class:`Design`:
+  A :term:`Design` represents a group of filesets and the source files therein.
+
+- :py:class:`Project`:
+  A :term:`Project` represents a group of designs and the source files therein.
+
+
+
+---------------------
+
+**Classes**
+
+
+
+
+.. autoclass:: Attribute
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Attribute
+      :parts: 1
+
+.. autoclass:: FileType
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: FileType
+      :parts: 1
+
+.. autoclass:: File
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: File
+      :parts: 1
+
+.. autoclass:: HumanReadableContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: HumanReadableContent
+      :parts: 1
+
+.. autoclass:: XMLContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XMLContent
+      :parts: 1
+
+.. autoclass:: YAMLContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: YAMLContent
+      :parts: 1
+
+.. autoclass:: JSONContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: JSONContent
+      :parts: 1
+
+.. autoclass:: INIContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: INIContent
+      :parts: 1
+
+.. autoclass:: TOMLContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TOMLContent
+      :parts: 1
+
+.. autoclass:: TCLContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TCLContent
+      :parts: 1
+
+.. autoclass:: SDCContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SDCContent
+      :parts: 1
+
+.. autoclass:: PythonContent
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: PythonContent
+      :parts: 1
+
+.. autoclass:: TextFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TextFile
+      :parts: 1
+
+.. autoclass:: LogFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: LogFile
+      :parts: 1
+
+.. autoclass:: XMLFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: XMLFile
+      :parts: 1
+
+.. autoclass:: SourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SourceFile
+      :parts: 1
+
+.. autoclass:: HDLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: HDLSourceFile
+      :parts: 1
+
+.. autoclass:: RDLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: RDLSourceFile
+      :parts: 1
+
+.. autoclass:: NetlistFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: NetlistFile
+      :parts: 1
+
+.. autoclass:: EDIFNetlistFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: EDIFNetlistFile
+      :parts: 1
+
+.. autoclass:: TCLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: TCLSourceFile
+      :parts: 1
+
+.. autoclass:: VHDLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLSourceFile
+      :parts: 1
+
+.. autoclass:: VerilogBaseFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogBaseFile
+      :parts: 1
+
+.. autoclass:: VerilogSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogSourceFile
+      :parts: 1
+
+.. autoclass:: VerilogHeaderFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VerilogHeaderFile
+      :parts: 1
+
+.. autoclass:: SystemVerilogBaseFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SystemVerilogBaseFile
+      :parts: 1
+
+.. autoclass:: SystemVerilogSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SystemVerilogSourceFile
+      :parts: 1
+
+.. autoclass:: SystemVerilogHeaderFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SystemVerilogHeaderFile
+      :parts: 1
+
+.. autoclass:: SystemRDLSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SystemRDLSourceFile
+      :parts: 1
+
+.. autoclass:: PythonSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: PythonSourceFile
+      :parts: 1
+
+.. autoclass:: CocotbPythonFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CocotbPythonFile
+      :parts: 1
+
+.. autoclass:: ConstraintFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ConstraintFile
+      :parts: 1
+
+.. autoclass:: ProjectFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: ProjectFile
+      :parts: 1
+
+.. autoclass:: CSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CSourceFile
+      :parts: 1
+
+.. autoclass:: CppSourceFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: CppSourceFile
+      :parts: 1
+
+.. autoclass:: SettingFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SettingFile
+      :parts: 1
+
+.. autoclass:: SimulationAnalysisFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationAnalysisFile
+      :parts: 1
+
+.. autoclass:: SimulationElaborationFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationElaborationFile
+      :parts: 1
+
+.. autoclass:: SimulationStartFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationStartFile
+      :parts: 1
+
+.. autoclass:: SimulationRunFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: SimulationRunFile
+      :parts: 1
+
+.. autoclass:: WaveformConfigFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformConfigFile
+      :parts: 1
+
+.. autoclass:: WaveformDatabaseFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformDatabaseFile
+      :parts: 1
+
+.. autoclass:: WaveformExchangeFile
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: WaveformExchangeFile
+      :parts: 1
+
+.. autoclass:: FileSet
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: FileSet
+      :parts: 1
+
+.. autoclass:: VHDLLibrary
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: VHDLLibrary
+      :parts: 1
+
+.. autoclass:: Design
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Design
+      :parts: 1
+
+.. autoclass:: Project
+   :members:
+   :private-members:
+   :special-members:
+   :inherited-members:
+   :exclude-members: __weakref__
+
+   .. rubric:: Inheritance
+   .. inheritance-diagram:: Project
+      :parts: 1

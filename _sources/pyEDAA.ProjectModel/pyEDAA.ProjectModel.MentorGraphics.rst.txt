@@ -1,0 +1,21 @@
+.. # Template modified by Patrick Lehmann
+     * removed automodule on top, because private members are activated for autodoc (no doubled documentation).
+     * Made sections like 'submodules' bold text, but no headlines to reduce number of ToC levels.
+
+==================================
+pyEDAA.ProjectModel.MentorGraphics
+==================================
+
+.. automodule:: pyEDAA.ProjectModel.MentorGraphics
+
+
+
+**Submodules**
+
+.. toctree::
+   :maxdepth: 1
+
+   pyEDAA.ProjectModel.MentorGraphics.ModelSim
+   pyEDAA.ProjectModel.MentorGraphics.QuestaSim
+
+.. currentmodule:: pyEDAA.ProjectModel.MentorGraphics

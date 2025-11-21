@@ -1,0 +1,89 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="543pt" height="64pt" viewBox="0.00 0.00 543.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance6043fe5f7c</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>CocotbPythonFile</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.CocotbPythonFile" ns1:title="A Python source file used by Cocotb." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="535,-37 434,-37 434,-18 535,-18 535,-37" />
+<ns0:text text-anchor="middle" x="484.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">CocotbPythonFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>PythonSourceFile</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonSourceFile" ns1:title="A Python source file." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="398,-37 297,-37 297,-18 398,-18 398,-37" />
+<ns0:text text-anchor="middle" x="347.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">PythonSourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>PythonSourceFile-&gt;CocotbPythonFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M398,-27.5C407.87,-27.5 418.29,-27.5 428.34,-27.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="428.55,-29.25 433.55,-27.5 428.55,-25.75 428.55,-29.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="95,-19 41,-19 41,0 95,0 95,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node6" class="node">
+<ns0:title>SourceFile</ns0:title>
+<ns0:g id="a_node6"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.SourceFile" ns1:title="Base-class of all source files." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="250,-19 183,-19 183,0 250,0 250,-19" />
+<ns0:text text-anchor="middle" x="216.5" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">SourceFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge5" class="edge">
+<ns0:title>File-&gt;SourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M95.19,-9.5C118.18,-9.5 151.91,-9.5 177.8,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="177.87,-11.25 182.87,-9.5 177.87,-7.75 177.87,-11.25" />
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="136,-56 0,-56 0,-37 136,-37 136,-56" />
+<ns0:text text-anchor="middle" x="68" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>PythonContent</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.PythonContent" ns1:title="A file type representing contents as Python source code." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="261,-56 172,-56 172,-37 261,-37 261,-56" />
+<ns0:text text-anchor="middle" x="216.5" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">PythonContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>HumanReadableContent-&gt;PythonContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.25,-46.5C146.5,-46.5 156.9,-46.5 166.66,-46.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="166.69,-48.25 171.69,-46.5 166.69,-44.75 166.69,-48.25" />
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>PythonContent-&gt;PythonSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M261.17,-40.07C270.97,-38.62 281.49,-37.08 291.68,-35.57" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="291.96,-37.3 296.65,-34.84 291.45,-33.84 291.96,-37.3" />
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>SourceFile-&gt;PythonSourceFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M250.05,-14.04C262.68,-15.8 277.5,-17.87 291.68,-19.85" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="291.67,-21.62 296.87,-20.57 292.16,-18.15 291.67,-21.62" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>

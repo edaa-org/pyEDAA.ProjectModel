@@ -1,0 +1,74 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="504pt" height="64pt" viewBox="0.00 0.00 504.00 64.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 60)">
+<ns0:title>inheritance19876c50ec</ns0:title>
+
+<ns0:g id="node1" class="node">
+<ns0:title>File</ns0:title>
+<ns0:g id="a_node1"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.File" ns1:title="A :term:`File` represents a file in a design. This :term:`base-class` is used" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="237,-56 183,-56 183,-37 237,-37 237,-56" />
+<ns0:text text-anchor="middle" x="210" y="-44" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">File</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>XMLFile</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLFile" ns1:title="An XML file (``*.xml``)." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="339,-37 284,-37 284,-18 339,-18 339,-37" />
+<ns0:text text-anchor="middle" x="311.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">XMLFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>File-&gt;XMLFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M237.14,-41.51C249.85,-39.08 265.23,-36.14 278.62,-33.59" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="279.26,-35.25 283.84,-32.59 278.6,-31.81 279.26,-35.25" />
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>HumanReadableContent</ns0:title>
+<ns0:g id="a_node2"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.HumanReadableContent" ns1:title="A file type representing human-readable contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="136,-19 0,-19 0,0 136,0 136,-19" />
+<ns0:text text-anchor="middle" x="68" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">HumanReadableContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>XMLContent</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.html#pyEDAA.ProjectModel.XMLContent" ns1:title="A file type representing XML contents." target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="248,-19 172,-19 172,0 248,0 248,-19" />
+<ns0:text text-anchor="middle" x="210" y="-7" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">XMLContent</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>HumanReadableContent-&gt;XMLContent</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M136.13,-9.5C146.65,-9.5 157.25,-9.5 166.99,-9.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="167,-11.25 172,-9.5 167,-7.75 167,-11.25" />
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>IPCoreDescriptionFile</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="../pyEDAA.ProjectModel/pyEDAA.ProjectModel.Xilinx.Vivado.html#pyEDAA.ProjectModel.Xilinx.Vivado.IPCoreDescriptionFile" ns1:title="IPCoreDescriptionFile" target="_top">
+<ns0:polygon fill="white" stroke="#1e90ff" points="496,-37 375,-37 375,-18 496,-18 496,-37" />
+<ns0:text text-anchor="middle" x="435.5" y="-25" font-family="Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans" font-size="10.00">IPCoreDescriptionFile</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>XMLFile-&gt;IPCoreDescriptionFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M339.27,-27.5C348.32,-27.5 358.84,-27.5 369.53,-27.5" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="369.78,-29.25 374.78,-27.5 369.78,-25.75 369.78,-29.25" />
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>XMLContent-&gt;XMLFile</ns0:title>
+<ns0:path fill="none" stroke="black" stroke-width="0.5" d="M248.05,-16.2C258.21,-18.04 269.13,-20.02 278.96,-21.79" />
+<ns0:polygon fill="black" stroke="black" stroke-width="0.5" points="278.75,-23.53 283.98,-22.7 279.37,-20.09 278.75,-23.53" />
+</ns0:g>
+</ns0:g>
+</ns0:svg>
