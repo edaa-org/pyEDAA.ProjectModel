@@ -34,13 +34,13 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2014-2026, Patrick Lehmann, Unai Martinez-Corral"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "0.6.0"
+__version__ =   "0.5.2"
 __keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
 from sys     import version_info
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Any
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Self
 
 from pyTooling.Common      import getFullyQualifiedName
 from pyTooling.Decorators  import export
@@ -259,7 +259,7 @@ class File(metaclass=FileType, slots=True):
 		"""
 		return len(self._attributes)
 
-	def __getitem__(self, key: Type[Attribute]) -> Any:
+	def __getitem__(self, key: Type[Attribute]) -> typing_Any:
 		"""Index access for returning attributes on this file.
 
 		:param key:        The attribute type.
@@ -1077,7 +1077,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		"""
 		return len(self._attributes)
 
-	def __getitem__(self, key: Type[Attribute]) -> Any:
+	def __getitem__(self, key: Type[Attribute]) -> typing_Any:
 		"""Index access for returning attributes on this fileset.
 
 		:param key:        The attribute type.
@@ -1138,7 +1138,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	_files:       List[File]
 	_vhdlVersion: VHDLVersion
 
-	_attributes:     Dict[Attribute, Any]
+	_attributes:     Dict[Attribute, typing_Any]
 	_dependencyNode: Vertex
 
 	def __init__(
@@ -1282,7 +1282,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		"""
 		return len(self._attributes)
 
-	def __getitem__(self, key: Type[Attribute]) -> Any:
+	def __getitem__(self, key: Type[Attribute]) -> typing_Any:
 		"""Index access for returning attributes on this VHDL library.
 
 		:param key:        The attribute type.
@@ -1640,7 +1640,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		"""
 		return len(self._attributes)
 
-	def __getitem__(self, key: Type[Attribute]) -> Any:
+	def __getitem__(self, key: Type[Attribute]) -> typing_Any:
 		"""Index access for returning attributes on this design.
 
 		:param key:        The attribute type.
@@ -1832,7 +1832,7 @@ class Project(metaclass=ExtendedType, slots=True):
 		"""
 		return len(self._attributes)
 
-	def __getitem__(self, key: Type[Attribute]) -> Any:
+	def __getitem__(self, key: Type[Attribute]) -> typing_Any:
 		"""Index access for returning attributes on this project.
 
 		:param key:        The attribute type.
