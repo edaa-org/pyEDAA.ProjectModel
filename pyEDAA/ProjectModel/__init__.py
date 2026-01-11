@@ -1138,6 +1138,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	_files:       List[File]
 	_vhdlVersion: VHDLVersion
 
+	_attributes:     Dict[Attribute, Any]
 	_dependencyNode: Vertex
 
 	def __init__(
@@ -1147,7 +1148,9 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		design:      Nullable["Design"] =    None,
 		vhdlVersion: Nullable[VHDLVersion] = None
 	) -> None:
-		self._name =    name
+		self._name =       name
+		self._attributes = {}
+
 		if project is not None:
 			self._project = project
 			self._design = project._defaultDesign if design is None else design
