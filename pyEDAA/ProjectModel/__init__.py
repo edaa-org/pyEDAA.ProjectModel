@@ -80,11 +80,11 @@ class FileType(ExtendedType):
 	FileTypes: Dict[str, 'FileType'] = {}     #: Dictionary of all classes of type :class:`FileType` or derived variants
 	Any: 'FileType'
 
-	def __init__(cls, name: str, bases: Tuple[type, ...], dictionary: Dict[str, typing_Any], **kwargs):
+	def __init__(cls, name: str, bases: Tuple[type, ...], dictionary: Dict[str, typing_Any], **kwargs) -> None:
 		super().__init__(name, bases, dictionary, **kwargs)
 		cls.Any = cls
 
-	def __new__(cls, className, baseClasses, classMembers: Dict, *args, **kwargs):
+	def __new__(cls, className, baseClasses, classMembers: Dict, *args, **kwargs) -> Self:
 		fileType = super().__new__(cls, className, baseClasses, classMembers, *args, **kwargs)
 		cls.FileTypes[className] = fileType
 		return fileType
@@ -128,7 +128,7 @@ class File(metaclass=FileType, slots=True):
 		project: Nullable["Project"] = None,
 		design:  Nullable["Design"] =  None,
 		fileSet: Nullable["FileSet"] = None
-	):
+	) -> None:
 		self._fileType =  getattr(FileTypes, self.__class__.__name__)
 		self._path =      path
 		if project is not None:
@@ -416,7 +416,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 	_vhdlLibrary: Nullable['VHDLLibrary']
 	_vhdlVersion: VHDLVersion
 
-	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: Nullable[VHDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
+	def __init__(self, path: pathlib_Path, vhdlLibrary: Union[str, 'VHDLLibrary'] = None, vhdlVersion: Nullable[VHDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None) -> None:
 		super().__init__(path, project, design, fileSet)
 
 		if isinstance(vhdlLibrary, str):
@@ -527,7 +527,7 @@ class SystemVerilogMixIn(metaclass=ExtendedType, mixin=True):
 class VerilogBaseFile(HDLSourceFile, HumanReadableContent):
 	_version: SystemVerilogVersion
 
-	def __init__(self, path: pathlib_Path, version: Nullable[SystemVerilogVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
+	def __init__(self, path: pathlib_Path, version: Nullable[SystemVerilogVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None) -> None:
 		super().__init__(path, project, design, fileSet)
 
 		self._version = version
@@ -564,7 +564,7 @@ class SystemRDLSourceFile(RDLSourceFile, HumanReadableContent):
 
 	_srdlVersion: SystemRDLVersion
 
-	def __init__(self, path: pathlib_Path, srdlVersion: Nullable[SystemRDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None):
+	def __init__(self, path: pathlib_Path, srdlVersion: Nullable[SystemRDLVersion] = None, project: Nullable["Project"] = None, design: Nullable["Design"] = None, fileSet: Nullable["FileSet"] = None) -> None:
 		super().__init__(path, project, design, fileSet)
 
 		self._srdlVersion = srdlVersion
@@ -708,7 +708,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		verilogVersion: Nullable[SystemVerilogVersion] = None,
 		svVersion:      Nullable[SystemVerilogVersion] = None,
 		srdlVersion:    Nullable[SystemRDLVersion] =     None
-	):
+	) -> None:
 		self._name =      name
 		self._topLevel =  topLevel
 		if project is not None:
@@ -998,7 +998,7 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		elif self._parent is not None:
 			return self._parent.VHDLLibrary
 		elif self._design is not None:
-			return self._design.VHDLLibrary
+			return self._design.VHDLLibrary   # FIXME: no library property. add a DefaultVHDLLibrary property
 		else:
 			raise Exception("VHDLLibrary was neither set locally nor globally.")
 
@@ -1146,7 +1146,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 		project:     Nullable["Project"] =   None,
 		design:      Nullable["Design"] =    None,
 		vhdlVersion: Nullable[VHDLVersion] = None
-	):
+	) -> None:
 		self._name =    name
 		if project is not None:
 			self._project = project
@@ -1370,7 +1370,7 @@ class Design(metaclass=ExtendedType, slots=True):
 		verilogVersion: Nullable[SystemVerilogVersion] = None,
 		svVersion:      Nullable[SystemVerilogVersion] = None,
 		srdlVersion:    Nullable[SystemRDLVersion] =     None
-	):
+	) -> None:
 		self._name =                  name
 		self._topLevel =              topLevel
 		self._project =               project
@@ -1710,7 +1710,7 @@ class Project(metaclass=ExtendedType, slots=True):
 		vhdlVersion:    Nullable[VHDLVersion] =          None,
 		verilogVersion: Nullable[SystemVerilogVersion] = None,
 		svVersion:      Nullable[SystemVerilogVersion] = None
-	):
+	) -> None:
 		self._name =            name
 		self._rootDirectory =   rootDirectory
 		self._designs =         {}

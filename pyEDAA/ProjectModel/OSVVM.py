@@ -49,7 +49,7 @@ class OSVVMProjectFile(ProjectFile, TCLContent):
 		project: Nullable[Project] = None,
 		design: Nullable[Design] = None,
 		fileSet: Nullable[FileSet] = None
-	):
+	) -> None:
 		super().__init__(path, project, design, fileSet)
 
 		self._osvvmProject = None

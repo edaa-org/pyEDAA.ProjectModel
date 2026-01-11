@@ -307,9 +307,6 @@ class FileFilter(TestCase):
 		self.assertEqual(2, len(result2))
 		self.assertListEqual(result2, [self._textfile2, self._textfile3])
 
-	def test_SourceFile(self):
-		pass
-
 
 class Validate(TestCase):
 	def test_FileSet(self) -> None:
