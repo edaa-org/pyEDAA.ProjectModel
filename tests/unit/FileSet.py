@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2025 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -306,9 +306,6 @@ class FileFilter(TestCase):
 
 		self.assertEqual(2, len(result2))
 		self.assertListEqual(result2, [self._textfile2, self._textfile3])
-
-	def test_SourceFile(self):
-		pass
 
 
 class Validate(TestCase):
