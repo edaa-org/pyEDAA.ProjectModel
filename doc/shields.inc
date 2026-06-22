@@ -4,11 +4,11 @@
    # percent encoding so that the URL is properly parsed.
 
 .. # Sourcecode link to GitHub
-.. |SHIELD:svg:ProjectModel-github| image:: https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
+.. |SHIELD:svg:ProjectModel-github| image:: https://img.shields.io/badge/pyEDAA-ProjectModel-ab47bc?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
    :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel
-.. |SHIELD:png:ProjectModel-github| image:: https://raster.shields.io/badge/pyEDAA-ProjectModel-ab47bc.svg?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
+.. |SHIELD:png:ProjectModel-github| image:: https://raster.shields.io/badge/pyEDAA-ProjectModel-ab47bc?longCache=true&style=flat-square&logo=github&longCache=true&logo=GitHub&labelColor=6a1b9a
    :alt: Sourcecode on GitHub
    :height: 22
    :target: https://GitHub.com/edaa-org/pyEDAA.ProjectModel
@@ -170,11 +170,11 @@
    :target: https://edaa-org.github.io/pyEDAA.ProjectModel/
 
 .. # Gitter
-.. |SHIELD:svg:ProjectModel-gitter| image:: https://img.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef
+.. |SHIELD:svg:ProjectModel-gitter| image:: https://img.shields.io/badge/chat-on%20gitter-4db797?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef
    :alt: Documentation License
    :height: 22
    :target: https://gitter.im/hdl/community
-.. |SHIELD:png:ProjectModel-gitter| image:: https://raster.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef
+.. |SHIELD:png:ProjectModel-gitter| image:: https://raster.shields.io/badge/chat-on%20gitter-4db797?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef
    :alt: Documentation License
    :height: 22
    :target: https://gitter.im/hdl/community
