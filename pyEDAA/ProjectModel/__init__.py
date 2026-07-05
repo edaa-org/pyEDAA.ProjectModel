@@ -30,12 +30,15 @@
 # ==================================================================================================================== #
 #
 """An abstract model of EDA tool projects."""
-__author__ =    "Patrick Lehmann"
-__email__ =     "Paebbels@gmail.com"
-__copyright__ = "2014-2026, Patrick Lehmann, Unai Martinez-Corral"
-__license__ =   "Apache License, Version 2.0"
-__version__ =   "0.6.3"
-__keywords__ =  ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
+__author__ =            "Patrick Lehmann"
+__email__ =             "Paebbels@gmail.com"
+__copyright__ =         "2014-2026, Patrick Lehmann, Unai Martinez-Corral"
+__license__ =           "Apache License, Version 2.0"
+__version__ =           "0.6.4"
+__keywords__ =          ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
+__project_url__ =       "https://github.com/edaa-org/pyEDAA.ProjectModel"
+__documentation_url__ = "https://edaa-org.github.io/pyEDAA.ProjectModel"
+__issue_tracker_url__ = "https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
