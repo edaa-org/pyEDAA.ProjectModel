@@ -42,7 +42,6 @@ __issue_tracker_url__ = "https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from sys     import version_info
 from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Self
 
 from pyTooling.Common      import getFullyQualifiedName
@@ -442,8 +441,7 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 			self._vhdlLibrary = None
 		else:
 			ex = TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
+			ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
 			raise ex
 
 		self._vhdlVersion = vhdlVersion
@@ -919,13 +917,11 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise TypeError("Parameter 'file' is not of type ProjectModel.File.")
 		elif file._fileSet is not None:
 			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be assigned to another fileset.")
+			ex.add_note(f"A file can't be assigned to another fileset.")
 			raise ex
 		elif file in self._set:
 			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be added twice to a fileset.")
+			ex.add_note(f"A file can't be added twice to a fileset.")
 			raise ex
 
 		self._files.append(file)
@@ -1259,8 +1255,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
 		if not isinstance(vhdlFile, VHDLSourceFile):
 			ex = TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
+			ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
 			raise ex
 
 		self._files.append(vhdlFile)
