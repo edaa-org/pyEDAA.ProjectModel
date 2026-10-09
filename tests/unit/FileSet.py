@@ -102,14 +102,14 @@ class Operations(TestCase):
 		fileSet = FileSet("fileset")
 		fileSet.AddFile(file)
 
-		self.assertIn(file, [f for f in fileSet.Files()])
+		self.assertIn(file, list(fileSet.Files()))
 
 	def test_AddFile_Again(self) -> None:
 		file = File(Path("file_A.txt"))
 		fileSet = FileSet("fileset")
 		fileSet.AddFile(file)
 
-		self.assertIn(file, [f for f in fileSet.Files()])
+		self.assertIn(file, list(fileSet.Files()))
 
 		with self.assertRaises(ValueError):
 			fileSet.AddFile(file)
@@ -129,7 +129,7 @@ class Operations(TestCase):
 		fileSet = FileSet("fileset")
 		fileSet.AddFiles(files)
 
-		self.assertIn(file, [f for f in fileSet.Files()])
+		self.assertIn(file, list(fileSet.Files()))
 
 	def test_AddFileSet(self) -> None:
 		subFileSet = FileSet("subfileset")
@@ -291,18 +291,18 @@ class FileFilter(TestCase):
 		self._textfile3 = TextFile(Path("text3.txt"), fileSet=self._fileset2)
 
 	def test_AnyFile(self) -> None:
-		result = [f for f in self._design.Files(fileType=FileTypes.Any)]
+		result = list(self._design.Files(fileType=FileTypes.Any))
 
 		self.assertEqual(6, len(result))
 		self.assertListEqual(result, [self._file1, self._file2, self._file3, self._textfile1, self._textfile2, self._textfile3])
 
 	def test_TextFile(self) -> None:
-		result1 = [f for f in self._design.Files(fileType=FileTypes.TextFile)]
+		result1 = list(self._design.Files(fileType=FileTypes.TextFile))
 
 		self.assertEqual(3, len(result1))
 		self.assertListEqual(result1, [self._textfile1, self._textfile2, self._textfile3])
 
-		result2 = [f for f in self._design.Files(fileType=FileTypes.TextFile, fileSet="fileset2")]
+		result2 = list(self._design.Files(fileType=FileTypes.TextFile, fileSet="fileset2"))
 
 		self.assertEqual(2, len(result2))
 		self.assertListEqual(result2, [self._textfile2, self._textfile3])
