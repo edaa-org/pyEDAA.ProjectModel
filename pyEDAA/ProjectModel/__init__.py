@@ -434,14 +434,14 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 				except KeyError as ex:
 					raise Exception(f"VHDL library '{vhdlLibrary}' not found in default design '{project.DefaultDesign.Name}'.") from ex
 			else:
-				raise Exception(f"Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
+				raise Exception("Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
 		elif isinstance(vhdlLibrary, VHDLLibrary):
 			self._vhdlLibrary = vhdlLibrary
 			vhdlLibrary.AddFile(self)
 		elif vhdlLibrary is None:
 			self._vhdlLibrary = None
 		else:
-			ex = TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			ex = TypeError("Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
 			if version_info >= (3, 11):  # pragma: no cover
 				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
 			raise ex
@@ -920,12 +920,12 @@ class FileSet(metaclass=ExtendedType, slots=True):
 		elif file._fileSet is not None:
 			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
 			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be assigned to another fileset.")
+				ex.add_note("A file can't be assigned to another fileset.")
 			raise ex
 		elif file in self._set:
 			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
 			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be added twice to a fileset.")
+				ex.add_note("A file can't be added twice to a fileset.")
 			raise ex
 
 		self._files.append(file)
@@ -1258,7 +1258,7 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
 		if not isinstance(vhdlFile, VHDLSourceFile):
-			ex = TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			ex = TypeError("Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
 			if version_info >= (3, 11):  # pragma: no cover
 				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
 			raise ex
