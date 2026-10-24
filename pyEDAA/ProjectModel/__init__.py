@@ -33,7 +33,7 @@
 """An abstract model of EDA tool projects."""
 __author__ =            "Patrick Lehmann"
 __email__ =             "Paebbels@gmail.com"
-__copyright__ =         "2014-2026, Patrick Lehmann, Unai Martinez-Corral"
+__copyright__ =         "2021-2026, Electronic Design Automation Abstraction (EDA²), Unai Martinez-Corral"
 __license__ =           "Apache License, Version 2.0"
 __version__ =           "0.7.0rc1"
 __keywords__ =          ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
