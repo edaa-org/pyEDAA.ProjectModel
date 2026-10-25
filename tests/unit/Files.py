@@ -36,7 +36,8 @@ from pyTooling.Testing   import Testcase
 from pySVModel           import SystemVerilogVersion
 from pyVHDLModel         import VHDLVersion
 
-from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes, Project, Design
+from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, \
+                                FileTypes, Project, Design
 
 
 if __name__ == "__main__": # pragma: no cover
