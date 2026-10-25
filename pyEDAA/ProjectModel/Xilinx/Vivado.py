@@ -29,17 +29,17 @@
 # ==================================================================================================================== #
 #
 """Specific file types and attributes for Xilinx Vivado."""
-from pathlib import Path
-from typing  import Iterable, Optional as Nullable
-from xml.dom import minidom, Node
+from pathlib               import Path
+from typing                import Iterable, Optional as Nullable
+from xml.dom               import minidom, Node
 
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
 from pyVHDLModel           import VHDLVersion
 
-from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design, \
-                                File as Model_File, ConstraintFile as Model_ConstraintFile, \
-                                VerilogSourceFile as Model_VerilogSourceFile, VHDLSourceFile as Model_VHDLSourceFile
+from pyEDAA.ProjectModel   import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design, \
+                                  File as Model_File, ConstraintFile as Model_ConstraintFile, \
+                                  VerilogSourceFile as Model_VerilogSourceFile, VHDLSourceFile as Model_VHDLSourceFile
 
 
 @export
