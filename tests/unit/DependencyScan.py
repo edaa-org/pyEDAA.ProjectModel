@@ -76,7 +76,7 @@ class VHDL(Testcase):
 		print(f"Loading design '{designA.Name}':")
 		design = DOMDesign(name=designA.Name)
 
-		print(f"  Loading default libraries (Std, Ieee, ...)")
+		print("  Loading default libraries (Std, Ieee, ...)")
 		design.LoadDefaultLibraries()
 
 		for libraryName, vhdlLibrary in designA.VHDLLibraries.items():
@@ -97,7 +97,7 @@ class VHDL(Testcase):
 
 				design.AddDocument(vhdlDocument, lib)
 
-		print(f"  Analyzing design ...")
+		print("  Analyzing design ...")
 		design.Analyze()
 
 		print()
