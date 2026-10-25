@@ -29,11 +29,12 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib  import Path
-from unittest import TestCase
+from pathlib             import Path
 
-from pySVModel   import SystemVerilogVersion
-from pyVHDLModel import VHDLVersion
+from pyTooling.Testing   import Testcase
+
+from pySVModel           import SystemVerilogVersion
+from pyVHDLModel         import VHDLVersion
 
 from pyEDAA.ProjectModel import FileSet, VHDLSourceFile, VHDLLibrary, VerilogSourceFile, SystemVerilogSourceFile, FileTypes, Project, Design
 
@@ -44,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class VHDLFile(TestCase):
+class VHDLFile(Testcase):
 	def test_Instantiation(self) -> None:
 		path = Path("example.vhdl")
 		file = VHDLSourceFile(path)
@@ -106,7 +107,7 @@ class VHDLFile(TestCase):
 		file.Validate()
 
 
-class VerilogFile(TestCase):
+class VerilogFile(Testcase):
 	def test_Instantiation(self) -> None:
 		path = Path("example.v")
 		file = VerilogSourceFile(path)
@@ -141,7 +142,7 @@ class VerilogFile(TestCase):
 		self.assertEqual(verilogVersion, file.VerilogVersion)
 
 
-class SystemVerilogFile(TestCase):
+class SystemVerilogFile(Testcase):
 	def test_Instantiation(self) -> None:
 		path = Path("example.sv")
 		file = SystemVerilogSourceFile(path)

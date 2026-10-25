@@ -29,11 +29,13 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib     import Path
-from unittest    import TestCase
+from pathlib                  import Path
 
-from pytest      import mark
-from pyVHDLModel import VHDLVersion
+from pytest                   import mark
+
+from pyTooling.Testing        import Testcase
+
+from pyVHDLModel              import VHDLVersion
 
 from pyEDAA.ProjectModel      import Design, VHDLLibrary, Project, VHDLSourceFile, VerilogSourceFile, FileSet
 
@@ -53,7 +55,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class VHDL(TestCase):
+class VHDL(Testcase):
 	@mark.skipif(withGHDL is False, reason="No 'pyGHDL' package found.")
 	def test_VHDLLibrary(self) -> None:
 		project = Project("project", rootDirectory=Path("project"), vhdlVersion=VHDLVersion.VHDL2019)

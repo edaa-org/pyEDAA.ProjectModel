@@ -29,11 +29,12 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib  import Path
-from unittest import TestCase
+from pathlib             import Path
 
-from pySVModel   import SystemVerilogVersion
-from pyVHDLModel import VHDLVersion
+from pyTooling.Testing   import Testcase
+
+from pySVModel           import SystemVerilogVersion
+from pyVHDLModel         import VHDLVersion
 
 from pyEDAA.ProjectModel import Project, Attribute
 
@@ -44,7 +45,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class Instantiate(Testcase):
 	def test_Project(self) -> None:
 		project = Project("project")
 
@@ -84,7 +85,7 @@ class Instantiate(TestCase):
 		self.assertEqual(SystemVerilogVersion.SystemVerilog2017, project.SVVersion)
 
 
-class Properties(TestCase):
+class Properties(Testcase):
 	def test_SetVersionsLater(self) -> None:
 		project = Project("project")
 
@@ -108,7 +109,7 @@ class Properties(TestCase):
 		self.assertEqual(projectDirectoryPath.as_posix(), project.ResolvedPath.as_posix())
 
 
-class Validate(TestCase):
+class Validate(Testcase):
 	def test_Project(self) -> None:
 		project = Project("project", rootDirectory=Path("tests/project"))
 
@@ -119,7 +120,7 @@ class Attr(Attribute):
 	pass
 
 
-class Attributes(TestCase):
+class Attributes(Testcase):
 	def test_AddAttribute_WrongType(self) -> None:
 		project = Project("project")
 

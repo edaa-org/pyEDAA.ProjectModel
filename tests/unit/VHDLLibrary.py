@@ -29,9 +29,9 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from unittest import TestCase
+from pyTooling.Testing   import Testcase
 
-from pyVHDLModel import VHDLVersion
+from pyVHDLModel         import VHDLVersion
 
 from pyEDAA.ProjectModel import Design, VHDLLibrary, Project
 
@@ -42,7 +42,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class Instantiate(Testcase):
 	def test_VHDLLibrary(self) -> None:
 		library = VHDLLibrary("library")
 

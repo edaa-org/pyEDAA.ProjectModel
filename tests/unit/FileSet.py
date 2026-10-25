@@ -29,11 +29,12 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib  import Path
-from unittest import TestCase
+from pathlib                        import Path
 
-from pySVModel   import SystemVerilogVersion
-from pyVHDLModel import VHDLVersion
+from pyTooling.Testing              import Testcase
+
+from pySVModel                      import SystemVerilogVersion
+from pyVHDLModel                    import VHDLVersion
 
 from pyEDAA.ProjectModel            import Design, FileSet, File, FileTypes, TextFile, Project, VHDLLibrary, Attribute
 from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
@@ -45,7 +46,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class Instantiate(Testcase):
 	def test_FileSet(self) -> None:
 		fileset = FileSet("fileset")
 
@@ -90,7 +91,7 @@ class Instantiate(TestCase):
 		self.assertEqual(svVersion, fileset.SVVersion)
 
 
-class Operations(TestCase):
+class Operations(Testcase):
 	def test_AddFile_WrongType(self) -> None:
 		fileSet = FileSet("fileset")
 
@@ -151,7 +152,7 @@ class Operations(TestCase):
 		self.assertEqual(subFileSet, fileset.FileSets["subfileset"])
 
 
-class Properties(TestCase):
+class Properties(Testcase):
 	def test_SetParentToFileSet(self) -> None:
 		fileSet = FileSet("fileset")
 		subFileSet = FileSet("subfileset")
@@ -270,7 +271,7 @@ class Properties(TestCase):
 		self.assertEqual(svVersion, fileset.SVVersion)
 
 
-class FileFilter(TestCase):
+class FileFilter(Testcase):
 	_design: Design
 
 	def setUp(self) -> None:
@@ -308,7 +309,7 @@ class FileFilter(TestCase):
 		self.assertListEqual(result2, [self._textfile2, self._textfile3])
 
 
-class Validate(TestCase):
+class Validate(Testcase):
 	def test_FileSet(self) -> None:
 		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
@@ -321,7 +322,7 @@ class Attr(Attribute):
 	pass
 
 
-class Attributes(TestCase):
+class Attributes(Testcase):
 	def test_AddAttribute_WrongType(self) -> None:
 		fileSet = FileSet("fileset")
 
@@ -360,7 +361,7 @@ class Attributes(TestCase):
 		del fileSet[Attr]
 
 
-class AttributeResolution(TestCase):
+class AttributeResolution(Testcase):
 	def test_AttachedToFileSet(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)
