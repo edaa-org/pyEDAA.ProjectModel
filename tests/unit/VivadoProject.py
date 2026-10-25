@@ -29,8 +29,9 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
-from unittest import TestCase
+from pathlib                           import Path
+
+from pyTooling.Testing                 import Testcase
 
 from pyEDAA.ProjectModel.Xilinx.Vivado import VivadoProjectFile
 
@@ -40,7 +41,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class FileSets(TestCase):
+class FileSets(Testcase):
 	def test_Parsing(self) -> None:
 		xprPath = Path.cwd() / "tests/VivadoProject/StopWatch/project/StopWatch.xpr"
 		# print()
