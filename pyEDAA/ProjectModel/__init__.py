@@ -42,7 +42,8 @@ __issue_tracker_url__ = "https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues"
 
 from os.path import relpath as path_relpath
 from pathlib import Path as pathlib_Path
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Self
+from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, \
+                    Self
 
 from pyTooling.Common      import getFullyQualifiedName
 from pyTooling.Decorators  import export
