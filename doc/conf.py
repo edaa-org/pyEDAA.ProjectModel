@@ -173,8 +173,8 @@ extensions = [
 	"sphinx_copybutton",
 	"sphinx_autodoc_typehints",
 	"autoapi.sphinx",
-	"sphinx_reports",
 # User defined extensions
+	"pyTooling.Sphinx",
 ]
 
 
@@ -213,7 +213,7 @@ extlinks = {
 	"ghissue":     (f"https://GitHub.com/{githubNamespace}/{project}/issues/%s", "issue #%s"),
 	"ghpull":      (f"https://GitHub.com/{githubNamespace}/{project}/pull/%s", "pull request #%s"),
 	"ghsrc":       (f"https://GitHub.com/{githubNamespace}/{project}/blob/main/%s", None),
-	"pypi":       ('https://PyPI.org/project/%s', '%s'),
+	"pypi":        ("https://PyPI.org/project/%s", "%s"),
 	"wiki":        (f"https://en.wikipedia.org/wiki/%s", None),
 }
 
@@ -254,23 +254,15 @@ todo_link_only = True
 
 
 # ==============================================================================
-# sphinx-reports
+# pyTooling.Sphinx - reports of domain 'report'
 # ==============================================================================
-report_dep_dependencies = {
-	"src":     ["../requirements.txt"],
-	"doc":     ["requirements.txt"],
-	"unit":    ["../tests/unit/requirements.txt"],
-	"build":   ["../build/requirements.txt"],
-	"publish": ["../dist/requirements.txt"],
-}
-
-report_unittest_testsuites = {
+pyTooling_Unittest_Testsuites = {
 	"src": {
 		"name":        f"{project}",
 		"xml_report":  "../report/unit/unittest.xml",
 	}
 }
-report_codecov_packages = {
+pyTooling_CodeCoverage_Packages = {
 	"src": {
 		"name":        f"{project}",
 		"json_report": "../report/coverage/coverage.json",
@@ -278,7 +270,7 @@ report_codecov_packages = {
 		"levels":      "default"
 	}
 }
-report_doccov_packages = {
+pyTooling_DocCoverage_Packages = {
 	"src": {
 		"name":       f"{project}",
 		"directory":  f"../{directoryName}",
