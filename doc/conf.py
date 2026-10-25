@@ -285,6 +285,19 @@ pyTooling_DocCoverage_Packages = {
 
 
 # ==============================================================================
+# pyTooling.Sphinx - dependency tables
+# ==============================================================================
+pyTooling_Dependency_Requirements = {
+	"package":       {"file":      "../requirements.txt"},
+	"testing":       {"file":      "../tests/requirements.txt"},
+	"documentation": {"file":      "requirements.txt"},
+	"packaging":     {"pyproject": True},
+	"publishing":    {"file":      "../dist/requirements.txt"},
+}
+pyTooling_Dependency_PackageOverrides = "Dependency.PackageOverrides.yaml"
+
+
+# ==============================================================================
 # Sphinx_Design
 # ==============================================================================
 # sd_fontawesome_latex = True
