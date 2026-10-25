@@ -52,7 +52,7 @@ class FileSets(TestCase):
 
 		self.assertEqual("StopWatch", project.Name)
 
-		designs = [d for d in project.Designs.values()]
+		designs = list(project.Designs.values())
 		self.assertEqual(1, len(designs))
 
 		design = designs[0]
@@ -63,7 +63,7 @@ class FileSets(TestCase):
 			"default", "src_Encoder", "src_Display", "src_StopWatch", "const_Encoder", "const_Display",	"const_StopWatch",
 			"sim_StopWatch", "utils_1"
 		)
-		filesets = [fs for fs in design.FileSets.keys()]
+		filesets = list(design.FileSets.keys())
 		self.assertEqual(len(expectedFilsesetNames), len(filesets))
 		self.assertSequenceEqual(expectedFilsesetNames,	filesets)
 

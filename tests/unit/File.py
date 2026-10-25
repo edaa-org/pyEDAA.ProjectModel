@@ -116,7 +116,7 @@ class Properties(TestCase):
 		self.assertIs(project, file.Project)
 		self.assertIs(design, file.Design)
 
-		files = [f for f in design.DefaultFileSet.Files()]
+		files = list(design.DefaultFileSet.Files())
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 
@@ -129,7 +129,7 @@ class Properties(TestCase):
 
 		self.assertIs(fileset, file.FileSet)
 
-		files = [f for f in fileset.Files()]
+		files = list(fileset.Files())
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 

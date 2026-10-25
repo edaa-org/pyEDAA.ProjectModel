@@ -136,7 +136,7 @@ class Properties(TestCase):
 		file = File(Path("example.vhdl"))
 		project.AddFile(file)
 
-		self.assertListEqual([file], [f for f in project.Files()])
+		self.assertListEqual([file], list(project.Files()))
 
 
 class Validate(TestCase):
