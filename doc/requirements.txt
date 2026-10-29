@@ -1,7 +1,7 @@
 -r ../requirements.txt
 
 # The extension the documentation uses: pyTooling.Sphinx with its domain 'report'
-pyTooling.Sphinx[reports] ~= 0.1.0rc6
+pyTooling.Sphinx[reports] ~= 1.0
 
 # Enforce latest version on ReadTheDocs
 sphinx ~= 9.2
