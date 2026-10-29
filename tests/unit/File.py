@@ -11,7 +11,8 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,8 +30,9 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
-from unittest import TestCase
+from pathlib                        import Path
+
+from pyTooling.Testing              import Testcase
 
 from pyEDAA.ProjectModel            import Design, FileSet, File, Project, FileTypes, Attribute
 from pyEDAA.ProjectModel.Attributes import KeyValueAttribute
@@ -42,7 +44,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class Instantiate(Testcase):
 	def test_File(self) -> None:
 		path = Path("example.vhdl")
 		file = File(path)
@@ -86,7 +88,7 @@ class Instantiate(TestCase):
 		self.assertIs(fileset, file.FileSet)
 
 
-class Properties(TestCase):
+class Properties(Testcase):
 	def test_SetProjectLater(self) -> None:
 		path = Path("example.vhdl")
 		project = Project("project")
@@ -116,7 +118,7 @@ class Properties(TestCase):
 		self.assertIs(project, file.Project)
 		self.assertIs(design, file.Design)
 
-		files = [f for f in design.DefaultFileSet.Files()]
+		files = list(design.DefaultFileSet.Files())
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 
@@ -129,7 +131,7 @@ class Properties(TestCase):
 
 		self.assertIs(fileset, file.FileSet)
 
-		files = [f for f in fileset.Files()]
+		files = list(fileset.Files())
 		self.assertEqual(1, len(files))
 		self.assertIs(file, files[0])
 
@@ -145,7 +147,7 @@ class Properties(TestCase):
 		self.assertEqual(f"{projectDirectoryPath.as_posix()}/{designDirectory}/{filePath}", file.ResolvedPath.as_posix())
 
 
-class Validate(TestCase):
+class Validate(Testcase):
 	def test_File(self) -> None:
 		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
@@ -159,7 +161,7 @@ class Attr(Attribute):
 	pass
 
 
-class Attributes(TestCase):
+class Attributes(Testcase):
 	def test_AddAttribute_WrongType(self) -> None:
 		file = File(Path("file.txt"))
 
@@ -198,7 +200,7 @@ class Attributes(TestCase):
 		del file[Attr]
 
 
-class AttributeResolution(TestCase):
+class AttributeResolution(Testcase):
 	def test_AttachedToFile(self) -> None:
 		project = Project("project", rootDirectory=Path("project"))
 		design = Design("design", directory=Path("designA"), project=project)

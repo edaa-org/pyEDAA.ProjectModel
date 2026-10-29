@@ -11,7 +11,8 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,11 +30,13 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib     import Path
-from unittest    import TestCase
+from pathlib                  import Path
 
-from pytest      import mark
-from pyVHDLModel import VHDLVersion
+from pytest                   import mark
+
+from pyTooling.Testing        import Testcase
+
+from pyVHDLModel              import VHDLVersion
 
 from pyEDAA.ProjectModel      import Design, VHDLLibrary, Project, VHDLSourceFile, VerilogSourceFile, FileSet
 
@@ -53,7 +56,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class VHDL(TestCase):
+class VHDL(Testcase):
 	@mark.skipif(withGHDL is False, reason="No 'pyGHDL' package found.")
 	def test_VHDLLibrary(self) -> None:
 		project = Project("project", rootDirectory=Path("project"), vhdlVersion=VHDLVersion.VHDL2019)
@@ -74,7 +77,7 @@ class VHDL(TestCase):
 		print(f"Loading design '{designA.Name}':")
 		design = DOMDesign(name=designA.Name)
 
-		print(f"  Loading default libraries (Std, Ieee, ...)")
+		print("  Loading default libraries (Std, Ieee, ...)")
 		design.LoadDefaultLibraries()
 
 		for libraryName, vhdlLibrary in designA.VHDLLibraries.items():
@@ -95,7 +98,7 @@ class VHDL(TestCase):
 
 				design.AddDocument(vhdlDocument, lib)
 
-		print(f"  Analyzing design ...")
+		print("  Analyzing design ...")
 		design.Analyze()
 
 		print()

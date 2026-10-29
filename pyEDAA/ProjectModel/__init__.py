@@ -11,8 +11,9 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
-# Copyright 2014-2016 Technische Universität Dresden - Germany, Chair of VLSI-Design, Diagnostics and Architecture     #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2014-2016 Technische Universitaet Dresden - Germany, Chair of VLSI-Design, Diagnostics and Architecture    #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -32,18 +33,18 @@
 """An abstract model of EDA tool projects."""
 __author__ =            "Patrick Lehmann"
 __email__ =             "Paebbels@gmail.com"
-__copyright__ =         "2014-2026, Patrick Lehmann, Unai Martinez-Corral"
+__copyright__ =         "2021-2026, Electronic Design Automation Abstraction (EDA²)"
 __license__ =           "Apache License, Version 2.0"
-__version__ =           "0.6.4"
+__version__ =           "0.7.0"
 __keywords__ =          ["eda project", "model", "abstract", "xilinx", "vivado", "osvvm", "file set", "file group", "test bench", "test harness"]
 __project_url__ =       "https://github.com/edaa-org/pyEDAA.ProjectModel"
 __documentation_url__ = "https://edaa-org.github.io/pyEDAA.ProjectModel"
 __issue_tracker_url__ = "https://GitHub.com/edaa-org/pyEDAA.ProjectModel/issues"
 
-from os.path import relpath as path_relpath
-from pathlib import Path as pathlib_Path
-from sys     import version_info
-from typing  import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, Any as typing_Any, Type, Set, Self
+from os.path               import relpath as path_relpath
+from pathlib               import Path as pathlib_Path
+from typing                import Dict, Union, Optional as Nullable, List, Iterable, Generator, Tuple, \
+                                  Any as typing_Any, Type, Set, Self
 
 from pyTooling.Common      import getFullyQualifiedName
 from pyTooling.Decorators  import export
@@ -434,16 +435,15 @@ class VHDLSourceFile(HDLSourceFile, HumanReadableContent):
 				except KeyError as ex:
 					raise Exception(f"VHDL library '{vhdlLibrary}' not found in default design '{project.DefaultDesign.Name}'.") from ex
 			else:
-				raise Exception(f"Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
+				raise Exception("Can't lookup VHDL library because neither 'project' nor 'design' is given as a parameter.")
 		elif isinstance(vhdlLibrary, VHDLLibrary):
 			self._vhdlLibrary = vhdlLibrary
 			vhdlLibrary.AddFile(self)
 		elif vhdlLibrary is None:
 			self._vhdlLibrary = None
 		else:
-			ex = TypeError(f"Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
+			ex = TypeError("Parameter 'vhdlLibrary' is neither a 'str' nor 'VHDLibrary'.")
+			ex.add_note(f"Got type '{getFullyQualifiedName(vhdlLibrary)}'.")
 			raise ex
 
 		self._vhdlVersion = vhdlVersion
@@ -919,13 +919,11 @@ class FileSet(metaclass=ExtendedType, slots=True):
 			raise TypeError("Parameter 'file' is not of type ProjectModel.File.")
 		elif file._fileSet is not None:
 			ex = ValueError(f"File '{file.Path!s}' is already part of fileset '{file.FileSet.Name}'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be assigned to another fileset.")
+			ex.add_note("A file can't be assigned to another fileset.")
 			raise ex
 		elif file in self._set:
 			ex = ValueError(f"File '{file.Path!s}' is already part of this fileset.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"A file can't be added twice to a fileset.")
+			ex.add_note("A file can't be added twice to a fileset.")
 			raise ex
 
 		self._files.append(file)
@@ -1258,9 +1256,8 @@ class VHDLLibrary(metaclass=ExtendedType, slots=True):
 
 	def AddFile(self, vhdlFile: VHDLSourceFile) -> None:
 		if not isinstance(vhdlFile, VHDLSourceFile):
-			ex = TypeError(f"Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
-			if version_info >= (3, 11):  # pragma: no cover
-				ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
+			ex = TypeError("Parameter 'vhdlFile' is not a 'VHDLSourceFile'.")
+			ex.add_note(f"Got type '{getFullyQualifiedName(vhdlFile)}'.")
 			raise ex
 
 		self._files.append(vhdlFile)

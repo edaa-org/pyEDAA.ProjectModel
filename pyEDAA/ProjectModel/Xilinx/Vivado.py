@@ -11,7 +11,8 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,19 +30,17 @@
 # ==================================================================================================================== #
 #
 """Specific file types and attributes for Xilinx Vivado."""
-from pathlib import Path
-from typing  import Iterable, Optional as Nullable
-from xml.dom import minidom, Node
+from pathlib               import Path
+from typing                import Iterable, Optional as Nullable
+from xml.dom               import minidom, Node
 
 from pyTooling.Decorators  import export
 from pyTooling.MetaClasses import ExtendedType
 from pyVHDLModel           import VHDLVersion
 
-from pyEDAA.ProjectModel import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design
-from pyEDAA.ProjectModel import File as Model_File
-from pyEDAA.ProjectModel import ConstraintFile as Model_ConstraintFile
-from pyEDAA.ProjectModel import VerilogSourceFile as Model_VerilogSourceFile
-from pyEDAA.ProjectModel import VHDLSourceFile as Model_VHDLSourceFile
+from pyEDAA.ProjectModel   import ProjectFile, XMLFile, XMLContent, SDCContent, Project, FileSet, Attribute, Design, \
+                                  File as Model_File, ConstraintFile as Model_ConstraintFile, \
+                                  VerilogSourceFile as Model_VerilogSourceFile, VHDLSourceFile as Model_VHDLSourceFile
 
 
 @export

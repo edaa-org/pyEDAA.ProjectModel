@@ -11,7 +11,8 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,11 +30,12 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib  import Path
-from unittest import TestCase
+from pathlib             import Path
 
-from pySVModel   import SystemVerilogVersion
-from pyVHDLModel import VHDLVersion
+from pyTooling.Testing   import Testcase
+
+from pySVModel           import SystemVerilogVersion
+from pyVHDLModel         import VHDLVersion
 
 from pyEDAA.ProjectModel import Design, File, Project, Attribute
 
@@ -44,7 +46,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class Instantiate(TestCase):
+class Instantiate(Testcase):
 	def test_Design(self) -> None:
 		design = Design("design")
 
@@ -77,7 +79,7 @@ class Instantiate(TestCase):
 		self.assertEqual(svVersion, design.SVVersion)
 
 
-class Properties(TestCase):
+class Properties(Testcase):
 	def test_SetProjectLater(self) -> None:
 		project = Project("project")
 		design = Design("design")
@@ -136,10 +138,10 @@ class Properties(TestCase):
 		file = File(Path("example.vhdl"))
 		project.AddFile(file)
 
-		self.assertListEqual([file], [f for f in project.Files()])
+		self.assertListEqual([file], list(project.Files()))
 
 
-class Validate(TestCase):
+class Validate(Testcase):
 	def test_Design(self) -> None:
 		project = Project("project", rootDirectory=Path("tests/project"))
 		design = Design("design", directory=Path("designA"), project=project)
@@ -151,7 +153,7 @@ class Attr(Attribute):
 	pass
 
 
-class Attributes(TestCase):
+class Attributes(Testcase):
 	def test_AddAttribute_WrongType(self) -> None:
 		design = Design("design")
 

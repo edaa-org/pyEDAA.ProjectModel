@@ -11,7 +11,8 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2026 Patrick Lehmann - Boetzingen, Germany                                                            #
+# Copyright 2021-2026 Electronic Design Automation Abstraction (EDA²)                                                  #
+# Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany                                                            #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
 # you may not use this file except in compliance with the License.                                                     #
@@ -29,8 +30,9 @@
 # ==================================================================================================================== #
 #
 """Instantiation tests for the project model."""
-from pathlib import Path
-from unittest import TestCase
+from pathlib                           import Path
+
+from pyTooling.Testing                 import Testcase
 
 from pyEDAA.ProjectModel.Xilinx.Vivado import VivadoProjectFile
 
@@ -40,7 +42,7 @@ if __name__ == "__main__": # pragma: no cover
 	exit(1)
 
 
-class FileSets(TestCase):
+class FileSets(Testcase):
 	def test_Parsing(self) -> None:
 		xprPath = Path.cwd() / "tests/VivadoProject/StopWatch/project/StopWatch.xpr"
 		# print()
@@ -52,7 +54,7 @@ class FileSets(TestCase):
 
 		self.assertEqual("StopWatch", project.Name)
 
-		designs = [d for d in project.Designs.values()]
+		designs = list(project.Designs.values())
 		self.assertEqual(1, len(designs))
 
 		design = designs[0]
@@ -63,7 +65,7 @@ class FileSets(TestCase):
 			"default", "src_Encoder", "src_Display", "src_StopWatch", "const_Encoder", "const_Display",	"const_StopWatch",
 			"sim_StopWatch", "utils_1"
 		)
-		filesets = [fs for fs in design.FileSets.keys()]
+		filesets = list(design.FileSets.keys())
 		self.assertEqual(len(expectedFilsesetNames), len(filesets))
 		self.assertSequenceEqual(expectedFilsesetNames,	filesets)
 
