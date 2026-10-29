@@ -66,38 +66,6 @@ Use Cases
 * Managing IP cores and projects with `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
 
 
-.. _NEWS:
-
-News
-****
-
-.. only:: html
-
-   Oct. 2021 - Reading ``*.xpr`` and ``*.pro`` Files
-   =================================================
-
-.. only:: latex
-
-   .. rubric:: Reading ``*.xpr`` and ``*.pro`` Files
-
-* Xilinx Vivado's ``*.xpr`` and OSVVM's ``*.pro`` files can now be read.
-* Filesets can be nested.
-* The dataset can be validated.
-
-
-.. only:: html
-
-   Sep. 2021 - Extracted ProjectModel from pyIPCMI
-   ===============================================
-
-.. only:: latex
-
-   .. rubric:: Extracted ProjectModel from pyIPCMI
-
-* The project model has been extracted from `pyIPCMI <https://GitHub.com/Paebbels/pyIPCMI>`__.
-* ProjectModel became first citizen of `EDA² <https://GitHub.com/edaa-org>`__ and got integrated into the `pyEDAA` namespace at PyPI.
-
-
 .. _CONTRIBUTORS:
 
 Contributors
@@ -127,6 +95,7 @@ The accompanying documentation is licensed under :ref:`Creative Commons - Attrib
    :caption: Introduction
    :hidden:
 
+   News
    Installation
    Dependency
 
