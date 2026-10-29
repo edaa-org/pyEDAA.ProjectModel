@@ -27,6 +27,7 @@ jobs:
       pylint:                      'false'
       codecov:                     'true'
       codacy:                      'true'
+      coverage_html:               'false'   # the documentation renders its code coverage below 'coverage/' itself
       dorny:                       'true'
     secrets:
       PYPI_TOKEN:    ${{ secrets.PYPI_TOKEN }}
